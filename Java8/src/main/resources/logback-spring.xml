@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration 节点：根节点，属性如下:
+        scan: 此属性为 true 时，配置文件发生改变，将会被重新加载，默认为true.
+        scanPeriod: 监测配置文件是否有修改的时间间隔，单位毫秒，当 scan 为 true 时，此属性生效。默认的时间间隔为1分钟.
+        debug: 此属性为 true 时，打印出 logback 内部日志信息，实时查看 logback 运行状态，默认 false.
+-->
+<configuration>
+    <!-- 如果不想使用默认的日志格式则不需要引入 base.xml-->
+    <!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+    <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
+    <property name="LOG_PATH" value="./logs"/>
+    <!-- 格式化输出
+            %d: 表示日期
+            %-5level: 日志级别从左显示5个字符宽度
+            ${PID:- }: 进程ID
+            %thread: 表示线程名
+            %msg：日志消息
+            %n: 是换行符
+            %X{traceInfo}: 跟踪信息
+    -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <property name="MY_CONSOLE_LOG_PATTERN"
+              value="${MY_CONSOLE_LOG_PATTERN:-%clr(%d{${yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(%X{traceInfo}){faint} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="MY_FILE_LOG_PATTERN"
+              value="${MY_FILE_LOG_PATTERN:-%d{${yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- appender 节点: 有几个子节点比较重要
+             filter: 日志输出拦截器,没特殊要求就使用系统自带的,若要将日志分开,比如将 ERROR 级别的日志输出到一个文件中,其他级别的日志输出到另一个文件中,这时候就要用到filter;
+             encoder: 和 pattern 节点组合用于具体输出日志的格式和编码方式;
+             file: 用来指定日志文件输出位置，绝对路径或者相对路径;
+             rollingPolicy: 日志回滚策略,常见的就是按照时间回滚策略(TimeBasedRollingPolicy)和按照大小时间回滚策略(SizeAndTimeBasedRollingPolicy);
+             maxHistory: 可选节点,控制保留日志文件的最大数量,超出数量就删除旧文件;
+             totalSizeCap: 可选节点,指定日志文件的上限大小;
+    -->
+    <!-- 输出到控制台日志配置: 此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息 -->
+    <appender name="MY_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${MY_CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 输出正常日志到文件配置: 按照每天生成日志文件 -->
+    <appender name="MY_FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志名称,如果没有 <File> 属性,那么只会使用 <FileNamePattern> 的文件路径规则
+             如果同时有 <File> 和 <FileNamePattern> ,那么当天日志是<File>,明天会自动把今天
+             的日志改名为今天的日期,即 <File> 的日志都是当天的
+        -->
+        <file>${LOG_PATH}/info.log</file>
+        <!-- 日志输出编码格式化 -->
+        <encoder charset="UTF-8">
+            <pattern>${MY_FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 滚动策略,按照大小时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_PATH}/info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--只保留最近30天的日志-->
+            <MaxHistory>30</MaxHistory>
+            <!-- 用来指定总日志文件的上限大小,那么到了这个值,就会删除旧的日志 -->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!-- 单个日志文件大小 -->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <!-- 过滤器: 只有过滤到指定级别的日志信息才会输出,如果 level 为 ERROR,那么控制台只会输出 ERROR 日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!-- 输出错误日志到文件配置: 按照每天生成日志文件 -->
+    <appender name="MY_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志名称,如果没有 <File> 属性,那么只会使用 <FileNamePattern> 的文件路径规则
+             如果同时有 <File> 和 <FileNamePattern> ,那么当天日志是<File>,明天会自动把今天
+             的日志改名为今天的日期,即 <File> 的日志都是当天的
+        -->
+        <file>${LOG_PATH}/error.log</file>
+        <!-- 日志输出编码格式化 -->
+        <encoder charset="UTF-8">
+            <pattern>${MY_FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 滚动策略,按照大小时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--只保留最近30天的日志-->
+            <MaxHistory>30</MaxHistory>
+            <!-- 用来指定总日志文件的上限大小,那么到了这个值,就会删除旧的日志 -->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!-- 单个日志文件大小 -->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <!-- 过滤器: 只有过滤到指定级别的日志信息才会输出,如果 level 为 ERROR,那么控制台只会输出 ERROR 日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <!-- OFF:   最高等级,用于关闭所有信息;
+         FATAL: 灾难级的,系统级别,程序无法打印;
+         ERROR: 错误信息;
+         WARN:  告警信息;
+         INFO:  普通的打印信息;
+         DEBUG: 调试,对调试应用程序有帮助;
+         TRACE: 跟踪;
+    -->
+    <!-- 开发环境:打印控制台 -->
+    <springProfile name="dev">
+        <!-- logger 节点: 可选节点,用来指定某一个包或者具体某一个类的日志打印级别
+                name: 指定包名;
+                level: 可选,日志的级别;
+         -->
+        <logger name="com.zaxxer.hikari" level="DEBUG"/>
+        <!-- root节点: 必须的节点,用来指定基础的日志级别,只有一个属性,该节点可以包含零个或者多个元素,子节点是 appender-ref,标记 appender将会添加到这个 logger中 -->
+        <root level="INFO">
+            <appender-ref ref="MY_CONSOLE"/>
+        </root>
+    </springProfile>
+    <!-- 服务器环境: 输出到文件 -->
+    <springProfile name="linux">
+        <logger name="com.zaxxer.hikari" level="INFO"/>
+        <!-- 指定最基础的日志级别 -->
+        <root level="INFO">
+            <appender-ref ref="MY_CONSOLE"/>
+            <appender-ref ref="MY_FILE_INFO"/>
+            <appender-ref ref="MY_FILE_ERROR"/>
+        </root>
+    </springProfile>
+</configuration>

@@ -1,0 +1,339 @@
+-- 【V1.9_1720-能力指标表】修改"设计规模"字段类型为: "VARCHAR"
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_ability_target` 
+MODIFY COLUMN `DESIGN_SCALE` varchar(50) NULL DEFAULT NULL COMMENT '设计规模' AFTER `PROJECT_SCALE`;
+
+-- 【V1.9_1720-OA设计批复表】修改"设计规模"字段类型为: "VARCHAR"
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_oadesign_reply` 
+MODIFY COLUMN `DESIGN_SCALE` varchar(50) NULL DEFAULT NULL COMMENT '设计规模' AFTER `START_DATE`;
+
+-- 【V1.9_1720-设计批复表】修改"设计规模"字段类型为: "VARCHAR"
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_design_reply` 
+MODIFY COLUMN `DESIGN_SCALE` varchar(50) NULL DEFAULT NULL COMMENT '设计规模' AFTER `START_DATE`;
+
+-- 【V1.9_432-能力指标表】添加“指标名称单位”字段
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_ability_target` 
+ADD COLUMN `UNIT` varchar(255) NULL COMMENT '指标名称单位' AFTER `OU_NAME`;
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.8-个性化配置】添加“设计编制手动发起电子会审”字段
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_personalize_config` 
+ADD COLUMN `START_ELECTRONICS_AUDIT` VARCHAR(2) DEFAULT '01' COMMENT '编制手动发起电子会审（00-是；01-否）' AFTER `IS_SHARE_DISPATCH`;
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.5.1-数据字典】项目成员变更添加变更岗位枚举值
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343851235443200002, 'MDSG_BGGW', '变更岗位', 1, '11', '维护经理添加', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:27:57', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343851601501081602, 'MDSG_BGGW', '变更岗位', 1, '12', '维护经理变更', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:29:24', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343851848872742913, 'MDSG_BGGW', '变更岗位', 1, '13', '项目会计添加', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:30:23', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343851958767702017, 'MDSG_BGGW', '变更岗位', 1, '14', '项目会计变更', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:30:49', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343852889580228610, 'MDSG_BGGW', '变更岗位', 1, '15', '采购经理添加', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:34:31', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1343853013895204865, 'MDSG_BGGW', '变更岗位', 1, '16', '采购经理变更', 1, '申请项目成员变更的岗位', 0, '项目设计', '中文', 0, '', '', '', '', 1175967015377788930, '2020-12-29 17:35:01', 1175967015377788930, '2020-10-19 00:00:00', '孙凯', '孙凯');
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.5-小区信息管理】添加会审ID
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_family_collection` 
+ADD COLUMN `AUDIT_ID` bigint(20) NULL COMMENT '会审ID' AFTER `ID`;
+
+-- 【V1.5-数据字典】添加文件接受字典值
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339763701947813890, 'MDSG_FILE_RECIVE', '工程交接-文件接受', 1, '', '', 1, '工程交接-文件接受', 1, '', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-18 10:45:33', 0, '2020-12-18 10:44:02', '刘泉清', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339763818335555586, 'MDSG_FILE_RECIVE', '工程交接-文件接受', 1, '0', '否', 1, '工程交接-文件接受', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-18 10:46:01', 0, '2020-12-18 10:44:29', '刘泉清', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339763935323082753, 'MDSG_FILE_RECIVE', '工程交接-文件接受', 1, '1', '是', 1, '工程交接-文件接受', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-18 10:46:28', 0, '2020-12-18 00:00:00', '刘泉清', '');
+
+
+-- 【V1.5-数据字典】添加方案审定类型字典值
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339461161142177794, 'MDSG_FASDLX', '方案审定类型', 1, '', '', 1, '项目设计-工程交接-方案审定类型', 1, '', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-17 14:43:21', 0, '2020-12-17 14:41:51', '刘泉清', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339462301351137281, 'MDSG_FASDLX', '方案审定类型', 1, '10', '方案审定', 1, '项目设计-工程交接-方案审定类型', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-17 14:47:53', 0, '2020-12-17 14:46:23', '刘泉清', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1339462410042331137, 'MDSG_FASDLX', '方案审定类型', 1, '20', '非方案审定', 1, '项目设计-工程交接-方案审定类型', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267368, '2020-12-17 14:48:19', 0, '2020-12-17 00:00:00', '刘泉清', '');
+
+-- 【V1.5-工程交接】新增工程交接表
+DROP TABLE IF EXISTS `mdsg_project_handover`;
+CREATE TABLE mdsg_project_handover(
+    `ID`                       bigint(20)            NOT  NULL   COMMENT '主键ID',
+    `PROJECT_HAND_CODE`        varchar(64)       DEFAULT  NULL   COMMENT '工程交接编码',
+    `PROJECT_HAND_NAME`        varchar(256)      DEFAULT  NULL   COMMENT '工程交接名称',
+    `BUILD_TYPE`               varchar(20)       DEFAULT  NULL   COMMENT '建设类型(10:新建,20:扩建,30:配套)',
+    `PROJECT_ID`               bigint(20)        DEFAULT  NULL   COMMENT '项目ID',
+    `PROJECT_CODE`             varchar(50)       DEFAULT  NULL   COMMENT '项目编码',
+    `PROJECT_NAME`             varchar(50)       DEFAULT  NULL   COMMENT '项目名称',
+    `INVESTMENT_MAJOR_NAME`    varchar(50)       DEFAULT  NULL   COMMENT '投资专业名称',
+    `INVESTMENT_MAJOR_CODE`    varchar(50)       DEFAULT  NULL   COMMENT '投资专业编码',
+    `SCHEME_APPROVE`           varchar(20)       DEFAULT  NULL   COMMENT '方案审定类型(10:方案审定,20:非方案审定)',
+    `PROJECT_FILE_RECIVE`      varchar(32)       DEFAULT  NULL   COMMENT '立项文件接收(0:否,1:是)',
+    `DESIGN_FILE_RECIVE`       varchar(32)       DEFAULT  NULL   COMMENT '设计文件接收 (0:否,1:是)',
+    `BILL_STATE`               varchar(32)       DEFAULT  '00'   COMMENT '单据状态(00:草稿,01:流程中,02:已完成)',
+    `CREATED_BY`               bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+    `CREATED_NAME`             varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+    `CREATED_DATE`             datetime          DEFAULT  NOW()  COMMENT '创建时间',
+    `UPDATE_BY`                bigint(20)        DEFAULT  NULL   COMMENT '更新者用户ID',
+    `UPDATE_NAME`              varchar(50)       DEFAULT  NULL   COMMENT '更新者用户名',
+    `UPDATE_DATE`              datetime          DEFAULT  NOW()  COMMENT '更新时间',
+    `COMPANY_CODE`             varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+    `COMPANY_NAME`             varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+    `SECOND_ORG_CODE`          varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+    `SECOND_ORG_NAME`          varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+    `ORG_CODE`                 varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+    `ORG_NAME`                 varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+    `DELETE_FLAG`              tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+    PRIMARY KEY (`ID`)
+)ENGINE=INNODB  DEFAULT CHARSET=utf8mb4 COMMENT='工程交接表';
+
+DROP TABLE IF EXISTS `mdsg_project_handover_attach`;
+CREATE TABLE mdsg_project_handover_attach(
+    `ID`                           bigint(20)            NOT  NULL   COMMENT '主键ID',
+    `PROJECT_HANDOVER_ID`          bigint(20)            NOT  NULL   COMMENT '工程交接表ID',
+    `PLAN_DEPARTMENT`              varchar(100)       DEFAULT  NULL  COMMENT '计划处室',
+    `MANAGER_ID`                   bigint(20)        DEFAULT  NULL   COMMENT '计划经理ID',
+    `MANAGER_UID`                  varchar(50)       DEFAULT  NULL   COMMENT '计划经理UID',
+    `MANAGER_CODE`                 varchar(50)       DEFAULT  NULL   COMMENT '计划经理编码',
+    `MANAGER_NAME`                 varchar(50)       DEFAULT  NULL   COMMENT '计划经理名称',
+    `IMPLEMENT_MANAGER_ID`         bigint(20)        DEFAULT  NULL   COMMENT '工程实施经理ID',
+    `IMPLEMENT_MANAGER_UID`        varchar(50)       DEFAULT  NULL   COMMENT '工程实施经理UID',
+    `IMPLEMENT_MANAGER_CODE`       varchar(50)       DEFAULT  NULL   COMMENT '工程实施经理编码',
+    `IMPLEMENT_MANAGER_NAME`       varchar(50)       DEFAULT  NULL   COMMENT '工程实施经理名称',
+    `PUECHASE_MANAGER_ID`          bigint(20)        DEFAULT  NULL   COMMENT '采购经理ID',
+    `PUECHASE_MANAGER_UID`         varchar(100)      DEFAULT  NULL   COMMENT '采购经理UID',
+    `PUECHASE_MANAGER_CODE`        varchar(50)       DEFAULT  NULL   COMMENT '采购经理编码',
+    `PUECHASE_MANAGER_NAME`        varchar(100)      DEFAULT  NULL   COMMENT '采购经理名称',
+    `DESIGN_MANAGER_ID`            bigint(20)        DEFAULT  NULL   COMMENT '设计总负责人ID',
+    `DESIGN_MANAGER_UID`           varchar(50)       DEFAULT  NULL   COMMENT '设计总负责人UID',
+    `DESIGN_MANAGER_CODE`          varchar(50)       DEFAULT  NULL   COMMENT '设计总负责人编码',
+    `DESIGN_MANAGER_NAME`          varchar(50)       DEFAULT  NULL   COMMENT '设计总负责人名称',
+    `DESIGN_MANAGER_PHONE`          varchar(11)      DEFAULT  NULL   COMMENT '设计总负责人电话',
+    `DESIGN_MANAGER_EMAIL`          varchar(64)      DEFAULT  NULL   COMMENT '设计总负责人邮箱',
+    `MANAGER_DEPARTMENT_CODE`      varchar(50)       DEFAULT  NULL   COMMENT '计划部门编码',
+    `MANAGER_DEPARTMENT_NAME`      varchar(100)      DEFAULT  NULL   COMMENT '计划部门名称',
+    `MAINTENANCE_DEPARTMENT_CODE`  varchar(50)       DEFAULT  NULL   COMMENT '维护部门编码',
+    `MAINTENANCE_DEPARTMENT_NAME`  varchar(200)      DEFAULT  NULL   COMMENT '维护部门名称',
+    `MAINDEMAND_DEPARTMENT_CODE`   varchar(50)       DEFAULT  NULL   COMMENT '需求部门编码',
+    `MAINDEMAND_DEPARTMENT_NAME`   varchar(200)      DEFAULT  NULL   COMMENT '需求部门名称',
+    `CREATED_BY`                   bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+    `CREATED_NAME`                 varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+    `CREATED_DATE`                 datetime          DEFAULT  NOW()  COMMENT '创建时间',
+    `UPDATE_BY`                    bigint(20)        DEFAULT  NULL   COMMENT '更新人用户ID',
+    `UPDATE_NAME`                  varchar(50)       DEFAULT  NULL   COMMENT '更新者用户名',
+    `UPDATE_DATE`                  datetime          DEFAULT  NOW()  COMMENT '更新时间',
+    `COMPANY_CODE`                 varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+    `COMPANY_NAME`                 varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+    `SECOND_ORG_CODE`              varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+    `SECOND_ORG_NAME`              varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+    `ORG_CODE`                     varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+    `ORG_NAME`                     varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+    `DELETE_FLAG`                  tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+    PRIMARY KEY (`ID`)
+)ENGINE=INNODB  DEFAULT CHARSET=utf8mb4 COMMENT='工程交接附加表';
+
+DROP TABLE IF EXISTS `mdsg_project_handover_build`;
+CREATE TABLE mdsg_project_handover_build(
+    `ID`                   bigint(20)            NOT  NULL   COMMENT '主键ID',
+    `PROJECT_HANDOVER_ID`  bigint(20)            NOT  NULL   COMMENT '工程交接表ID',
+    `BUILD_COMPANY_CODE`   varchar(50)       DEFAULT  NULL   COMMENT '建设单位编码',
+    `BUILD_COMPANY_NAME`   varchar(100)      DEFAULT  NULL   COMMENT '建设单位名称',
+    `PROJECT_REPLY_ID`     bigint(20)        DEFAULT  NULL   COMMENT '立项批复ID',
+    `PROJECT_REPLY_CODE`   varchar(50)       DEFAULT  NULL   COMMENT '立项批复单编码',
+    `PROJECT_REPLY_NAME`   varchar(100)      DEFAULT  NULL   COMMENT '立项批复单名称',
+    `PROJECT_REPLY_AMT`    decimal(24, 9)    DEFAULT  NULL   COMMENT '立项批复金额(建设单位的批复金额)',
+    `PROJECT_REPLY_NO`     varchar(64)       DEFAULT  NULL   COMMENT '立项批复文号',
+    `PROJECT_REPLY_DATE`   datetime          DEFAULT  NULL   COMMENT '立项批复日期',
+    `DESIGN_REPLY_ID`      bigint(20)        DEFAULT  NULL   COMMENT 'OA设计批复单ID',
+    `DESIGN_REPLY_CODE`    varchar(64)       DEFAULT  NULL   COMMENT 'OA设计批复单编码',
+    `DESIGN_REPLY_NAME`    varchar(100)      DEFAULT  NULL   COMMENT 'OA设计批复单名称',
+    `DESIGN_REPLY_AMT`     decimal(24, 9)    DEFAULT  NULL   COMMENT 'OA设计批复金额',
+    `DESIGN_REPLY_NO`      varchar(64)       DEFAULT  NULL   COMMENT 'OA设计批复文号',
+    `DESIGN_REPLY_DATE`    datetime          DEFAULT  NULL   COMMENT 'OA设计批复日期',
+    `CREATED_BY`           bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+    `CREATED_NAME`         varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+    `CREATED_DATE`         datetime          DEFAULT  NOW()  COMMENT '创建时间',
+    `UPDATE_BY`            bigint(20)        DEFAULT  NULL   COMMENT '更新人用户ID',
+    `UPDATE_NAME`          varchar(50)       DEFAULT  NULL   COMMENT '更新者用户名',
+    `UPDATE_DATE`          datetime          DEFAULT  NOW()  COMMENT '更新时间',
+    `COMPANY_CODE`         varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+    `COMPANY_NAME`         varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+    `SECOND_ORG_CODE`      varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+    `SECOND_ORG_NAME`      varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+    `ORG_CODE`             varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+    `ORG_NAME`             varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+    `DELETE_FLAG`          tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+    PRIMARY KEY (`ID`)
+)ENGINE=INNODB  DEFAULT CHARSET=utf8mb4 COMMENT='工程交接建设表';
+
+DROP TABLE IF EXISTS `mdsg_project_handover_reply`;
+CREATE TABLE mdsg_project_handover_reply(
+    `ID`                   bigint(20)            NOT  NULL   COMMENT '主键ID',
+    `PROJECT_HANDOVER_ID`  bigint(20)            NOT  NULL   COMMENT '工程交接表ID',
+    `REPLY_TYEP`           varchar(32)       DEFAULT  NULL   COMMENT '批复类型(00:立项批复,01:OA设计批复)',
+    `REPLY_ID`             bigint(20)        DEFAULT  NULL   COMMENT '批复ID',
+    `REPLY_CODE`           varchar(64)       DEFAULT  NULL   COMMENT '批复编码',
+    `REPLY_NAME`           varchar(256)      DEFAULT  NULL   COMMENT '批复名称',
+    `REPLY_AMT`            decimal(24, 9)    DEFAULT  NULL   COMMENT '批复金额',
+    `REPLY_NO`             varchar(64)       DEFAULT  NULL   COMMENT '批复文号',
+    `REPLY_DATE`           datetime          DEFAULT  NULL   COMMENT '批复日期',
+    `REPLY_TITLE`          varchar(256)      DEFAULT  NULL   COMMENT '批复标题',
+    `CREATED_BY`           bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+    `CREATED_NAME`         varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+    `CREATED_DATE`         datetime          DEFAULT  NOW()  COMMENT '创建时间',
+    `UPDATE_BY`            bigint(20)        DEFAULT  NULL   COMMENT '更新人用户ID',
+    `UPDATE_NAME`          varchar(50)       DEFAULT  NULL   COMMENT '更新者用户名',
+    `UPDATE_DATE`          datetime          DEFAULT  NOW()  COMMENT '更新时间',
+    `COMPANY_CODE`         varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+    `COMPANY_NAME`         varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+    `SECOND_ORG_CODE`      varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+    `SECOND_ORG_NAME`      varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+    `ORG_CODE`             varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+    `ORG_NAME`             varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+    `DELETE_FLAG`          tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+    PRIMARY KEY (`ID`)
+)ENGINE=INNODB  DEFAULT CHARSET=utf8mb4 COMMENT='工程交接批复信息表';
+
+DROP TABLE IF EXISTS `mdsg_project_handover_contract`;
+CREATE TABLE mdsg_project_handover_contract(
+    `ID`                     bigint(20)            NOT  NULL   COMMENT '主键ID',
+    `PROJECT_HANDOVER_ID`    bigint(20)        DEFAULT  NULL   COMMENT '工程交接表ID',
+    `CONTRACT_TYPE_HEAD`     tinyint(4)        DEFAULT  NULL   COMMENT '1:合同交接(包括单项合同、标准合同订单,框架协议) 2:框架订单交接',
+    `CONTRACT_CODE`          varchar(128)      DEFAULT  NULL   COMMENT '合同编号',
+    `CONTRACT_NAME`          varchar(256)      DEFAULT  NULL   COMMENT '合同名称',
+    `CONTRACT_TYPE`          varchar(64)       DEFAULT  NULL   COMMENT '合同类型',
+    `CONTRACT_DATE`          datetime          DEFAULT  NULL   COMMENT '合同起草日期',
+    `CONTRACT_AMOUNT_TOTAL`  decimal(24, 9)    DEFAULT  NULL   COMMENT '含税合同金额',
+    `CONTRACT_AMOUNT`        decimal(24, 9)    DEFAULT  NULL   COMMENT '不含税合同金额',
+    `TAX_AMOUNT`             decimal(24, 9)    DEFAULT  NULL   COMMENT '税额',
+    `SIGNN_DATE`             datetime          DEFAULT  NULL   COMMENT '合同签订时间',
+    `PARTNER_COMPANY`        varchar(128)      DEFAULT  NULL   COMMENT '供应商名称',
+    `PARTNER_CONTACT`        varchar(128)      DEFAULT  NULL   COMMENT '合同对方联系人',
+    `PARTNER_TEL`            varchar(128)      DEFAULT  NULL   COMMENT '合同对方联系人手机',
+    `PARTNER_EMAIL`          varchar(128)      DEFAULT  NULL   COMMENT '合同对方联系人邮箱',
+    `FILE_URL`               varchar(512)      DEFAULT  NULL   COMMENT '合同扫描件链接',
+    `FILE_NAME`              varchar(256)      DEFAULT  NULL   COMMENT '合同扫描件名称',
+    `OUTPUT_EXT`             varchar(2000)     DEFAULT  NULL   COMMENT '输出扩展/Json格式',
+    `CREATED_BY`             bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+    `CREATED_NAME`           varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+    `CREATED_DATE`           datetime          DEFAULT  NOW()  COMMENT '创建时间',
+    `UPDATE_BY`              bigint(20)        DEFAULT  NULL   COMMENT '更新人用户ID',
+    `UPDATE_NAME`            varchar(50)       DEFAULT  NULL   COMMENT '更新者用户名',
+    `UPDATE_DATE`            datetime          DEFAULT  NOW()  COMMENT '更新时间',
+    `COMPANY_CODE`           varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+    `COMPANY_NAME`           varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+    `SECOND_ORG_CODE`        varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+    `SECOND_ORG_NAME`        varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+    `ORG_CODE`               varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+    `ORG_NAME`               varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+    `DELETE_FLAG`            tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+    PRIMARY KEY (`ID`)
+)ENGINE=INNODB  DEFAULT CHARSET=utf8mb4 COMMENT='工程交接合同表';
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.4-设计变更调整申请】设计变更表: 去掉"任务编码"、"批复ID"
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_design_change` 
+DROP COLUMN `TASK_CODE`,
+DROP COLUMN `TASK_NAME`,
+DROP COLUMN `TASK_STATUS_ID`,
+DROP COLUMN `REPLY_ID`;
+
+-- 【V1.4-设计变更调整申请】任务状态表增加"变更申请单ID",为设计变更表主键
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_task_status` 
+ADD COLUMN `DESIGN_CHANGE_ID` bigint(20) NULL COMMENT '设计变更表ID' AFTER `REPLY_AMT`;
+
+-- 【V1.4-数据字典】项目成员变更管理,变更岗位添加枚举值
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329675989052018690, 'MDSG_BGGW', '变更岗位', 1, '04', '工程管理经理添加', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:40:35', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676299136913409, 'MDSG_BGGW', '变更岗位', 1, '05', '需求经理变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:41:49', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676377012555777, 'MDSG_BGGW', '变更岗位', 1, '06', '计划项目经理变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:42:07', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676488195166209, 'MDSG_BGGW', '变更岗位', 1, '07', '工程管理经理(主)变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:42:34', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676612359147522, 'MDSG_BGGW', '变更岗位', 1, '08', '工程管理经理变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:43:03', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676715371253762, 'MDSG_BGGW', '变更岗位', 1, '09', '工程实施经理(主)变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:43:28', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1329676800251383809, 'MDSG_BGGW', '变更岗位', 1, '10', '工程实施经理变更', 1, '申请项目成员变更的岗位', 0, '投资计划', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-20 14:43:48', 1175967015377788930, '2020-10-19 00:00:00', '苗帅', '孙凯');
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.3-数据字典】添加小区类型 (`cpms_sys_dict`.`sys_dict`)
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1323516945819914241, 'MDSG_DATATYPE', '小区类型', 1, '', '', 1, '小区类型', 1, '', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-03 14:46:44', 0, '2020-11-03 14:45:35', '苗帅', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1323519379850022913, 'MDSG_DATATYPE', '小区类型', 1, '00', '新建小区', 1, '小区类型', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-03 14:56:25', 0, '2020-11-03 14:55:16', '苗帅', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1323519483860373506, 'MDSG_DATATYPE', '小区类型', 1, '01', '光改小区', 1, '小区类型', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-03 14:56:49', 0, '2020-11-03 00:00:00', '苗帅', '');
+INSERT INTO `sys_dict`(`DIC_ID`, `DIC_CODE`, `DIC_NAME`, `DIC_FLAG`, `ITEM_CODE`, `ITEM_VALUE`, `ITEM_FLAG`, `DIC_COMMENTS`, `IS_HEAD_FLAG`, `SERVICE_NAME`, `LANGUAGE`, `DELETE_FLAG`, `COMPANY_CODE`, `COMPANY_NAME`, `ORG_CODE`, `ORG_NAME`, `CREATED_BY`, `CREATED_DATE`, `UPDATED_BY`, `UPDATED_DATE`, `CREATED_BY_NAME`, `UPDATED_BY_NAME`) VALUES (1323519643382337538, 'MDSG_DATATYPE', '小区类型', 1, '02', '共享宽带', 1, '小区类型', 0, '项目设计', '中文', 0, '', '', '', '', 1161618754047267362, '2020-11-03 14:57:27', 0, '2020-11-03 00:00:00', '苗帅', '');
+
+-- 【V1.3-小区信息管理】添加小区类型字段
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_family_collection` 
+ADD COLUMN `DATA_TYPE` varchar(10) NULL COMMENT '小区类型' AFTER `DOCUMENT_STATUS`;
+
+-------------------------------------------------分-割-线-------------------------------------------------
+
+-- 【V1.2-设计电子会审/设计线下会审】任务状态表添加 "会审金额"
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_task_status` 
+ADD COLUMN `AUDIT_AMT` decimal(20, 6) NULL COMMENT '会审金额' AFTER `DISPATCH_MASTER_ID`;
+
+-- 【V1.2-设计电子会审/设计线下会审】"会审金额" 改成 "会审总金额（元）",仅调整中文字段名
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_audit` 
+MODIFY COLUMN `AUDIT_WAY` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '会审总金额(元)' AFTER `START_DATE`;
+
+-- 【Sprint18-设计预审通知】反馈人页面添加 "接受意见" 和 "接受意见说明" 两个字段
+ALTER TABLE `cpms_mrpi_mdsg`.`mdsg_report_info` 
+ADD COLUMN `REPORT_OPINION` varchar(30) NULL COMMENT '接收意见(00-同意,01-不同意)' AFTER `PROJECT_CODE`;
+
+=================================================分=界=线=================================================
+
+-- 小区信息管理 - 开始
+DROP TABLE IF EXISTS `mdsg_family_collection`;
+CREATE TABLE `mdsg_family_collection` (
+  `ID`                bigint(20)            NOT  NULL   COMMENT 'ID',
+  `TASK_ID`           bigint(20)            NOT  NULL   COMMENT '任务ID',
+  `AUDIT_ID`          bigint(20)            NOT  NULL   COMMENT '会审ID',
+  `DATA_TYPE`         varchar(10)       DEFAULT  NULL   COMMENT '小区类型',
+  `DOCUMENT_STATUS`   varchar(10)       DEFAULT  '00'   COMMENT '单据状态',
+  `CREATED_BY`        bigint(20)        DEFAULT  NULL   COMMENT '建设类型',
+  `CREATED_NAME`      varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+  `CREATED_DATE`      datetime          DEFAULT  NOW()  COMMENT '创建时间',
+  `UPDATE_BY`         bigint(20)        DEFAULT  NULL   COMMENT '更新人',
+  `UPDATE_NAME`       varchar(50)       DEFAULT  NULL   COMMENT '更新人名称',
+  `UPDATE_DATE`       datetime          DEFAULT  NOW()  COMMENT '更新时间',
+  `COMPANY_CODE`      varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+  `COMPANY_NAME`      varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+  `SECOND_ORG_CODE`   varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+  `SECOND_ORG_NAME`   varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+  `ORG_CODE`          varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+  `ORG_NAME`          varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+  `DELETE_FLAG`       tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+  PRIMARY KEY (`ID`)  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='家宽/集客行表';
+
+DROP TABLE IF EXISTS `mdsg_family_collection_info`;
+CREATE TABLE `mdsg_family_collection_info` (
+  `ID`                       bigint(20)            NOT  NULL   COMMENT '主键ID',
+  `FAMILY_COLLECTION_ID`     bigint(20)        DEFAULT  NULL   COMMENT '家宽/集客行ID',
+  `COM_ENTER_NAME`           varchar(100)      DEFAULT  NULL   COMMENT '小区/企业名称',
+  `CONSTRUCTION_LOCATION`    varchar(100)      DEFAULT  NULL   COMMENT '施工地点',
+  `START_LNG`                varchar(50)       DEFAULT  NULL   COMMENT '起点经度',
+  `START_LAT`                varchar(50)       DEFAULT  NULL   COMMENT '起点纬度',
+  `END_LNG`                  varchar(50)       DEFAULT  NULL   COMMENT '终点经度',
+  `END_LAT`                  varchar(50)       DEFAULT  NULL   COMMENT '终点纬度',
+  `CREATED_BY`               bigint(20)        DEFAULT  NULL   COMMENT '创建者用户ID',
+  `CREATED_NAME`             varchar(50)       DEFAULT  NULL   COMMENT '创建者用户名',
+  `CREATED_DATE`             datetime          DEFAULT  NOW()  COMMENT '创建时间',
+  `UPDATE_BY`                bigint(20)        DEFAULT  NULL   COMMENT '更新人',
+  `UPDATE_NAME`              varchar(50)       DEFAULT  NULL   COMMENT '更新人名称',
+  `UPDATE_DATE`              datetime          DEFAULT  NOW()  COMMENT '更新时间',
+  `COMPANY_CODE`             varchar(50)       DEFAULT  NULL   COMMENT '单位编码',
+  `COMPANY_NAME`             varchar(100)      DEFAULT  NULL   COMMENT '单位简称',
+  `SECOND_ORG_CODE`          varchar(50)       DEFAULT  NULL   COMMENT '二级组织编码',
+  `SECOND_ORG_NAME`          varchar(100)      DEFAULT  NULL   COMMENT '二级组织简称',
+  `ORG_CODE`                 varchar(50)       DEFAULT  NULL   COMMENT '组织编码',
+  `ORG_NAME`                 varchar(100)      DEFAULT  NULL   COMMENT '组织简称',
+  `DELETE_FLAG`              tinyint(4)        DEFAULT  0      COMMENT '删除标识(0:未删除,1:已删除)',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='加宽/集客信息表';
+-- 小区信息管理 - 结束
+
+-- 漏洞越权修复(2020年08月31日)
+DROP TABLE IF EXISTS `mdsg_filter_url`;
+CREATE TABLE `mdsg_filter_url` (
+  ID              bigint(20)   NOT NULL     COMMENT '主键ID',
+  URL             varchar(200) NOT NULL     COMMENT '需要拦截的URL地址',
+  TABLE_NAME      varchar(50)  NOT NULL     COMMENT '表名',
+  BUSINESS_TYPE   varchar(50)  NOT NULL     COMMENT '单据类型，各微服务中单据类型名称缩写，和待办表中的businessType字段保持一致即可',
+  OPERATION_TYPE  varchar(50)  NOT NULL     COMMENT '操作类型: DEL-删除,UPDATE-修改,CHECK-查看',
+  IS_PROJECT_USER tinyint(4)   DEFAULT NULL COMMENT '是否涉及项目成员: 0-涉及,1-不涉及',
+  CREATION_DATE   datetime     NOT NULL     COMMENT '创建时间',
+  UPDATE_DATE     datetime     NOT NULL     COMMENT '更新时间',
+  DELETE_FLAG     tinyint(4)   NOT NULL     COMMENT '删除标记: 0-未删除,1-已删除',
+  PRIMARY KEY (`FILTER_URL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='URL拦截名单表';

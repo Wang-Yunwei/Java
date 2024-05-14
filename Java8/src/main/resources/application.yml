@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /wyw
+spring:
+  application:
+    name: Wang-Yunwei
+  profiles:
+    include: @profiles.active@
+# jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: 8y37J6qFKQnuQyKr9y
