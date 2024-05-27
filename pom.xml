@@ -8,7 +8,7 @@
     <groupId>com.wei.yun</groupId>
     <version>2014.05.14</version>
     <packaging>pom</packaging>
-    
+
     <modules>
         <module>Java8</module>
     </modules>
