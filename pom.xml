@@ -8,13 +8,7 @@
     <groupId>com.wei.yun</groupId>
     <version>2014.05.14</version>
     <packaging>pom</packaging>
-
-<!-- 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
--->
+    
     <modules>
         <module>Java8</module>
     </modules>
