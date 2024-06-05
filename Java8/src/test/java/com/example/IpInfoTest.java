@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example;
 
 import com.jthinking.common.util.ip.IPInfo;
 import com.jthinking.common.util.ip.IPInfoUtils;

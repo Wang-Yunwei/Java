@@ -1,6 +1,4 @@
-package com.example.test;
-
-import cn.hutool.core.lang.copier.Copier;
+package com.example;
 
 /**
  * @author WangYunwei [2023-11-27]

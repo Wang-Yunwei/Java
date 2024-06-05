@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,12 +9,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author WangYunwei [2024-04-19]
  */
-public class TestA {
+public class HashMapTest {
 
     /**
-     * 验证HashMap的线程不安全性
-     * @param args
-     * @throws InterruptedException
+     * 验证HashMap的线程不安全性,hash碰撞导致数据缺失
      */
     public static void main(String[] args) throws InterruptedException {
         Map<Integer,Integer> hashMap = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;

@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example;
 
 import cn.hutool.core.collection.CollUtil;
 import com.beust.jcommander.internal.Lists;
