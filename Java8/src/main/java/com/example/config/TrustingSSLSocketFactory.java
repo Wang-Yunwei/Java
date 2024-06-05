@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * @author WangYunwei [2022-08-23]
+ * 使 Fegin 可以发送 SSL 请求
  */
 public class TrustingSSLSocketFactory extends SSLSocketFactory
         implements X509TrustManager, X509KeyManager {

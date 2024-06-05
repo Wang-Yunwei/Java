@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel(value = "PushDateToSSEPo", description = "SSE - 推送数据_入参")
-public class PushDateToSSEPo {
+public class PushDatePo {
 
     /**
      * sseID

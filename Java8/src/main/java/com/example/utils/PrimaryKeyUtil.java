@@ -1,29 +1,17 @@
-//package com.example.utils;
-//
-//import com.google.common.collect.Lists;
-//import com.mdsd.cloud.constants.CommonConstants;
-//import lombok.extern.slf4j.Slf4j;
-//import org.apache.commons.lang3.StringUtils;
-//import org.springframework.data.redis.core.RedisTemplate;
-//import org.springframework.stereotype.Component;
-//
-//import javax.annotation.Resource;
-//import java.text.MessageFormat;
-//import java.time.LocalDate;
-//import java.time.LocalDateTime;
-//import java.time.format.DateTimeFormatter;
-//import java.time.temporal.ChronoUnit;
-//import java.util.List;
-//import java.util.UUID;
-//import java.util.concurrent.TimeUnit;
-//
-///**
-// * @author WangYunwei [2021-09-30]
-// */
-//@Slf4j
-//@Component
-//public class PrimaryKeyUtil {
-//
+package com.example.utils;
+
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+/**
+ * @author WangYunwei [2021-09-30]
+ */
+@Component
+public class PrimaryKeyUtil {
+
 //    @Resource
 //    RedisTemplate<String, Object> redisTemplate;
 //
@@ -51,24 +39,21 @@
 //                String.valueOf(0));
 //        return String.format("%s%s", DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now()), value);
 //    }
-//
-//    /**
-//     * 获取UUID
-//     *
-//     * @param num 个数
-//     * @return List或String
-//     */
-//    public static Object getUUID(final Integer num) {
-//
-//        if (null != num) {
-//            if (num > 0) {
-//                final List<String> result = Lists.newArrayList();
-//                for (int i = 0; i < num; i++) {
-//                    result.add(UUID.randomUUID().toString().replace("-", ""));
-//                }
-//                return result;
-//            }
-//        }
-//        return UUID.randomUUID().toString().replace("-", "");
-//    }
-//}
+
+    /**
+     * 获取UUID
+     */
+    public static Object getUUID(final Integer num) {
+
+        if (null != num) {
+            if (num > 0) {
+                final List<String> result =new ArrayList();
+                for (int i = 0; i < num; i++) {
+                    result.add(UUID.randomUUID().toString().replace("-", ""));
+                }
+                return result;
+            }
+        }
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+}

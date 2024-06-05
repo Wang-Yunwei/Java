@@ -1,6 +1,6 @@
 package com.example.controller.sse.service.impl;
 
-import com.example.controller.sse.dto.PushDateToSSEPo;
+import com.example.controller.sse.dto.PushDatePo;
 import com.example.controller.sse.service.SseService;
 import com.example.response.exception.BusinessException;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,7 @@ public class SseServiceImpl implements SseService {
     private static final Map<String, SseEmitter> sseMap = new ConcurrentHashMap();
 
     /**
-     * SSE - 建立连接
-     *
-     * @deprecated send(): 发送数据
+     * send(): 发送数据
      * complete(): 表示执行完毕，会断开连接
      * onTimeout(): 超时回调触发
      * onCompletion(): 结束之后的回调触发
@@ -38,20 +36,17 @@ public class SseServiceImpl implements SseService {
         }
         //超时回调触发
         result.onTimeout(() -> {
-            throw new BusinessException("SSE连接超时!");
+            throw new BusinessException("SSE 连接超时!");
         });
         //结束之后的回调触发
         result.onCompletion(() -> {
-            throw new BusinessException("关闭SSE连接!");
+            throw new BusinessException("关闭 SSE 连接!");
         });
         return result;
     }
 
-    /**
-     * SSE - 推送数据
-     */
     @Override
-    public Boolean pushDataToSSE(PushDateToSSEPo param) {
+    public Boolean pushData(PushDatePo param) {
 
         try {
             //根据sseId获取SseEmitter

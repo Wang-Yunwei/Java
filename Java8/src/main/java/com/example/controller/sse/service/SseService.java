@@ -1,6 +1,6 @@
 package com.example.controller.sse.service;
 
-import com.example.controller.sse.dto.PushDateToSSEPo;
+import com.example.controller.sse.dto.PushDatePo;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 /**
@@ -16,5 +16,5 @@ public interface SseService {
     /**
      * SSE - 推送数据
      */
-    Boolean pushDataToSSE(PushDateToSSEPo param);
+    Boolean pushData(PushDatePo param);
 }

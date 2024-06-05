@@ -18,7 +18,7 @@ import java.util.Map;
  * @author WangYunwei [2022-07-01]
  */
 @Slf4j
-public class MyLocalDateUtil {
+public class LocalDateUtil {
 
     /**
      * 根据年获取日期

@@ -1,6 +1,6 @@
 package com.example.controller.sse;
 
-import com.example.controller.sse.dto.PushDateToSSEPo;
+import com.example.controller.sse.dto.PushDatePo;
 import com.example.controller.sse.service.SseService;
 import com.example.response.ResponseDto;
 import com.example.response.ResponseUtil;
@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 /**
  * @author WangYunwei [2023-12-21]
  */
+@RestController
+@RequestMapping("sse")
 public class SseController {
 
     SseService sseService;
@@ -23,16 +25,16 @@ public class SseController {
      * SSE - 建立连接
      */
     @ApiOperation(value = "SSE - 建立连接")
-    @GetMapping(value = "/connectSSE/{sseId}")
-    public SseEmitter connectSSE(@PathVariable final String sseId) {
+    @GetMapping(name= "建立连接",path = "/connectionEstablishment/{sseId}")
+    public SseEmitter connectionEstablishment(@PathVariable final String sseId) {
 
         return this.sseService.connectSSE(sseId);
     }
 
-    @ApiOperation(value = "SSE - 发送数据")
-    @PostMapping(value = "pushDataToSSE")
-    public ResponseDto<Boolean> pushDataToSSE(@RequestBody PushDateToSSEPo param){
+    @ApiOperation(value = "SSE - 推送数据")
+    @PostMapping(name="推送数据",path = "pushData")
+    public ResponseDto<Boolean> pushData(@RequestBody PushDatePo param){
 
-        return  ResponseUtil.wrapSuccess(sseService.pushDataToSSE(param));
+        return  ResponseUtil.wrapSuccess(sseService.pushData(param));
     }
 }

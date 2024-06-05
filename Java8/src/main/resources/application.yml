@@ -1,9 +1,10 @@
 server:
   servlet:
-    context-path: /wyw
+    context-path: /java8
+  port: 8080
 spring:
   application:
-    name: Wang-Yunwei
+    name: Java_8
   profiles:
     include: @profiles.active@
 # jasypt加密的密匙
