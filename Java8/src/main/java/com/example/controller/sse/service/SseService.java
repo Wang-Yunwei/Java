@@ -11,7 +11,7 @@ public interface SseService {
     /**
      * SSE - 建立连接
      */
-    SseEmitter connectSSE(String sseId);
+    SseEmitter connectionEstablishment(String sseId);
 
     /**
      * SSE - 推送数据

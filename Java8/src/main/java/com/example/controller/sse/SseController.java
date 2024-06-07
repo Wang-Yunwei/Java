@@ -28,7 +28,7 @@ public class SseController {
     @GetMapping(name= "建立连接",path = "/connectionEstablishment/{sseId}")
     public SseEmitter connectionEstablishment(@PathVariable final String sseId) {
 
-        return this.sseService.connectSSE(sseId);
+        return this.sseService.connectionEstablishment(sseId);
     }
 
     @ApiOperation(value = "SSE - 推送数据")

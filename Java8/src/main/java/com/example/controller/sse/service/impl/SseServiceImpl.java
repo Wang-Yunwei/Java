@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,19 +19,14 @@ public class SseServiceImpl implements SseService {
 
     private static final Map<String, SseEmitter> sseMap = new ConcurrentHashMap();
 
-    /**
-     * send(): 发送数据
-     * complete(): 表示执行完毕，会断开连接
-     * onTimeout(): 超时回调触发
-     * onCompletion(): 结束之后的回调触发
-     */
     @Override
-    public SseEmitter connectSSE(String sseId) {
+    public SseEmitter connectionEstablishment(String sseId) {
 
         final SseEmitter result = new SseEmitter(1000 * 60 * 60 * 24L);
         try {
-            result.send(SseEmitter.event().data("SSE连接成功!"));//send():发送数据
-            sseMap.put(sseId, result);//将SseEmitter放入Map中
+            // 发送数据
+            result.send(SseEmitter.event().data("SSE连接成功!"));
+            sseMap.put(sseId, result);
         } catch (final IOException e) {
             result.completeWithError(e);
         }
@@ -40,6 +36,8 @@ public class SseServiceImpl implements SseService {
         });
         //结束之后的回调触发
         result.onCompletion(() -> {
+            // 执行完毕断开连接
+            result.complete();
             throw new BusinessException("关闭 SSE 连接!");
         });
         return result;
@@ -49,14 +47,13 @@ public class SseServiceImpl implements SseService {
     public Boolean pushData(PushDatePo param) {
 
         try {
-            //根据sseId获取SseEmitter
+            // 根据 sseId 获取 SseEmitter
             final SseEmitter sseEmitter = sseMap.get(param.getSseId());
-            //发送数据
+            Optional.of(sseEmitter).orElseThrow(() -> new BusinessException(String.format("未找到 SSE_ID = %s 的连接", param.getSseId())));
+            // 发送数据
             sseEmitter.send(param.getContent());
-        } catch (final NullPointerException e) {
-            throw new BusinessException(String.format("未找到SSE连接: %s", e.getClass().getName()));
         } catch (final IOException e) {
-            throw new BusinessException(String.format("发送数据失败: %s", e.getClass().getName()));
+            throw new BusinessException(String.format("推送数据失败: %s", e.getClass().getName()));
         }
         return Boolean.TRUE;
     }
