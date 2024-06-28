@@ -19,7 +19,7 @@ public class NettyController {
     public static void main(String[] args){
         // 创建服务端启动引导器
         ServerBootstrap bootstrap = new ServerBootstrap();
-        // 配置线程模型
+        // 配置线程模型  EventLoop 等于 Thread
         bootstrap.group(new NioEventLoopGroup());
         // 指定服务端的 IO 模型
         bootstrap.channel(NioServerSocketChannel.class);
@@ -29,7 +29,6 @@ public class NettyController {
             protected void initChannel(NioSocketChannel ch) throws Exception {
                 // 解码
                 ch.pipeline().addLast(new StringDecoder());
-
                 ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){
                     @Override
                     public void channelActive(ChannelHandlerContext ctx) throws Exception {

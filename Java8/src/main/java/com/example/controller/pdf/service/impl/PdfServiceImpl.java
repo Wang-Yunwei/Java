@@ -1,6 +1,5 @@
 package com.example.controller.pdf.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.beust.jcommander.internal.Lists;
 import com.example.controller.pdf.dto.FirstAidMedicalRecordsPo;
 import com.example.controller.pdf.dto.TriageDetailPo;
