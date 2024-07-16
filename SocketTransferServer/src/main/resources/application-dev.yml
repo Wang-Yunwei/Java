@@ -1,0 +1,8 @@
+server:
+  port: 20240
+env:
+  ip:
+    socket_client: 127.0.0.1
+  port:
+    web-socket-server: 20241
+    socket_client: 20242

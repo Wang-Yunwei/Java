@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: SocketTransferServer
+  profiles:
+    include: @profiles.active@
+server:
+  servlet:
+    context-path: /socket-transfer-server
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
