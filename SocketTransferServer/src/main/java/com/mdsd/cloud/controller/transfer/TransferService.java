@@ -2,6 +2,7 @@ package com.mdsd.cloud.controller.transfer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.socket.WebSocketServer;
 import com.mdsd.cloud.event.SocketEvent;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class ListenerService {
+public class TransferService {
 
     private SocketClient nettyClient;
 
@@ -27,7 +28,7 @@ public class ListenerService {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public ListenerService(SocketClient nettyClient, WebSocketServer webSocketServer) {
+    public TransferService(SocketClient nettyClient, WebSocketServer webSocketServer) {
 
         this.nettyClient = nettyClient;
         this.webSocketServer = webSocketServer;
@@ -61,12 +62,31 @@ public class ListenerService {
             }
         } else if (source instanceof SocketClient) {
             ByteBuf byteBuf = (ByteBuf) evn.getMsg();
-            if(byteBuf.getShort(0) == 0x6A77){
 
+            if(byteBuf.getShort(0) == 0x6A77){
+//                handleInstruct()
+            }
+
+
+            if(byteBuf.getShort(0) == 0x6A77){
+                switch (byteBuf.getByte(4)) {//指令编码
+                    case 0x01:
+                        break;
+                    case 0x02:
+                    default:
+                        break;
+                }
             }
 
 //            nettyClient.sendMessage(cnt);
         } else {
+
+        }
+    }
+
+    private void handleInstruct(InstructEnum param){
+
+        switch (param){
 
         }
     }

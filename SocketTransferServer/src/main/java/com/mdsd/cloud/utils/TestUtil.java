@@ -24,10 +24,12 @@ public class TestUtil {
         // 假设我们想查看写入的数据
         // 注意：ByteBuf没有直接的toString()方法来显示所有字节，但我们可以手动遍历
         for (int i = 0; i < buffer.readableBytes(); i++) {
-//            byte b = buffer.getByte(i); // 这里为了示例，我们实际读取了数据，但在实际场景中，你可能只是想查看而不修改readerIndex
-//            System.out.printf("Byte %d: 0x%02X%n", i, b);
-            int anInt = buffer.getInt(i);
-            System.out.printf("int %d: %d", i, anInt);
+            byte b = buffer.getByte(i); // 这里为了示例，我们实际读取了数据，但在实际场景中，你可能只是想查看而不修改readerIndex
+            System.out.printf("Byte %d: 0x%02X%n", i, b);
         }
+
+        Integer ab = 0xD1;
+
+        System.out.println(ab == 0xD1);
     }
 }

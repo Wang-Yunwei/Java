@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 public class ByteUtil {
 
     public static byte[] intToByte(int param) {
-
+        // int 转成小端序
         byte[] result = new byte[4];
         result[0] = (byte) (param & 0xFF);
         result[1] = (byte) ((param >> 8) & 0xFF);
