@@ -9,7 +9,7 @@
     var socket;
     // 判断当前浏览器是否支持webSocket
     if(window.WebSocket){
-        socket = new WebSocket("ws://127.0.0.1:49151/webSocket")
+        socket = new WebSocket("ws://127.0.0.1:8081")
         // 相当于channel的read事件，ev 收到服务器回送的消息
         socket.onmessage = function (ev) {
             var rt = document.getElementById("responseText");
@@ -18,14 +18,9 @@
         // 相当于连接开启
         socket.onopen = function (ev) {
             var rt = document.getElementById("responseText");
-            rt.value =  "连接开启了..."
-            socket.send(
-                JSON.stringify({
-                    // 连接成功将，用户ID传给服务端
-                    uid: "123456"
-                })
-            );
+            rt.value =  "连接开启了..."+ev.data;
         }
+
         // 相当于连接关闭
         socket.onclose = function (ev) {
             var rt = document.getElementById("responseText");
