@@ -1,7 +1,7 @@
 package com.mdsd.cloud.socket;
 
-import com.mdsd.cloud.controller.listener.dto.HeartbeatInp;
-import com.mdsd.cloud.controller.listener.dto.RegisterInp;
+import com.mdsd.cloud.controller.transfer.dto.HeartbeatInp;
+import com.mdsd.cloud.controller.transfer.dto.RegisterInp;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -109,7 +109,6 @@ public class SocketClient {
                                                      buf.writeByte(heartbeatInp.getInstructNum());
                                                      buf.writeLong(System.currentTimeMillis());
                                                      channel.writeAndFlush(buf);
-                                                     buf.release();
                                                  }
                                              }
                                          }
@@ -146,7 +145,6 @@ public class SocketClient {
                 buf.writeInt(registerInp.getUserNum());
                 buf.writeBytes(registerInp.getAccessToken());
                 channel.writeAndFlush(buf);
-                buf.release();
             }
         });
     }

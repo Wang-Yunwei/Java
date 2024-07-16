@@ -1,6 +1,5 @@
-package com.mdsd.cloud.controller.listener.dto;
+package com.mdsd.cloud.controller.transfer.dto;
 
-import com.mdsd.cloud.controller.airport.dto.PointDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
