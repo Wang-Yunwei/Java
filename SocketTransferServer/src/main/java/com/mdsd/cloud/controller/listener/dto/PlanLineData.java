@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.socket.dto;
+package com.mdsd.cloud.controller.listener.dto;
 
 import com.mdsd.cloud.controller.airport.dto.PointDTO;
 import io.swagger.v3.oas.annotations.media.Schema;

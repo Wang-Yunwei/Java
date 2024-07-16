@@ -4,13 +4,10 @@ import com.mdsd.cloud.config.TyRequestInterceptor;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
 import com.mdsd.cloud.controller.auth.service.AuthService;
-import com.mdsd.cloud.controller.socket.components.SocketClient;
-import com.mdsd.cloud.controller.socket.dto.RegisterInp;
+import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
-import com.mdsd.cloud.utils.ByteUtil;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**

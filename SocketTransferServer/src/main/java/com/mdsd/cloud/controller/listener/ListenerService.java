@@ -1,9 +1,9 @@
-package com.mdsd.cloud.controller.socket;
+package com.mdsd.cloud.controller.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.socket.components.SocketClient;
-import com.mdsd.cloud.controller.socket.components.WebSocketServer;
+import com.mdsd.cloud.socket.SocketClient;
+import com.mdsd.cloud.socket.WebSocketServer;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class SocketEventListener {
+public class ListenerService {
 
     private SocketClient nettyClient;
 
@@ -27,7 +27,7 @@ public class SocketEventListener {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public SocketEventListener(SocketClient nettyClient, WebSocketServer webSocketServer) {
+    public ListenerService(SocketClient nettyClient, WebSocketServer webSocketServer) {
 
         this.nettyClient = nettyClient;
         this.webSocketServer = webSocketServer;

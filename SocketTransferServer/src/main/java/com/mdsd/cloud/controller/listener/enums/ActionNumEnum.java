@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.socket.enums;
+package com.mdsd.cloud.controller.listener.enums;
 
 /**
  * @author WangYunwei [2024-07-15]

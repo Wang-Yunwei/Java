@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.socket.components;
+package com.mdsd.cloud.socket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

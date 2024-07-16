@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.socket.dto;
+package com.mdsd.cloud.controller.listener.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -11,17 +11,18 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class HeartbeatInp {
+public class RegisterOup {
 
     @Schema(description = "帧头", type = "uit16", maxLength = 2)
-    private short frameHeader = 0x7479;
+    private short frameHeader = 0x6A77;
 
     @Schema(description = "数据长度", type = "uit16", maxLength = 2)
-    private short dataLength = 0x09;
+    private short dataLength;
 
     @Schema(description = "指令编号", type = "uint8", maxLength = 1)
-    private byte instructNum = 0x02;
+    private byte instructNum = 0x01;
 
-    @Schema(description = "时间戳", type = "uint64", maxLength = 8)
-    private long timestamp;
+    @Schema(description = "是否成功", type = "uint8", maxLength = 1)
+    private byte isSuccess;
+    
 }

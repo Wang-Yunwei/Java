@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.socket.dto;
+package com.mdsd.cloud.controller.listener.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package com.mdsd.cloud.controller.socket.components;
+package com.mdsd.cloud.socket;
 
-import com.mdsd.cloud.controller.socket.dto.HeartbeatInp;
-import com.mdsd.cloud.controller.socket.dto.RegisterInp;
+import com.mdsd.cloud.controller.listener.dto.HeartbeatInp;
+import com.mdsd.cloud.controller.listener.dto.RegisterInp;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
