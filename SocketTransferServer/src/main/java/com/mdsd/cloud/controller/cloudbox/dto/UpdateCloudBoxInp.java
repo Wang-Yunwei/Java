@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UpdateInp {
+public class UpdateCloudBoxInp {
 
     @Schema(description = "云盒SN编号")
     private String boxSn;

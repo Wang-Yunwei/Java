@@ -1,10 +1,8 @@
 package com.mdsd.cloud.controller.airport.service;
 
 import com.mdsd.cloud.controller.airport.dto.HangarListOup;
-import com.mdsd.cloud.controller.airport.dto.LineInp;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
-import com.mdsd.cloud.controller.airport.dto.UpdateInp;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 
 /**
  * @author WangYunwei [2024-07-12]
@@ -29,7 +27,7 @@ public interface AirportService {
     /**
      * 修改机库信息
      */
-    void update(UpdateInp param);
+    void update(UpdateAirportInp param);
 
     /**
      * 获取舱外视频地址

@@ -25,7 +25,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
      * 修改云盒设置
      */
     @Override
-    public void update(UpdateInp param) {
+    public void update(UpdateCloudBoxInp param) {
 
     }
 

@@ -17,7 +17,7 @@ public interface CloudBoxService {
     /**
      * 修改云盒设置
      */
-    void update(UpdateInp param);
+    void update(UpdateCloudBoxInp param);
 
     /**
      * 获取飞行历史

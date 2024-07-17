@@ -1,5 +1,6 @@
 package com.mdsd.cloud.socket;
 
+import com.mdsd.cloud.controller.transfer.dto.BaseInp;
 import com.mdsd.cloud.controller.transfer.dto.HeartbeatInp;
 import com.mdsd.cloud.controller.transfer.dto.RegisterInp;
 import com.mdsd.cloud.event.SocketEvent;
@@ -48,11 +49,6 @@ public class SocketClient {
 
     @Setter
     private byte connectCount;
-
-    @Getter
-    private final RegisterInp registerInp = new RegisterInp();
-
-    private final HeartbeatInp heartbeatInp = new HeartbeatInp();
 
     private final ApplicationEventPublisher publisher;
 
@@ -104,9 +100,9 @@ public class SocketClient {
                                                  // 发送心跳
                                                  if (evt instanceof IdleStateEvent) {
                                                      ByteBuf buf = Unpooled.buffer();
-                                                     buf.writeShort(heartbeatInp.getFrameHeader());
-                                                     buf.writeShort(heartbeatInp.getDataLength());
-                                                     buf.writeByte(heartbeatInp.getInstructNum());
+                                                     buf.writeShort(0x7479);
+                                                     buf.writeShort(0x09);
+                                                     buf.writeByte(0x02);
                                                      buf.writeLong(System.currentTimeMillis());
                                                      channel.writeAndFlush(buf);
                                                  }
@@ -118,7 +114,7 @@ public class SocketClient {
                 });
     }
 
-    public void connect() {
+    public void connect(BaseInp param) {
 
         if (12 <= connectCount) {
             log.error("已经达到最大尝试连接次数,若要再次连接请重置连接次数!");
@@ -139,11 +135,11 @@ public class SocketClient {
                 log.info("连接成功!");
                 channel = channelFuture.channel();
                 ByteBuf buf = Unpooled.buffer();
-                buf.writeShort(registerInp.getFrameHeader());
-                buf.writeShort(registerInp.getDataLength());
-                buf.writeByte(registerInp.getInstructNum());
-                buf.writeInt(registerInp.getUserNum());
-                buf.writeBytes(registerInp.getAccessToken());
+                buf.writeShort(param.getFrameHeader());
+                buf.writeShort(param.getDataLength());
+                buf.writeByte(param.getInstructNum());
+                buf.writeInt(param.getUserNum());
+                buf.writeBytes(param.getAccessToken());
                 channel.writeAndFlush(buf);
             }
         });

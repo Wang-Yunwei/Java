@@ -1,9 +1,8 @@
 package com.mdsd.cloud.controller.airport;
 
 import com.mdsd.cloud.controller.airport.dto.HangarListOup;
-import com.mdsd.cloud.controller.airport.dto.LineInp;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
-import com.mdsd.cloud.controller.airport.dto.UpdateInp;
+import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.response.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +49,7 @@ public class AirportController {
 
     @Operation(summary = "修改机库信息")
     @PostMapping(name = "修改机库信息", path = "/update")
-    public ResponseDto update(@RequestBody UpdateInp param) {
+    public ResponseDto update(@RequestBody UpdateAirportInp param) {
 
         service.update(param);
         return ResponseDto.wrapSuccess();

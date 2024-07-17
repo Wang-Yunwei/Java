@@ -1,9 +1,8 @@
 package com.mdsd.cloud.controller.airport.service.impl;
 
 import com.mdsd.cloud.controller.airport.dto.HangarListOup;
-import com.mdsd.cloud.controller.airport.dto.LineInp;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
-import com.mdsd.cloud.controller.airport.dto.UpdateInp;
+import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +43,7 @@ public class AirportServiceImpl implements AirportService {
      * 修改机库信息
      */
     @Override
-    public void update(UpdateInp param) {
+    public void update(UpdateAirportInp param) {
 
     }
 

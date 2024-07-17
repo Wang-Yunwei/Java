@@ -31,6 +31,15 @@ public class BaseInp {
     @Schema(description = "动作编号", type = "uint8", maxLength = 1)
     private byte actionNum;
 
-    @Schema(description = "航线数据", type = "byte[]")
+    @Schema(description = "用户编号 (鉴权接口返回的 companyId)", type = "uint32", maxLength = 4)
+    private int userNum;
+
+    @Schema(description = "鉴权接口返回的accessToken", type = "byte[]")
+    private byte[] accessToken;
+
+    @Schema(description = "时间戳", type = "uint64", maxLength = 8)
+    private long timestamp;
+
+    @Schema(description = "数据", type = "byte[]")
     private byte[] data;
 }

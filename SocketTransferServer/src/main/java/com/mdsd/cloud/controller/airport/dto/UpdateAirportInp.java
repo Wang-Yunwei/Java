@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UpdateInp {
+public class UpdateAirportInp {
 
     @Schema(description = "机库编号")
     private String hangarId;
