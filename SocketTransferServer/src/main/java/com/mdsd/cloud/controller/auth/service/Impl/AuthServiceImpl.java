@@ -37,12 +37,11 @@ public class AuthServiceImpl implements AuthService {
             AuthSingleton.getInstance().setCompanyId(companyId);
             AuthSingleton.getInstance().setAccessToken(accessToken);
             // 执行 TCP 连接注册
-            socketClient.connect(
-                    new BaseInp().setInstructNum((short) 0x01)
-                            .setUserNum(companyId)
-                            .setAccessToken(accessToken.getBytes())
-                            .setDataLength((short)(accessToken.getBytes().length + 5))
-            );
+            socketClient.getBaseInp().setInstructNum((short) 0x01)
+                    .setUserNum(companyId)
+                    .setAccessToken(accessToken.getBytes())
+                    .setDataLength((short) (accessToken.getBytes().length + 5));
+            socketClient.connect();
             // 返回前端数据
             result.setCompanyId(companyId);
             result.setAccessToken(accessToken);

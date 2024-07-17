@@ -43,26 +43,29 @@ public class TransferService {
         // 访问事件源和消息
         Object source = evn.getSource();
         if (source instanceof WebSocketServer) {
-            Map<String,String> msg = (Map<String, String>) evn.getMsg();
-
+            Map<String, String> msg = (Map<String, String>) evn.getMsg();
+            handleWebSocketData(msg);
         } else if (source instanceof SocketClient) {
             ByteBuf byteBuf = (ByteBuf) evn.getMsg();
             if (byteBuf.getShort(0) == 0x6A77) {
-                // 指令编码
-                handleSocketClientData(InstructEnum.getEnum(byteBuf.getByte(4)));
+                int instruct = byteBuf.getByte(4) & 0xFF;
+                int active = byteBuf.getByte(6) & 0xFF;
+                handleSocketClientData(byteBuf,InstructEnum.getEnum(instruct,active));
             }
         } else {
             throw new RuntimeException("未知事件源!");
         }
     }
 
-    private void handleSocketClientData(InstructEnum param) {
+    private void handleSocketClientData(ByteBuf buf,InstructEnum param) {
 
         switch (param) {
-            case 注册: // 注册回复
+            case 注册:
+
+//                webSocketServer.sendMessage(AuthSingleton);
 
                 break;
-            case 心跳: // 心跳回复
+            case 心跳:
 
                 break;
             default:
@@ -72,5 +75,20 @@ public class TransferService {
 
     private void handleWebSocketData(Map<String, String> param) {
 
+        int instruct = Integer.parseInt(param.get("instructNum"), 16);
+        int active = Integer.parseInt(param.get("activeNum"), 16);
+        InstructEnum anEnum = InstructEnum.getEnum(instruct, active);
+        switch (anEnum){
+//            case 注册 -> "xx";
+
+        }
     }
+
+    /**
+     * 注册
+     */
+    private void register(){
+
+    }
+
 }

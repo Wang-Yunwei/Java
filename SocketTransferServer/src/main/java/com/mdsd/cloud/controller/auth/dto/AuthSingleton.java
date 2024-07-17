@@ -3,6 +3,8 @@ package com.mdsd.cloud.controller.auth.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 /**
  * @author WangYunwei [2024-07-17]
  */
@@ -14,7 +16,7 @@ public class AuthSingleton {
 
     private String accessToken;
 
-    private String currentHost;
+    private Map<String,String> current;
 
     private static AuthSingleton authSingleton = new AuthSingleton();
 
