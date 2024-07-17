@@ -1,5 +1,6 @@
 package com.mdsd.cloud.controller.airport.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mdsd.cloud.controller.airport.dto.HangarListOup;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
@@ -22,7 +23,7 @@ public interface AirportService {
     /**
      * 规划机库航线
      */
-    void line(PlanLineDTO param);
+    void line(PlanLineDTO param) throws JsonProcessingException;
 
     /**
      * 修改机库信息

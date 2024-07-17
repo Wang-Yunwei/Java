@@ -1,5 +1,6 @@
 package com.mdsd.cloud.controller.airport;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mdsd.cloud.controller.airport.dto.HangarListOup;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
@@ -43,7 +44,11 @@ public class AirportController {
     @PostMapping(name = "规划机库航线", path = "/line")
     public ResponseDto line(@RequestBody PlanLineDTO param) {
 
-        service.line(param);
+        try {
+            service.line(param);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("入参转JSON失败!");
+        }
         return ResponseDto.wrapSuccess();
     }
 

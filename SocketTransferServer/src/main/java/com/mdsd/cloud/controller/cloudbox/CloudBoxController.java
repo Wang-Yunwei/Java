@@ -72,10 +72,10 @@ public class CloudBoxController {
     }
 
     @Operation(summary = "获取直播地址",description = "Rtsp推流时只返回rtsp拉流地址,rtmp推流时返回rtmp、flv和rtc拉流地址")
-    @GetMapping(name = "获取直播地址", path = "/pullUrl/{boxSn}")
-    public ResponseDto<PullUrlOup> pullUrl(@PathVariable String boxSn) {
+    @GetMapping(name = "获取直播地址", path = "/getLiveAddress/{boxSn}")
+    public ResponseDto<GetLiveAddressOup> getLiveAddress(@PathVariable String boxSn) {
 
-        return ResponseDto.wrapSuccess(service.pullUrl(boxSn));
+        return ResponseDto.wrapSuccess(service.getLiveAddress(boxSn));
     }
 
     @Operation(summary = "获取任务照片")

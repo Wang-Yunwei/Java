@@ -42,7 +42,7 @@ public interface CloudBoxService {
     /**
      * 获取直播地址
      */
-    PullUrlOup pullUrl(String boxSn);
+    GetLiveAddressOup getLiveAddress(String boxSn);
 
     /**
      * 获取任务照片

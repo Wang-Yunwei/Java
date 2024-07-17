@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class PullUrlOup {
+public class GetLiveAddressOup {
 
     @Schema(description = "rtsp直播地址")
     private String rtsp;

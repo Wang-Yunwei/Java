@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class GetTokenInp {
 
-
     @Schema(description = "AccessKeyID")
     private String accessKeyId;
 
