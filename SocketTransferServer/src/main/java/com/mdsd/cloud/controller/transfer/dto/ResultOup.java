@@ -20,7 +20,7 @@ public class ResultOup {
     private short dataLength;
 
     @Schema(description = "指令编号", type = "uint8", maxLength = 1)
-    private short instructNum = 0xD1;
+    private short instructNum;
 
     @Schema(description = "加密标志 (0x01-加密,0x00-未加密)", type = "uint8", maxLength = 1)
     private byte isEncrypt;

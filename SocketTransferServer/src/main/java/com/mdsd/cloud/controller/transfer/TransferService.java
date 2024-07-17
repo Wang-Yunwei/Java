@@ -10,6 +10,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,13 @@ public class TransferService {
                 String text = textMsg.text();
                 try {
                     Map<String, String> map = objectMapper.readValue(text, Map.class);
-                    log.info(map.toString());
+                    log.info("WebSocketServer 接收到 >>> {}" ,map.toString());
+                    String frameHeader = map.get("frameHeader");
+                    String instructNum = map.get("instructNum");
+                    if(StringUtils.isNoneBlank(frameHeader) && StringUtils.isNoneBlank(instructNum)){
+
+                    }
+                    handleSocketClientData(InstructEnum.getEnum((byte) Integer.parseInt(instructNum, 16)));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException("数据解析失败");
                 }
@@ -58,36 +65,36 @@ public class TransferService {
                 log.error("二进制数据 >>> {}", array.toString());
                 cnt.release();
             } else {
-                throw new RuntimeException("未知数据类型");
+                throw new RuntimeException("未知数据类型!");
             }
         } else if (source instanceof SocketClient) {
             ByteBuf byteBuf = (ByteBuf) evn.getMsg();
-
             if(byteBuf.getShort(0) == 0x6A77){
-//                handleInstruct()
+                // 指令编码
+                handleSocketClientData(InstructEnum.getEnum(byteBuf.getByte(4)));
             }
-
-
-            if(byteBuf.getShort(0) == 0x6A77){
-                switch (byteBuf.getByte(4)) {//指令编码
-                    case 0x01:
-                        break;
-                    case 0x02:
-                    default:
-                        break;
-                }
-            }
-
-//            nettyClient.sendMessage(cnt);
         } else {
-
+            throw new RuntimeException("未知事件源!");
         }
     }
 
-    private void handleInstruct(InstructEnum param){
+    private void handleSocketClientData(InstructEnum param){
+
 
         switch (param){
+            case 注册: // 注册回复
 
+                break;
+            case 心跳: // 心跳回复
+                break;
+            default:
+                break;
         }
+    }
+
+    private void handleWebSocketData(Map<String,String> param){
+
+
+
     }
 }

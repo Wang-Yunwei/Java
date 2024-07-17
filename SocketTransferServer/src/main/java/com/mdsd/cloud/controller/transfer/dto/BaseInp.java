@@ -30,4 +30,7 @@ public class BaseInp {
 
     @Schema(description = "动作编号", type = "uint8", maxLength = 1)
     private byte actionNum;
+
+    @Schema(description = "航线数据", type = "byte[]")
+    private byte[] data;
 }
