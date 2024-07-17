@@ -2,26 +2,32 @@ package com.mdsd.cloud.socket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -31,8 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class WebSocketServer {
 
-    private final ApplicationEventPublisher publisher;
-
     // 未连接队列(syn队列): 保存已经接收到SYN包但还未完成三次握手的连接请求
     private final EventLoopGroup parentGroup = new NioEventLoopGroup();
 
@@ -41,10 +45,12 @@ public class WebSocketServer {
 
     private final ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap<>();
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper om = new ObjectMapper();
 
     @Value("${env.port.web-socket-server}")
     private int port;
+
+    private final ApplicationEventPublisher publisher;
 
     public WebSocketServer(ApplicationEventPublisher publisher) {
 
@@ -56,18 +62,12 @@ public class WebSocketServer {
         Channel channel = channelMap.get(key);
         if (null != channel && channel.isActive()) {
             try {
-                String result = objectMapper.writeValueAsString(resp);
+                String result = om.writeValueAsString(resp);
                 channel.writeAndFlush(new TextWebSocketFrame(result));
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("数据转Json失败!");
             }
         }
-    }
-
-    public void publishEvent(Object obj) {
-
-        SocketEvent<Object> event = new SocketEvent<>(this, obj);
-        publisher.publishEvent(event);
     }
 
     @PostConstruct
@@ -81,7 +81,7 @@ public class WebSocketServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() { // 添加一个 ChannelInitializer 来初始化每一个新的Channel
 
                     @Override
-                    protected void initChannel(NioSocketChannel ch)  {
+                    protected void initChannel(NioSocketChannel ch) {
 
                         ch.pipeline().addLast(new HttpServerCodec()) // HTTP 编解码器
                                 .addLast(new ChunkedWriteHandler()) // 以块方式写的处理器
@@ -90,23 +90,53 @@ public class WebSocketServer {
                                 .addLast(new ChannelInboundHandlerAdapter() {
 
                                              @Override
-                                             public void channelRegistered(ChannelHandlerContext ctx)  {
+                                             public void channelRegistered(ChannelHandlerContext ctx) {
 
                                                  InetSocketAddress remoteAddress = (InetSocketAddress) ctx.channel().remoteAddress();
                                                  String hostAddress = remoteAddress.getAddress().getHostAddress();
                                                  Channel channel = channelMap.get(hostAddress);
                                                  if (null == channel) {
+                                                     log.info("当前注册连接地址 >>> {}", hostAddress);
                                                      channelMap.put(hostAddress, ctx.channel());
+                                                 } else {
+                                                     log.warn("该地址连接已存在请勿重复操作 >>> {}", hostAddress);
                                                  }
                                              }
 
                                              @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-                                                 publishEvent(msg);
+                                                 if (msg instanceof TextWebSocketFrame) {
+                                                     TextWebSocketFrame textMsg = (TextWebSocketFrame) msg;
+                                                     String text = textMsg.text();
+                                                     Map<String, String> map;
+                                                     try {
+                                                         map = om.readValue(text, Map.class);
+                                                         log.info("WebSocketServer 接收到 >>> {}", map.toString());
+                                                     } catch (JsonProcessingException e) {
+                                                         throw new RuntimeException("数据解析失败");
+                                                     }
+                                                     // 保存连接信息
+                                                     if(null != map){
+                                                         Channel channel = channelMap.get(map.get("boxSn"));
+                                                         if (null == channel) {
+                                                             log.info("当前注册连接云盒号 >>> {}", map.get("boxSn"));
+                                                             channelMap.put(map.get("boxSn"), ctx.channel());
+                                                         }
+                                                         // 发送事件
+                                                         publisher.publishEvent(new SocketEvent<>(this, map));
+                                                     }
+                                                 } else if (msg instanceof BinaryWebSocketFrame) {
+                                                     BinaryWebSocketFrame binaryMsg = (BinaryWebSocketFrame) msg;
+                                                     ByteBuf cnt = binaryMsg.content();
+                                                     byte[] array = cnt.array();
+                                                     log.error("二进制数据 >>> {}", array.toString());
+                                                     cnt.release();
+                                                 } else {
+                                                     throw new RuntimeException("未知数据类型!");
+                                                 }
                                              }
                                          }
-
                                 );
                     }
                 })

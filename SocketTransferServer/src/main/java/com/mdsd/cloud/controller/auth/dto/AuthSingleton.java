@@ -14,6 +14,8 @@ public class AuthSingleton {
 
     private String accessToken;
 
+    private String currentHost;
+
     private static AuthSingleton authSingleton = new AuthSingleton();
 
     private AuthSingleton(){}

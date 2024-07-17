@@ -33,12 +33,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class SocketClient {
 
-    private Channel channel;
-
-    private final EventLoopGroup group = new NioEventLoopGroup();
-
-    private final Bootstrap bootstrap = new Bootstrap();
-
     @Setter
     @Value("${env.ip.socket_client}")
     private String host;
@@ -49,6 +43,15 @@ public class SocketClient {
 
     @Setter
     private byte connectCount;
+
+    private Channel channel;
+
+    @Getter
+    private BaseInp baseInp = new BaseInp();
+
+    private final EventLoopGroup group = new NioEventLoopGroup();
+
+    private final Bootstrap bootstrap = new Bootstrap();
 
     private final ApplicationEventPublisher publisher;
 
@@ -62,14 +65,7 @@ public class SocketClient {
 
         if (channel != null && channel.isActive()) {
             channel.writeAndFlush(Unpooled.wrappedBuffer(data));
-
         }
-    }
-
-    private void publishEvent(ByteBuf message) {
-
-        SocketEvent<ByteBuf> event = new SocketEvent<>(this, message);
-        publisher.publishEvent(event);
     }
 
     @PostConstruct
@@ -91,7 +87,8 @@ public class SocketClient {
                                              protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
 
                                                  // 收到信息后发布事件
-                                                 publishEvent(msg);
+                                                 SocketEvent<ByteBuf> event = new SocketEvent<>(this, msg);
+                                                 publisher.publishEvent(event);
                                              }
 
                                              @Override
@@ -108,13 +105,12 @@ public class SocketClient {
                                                  }
                                              }
                                          }
-
                                 );
                     }
                 });
     }
 
-    public void connect(BaseInp param) {
+    public void connect() {
 
         if (12 <= connectCount) {
             log.error("已经达到最大尝试连接次数,若要再次连接请重置连接次数!");
@@ -135,11 +131,11 @@ public class SocketClient {
                 log.info("连接成功!");
                 channel = channelFuture.channel();
                 ByteBuf buf = Unpooled.buffer();
-                buf.writeShort(param.getFrameHeader());
-                buf.writeShort(param.getDataLength());
-                buf.writeByte(param.getInstructNum());
-                buf.writeInt(param.getUserNum());
-                buf.writeBytes(param.getAccessToken());
+                buf.writeShort(baseInp.getFrameHeader());
+                buf.writeShort(baseInp.getDataLength());
+                buf.writeByte(baseInp.getInstructNum());
+                buf.writeInt(baseInp.getUserNum());
+                buf.writeBytes(baseInp.getAccessToken());
                 channel.writeAndFlush(buf);
             }
         });
