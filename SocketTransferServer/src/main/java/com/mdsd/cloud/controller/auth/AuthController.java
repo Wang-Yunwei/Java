@@ -25,7 +25,7 @@ public class AuthController {
         this.service = service;
     }
 
-    @PostMapping(name = "换取AccessToken(鉴权)", path = "/getToken")
+    @PostMapping(name = "换取AccessToken(鉴权),同时执行TCP连接注册", path = "/getToken")
     public ResponseDto<GetTokenOup> getToken(@RequestBody GetTokenInp param) {
 
         return ResponseDto.wrapSuccess(service.getToken(param));

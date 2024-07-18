@@ -5,6 +5,8 @@ package com.mdsd.cloud.controller.transfer.enums;
  */
 public enum InstructEnum {
 
+    请求帧头(0x7479,0),
+    回复帧头(0x6A77,0),
     注册(0x01, 0),
     心跳(0x02, 0),
     图片上传完成通知(0x09, 0),

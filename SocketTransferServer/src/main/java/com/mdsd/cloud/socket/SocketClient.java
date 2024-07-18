@@ -1,8 +1,10 @@
 package com.mdsd.cloud.socket;
 
+import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.transfer.dto.BaseInp;
 import com.mdsd.cloud.controller.transfer.dto.HeartbeatInp;
 import com.mdsd.cloud.controller.transfer.dto.RegisterInp;
+import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.ResponseDto;
 import io.netty.bootstrap.Bootstrap;
@@ -43,10 +45,11 @@ public class SocketClient {
     @Value("${env.port.socket_client}")
     private int port;
 
-    @Getter
-    private final ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap<>();
-
     private final EventLoopGroup group = new NioEventLoopGroup();
+
+    private final Bootstrap bootstrap = new Bootstrap();
+
+    private Channel channel;
 
     private final ApplicationEventPublisher publisher;
 
@@ -56,9 +59,19 @@ public class SocketClient {
         this.publisher = publisher;
     }
 
-    public void create(String boxSn, BaseInp baseInp) {
+    public void sendMessage(ByteBuf buf) {
 
-        Bootstrap bootstrap = new Bootstrap();
+        channel.writeAndFlush(buf);
+    }
+
+    public void sendMessage(byte[] data) {
+
+        channel.writeAndFlush(Unpooled.wrappedBuffer(data));
+    }
+
+    @PostConstruct
+    private void create() {
+
         bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_SNDBUF, 1024 * 1024)
                 .option(ChannelOption.SO_RCVBUF, 1024 * 1024)
@@ -96,10 +109,9 @@ public class SocketClient {
                                 );
                     }
                 });
-        connect(bootstrap, boxSn, baseInp);
     }
 
-    private void connect(Bootstrap bootstrap, String boxSn, BaseInp baseInp) {
+    public void connect() {
 
         ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
         channelFuture.addListener(new ChannelFutureListener() {
@@ -110,22 +122,23 @@ public class SocketClient {
                 if (future.isSuccess()) {
                     // 连接成功后,发送注册请求
                     log.info("连接成功,并发送注册请求!");
-                    Channel channel = future.channel();
+                    channel = future.channel();
                     ByteBuf buf = Unpooled.buffer();
-                    buf.writeShort(baseInp.getFrameHeader());
-                    buf.writeShort(baseInp.getDataLength());
-                    buf.writeByte(baseInp.getInstructNum());
-                    buf.writeInt(baseInp.getCompanyId());
-                    buf.writeBytes(baseInp.getAccessToken());
+                    byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
+                    buf.writeShort(0x7479);
+                    buf.writeShort(bytes.length + 5);
+                    buf.writeByte(InstructEnum.注册.getInstruct());
+                    buf.writeInt(AuthSingleton.getInstance().getCompanyId());
+                    buf.writeBytes(bytes);
                     channel.writeAndFlush(buf);
-                    channelMap.put(boxSn, channel);
                 } else {
                     // 重新连接
                     int connectCount = 0;
                     while (connectCount < 3) {
+                        log.info("正在尝试连接 >>> {}");
                         Thread.sleep(1000 * 3);
                         connectCount++;
-                        connect(bootstrap, boxSn, baseInp);
+                        connect();
                     }
                 }
             }
@@ -136,5 +149,9 @@ public class SocketClient {
     public void destroy() {
 
         group.shutdownGracefully();
+        if (null != channel) {
+
+            channel.close();
+        }
     }
 }

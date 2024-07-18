@@ -18,7 +18,9 @@ public class AuthSingleton {
 
     private String accessToken;
 
-    private Set<String> boxSnList;
+    private String currentHost;
+
+    private Set<String> webSocketKeys;
 
     private static AuthSingleton authSingleton = new AuthSingleton();
 
