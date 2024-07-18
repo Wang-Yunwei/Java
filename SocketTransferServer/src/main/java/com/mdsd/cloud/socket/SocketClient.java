@@ -4,6 +4,7 @@ import com.mdsd.cloud.controller.transfer.dto.BaseInp;
 import com.mdsd.cloud.controller.transfer.dto.HeartbeatInp;
 import com.mdsd.cloud.controller.transfer.dto.RegisterInp;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.response.ResponseDto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,17 +43,10 @@ public class SocketClient {
     @Value("${env.port.socket_client}")
     private int port;
 
-    @Setter
-    private byte connectCount;
-
-    private Channel channel;
-
     @Getter
-    private BaseInp baseInp = new BaseInp();
+    private final ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap<>();
 
     private final EventLoopGroup group = new NioEventLoopGroup();
-
-    private final Bootstrap bootstrap = new Bootstrap();
 
     private final ApplicationEventPublisher publisher;
 
@@ -61,16 +56,9 @@ public class SocketClient {
         this.publisher = publisher;
     }
 
-    public void sendMessage(byte[] data) {
+    public void create(String boxSn, BaseInp baseInp) {
 
-        if (channel != null && channel.isActive()) {
-            channel.writeAndFlush(Unpooled.wrappedBuffer(data));
-        }
-    }
-
-    @PostConstruct
-    private void create() {
-
+        Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_SNDBUF, 1024 * 1024)
                 .option(ChannelOption.SO_RCVBUF, 1024 * 1024)
@@ -101,52 +89,52 @@ public class SocketClient {
                                                      buf.writeShort(0x09);
                                                      buf.writeByte(0x02);
                                                      buf.writeLong(System.currentTimeMillis());
-                                                     channel.writeAndFlush(buf);
+                                                     ctx.writeAndFlush(buf);
                                                  }
                                              }
                                          }
                                 );
                     }
                 });
+        connect(bootstrap, boxSn, baseInp);
     }
 
-    public void connect() {
+    private void connect(Bootstrap bootstrap, String boxSn, BaseInp baseInp) {
 
-        if (12 <= connectCount) {
-            log.error("已经达到最大尝试连接次数,若要再次连接请重置连接次数!");
-            return;
-        }
-        log.warn("正在尝试建立连接 >>> {}:{}", host, port);
         ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
+        channelFuture.addListener(new ChannelFutureListener() {
 
-        channelFuture.addListener(future -> {
+            @Override
+            public void operationComplete(ChannelFuture future) throws Exception {
 
-            if (!future.isSuccess()) {
-                log.warn("连接失败,正在尝试第 {} 次重连...", connectCount);
-                connectCount++;
-                // 等待 5 秒后重连
-                group.schedule(this::connect, 5, TimeUnit.SECONDS);
-            } else {
-                // 连接成功后,发送注册请求
-                log.info("连接成功!");
-                channel = channelFuture.channel();
-                ByteBuf buf = Unpooled.buffer();
-                buf.writeShort(baseInp.getFrameHeader());
-                buf.writeShort(baseInp.getDataLength());
-                buf.writeByte(baseInp.getInstructNum());
-                buf.writeInt(baseInp.getUserNum());
-                buf.writeBytes(baseInp.getAccessToken());
-                channel.writeAndFlush(buf);
+                if (future.isSuccess()) {
+                    // 连接成功后,发送注册请求
+                    log.info("连接成功,并发送注册请求!");
+                    Channel channel = future.channel();
+                    ByteBuf buf = Unpooled.buffer();
+                    buf.writeShort(baseInp.getFrameHeader());
+                    buf.writeShort(baseInp.getDataLength());
+                    buf.writeByte(baseInp.getInstructNum());
+                    buf.writeInt(baseInp.getCompanyId());
+                    buf.writeBytes(baseInp.getAccessToken());
+                    channel.writeAndFlush(buf);
+                    channelMap.put(boxSn, channel);
+                } else {
+                    // 重新连接
+                    int connectCount = 0;
+                    while (connectCount < 3) {
+                        Thread.sleep(1000 * 3);
+                        connectCount++;
+                        connect(bootstrap, boxSn, baseInp);
+                    }
+                }
             }
         });
     }
 
     @PreDestroy
-    private void destroy() {
+    public void destroy() {
 
         group.shutdownGracefully();
-        if (channel != null) {
-            channel.close();
-        }
     }
 }

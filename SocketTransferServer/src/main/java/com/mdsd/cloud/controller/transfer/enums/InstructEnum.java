@@ -129,6 +129,18 @@ public enum InstructEnum {
         return action;
     }
 
+    public static InstructEnum getEnum(final int instruct) {
+
+        if (0 != instruct) {
+            for (final InstructEnum item : InstructEnum.values()) {
+                if (instruct == item.getInstruct()) {
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
+
     public static InstructEnum getEnum(final int instruct, int action) {
 
         if (0 != instruct) {

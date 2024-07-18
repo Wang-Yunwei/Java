@@ -19,8 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private final SocketClient socketClient;
-
     private final EApiFeign feign;
 
     /**
@@ -36,12 +34,6 @@ public class AuthServiceImpl implements AuthService {
             String accessToken = token.getContent().getAccessToken();
             AuthSingleton.getInstance().setCompanyId(companyId);
             AuthSingleton.getInstance().setAccessToken(accessToken);
-            // 执行 TCP 连接注册
-            socketClient.getBaseInp().setInstructNum((short) 0x01)
-                    .setUserNum(companyId)
-                    .setAccessToken(accessToken.getBytes())
-                    .setDataLength((short) (accessToken.getBytes().length + 5));
-            socketClient.connect();
             // 返回前端数据
             result.setCompanyId(companyId);
             result.setAccessToken(accessToken);

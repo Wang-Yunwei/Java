@@ -32,7 +32,7 @@ public class BaseInp {
     private byte actionNum;
 
     @Schema(description = "用户编号 (鉴权接口返回的 companyId)", type = "uint32", maxLength = 4)
-    private int userNum;
+    private int companyId;
 
     @Schema(description = "鉴权接口返回的accessToken", type = "byte[]")
     private byte[] accessToken;
