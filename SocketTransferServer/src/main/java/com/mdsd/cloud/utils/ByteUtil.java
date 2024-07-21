@@ -7,13 +7,20 @@ import java.nio.charset.StandardCharsets;
  */
 public class ByteUtil {
 
+    public static byte[] shortToByte(){
+        byte[] result = new byte[2];
+        result[0] = (byte) (0x6A77 >> 8); // 右移8位,得到高8位
+        result[1] = (byte) (0x6A77 & 0xFF); // 与0xFF进行位与操作,得到低8位
+        return result;
+    }
+
     public static byte[] intToByte(int param) {
-        // int 转成小端序
+        // int 转成大端序
         byte[] result = new byte[4];
-        result[0] = (byte) (param & 0xFF);
-        result[1] = (byte) ((param >> 8) & 0xFF);
-        result[2] = (byte) ((param >> 16) & 0xFF);
-        result[3] = (byte) ((param >> 24) & 0xFF);
+        result[0] = (byte) ((param >> 24) & 0xFF);
+        result[1] = (byte) ((param >> 16) & 0xFF);
+        result[2] = (byte) ((param >> 8) & 0xFF);
+        result[3] = (byte) (param & 0xFF);
         return result;
     }
 
@@ -21,4 +28,6 @@ public class ByteUtil {
 
         return str.getBytes(StandardCharsets.UTF_8);
     }
+
+
 }

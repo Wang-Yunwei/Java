@@ -11,6 +11,7 @@ import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.socket.WebSocketServer;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
@@ -63,19 +64,19 @@ public class TransferService {
             if (byteBuf.getShort(0) == 0x6A77) {
                 InstructEnum anEnum;
                 int instruct = byteBuf.getByte(4) & 0xFF;
-                int active = byteBuf.getByte(6) & 0xFF;
                 // 指令过滤
                 switch (instruct){
-                    case 0x01:
-                    case 0x02:
-                    case 0x09:
-                    case 0x0C:
-                    case 0xA8:
-                    case 0xA9:
-                    case 0xDC:
+                    case 0x01:// 注册
+                    case 0x02:// 心跳
+                    case 0x09:// 图片上传完成通知
+                    case 0x0C:// 信道质量
+                    case 0xA8:// 实时状态
+                    case 0xA9:// 实时遥测
+                    case 0xDC:// MOP数据透传
                         anEnum = InstructEnum.getEnum(instruct);
                         break;
                     default:
+                        int active = byteBuf.getByte(6) & 0xFF;
                         anEnum = InstructEnum.getEnum(instruct,active);
                         break;
                 }
@@ -101,6 +102,9 @@ public class TransferService {
                 ResponseDto<ResultOup> resultOupResponseDto = ResponseDto.wrapSuccess(new ResultOup().setInstructNum(param.getInstruct()).setTimestamp(slice.getLong(0)));
                 ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
                 channelMap.forEach((key,value) -> webSocketServer.sendMessage(key,resultOupResponseDto));
+                break;
+            case 图片上传完成通知:
+
                 break;
             case 信道质量:
 
@@ -135,7 +139,7 @@ public class TransferService {
 
             case 起飞:
                 buffer.writeShort(0);// 数据长度,占位临时赋值为0
-                buffer.writeBytes(boxSn.getBytes());// 云盒编号
+                buffer.writeBytes(ByteUtil.stringToByte(boxSn));// 云盒编号
                 buffer.writeByte(anEnum.getInstruct());// 指令编号
                 buffer.writeByte(0);// 加密标志
                 buffer.writeByte(anEnum.getAction());// 动作编号
@@ -161,14 +165,4 @@ public class TransferService {
                 break;
         }
     }
-
-    /**
-     * 注册
-     */
-    private void register(Integer companyId,String accessToken,String boxSn){
-
-        BaseInp baseInp = new BaseInp();
-
-    }
-
 }

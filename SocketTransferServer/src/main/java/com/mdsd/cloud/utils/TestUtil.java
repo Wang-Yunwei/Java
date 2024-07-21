@@ -27,7 +27,12 @@ public class TestUtil {
 
             System.out.println(b);
             System.out.println(ab);
+            System.out.println(ab == b);
             System.out.println(ab == (b & 0xFF));
+//            switch (b){
+//                case 0xD1:
+//                    break;
+//            }
         }
 
         byte ac = (byte) 0xD1;
