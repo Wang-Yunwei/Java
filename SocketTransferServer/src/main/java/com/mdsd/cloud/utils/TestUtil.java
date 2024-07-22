@@ -1,18 +1,25 @@
 package com.mdsd.cloud.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Map;
 
 /**
  * @author WangYunwei [2024-07-14]
  */
 public class TestUtil {
 
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws IOException {
+
+        ObjectMapper om = new ObjectMapper();
 
         // 创建一个非池化的ByteBuf实例
         ByteBuf buffer = Unpooled.buffer();
@@ -38,17 +45,21 @@ public class TestUtil {
 //        buffer.writeDouble(dou);
 
         // 写入一个 byte[]
-        String str = "{k1: v1, k2: v2}";
+        String str = "{\"sites\":{\"site\":[{\"id\":\"1\",\"name\":\"菜鸟教程\",\"url\":\"www.runoob.com\"},{\"id\":\"2\",\"name\":\"菜鸟工具\",\"url\":\"www.jyshare.com\"},{\"id\":\"3\",\"name\":\"Google\",\"url\":\"www.google.com\"}]}}";
         byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-        byte[] encode = Base64.getEncoder().encode(bytes);
-        buffer.writeBytes(encode);
+        buffer.writeBytes(bytes);
+//        byte[] encode = Base64.getEncoder().encode(bytes);
+//        buffer.writeBytes(encode);
+
 
         int bufLength = buffer.readableBytes(); // 获取 buffer 长度
 
-        byte[] bytes1 = new byte[encode.length];
+        byte[] bytes1 = new byte[bytes.length];
+//        byte[] bytes1 = new byte[encode.length];
         buffer.readBytes(bytes1);
+        System.out.println(om.readValue(bytes1, Map.class));
 //        System.out.println(new String(bytes1,StandardCharsets.UTF_8));
-        System.out.println(new String(Base64.getDecoder().decode(bytes1),StandardCharsets.UTF_8));
+//        System.out.println(new String(Base64.getDecoder().decode(bytes1),StandardCharsets.UTF_8));
 
 
     }

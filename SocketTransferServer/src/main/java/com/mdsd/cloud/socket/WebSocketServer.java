@@ -8,6 +8,7 @@ import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -92,22 +93,18 @@ public class WebSocketServer<T> {
                                 .addLast(new WebSocketServerProtocolHandler("/websocket")) // 处理 WebSocket 握手
                                 .addLast(new ChannelInboundHandlerAdapter() {
 
-//                                             @Override
-//                                             public void channelRegistered(ChannelHandlerContext ctx) {
-//
-//                                                 InetSocketAddress remoteAddress = (InetSocketAddress) ctx.channel().remoteAddress();
-//                                                 String hostAddress = remoteAddress.getAddress().getHostAddress();
-//                                                 Channel channel = channelMap.get(hostAddress);
-//                                                 if (null == channel) {
-//                                                     log.info("当前注册连接地址 >>> {}", hostAddress);
-//                                                     AuthSingleton.getInstance().setCurrentHost(hostAddress);
-//                                                     channelMap.put(hostAddress, ctx.channel());
-//                                                 } else {
-//                                                     log.warn("该地址连接已存在请勿重复操作 >>> {}", hostAddress);
-//                                                 }
-//                                             }
+                                    @Override
+                                    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                        // 连接已经建立，现在回复一个连接成功的信息
+                                        String response = "连接成功！";
+                                        ByteBuf buf = Unpooled.copiedBuffer(response.getBytes());
 
-                                             @Override
+                                        // 发送消息给客户端
+                                        ctx.writeAndFlush(buf);
+                                        super.channelActive(ctx);
+                                    }
+
+                                    @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
                                                  if (msg instanceof TextWebSocketFrame) {
@@ -117,15 +114,21 @@ public class WebSocketServer<T> {
                                                      try {
                                                          msgMap = om.readValue(text, Map.class);
                                                          log.info("WebSocketServer 接收到 >>> {}", msgMap.toString());
+                                                         String action = msgMap.get("action");
+                                                         if(StringUtils.isNoneBlank(action)){
+                                                             // 心跳数据直接回复
+                                                             ctx.writeAndFlush(new TextWebSocketFrame("心跳回复!"));
+                                                             return;
+                                                         }
                                                      } catch (JsonProcessingException e) {
                                                          throw new RuntimeException("数据解析失败");
                                                      }
                                                      // 保存连接信息
                                                      if (null != msgMap) {
-                                                         Channel channel = channelMap.get(msgMap.get("boxSn"));
+                                                         Channel channel = channelMap.get(msgMap.get("云盒编号"));
                                                          if (null == channel) {
-                                                             log.info("当前注册连接云盒号 >>> {}", msgMap.get("boxSn"));
-                                                             channelMap.put(msgMap.get("boxSn"), ctx.channel());
+                                                             log.info("当前注册连接云盒号 >>> {}", msgMap.get("云盒编号"));
+                                                             channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
                                                          publisher.publishEvent(new SocketEvent<>(this, msgMap));
                                                      }
