@@ -1,13 +1,20 @@
 package com.mdsd.cloud.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * @author WangYunwei [2024-07-14]
  */
 public class ByteUtil {
 
+    private final static ObjectMapper om = new ObjectMapper();
+
     public static byte[] shortToByte(){
+
+
         byte[] result = new byte[2];
         result[0] = (byte) (0x6A77 >> 8); // 右移8位,得到高8位
         result[1] = (byte) (0x6A77 & 0xFF); // 与0xFF进行位与操作,得到低8位
@@ -29,5 +36,8 @@ public class ByteUtil {
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
+    public static String bytesToStringUTF8(byte[] bytes){
 
+        return new String(bytes,StandardCharsets.UTF_8);
+    }
 }

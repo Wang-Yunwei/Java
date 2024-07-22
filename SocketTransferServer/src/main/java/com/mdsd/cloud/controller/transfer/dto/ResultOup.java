@@ -12,7 +12,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ResultOup {
 
-
     @Schema(description = "帧头", type = "uit16", maxLength = 2)
     private Integer frameHeader = 0x6A77;
 

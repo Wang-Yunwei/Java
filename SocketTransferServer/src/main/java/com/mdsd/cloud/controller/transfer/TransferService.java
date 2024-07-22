@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.transfer.dto.BaseInp;
 import com.mdsd.cloud.controller.transfer.dto.ResultOup;
+import com.mdsd.cloud.controller.transfer.dto.SignalInfo;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.socket.SocketClient;
@@ -24,10 +25,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -65,7 +63,7 @@ public class TransferService {
                 InstructEnum anEnum;
                 int instruct = byteBuf.getByte(4) & 0xFF;
                 // 指令过滤
-                switch (instruct){
+                switch (instruct) {
                     case 0x01:// 注册
                     case 0x02:// 心跳
                     case 0x09:// 图片上传完成通知
@@ -77,37 +75,55 @@ public class TransferService {
                         break;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
-                        anEnum = InstructEnum.getEnum(instruct,active);
+                        anEnum = InstructEnum.getEnum(instruct, active);
                         break;
                 }
-                socketClientHandle(anEnum,byteBuf);
+                socketClientHandle(anEnum, byteBuf);
             }
         } else {
             throw new RuntimeException("未知事件源!");
         }
     }
 
-    private void socketClientHandle(InstructEnum param,ByteBuf buf) {
+    private void socketClientHandle(InstructEnum param, ByteBuf buf) {
 
+        ResponseDto<Map<String,Object>> result;
+        HashMap<String, Object> hashMap = new HashMap<>();
         switch (param) {
             case 注册:
                 byte isSuccess = buf.getByte(5);
-                if(isSuccess == 0){
+                if (isSuccess == 0) {
                     log.info("客户端连接TY成功!");
                 }
                 break;
             case 心跳:
                 // 将心跳回复发送给所有 WebSocketClient
-                ByteBuf slice = buf.slice(5, 8);
-                ResponseDto<ResultOup> resultOupResponseDto = ResponseDto.wrapSuccess(new ResultOup().setInstructNum(param.getInstruct()).setTimestamp(slice.getLong(0)));
+                buf.skipBytes(5);
+                hashMap.put("instructNum", param.getInstruct());
+                hashMap.put("timestamp", buf.readLong());// 此值为心跳指令发送的时间戳原样返回
+                result = ResponseDto.wrapSuccess(hashMap);
                 ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
-                channelMap.forEach((key,value) -> webSocketServer.sendMessage(key,resultOupResponseDto));
+                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
                 break;
             case 图片上传完成通知:
 
                 break;
             case 信道质量:
+                buf.skipBytes(5);
+                long l = buf.readUnsignedInt(); // 终端到平台的延时
+                byte[] boxSn = new byte[15];// 云盒编号
+                buf.readBytes(boxSn);
+                byte[] data = new byte[buf.readableBytes()];
+                buf.readBytes(data);
+                String str = ByteUtil.bytesToStringUTF8(data);
 
+//                buf.readBytes
+//
+//                boxSn.readableBytes();
+
+//                byteBuf.readBytes(signal);
+//                SignalInfo singal=SignalInfo.parseFrom(signal);
+//                log.info(singal.toString());
                 break;
             case 状态数据:
 
@@ -122,20 +138,20 @@ public class TransferService {
 
     private void webSocketHandle(Map<String, String> param) {
 
-        Assert.notNull(param.get("instructNum"),"指令不能为: NULL");
-        Assert.notNull(param.get("boxSn"),"云盒编号不能为: NULL");
+        Assert.notNull(param.get("instructNum"), "指令不能为: NULL");
+        Assert.notNull(param.get("boxSn"), "云盒编号不能为: NULL");
         int instruct = Integer.parseInt(param.get("instructNum"), 16);
         String boxSn = param.get("boxSn");
         InstructEnum anEnum;
-        if(null != param.get("activeNum")){
+        if (null != param.get("activeNum")) {
             int active = Integer.parseInt(param.get("activeNum"), 16);
             anEnum = InstructEnum.getEnum(instruct, active);
-        }else{
+        } else {
             anEnum = InstructEnum.getEnum(instruct);
         }
         ByteBuf buffer = aDefault.buffer();
         buffer.writeShort(InstructEnum.请求帧头.getInstruct());// 帧头
-        switch (anEnum){
+        switch (anEnum) {
 
             case 起飞:
                 buffer.writeShort(0);// 数据长度,占位临时赋值为0
@@ -143,10 +159,10 @@ public class TransferService {
                 buffer.writeByte(anEnum.getInstruct());// 指令编号
                 buffer.writeByte(0);// 加密标志
                 buffer.writeByte(anEnum.getAction());// 动作编号
-                if (null != param.get("data")){
+                if (null != param.get("data")) {
                     buffer.writeFloat(Float.parseFloat(param.get("data")));// 起飞高度
                 }
-                buffer.setShort(2, buffer.readableBytes()-4);//重新赋值数据长度
+                buffer.setShort(2, buffer.readableBytes() - 4);//重新赋值数据长度
                 byte[] bytes = new byte[buffer.readableBytes()];
                 buffer.readBytes(bytes);
                 nettyClient.sendMessage(bytes);// 发送 TCP
