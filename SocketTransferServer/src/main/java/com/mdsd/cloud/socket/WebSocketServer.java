@@ -74,6 +74,11 @@ public class WebSocketServer<T> {
         }
     }
 
+    private void publishEvent(Map<String, String> msgMap) {
+
+        publisher.publishEvent(new SocketEvent<>(this, msgMap));
+    }
+
     @PostConstruct
     public void startWebSocketServer() {
 
@@ -93,18 +98,18 @@ public class WebSocketServer<T> {
                                 .addLast(new WebSocketServerProtocolHandler("/websocket")) // 处理 WebSocket 握手
                                 .addLast(new ChannelInboundHandlerAdapter() {
 
-                                    @Override
-                                    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                        // 连接已经建立，现在回复一个连接成功的信息
-                                        String response = "连接成功！";
-                                        ByteBuf buf = Unpooled.copiedBuffer(response.getBytes());
+                                             @Override
+                                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                                 // 连接已经建立，现在回复一个连接成功的信息
+                                                 String response = "连接成功！";
+                                                 ByteBuf buf = Unpooled.copiedBuffer(response.getBytes());
 
-                                        // 发送消息给客户端
-                                        ctx.writeAndFlush(buf);
-                                        super.channelActive(ctx);
-                                    }
+                                                 // 发送消息给客户端
+                                                 ctx.writeAndFlush(buf);
+                                                 super.channelActive(ctx);
+                                             }
 
-                                    @Override
+                                             @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
                                                  if (msg instanceof TextWebSocketFrame) {
@@ -115,7 +120,7 @@ public class WebSocketServer<T> {
                                                          msgMap = om.readValue(text, Map.class);
                                                          log.info("WebSocketServer 接收到 >>> {}", msgMap.toString());
                                                          String action = msgMap.get("action");
-                                                         if(StringUtils.isNoneBlank(action)){
+                                                         if (StringUtils.isNoneBlank(action)) {
                                                              // 心跳数据直接回复
                                                              ctx.writeAndFlush(new TextWebSocketFrame("心跳回复!"));
                                                              return;
@@ -130,7 +135,7 @@ public class WebSocketServer<T> {
                                                              log.info("当前注册连接云盒号 >>> {}", msgMap.get("云盒编号"));
                                                              channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
-                                                         publisher.publishEvent(new SocketEvent<>(this, msgMap));
+                                                         publishEvent(msgMap);
                                                      }
                                                  } else if (msg instanceof BinaryWebSocketFrame) {
                                                      BinaryWebSocketFrame binaryMsg = (BinaryWebSocketFrame) msg;

@@ -61,12 +61,16 @@ public class SocketClient {
 
     public void sendMessage(ByteBuf buf) {
 
-        channel.writeAndFlush(buf);
+        if(null != channel && channel.isActive()){
+            channel.writeAndFlush(buf);
+        }else{
+            throw new RuntimeException("SocketClient 连接不存在!");
+        }
     }
 
-    public void sendMessage(byte[] data) {
+    private void publishEvent(ByteBuf msg) {
 
-        channel.writeAndFlush(Unpooled.wrappedBuffer(data));
+        publisher.publishEvent(new SocketEvent<>(this, msg));
     }
 
     @PostConstruct
@@ -88,8 +92,7 @@ public class SocketClient {
                                              protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
 
                                                  // 收到信息后发布事件
-                                                 SocketEvent<ByteBuf> event = new SocketEvent<>(this, msg);
-                                                 publisher.publishEvent(event);
+                                                 publishEvent(msg);
                                              }
 
                                              @Override
