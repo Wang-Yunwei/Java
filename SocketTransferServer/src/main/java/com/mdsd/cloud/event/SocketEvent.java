@@ -1,21 +1,31 @@
 package com.mdsd.cloud.event;
 
+import io.netty.buffer.ByteBuf;
+import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
+
+import java.util.Map;
 
 /**
  * @author WangYunwei [2024-07-10]
  */
-public class SocketEvent<T> extends ApplicationEvent {
-    private T msg;
+@Getter
+public class SocketEvent extends ApplicationEvent {
 
-    public SocketEvent(Object source, T msg) {
+    private Map<String, String> map;
+
+    private ByteBuf byteBuf;
+
+    public SocketEvent(Object source, Map<String, String> map) {
 
         super(source);
-        this.msg = msg;
+        this.map = map;
     }
 
-    public T getMsg() {
+    public SocketEvent(Object source, ByteBuf byteBuf) {
 
-        return msg;
+        super(source);
+        this.byteBuf = byteBuf;
     }
+
 }

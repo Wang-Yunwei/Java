@@ -1,8 +1,11 @@
 package com.mdsd.cloud.controller.transfer.enums;
 
+import lombok.Getter;
+
 /**
  * @author WangYunwei [2024-07-16]
  */
+@Getter
 public enum InstructEnum {
 
     请求帧头(0x7479,0),
@@ -110,24 +113,14 @@ public enum InstructEnum {
     设置喷火时间(0xDD, 0x09),
     避开喷火区开关(0xDD, 0xFE);
 
-    private int instruct;
+    private final int instruct;
 
-    private int action;
+    private final int action;
 
     InstructEnum(int instruct, int action) {
 
         this.instruct = instruct;
         this.action = action;
-    }
-
-    public int getInstruct() {
-
-        return instruct;
-    }
-
-    public int getAction() {
-
-        return action;
     }
 
     public static InstructEnum getEnum(final int instruct) {

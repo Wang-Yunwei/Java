@@ -1,32 +1,24 @@
 package com.mdsd.cloud.controller.transfer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.transfer.dto.BaseInp;
-import com.mdsd.cloud.controller.transfer.dto.ResultOup;
-import com.mdsd.cloud.controller.transfer.dto.SignalInfo;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
+import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.socket.WebSocketServer;
-import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -36,13 +28,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class TransferService {
 
-    private SocketClient nettyClient;
+    private final SocketClient nettyClient;
 
-    private WebSocketServer webSocketServer;
+    private final WebSocketServer webSocketServer;
 
-    private ObjectMapper om = new ObjectMapper();
+    private final ObjectMapper om = new ObjectMapper();
 
-    private PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
+    private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
     public TransferService(SocketClient nettyClient, WebSocketServer webSocketServer) {
 
@@ -56,10 +48,10 @@ public class TransferService {
         // 访问事件源和消息
         Object source = evn.getSource();
         if (source instanceof WebSocketServer) {
-            Map<String, String> msg = (Map<String, String>) evn.getMsg();
+            Map<String, String> msg = evn.getMap();
             webSocketServerChannelReadListener(msg);
         } else if (source instanceof SocketClient) {
-            ByteBuf byteBuf = (ByteBuf) evn.getMsg();
+            ByteBuf byteBuf = evn.getByteBuf();
             if (byteBuf.getShort(0) == 0x6A77) {
                 InstructEnum anEnum;
                 int instruct = byteBuf.getByte(4) & 0xFF;
@@ -81,7 +73,9 @@ public class TransferService {
                         anEnum = InstructEnum.getEnum(instruct, active);
                         break;
                 }
-                socketClientChannelRead0Listener(anEnum, byteBuf);
+                if (null != anEnum) {
+                    socketClientChannelRead0Listener(anEnum, byteBuf);
+                }
             }
         } else {
             throw new RuntimeException("未知事件源!");
@@ -91,61 +85,63 @@ public class TransferService {
     private void socketClientChannelRead0Listener(InstructEnum param, ByteBuf buf) {
 
         buf.skipBytes(5);
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("指令编码", param.getInstruct());
-        ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
+        Map<String, Object> result = new HashMap<>();
+        result.put("指令编码", param.getInstruct());
+        ConcurrentHashMap<String,Channel> channelMap = webSocketServer.getChannelMap();
         byte[] boxSnByte = new byte[15];// 云盒编号
         byte[] dataByte;
         switch (param) {
             case 注册:
-                hashMap.put("是否成功", buf.readByte());
-                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(hashMap)));
+                result.put("是否成功", buf.readByte());
+                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
                 break;
             case 心跳:
                 // 将心跳回复发送给所有 WebSocketClient
-                hashMap.put("时间戳", buf.readLong());// 此值为心跳指令发送的时间戳原样返回
-                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(hashMap)));
+                result.put("时间戳", buf.readLong());// 此值为心跳指令发送的时间戳原样返回
+                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
                 break;
             case 图片上传完成通知:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("经度", buf.readDouble());
-                hashMap.put("纬度", buf.readDouble());
-                hashMap.put("时间戳", buf.readLong());
-                hashMap.put("原图大小", buf.readLong());
+                result.put("加密标志", buf.readByte());
+                result.put("经度", buf.readDouble());
+                result.put("纬度", buf.readDouble());
+                result.put("时间戳", buf.readLong());
+                result.put("原图大小", buf.readLong());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
-                hashMap.put("原图地址", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("原图地址", ByteUtil.bytesToStringUTF8(dataByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 云盒开关机通知:
-                hashMap.put("状态", buf.readByte());
+                result.put("状态", buf.readByte());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 信道质量:
-                hashMap.put("时间戳", buf.readUnsignedInt());// 终端到平台的延时
+                result.put("时间戳", buf.readUnsignedInt());// 终端到平台的延时
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
-                hashMap.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 状态数据:
             case 遥测数据:
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
                 try {
-                    Map map = om.readValue(dataByte, Map.class);
-                    hashMap.put("云盒SN号", map.get("boxSn"));
+                    Map<String,String> map = om.readValue(dataByte, new TypeReference<>() {
+
+                    });
+                    result.put("云盒SN号", map.get("boxSn"));
                 } catch (IOException e) {
                     throw new RuntimeException("状态数据 byte[] 转 Map 异常!");
                 }
-                hashMap.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 航线规划:
             case 起飞:
@@ -174,75 +170,75 @@ public class TransferService {
             case 格式化存储卡:
             case 设置视频码流:
             case 切换SIM卡:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("执行结果", buf.readByte());
-                hashMap.put("错误码", buf.readInt());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("执行结果", buf.readByte());
+                result.put("错误码", buf.readInt());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 实时激光测距:
             case 手动激光测距:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("执行结果", buf.readByte());
-                hashMap.put("经度", buf.readDouble());
-                hashMap.put("纬度", buf.readDouble());
-                hashMap.put("海拔高度", buf.readFloat());
-                hashMap.put("距离", buf.readFloat());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("执行结果", buf.readByte());
+                result.put("经度", buf.readDouble());
+                result.put("纬度", buf.readDouble());
+                result.put("海拔高度", buf.readFloat());
+                result.put("距离", buf.readFloat());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 打开单点测温:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("执行结果", buf.readByte());
-                hashMap.put("X点坐标", buf.readFloat());
-                hashMap.put("Y点坐标", buf.readFloat());
-                hashMap.put("温度", buf.readFloat());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("执行结果", buf.readByte());
+                result.put("X点坐标", buf.readFloat());
+                result.put("Y点坐标", buf.readFloat());
+                result.put("温度", buf.readFloat());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 打开区域测温:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("执行结果", buf.readByte());
-                hashMap.put("X1点坐标", buf.readFloat());
-                hashMap.put("Y1点坐标", buf.readFloat());
-                hashMap.put("X2点坐标", buf.readFloat());
-                hashMap.put("Y2点坐标", buf.readFloat());
-                hashMap.put("平均温度", buf.readFloat());
-                hashMap.put("最低温度", buf.readFloat());
-                hashMap.put("最高温度", buf.readFloat());
-                hashMap.put("最低温度x坐标", buf.readFloat());
-                hashMap.put("最低温度y坐标", buf.readFloat());
-                hashMap.put("最高温度x坐标", buf.readFloat());
-                hashMap.put("最高温度y坐标", buf.readFloat());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("执行结果", buf.readByte());
+                result.put("X1点坐标", buf.readFloat());
+                result.put("Y1点坐标", buf.readFloat());
+                result.put("X2点坐标", buf.readFloat());
+                result.put("Y2点坐标", buf.readFloat());
+                result.put("平均温度", buf.readFloat());
+                result.put("最低温度", buf.readFloat());
+                result.put("最高温度", buf.readFloat());
+                result.put("最低温度x坐标", buf.readFloat());
+                result.put("最低温度y坐标", buf.readFloat());
+                result.put("最高温度x坐标", buf.readFloat());
+                result.put("最高温度y坐标", buf.readFloat());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 无人机准备完成通知:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("电池电量", buf.readByte());
-                hashMap.put("经度", buf.readDouble());
-                hashMap.put("纬度", buf.readDouble());
-                hashMap.put("海拔高度", buf.readInt());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("电池电量", buf.readByte());
+                result.put("经度", buf.readDouble());
+                result.put("纬度", buf.readDouble());
+                result.put("海拔高度", buf.readInt());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             case 机场任务完成通知:
-                hashMap.put("加密标志", buf.readByte());
-                hashMap.put("动作编号", buf.readByte() & 0xFF);
-                hashMap.put("媒体文件数量", buf.readShort());
+                result.put("加密标志", buf.readByte());
+                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("媒体文件数量", buf.readShort());
                 buf.readBytes(boxSnByte);
-                hashMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(hashMap.get("云盒SN号").toString(), ResponseDto.wrapSuccess(hashMap));
+                result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
                 break;
             default:
                 throw new RuntimeException("未知指令!");
@@ -261,12 +257,13 @@ public class TransferService {
         } else {
             anEnum = InstructEnum.getEnum(instruct);
         }
+        Assert.notNull(anEnum, "枚举类中未查询到指令!");
         ByteBuf buffer = aDefault.buffer();
         buffer.writeShort(InstructEnum.请求帧头.getInstruct());// 帧头
         buffer.writeShort(0);// 数据长度,占位临时赋值为0
         buffer.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
         buffer.writeByte(anEnum.getInstruct());// 指令编号
-        buffer.writeByte(Byte.valueOf(map.get("加密标志")));// 加密标志
+        buffer.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
         buffer.writeByte(anEnum.getAction());// 动作编号
         switch (anEnum) {
             case 云台转动_基于角度_回中:
@@ -290,23 +287,26 @@ public class TransferService {
             case 变倍减:
             case 变倍复位:
             case 变倍停止:
+                // TODO 变倍停止
                 break;
             case 变倍到指定倍数:
                 buffer.writeByte(Integer.parseInt(map.get("变倍数值")));
                 break;
             case 航线规划:
                 buffer.writeBytes(ByteUtil.stringToByte(map.get("航线数据")));
+                break;
             case 起飞:
                 buffer.writeFloat(Float.parseFloat(map.get("飞起高度")));
                 break;
             case 返航:
             case 返航到指定机场:
                 buffer.writeShort(Short.parseShort(map.get("返航高度")));
-                buffer.writeDouble(Double.valueOf(map.get("机库经度")));
-                buffer.writeDouble(Double.valueOf(map.get("机库纬度")));
-                buffer.writeDouble(Double.valueOf(map.get("备降点经度")));
-                buffer.writeDouble(Double.valueOf(map.get("备降点纬度")));
+                buffer.writeDouble(Double.parseDouble(map.get("机库经度")));
+                buffer.writeDouble(Double.parseDouble(map.get("机库纬度")));
+                buffer.writeDouble(Double.parseDouble(map.get("备降点经度")));
+                buffer.writeDouble(Double.parseDouble(map.get("备降点纬度")));
                 buffer.writeBytes(ByteUtil.stringToByte(map.get("机库ID")));
+                break;
             case 取消返航:
             case 降落:
             case 取消降落:
@@ -314,6 +314,7 @@ public class TransferService {
             case 暂停航线:
             case 恢复航线:
             case 结束航线:
+                // TODO 结束航线
                 break;
             case 实时激光测距:
             case 云台设置跟随模式:
@@ -348,6 +349,7 @@ public class TransferService {
             case 拍照:
             case 开始录像:
             case 停止录像:
+                // TODO 停止录像
                 break;
             case 方向控制:
                 buffer.writeFloat(Float.parseFloat(map.get("前后速度")));
@@ -358,6 +360,7 @@ public class TransferService {
                 break;
             case 强制降落:
             case 关闭单点测温:
+                // TODO 关闭单点测温
                 break;
             case 打开区域测温:
                 buffer.writeFloat(Float.parseFloat(map.get("X1点坐标")));
@@ -366,20 +369,22 @@ public class TransferService {
                 buffer.writeFloat(Float.parseFloat(map.get("Y2点坐标")));
                 break;
             case 关闭区域测温:
+                // TODO 关闭区域测温
                 break;
             case 设置返航点:
-                buffer.writeDouble(Double.valueOf(map.get("经度")));
-                buffer.writeDouble(Double.valueOf(map.get("纬度")));
+                buffer.writeDouble(Double.parseDouble(map.get("经度")));
+                buffer.writeDouble(Double.parseDouble(map.get("纬度")));
                 break;
             case 指点飞行:
-                buffer.writeDouble(Double.valueOf(map.get("经度")));
-                buffer.writeDouble(Double.valueOf(map.get("经度")));
+                buffer.writeDouble(Double.parseDouble(map.get("经度")));
+                buffer.writeDouble(Double.parseDouble(map.get("经度")));
                 buffer.writeFloat(Float.parseFloat(map.get("高度")));
                 buffer.writeFloat(Float.parseFloat(map.get("速度")));
                 buffer.writeByte(Integer.parseInt(map.get("飞行模式")));
                 break;
             case 停止指点飞行:
             case 格式化存储卡:
+                // TODO 格式化存储卡
                 break;
             case 云台转动_基于速度:
                 buffer.writeFloat(Float.parseFloat(map.get("俯仰")));
@@ -406,6 +411,7 @@ public class TransferService {
                 buffer.writeByte(Integer.parseInt(map.get("音量")));
                 break;
             case 停止喊话:
+                // TODO 停止喊话
                 break;
             case 开关灯:
             case 开关爆闪:
@@ -425,6 +431,8 @@ public class TransferService {
                 buffer.writeByte(Integer.parseInt(map.get("动作数据")));
                 break;
             case MOP数据透传:
+                // TODO MOP数据透传
+                break;
             default:
                 throw new RuntimeException("未知指令!");
         }

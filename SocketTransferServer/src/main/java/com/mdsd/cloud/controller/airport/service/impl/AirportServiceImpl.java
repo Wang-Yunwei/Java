@@ -41,7 +41,7 @@ public class AirportServiceImpl implements AirportService {
     public HangarListOup hangarList() {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
             log.info("机库列表 >>> {}",result.getContent());
         }
         return null;
@@ -54,7 +54,7 @@ public class AirportServiceImpl implements AirportService {
     public void hangarControl(String hangarId, Integer instructId) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.hangarControl(hangarId, instructId, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.hangarControl(hangarId, instructId, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("机库控制失败!");
             }
@@ -73,7 +73,7 @@ public class AirportServiceImpl implements AirportService {
             String s = om.writeValueAsString(param);
             String bas = Base64.getEncoder().encodeToString(s.getBytes());
             map.put("lineData", bas);
-            ResponseTy result = feign.line(map, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.line(map, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("规划机库航线失败!");
             }
@@ -87,7 +87,7 @@ public class AirportServiceImpl implements AirportService {
     public void update(UpdateAirportInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.updateHangar(param, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.updateHangar(param, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("修改机库信息失败!");
             }

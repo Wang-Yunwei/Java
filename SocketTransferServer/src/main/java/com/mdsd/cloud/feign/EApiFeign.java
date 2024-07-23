@@ -24,20 +24,23 @@ public interface EApiFeign {
     ResponseTy<List<GetCloudBoxListOup>> cloudBoxList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "修改云盒设置", path = "/box/update")
-    ResponseTy updateCloudBox(@RequestBody UpdateCloudBoxInp param, @RequestHeader(value = "x-cid") Integer companyId,
+    ResponseTy<String> updateCloudBox(@RequestBody UpdateCloudBoxInp param, @RequestHeader(value = "x-cid") Integer companyId,
                        @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "获取飞行历史", path = "/box/history")
     ResponseTy<List<HistoryOup>> history(@RequestBody HistoryInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "修改推流地址", path = "/update/live")
-    ResponseTy updateLive(@RequestBody UpdateLiveInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> updateLive(@RequestBody UpdateLiveInp param, @RequestHeader(value = "x-cid") Integer companyId,
+    @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "开始直播推流", path = "/box/openlive/{boxSn}")
-    ResponseTy openLive(@PathVariable String boxSn, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> openLive(@PathVariable String boxSn, @RequestHeader(value = "x-cid") Integer companyId,
+                            @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "结束直播推流", path = "/box/closelive/{boxSn}")
-    ResponseTy closeLive(@PathVariable String boxSn, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> closeLive(@PathVariable String boxSn, @RequestHeader(value = "x-cid") Integer companyId,
+                            @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "获取直播地址", path = "/box/pullUrl/{boxSn}")
     ResponseTy<GetLiveAddressOup> getLiveAddress(@PathVariable String boxSn, @RequestHeader(value = "x-cid") Integer companyId,
@@ -47,16 +50,16 @@ public interface EApiFeign {
     ResponseTy<List<GetPhotosOup>> getPhotos(@RequestBody GetPhotosInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库列表", path = "/hangar/list")
-    ResponseTy hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库控制", path = "/hangar/{hangarId}/{instructId}")
-    ResponseTy hangarControl(@PathVariable String hangarId, @PathVariable Integer instructId, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> hangarControl(@PathVariable String hangarId, @PathVariable Integer instructId, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "规划机库航线", path = "/hangar/line")
-    ResponseTy line(@RequestBody Map<String, String> param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> line(@RequestBody Map<String, String> param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "修改机库信息", path = "/hangar/update")
-    ResponseTy updateHangar(@RequestBody UpdateAirportInp param, @RequestHeader(value = "x-cid") Integer companyId,
+    ResponseTy<String> updateHangar(@RequestBody UpdateAirportInp param, @RequestHeader(value = "x-cid") Integer companyId,
                             @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "获取舱外视频地址", path = "/video/out/{hangarId}/{type}")

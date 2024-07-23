@@ -1,12 +1,8 @@
 package com.mdsd.cloud.socket;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.transfer.dto.BaseInp;
-import com.mdsd.cloud.controller.transfer.dto.HeartbeatInp;
-import com.mdsd.cloud.controller.transfer.dto.RegisterInp;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
-import com.mdsd.cloud.response.ResponseDto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -19,7 +15,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -59,18 +53,18 @@ public class SocketClient {
         this.publisher = publisher;
     }
 
-    public void sendMessage(ByteBuf buf) {
+    public void sendMessage(ByteBuf byteBuf) {
 
-        if(null != channel && channel.isActive()){
-            channel.writeAndFlush(buf);
-        }else{
+        if (null != channel && channel.isActive()) {
+            channel.writeAndFlush(byteBuf);
+        } else {
             throw new RuntimeException("SocketClient 连接不存在!");
         }
     }
 
-    private void publishEvent(ByteBuf msg) {
+    private void publishEvent(ByteBuf byteBuf) {
 
-        publisher.publishEvent(new SocketEvent<>(this, msg));
+        publisher.publishEvent(new SocketEvent(this, byteBuf));
     }
 
     @PostConstruct
@@ -96,7 +90,7 @@ public class SocketClient {
                                              }
 
                                              @Override
-                                             public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                                             public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
 
                                                  // 发送心跳
                                                  if (evt instanceof IdleStateEvent) {
@@ -117,32 +111,28 @@ public class SocketClient {
     public void connect() {
 
         ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
-        channelFuture.addListener(new ChannelFutureListener() {
+        channelFuture.addListener((ChannelFutureListener) future -> {
 
-            @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
-
-                if (future.isSuccess()) {
-                    // 连接成功后,发送注册请求
-                    log.info("连接成功,并发送注册请求!");
-                    channel = future.channel();
-                    ByteBuf buf = Unpooled.buffer();
-                    byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
-                    buf.writeShort(0x7479);
-                    buf.writeShort(bytes.length + 5);
-                    buf.writeByte(InstructEnum.注册.getInstruct());
-                    buf.writeInt(AuthSingleton.getInstance().getCompanyId());
-                    buf.writeBytes(bytes);
-                    channel.writeAndFlush(buf);
-                } else {
-                    // 重新连接
-                    int connectCount = 0;
-                    while (connectCount < 3) {
-                        log.info("正在尝试连接 >>> {}");
-                        Thread.sleep(1000 * 3);
-                        connectCount++;
-                        connect();
-                    }
+            if (future.isSuccess()) {
+                // 连接成功后,发送注册请求
+                log.info("连接成功,并发送注册请求!");
+                channel = future.channel();
+                ByteBuf buf = Unpooled.buffer();
+                byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
+                buf.writeShort(0x7479);
+                buf.writeShort(bytes.length + 5);
+                buf.writeByte(InstructEnum.注册.getInstruct());
+                buf.writeInt(AuthSingleton.getInstance().getCompanyId());
+                buf.writeBytes(bytes);
+                channel.writeAndFlush(buf);
+            } else {
+                // 重新连接
+                int connectCount = 0;
+                while (connectCount < 3) {
+                    log.info("正在尝试连接 >>> {}", connectCount);
+                    Thread.sleep(1000 * 3);
+                    connectCount++;
+                    connect();
                 }
             }
         });

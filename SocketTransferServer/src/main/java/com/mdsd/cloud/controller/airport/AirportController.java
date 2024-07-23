@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AirportController {
 
-    private AirportService service;
+    private final AirportService service;
 
     public AirportController(AirportService service) {
 
@@ -34,7 +34,7 @@ public class AirportController {
 
     @Operation(summary = "机库控制",description = "发送机场控制命令")
     @GetMapping(name = "机库控制", path = "/hangarControl/{hangarId}/{instructId}")
-    public ResponseDto hangarControl(@PathVariable String hangarId,@PathVariable Integer instructId) {
+    public ResponseDto<String> hangarControl(@PathVariable String hangarId,@PathVariable Integer instructId) {
 
         service.hangarControl(hangarId,instructId);
         return ResponseDto.wrapSuccess();
@@ -42,7 +42,7 @@ public class AirportController {
 
     @Operation(summary = "规划机库航线")
     @PostMapping(name = "规划机库航线", path = "/line")
-    public ResponseDto line(@RequestBody PlanLineDTO param) {
+    public ResponseDto<String> line(@RequestBody PlanLineDTO param) {
 
         try {
             service.line(param);
@@ -54,7 +54,7 @@ public class AirportController {
 
     @Operation(summary = "修改机库信息")
     @PostMapping(name = "修改机库信息", path = "/update")
-    public ResponseDto update(@RequestBody UpdateAirportInp param) {
+    public ResponseDto<String> update(@RequestBody UpdateAirportInp param) {
 
         service.update(param);
         return ResponseDto.wrapSuccess();
@@ -62,14 +62,14 @@ public class AirportController {
 
     @Operation(summary = "获取舱外视频地址")
     @PostMapping(name = "获取舱外视频地址", path = "/video/out/{hangarId}/{type}")
-    public ResponseDto videoOut(@PathVariable String hangarId,@PathVariable String type) {
+    public ResponseDto<String> videoOut(@PathVariable String hangarId,@PathVariable String type) {
 
         return ResponseDto.wrapSuccess(service.videoOut(hangarId,type));
     }
 
     @Operation(summary = "获取舱内视频地址")
     @PostMapping(name = "获取舱内视频地址", path = "/video/{hangarId}/{type}")
-    public ResponseDto videoIn(@PathVariable String hangarId,@PathVariable String type) {
+    public ResponseDto<String> videoIn(@PathVariable String hangarId,@PathVariable String type) {
 
         return ResponseDto.wrapSuccess(service.videoIn(hangarId,type));
     }
