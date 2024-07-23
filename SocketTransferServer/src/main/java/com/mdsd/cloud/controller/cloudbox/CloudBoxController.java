@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class CloudBoxController {
 
-    private CloudBoxService service;
+    private final CloudBoxService service;
 
     public CloudBoxController(CloudBoxService service) {
 
@@ -34,7 +34,7 @@ public class CloudBoxController {
 
     @Operation(summary = "修改云盒设置")
     @PostMapping(name = "修改云盒设置", path = "/update")
-    public ResponseDto update(@RequestBody UpdateCloudBoxInp param) {
+    public ResponseDto<String> update(@RequestBody UpdateCloudBoxInp param) {
 
         service.update(param);
         return ResponseDto.wrapSuccess();
@@ -49,7 +49,7 @@ public class CloudBoxController {
 
     @Operation(summary = "修改推流地址",description = "当需要将云盒视频推流到第三方流媒体服务器时调此接口修改推流地址")
     @PostMapping(name = "修改推流地址", path = "/updateLive")
-    public ResponseDto updateLive(@RequestBody UpdateLiveInp param) {
+    public ResponseDto<String> updateLive(@RequestBody UpdateLiveInp param) {
 
         service.updateLive(param);
         return ResponseDto.wrapSuccess();
@@ -57,7 +57,7 @@ public class CloudBoxController {
 
     @Operation(summary = "开始直播推流",description = "云盒默认为手动推流方式,如果需要开机自动推流请联系我方技术人员")
     @GetMapping(name = "开始直播推流", path = "/openLive/{boxSn}")
-    public ResponseDto openLive(@PathVariable String boxSn) {
+    public ResponseDto<String> openLive(@PathVariable String boxSn) {
 
         service.openLive(boxSn);
         return ResponseDto.wrapSuccess();
@@ -65,7 +65,7 @@ public class CloudBoxController {
 
     @Operation(summary = "结束直播推流")
     @GetMapping(name = "结束直播推流", path = "/closeLive/{boxSn}")
-    public ResponseDto closeLive(@PathVariable String boxSn) {
+    public ResponseDto<String> closeLive(@PathVariable String boxSn) {
 
         service.closeLive(boxSn);
         return ResponseDto.wrapSuccess();

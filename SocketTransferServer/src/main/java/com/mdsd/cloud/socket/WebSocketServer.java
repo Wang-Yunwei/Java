@@ -1,6 +1,7 @@
 package com.mdsd.cloud.socket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.ResponseDto;
@@ -33,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class WebSocketServer<T> {
+public class WebSocketServer {
 
     // 未连接队列(syn队列): 保存已经接收到SYN包但还未完成三次握手的连接请求
     private final EventLoopGroup parentGroup = new NioEventLoopGroup();
@@ -41,6 +42,7 @@ public class WebSocketServer<T> {
     // 已连接队列(accept队列): 保存已完成三次握手,但服务器应用程序还未调用accept函数来处理的连接请求
     private final EventLoopGroup childGroup = new NioEventLoopGroup();
 
+    @Getter
     private final ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap<>();
 
     private final HashMap<String, String> map = new HashMap<>();
@@ -57,12 +59,7 @@ public class WebSocketServer<T> {
         this.publisher = publisher;
     }
 
-    public ConcurrentHashMap<String, Channel> getChannelMap() {
-
-        return channelMap;
-    }
-
-    public void sendMessage(String key, ResponseDto<T> resp) {
+    public void sendMessage(String key, ResponseDto<Map<String, Object>> resp) {
 
         Channel channel = channelMap.get(key);
         if (null != channel && channel.isActive()) {
@@ -102,12 +99,13 @@ public class WebSocketServer<T> {
                                              @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
                                                      Map<String, String> msgMap;
                                                      try {
-                                                         msgMap = om.readValue(text, Map.class);
+                                                         msgMap = om.readValue(text, new TypeReference<>() {
+
+                                                         });
                                                          log.info("WebSocketServer <<< {}", msgMap.toString());
                                                          if (StringUtils.isNoneBlank(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
@@ -123,7 +121,7 @@ public class WebSocketServer<T> {
                                                          } catch (JsonProcessingException ex) {
                                                              throw new RuntimeException(ex);
                                                          }
-                                                         throw new RuntimeException(String.format("数据解析失败 >>> %s",text));
+                                                         throw new RuntimeException(String.format("数据解析失败 >>> %s", text));
                                                      }
                                                      // 保存连接信息
                                                      Channel channel = channelMap.get(msgMap.get("云盒编号"));

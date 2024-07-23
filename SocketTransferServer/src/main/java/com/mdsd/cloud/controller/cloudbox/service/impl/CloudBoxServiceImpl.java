@@ -49,7 +49,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
     public void update(UpdateCloudBoxInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("修改云盒设置失败!");
             }
@@ -80,7 +80,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
     public void updateLive(UpdateLiveInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("修改推流地址失败!");
             }
@@ -94,7 +94,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
     public void openLive(String boxSn) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("开始直播推流失败!");
             }
@@ -108,7 +108,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
     public void closeLive(String boxSn) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<String> result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
             if (result.getState() != 0) {
                 throw new RuntimeException("结束直播推流失败!");
             }

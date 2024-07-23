@@ -4,11 +4,9 @@ import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
 import com.mdsd.cloud.controller.auth.service.AuthService;
-import com.mdsd.cloud.controller.transfer.dto.BaseInp;
-import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
-import lombok.Getter;
+import com.mdsd.cloud.socket.SocketClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
