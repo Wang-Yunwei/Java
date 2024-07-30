@@ -60,7 +60,5 @@ public class TestUtil {
         System.out.println(om.readValue(bytes1, Map.class));
 //        System.out.println(new String(bytes1,StandardCharsets.UTF_8));
 //        System.out.println(new String(Base64.getDecoder().decode(bytes1),StandardCharsets.UTF_8));
-
-
     }
 }

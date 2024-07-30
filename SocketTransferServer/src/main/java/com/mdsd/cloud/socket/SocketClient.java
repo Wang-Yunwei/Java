@@ -115,7 +115,7 @@ public class SocketClient {
 
             if (future.isSuccess()) {
                 // 连接成功后,发送注册请求
-                log.info("连接成功,并发送注册请求!");
+                log.info("连接成功,开始发送注册请求!");
                 channel = future.channel();
                 ByteBuf buf = Unpooled.buffer();
                 byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();

@@ -25,6 +25,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -64,8 +65,9 @@ public class WebSocketServer {
         Channel channel = channelMap.get(key);
         if (null != channel && channel.isActive()) {
             try {
-                String result = om.writeValueAsString(resp);
-                channel.writeAndFlush(new TextWebSocketFrame(result));
+                String sendDate = om.writeValueAsString(resp);
+                log.info("WebSocketServer_SendMassage >>> {}",sendDate);
+                channel.writeAndFlush(new TextWebSocketFrame(sendDate));
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("数据转Json失败!");
             }
@@ -80,6 +82,7 @@ public class WebSocketServer {
     @PostConstruct
     public void startWebSocketServer() {
 
+        StringBuilder stringBuilder = new StringBuilder();
         // 创建服务端启动引导器
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         // 配置线程模型  EventLoop 等于 Thread
@@ -99,6 +102,7 @@ public class WebSocketServer {
                                              @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
+                                                 map.clear();
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
                                                      Map<String, String> msgMap;
@@ -107,13 +111,13 @@ public class WebSocketServer {
 
                                                          });
                                                          log.info("WebSocketServer <<< {}", msgMap.toString());
-                                                         if (StringUtils.isNoneBlank(msgMap.get("action"))) {
+                                                         if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
+                                                             map.put("action","PONG_MESSAGE");
                                                              ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
                                                              return;
                                                          }
                                                      } catch (JsonProcessingException e) {
-                                                         map.clear();
                                                          map.put("action", "ERROR_MESSAGE");
                                                          map.put("error", "数据解析失败!");
                                                          try {
@@ -126,12 +130,23 @@ public class WebSocketServer {
                                                      // 保存连接信息
                                                      Channel channel = channelMap.get(msgMap.get("云盒编号"));
                                                      if (null == channel) {
-                                                         log.info("当前注册连接云盒号 >>> {}", msgMap.get("云盒编号"));
+                                                         Iterator<String> iterator = channelMap.keys().asIterator();
+                                                         while (iterator.hasNext()){
+                                                             stringBuilder.setLength(0);
+                                                             stringBuilder.append(iterator.next());
+                                                             if(iterator.hasNext()){
+                                                                 stringBuilder.append(",");
+                                                             }
+                                                         }
+                                                         if(stringBuilder.isEmpty()){
+                                                             log.info("当前注册云盒号: {}", msgMap.get("云盒编号"));
+                                                         }else{
+                                                             log.info("当前注册云盒号: {},已经注册云盒: {}", msgMap.get("云盒编号"),stringBuilder);
+                                                         }
                                                          channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                      }
                                                      publishEvent(msgMap);
                                                  } else {
-                                                     map.clear();
                                                      map.put("action", "ERROR_MESSAGE");
                                                      map.put("error", "未知数据类型!");
                                                      try {
@@ -146,8 +161,8 @@ public class WebSocketServer {
                                              @Override
                                              public void channelActive(ChannelHandlerContext ctx) {
 
+                                                 map.clear();
                                                  ctx.executor().schedule(() -> {
-                                                     map.clear();
                                                      map.put("action", "READY_MESSAGE");
                                                      try {
                                                          ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
