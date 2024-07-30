@@ -2,7 +2,7 @@ server:
   port: 20240
 env:
   ip:
-    tyjw_api: 192.168.0.222
+    tyjw_server: 192.168.0.222
   port:
     web-socket-server: 20241
     tyjw_api: 12000

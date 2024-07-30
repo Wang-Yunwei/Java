@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author WangYunwei [2024-07-11]
  */
-@FeignClient(name = "cloud-box", url = "http://${env.ip.socket_client}:${env.port.socket_client}/eapi")
+@FeignClient(name = "tyjw_server", url = "http://${env.ip.tyjw_server}:${env.port.tyjw_api}/eapi")
 public interface EApiFeign {
 
     @PostMapping(name = "换取AccessToken(鉴权)", path = "/auth/getToken")

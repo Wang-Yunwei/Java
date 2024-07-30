@@ -32,11 +32,11 @@ import java.util.concurrent.TimeUnit;
 public class SocketClient {
 
     @Setter
-    @Value("${env.ip.socket_client}")
+    @Value("${env.ip.tyjw_server}")
     private String host;
 
     @Setter
-    @Value("${env.port.socket_client}")
+    @Value("${env.port.tyjw_socket}")
     private int port;
 
     private final EventLoopGroup group = new NioEventLoopGroup();
