@@ -87,12 +87,12 @@ public class TransferService {
         buf.skipBytes(5);
         Map<String, Object> result = new HashMap<>();
         result.put("指令编码", param.getInstruct());
-        ConcurrentHashMap<String,Channel> channelMap = webSocketServer.getChannelMap();
+        ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
         byte[] boxSnByte = new byte[15];// 云盒编号
         byte[] dataByte;
         switch (param) {
             case 注册:
-                result.put("是否成功", buf.readByte());
+                result.put("action", buf.readByte() == 0 ? "ERROR_MESSAGE" : "NEW_MESSAGE");
                 channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
                 break;
             case 心跳:
@@ -133,7 +133,7 @@ public class TransferService {
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
                 try {
-                    Map<String,String> map = om.readValue(dataByte, new TypeReference<>() {
+                    Map<String, String> map = om.readValue(dataByte, new TypeReference<>() {
 
                     });
                     result.put("云盒SN号", map.get("boxSn"));

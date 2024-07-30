@@ -7,7 +7,9 @@ import com.mdsd.cloud.controller.auth.service.AuthService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
 import com.mdsd.cloud.socket.SocketClient;
+import com.mdsd.cloud.utils.MD5HashGenerator;
 import lombok.RequiredArgsConstructor;
+import org.bouncycastle.jcajce.provider.digest.MD5;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +30,8 @@ public class AuthServiceImpl implements AuthService {
     public GetTokenOup getToken(GetTokenInp param) {
 
         GetTokenOup result = new GetTokenOup();
+        String s = param.getAccessKeyId() + param.getAccessKeySecret() + param.getTimeStamp();
+        param.setEncryptStr(MD5HashGenerator.generateMD5(s));
         ResponseTy<GetTokenOup> token = feign.getToken(param);
         if (0 == token.getState()) {
             Integer companyId = token.getContent().getCompanyId();

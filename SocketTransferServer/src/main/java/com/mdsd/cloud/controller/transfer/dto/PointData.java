@@ -21,10 +21,10 @@ public class PointData {
     @Schema(description = "纬度")
     private Double lat;
 
-    @Schema(description = "高度 (单位: 米,范围0~遥控器限高,此值为相对起飞点高度,如果太高会有失去网络覆盖风险)")
+    @Schema(description = "高度 (单位:米,范围0~遥控器限高,此值为相对起飞点高度,如果太高会有失去网络覆盖风险)")
     private Float height;
 
-    @Schema(description = "速度 (单位: 米/秒,范围 0 ~ 15),默认8")
+    @Schema(description = "速度 (单位:米/秒,范围 0 ~ 15),默认8")
     private Float speed;
 
     @Schema(description = "动作数组")

@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 public class GetTokenInp {
 
     @Schema(description = "AccessKeyID")
-    private String accessKeyId;
+    private String accessKeyId = "qmfmd3Wy7M4dMcylnrTU";
+
+    @Schema(description = "AccessKeySecret")
+    private String accessKeySecret = "5WBU2uEhHZaVefpZdaxpFh4LgW9fZZaa";
 
     @Schema(description = "encryptStr=MD5(AccessKeyID+AccessKeySecret+timeStamp)")
     private String encryptStr;
