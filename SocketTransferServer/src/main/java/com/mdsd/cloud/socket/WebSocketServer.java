@@ -66,8 +66,8 @@ public class WebSocketServer {
         if (null != channel && channel.isActive()) {
             try {
                 String sendDate = om.writeValueAsString(resp);
-                log.info("WebSocketServer_SendMassage >>> {}",sendDate);
                 channel.writeAndFlush(new TextWebSocketFrame(sendDate));
+                log.info("WebSocketServer_SendMassage >>> {}",sendDate);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("数据转Json失败!");
             }
@@ -110,11 +110,12 @@ public class WebSocketServer {
                                                          msgMap = om.readValue(text, new TypeReference<>() {
 
                                                          });
-                                                         log.info("WebSocketServer <<< {}", msgMap.toString());
+                                                         log.info("WebSocketServer_Receive <<< {}", msgMap.toString());
                                                          if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
                                                              map.put("action","PONG_MESSAGE");
                                                              ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
+                                                             log.info("WebSocketServer_Reply >>> {}", map);
                                                              return;
                                                          }
                                                      } catch (JsonProcessingException e) {
@@ -125,7 +126,7 @@ public class WebSocketServer {
                                                          } catch (JsonProcessingException ex) {
                                                              throw new RuntimeException(ex);
                                                          }
-                                                         throw new RuntimeException(String.format("数据解析失败 >>> %s", text));
+                                                         throw new RuntimeException("数据解析失败");
                                                      }
                                                      // 保存连接信息
                                                      Channel channel = channelMap.get(msgMap.get("云盒编号"));

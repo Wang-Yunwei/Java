@@ -92,12 +92,18 @@ public class TransferService {
         buf.skipBytes(5);
         Map<String, Object> result = new HashMap<>();
         result.put("指令编码", param.getInstruct());
+        result.put("action","NEW_MESSAGE");
         ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
         byte[] boxSnByte = new byte[15];// 云盒编号
         byte[] dataByte;
+        byte isSuccess;
         switch (param) {
             case 注册:
-                result.put("action", buf.readByte() == 0 ? "ERROR_MESSAGE" : "NEW_MESSAGE");
+                isSuccess = buf.readByte();
+                result.put("是否成功",isSuccess);
+                if (isSuccess == 0) {
+                    result.put("action","ERROR_MESSAGE" );
+                }
                 channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
                 break;
             case 心跳:
@@ -177,7 +183,11 @@ public class TransferService {
             case 切换SIM卡:
                 result.put("加密标志", buf.readByte());
                 result.put("动作编号", buf.readByte() & 0xFF);
-                result.put("执行结果", buf.readByte());
+                isSuccess = buf.readByte();
+                result.put("执行结果", isSuccess);
+                if (isSuccess == 0) {
+                    result.put("action","ERROR_MESSAGE" );
+                }
                 result.put("错误码", buf.readInt());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
@@ -187,7 +197,11 @@ public class TransferService {
             case 手动激光测距:
                 result.put("加密标志", buf.readByte());
                 result.put("动作编号", buf.readByte() & 0xFF);
-                result.put("执行结果", buf.readByte());
+                isSuccess = buf.readByte();
+                result.put("执行结果", isSuccess);
+                if (isSuccess == 0) {
+                    result.put("action","ERROR_MESSAGE" );
+                }
                 result.put("经度", buf.readDouble());
                 result.put("纬度", buf.readDouble());
                 result.put("海拔高度", buf.readFloat());
@@ -199,7 +213,11 @@ public class TransferService {
             case 打开单点测温:
                 result.put("加密标志", buf.readByte());
                 result.put("动作编号", buf.readByte() & 0xFF);
-                result.put("执行结果", buf.readByte());
+                isSuccess = buf.readByte();
+                result.put("执行结果", isSuccess);
+                if (isSuccess == 0) {
+                    result.put("action","ERROR_MESSAGE" );
+                }
                 result.put("X点坐标", buf.readFloat());
                 result.put("Y点坐标", buf.readFloat());
                 result.put("温度", buf.readFloat());
@@ -210,7 +228,11 @@ public class TransferService {
             case 打开区域测温:
                 result.put("加密标志", buf.readByte());
                 result.put("动作编号", buf.readByte() & 0xFF);
-                result.put("执行结果", buf.readByte());
+                isSuccess = buf.readByte();
+                result.put("执行结果", isSuccess);
+                if (isSuccess == 0) {
+                    result.put("action","ERROR_MESSAGE" );
+                }
                 result.put("X1点坐标", buf.readFloat());
                 result.put("Y1点坐标", buf.readFloat());
                 result.put("X2点坐标", buf.readFloat());
