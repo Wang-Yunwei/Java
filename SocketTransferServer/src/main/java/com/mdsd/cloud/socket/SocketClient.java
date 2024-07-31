@@ -17,6 +17,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -117,6 +118,9 @@ public class SocketClient {
                 log.info("连接成功,开始发送注册请求! <<< {}",String.format("%s:%s",host,port));
                 channel = future.channel();
                 ByteBuf buf = Unpooled.buffer();
+                if(StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())){
+                    throw new RuntimeException("未找到 AccessToken,请确认已经调过 getToken 接口!");
+                }
                 byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
                 buf.writeShort(0x7479);
                 buf.writeShort(bytes.length + 5);
