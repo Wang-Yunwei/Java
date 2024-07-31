@@ -1,5 +1,6 @@
 package com.mdsd.cloud.socket;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -105,6 +107,9 @@ public class WebSocketServer {
                                                  map.clear();
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
+                                                     if(StringUtils.isEmpty(text)){
+                                                         return ;
+                                                     }
                                                      Map<String, String> msgMap;
                                                      try {
                                                          msgMap = om.readValue(text, new TypeReference<>() {
@@ -128,7 +133,8 @@ public class WebSocketServer {
                                                          }
                                                          throw new RuntimeException("数据解析失败");
                                                      }
-                                                     // 保存连接信息
+                                                     // 保存连接信息并发送事件
+                                                     Assert.notNull(msgMap.get("云盒编号"),"云盒号为: NULL");
                                                      Channel channel = channelMap.get(msgMap.get("云盒编号"));
                                                      if (null == channel) {
                                                          Iterator<String> iterator = channelMap.keys().asIterator();

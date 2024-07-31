@@ -38,8 +38,7 @@ public class AuthServiceImpl implements AuthService {
             String accessToken = token.getContent().getAccessToken();
             AuthSingleton.getInstance().setCompanyId(companyId);
             AuthSingleton.getInstance().setAccessToken(accessToken);
-            // 执行TCP注册连接
-            socketClient.connect();
+
             // 返回前端数据
             result.setCompanyId(companyId);
             result.setAccessToken(accessToken);

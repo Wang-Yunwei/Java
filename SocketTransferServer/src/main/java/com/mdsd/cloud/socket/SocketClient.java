@@ -99,6 +99,7 @@ public class SocketClient {
                                                      buf.writeShort(0x09);
                                                      buf.writeByte(0x02);
                                                      buf.writeLong(System.currentTimeMillis());
+                                                     log.info("SocketClient >>> ");
                                                      ctx.writeAndFlush(buf);
                                                  }
                                              }
@@ -112,10 +113,9 @@ public class SocketClient {
 
         ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
         channelFuture.addListener((ChannelFutureListener) future -> {
-
             if (future.isSuccess()) {
                 // 连接成功后,发送注册请求
-                log.info("连接成功,开始发送注册请求!");
+                log.info("连接成功,开始发送注册请求! <<< {}",String.format("%s:%s",host,port));
                 channel = future.channel();
                 ByteBuf buf = Unpooled.buffer();
                 byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
@@ -129,7 +129,7 @@ public class SocketClient {
                 // 重新连接
                 int connectCount = 0;
                 while (connectCount < 3) {
-                    log.info("正在尝试连接 >>> {}", connectCount);
+                    log.info("正在第 {} 次尝试重新连接,3次失败后请重新发起注册请求!", connectCount + 1);
                     Thread.sleep(1000 * 3);
                     connectCount++;
                     connect();

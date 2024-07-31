@@ -6,4 +6,4 @@ env:
   port:
     web-socket-server: 20241
     tyjw_api: 12000
-    tyjw_socket: 12001
+    tyjw_socket: 13002

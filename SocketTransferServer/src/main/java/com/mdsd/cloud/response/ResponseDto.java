@@ -22,7 +22,7 @@ public final class ResponseDto<T> implements Serializable {
 
     private String message = "SUCCESS";
 
-    private Date responseTime = new Date();
+    private Date timestamp = new Date();
 
     private T body;
 
