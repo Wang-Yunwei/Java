@@ -99,7 +99,6 @@ public class SocketClient {
                                                      buf.writeShort(0x09);
                                                      buf.writeByte(0x02);
                                                      buf.writeLong(System.currentTimeMillis());
-                                                     log.info("SocketClient >>> ");
                                                      ctx.writeAndFlush(buf);
                                                  }
                                              }

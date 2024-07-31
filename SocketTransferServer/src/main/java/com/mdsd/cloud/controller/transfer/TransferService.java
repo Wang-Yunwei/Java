@@ -67,14 +67,14 @@ public class TransferService {
                     case 0x0C:// 信道质量
                     case 0xA8:// 实时状态
                     case 0xA9:// 实时遥测
-                        log.info("SocketClient_指令 <<< {}", instruct);
+                        log.info("SocketClient_指令 <<< {}", String.format("0x%02X", instruct));
                         anEnum = InstructEnum.getEnum(instruct);
                         break;
                     case 0xDC:// MOP数据透传
                         return;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
-                        log.info("SocketClient_指令_动作 <<< {}_{}", instruct, active);
+                        log.info("SocketClient_指令_动作 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         anEnum = InstructEnum.getEnum(instruct, active);
                         break;
                 }
@@ -91,7 +91,7 @@ public class TransferService {
 
         buf.skipBytes(5);
         Map<String, Object> result = new HashMap<>();
-        result.put("指令编码", param.getInstruct());
+        result.put("指令编码", String.format("0x%02X", param.getInstruct()));
         result.put("action", "NEW_MESSAGE");
         ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
         byte[] boxSnByte = new byte[15];// 云盒编号
@@ -104,12 +104,12 @@ public class TransferService {
                 if (isSuccess == 0) {
                     result.put("action", "ERROR_MESSAGE");
                 }
-                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
+                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
                 break;
             case 心跳:
                 // 将心跳回复发送给所有 WebSocketClient
                 result.put("时间戳", buf.readLong());// 此值为心跳指令发送的时间戳原样返回
-                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, ResponseDto.wrapSuccess(result)));
+                channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
                 break;
             case 图片上传完成通知:
                 result.put("加密标志", buf.readByte());
@@ -122,13 +122,13 @@ public class TransferService {
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
                 result.put("原图地址", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 云盒开关机通知:
                 result.put("状态", buf.readByte());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 信道质量:
                 result.put("时间戳", buf.readUnsignedInt());// 终端到平台的延时
@@ -137,7 +137,7 @@ public class TransferService {
                 dataByte = new byte[buf.readableBytes()];
                 buf.readBytes(dataByte);
                 result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 状态数据:
             case 遥测数据:
@@ -152,7 +152,7 @@ public class TransferService {
                     throw new RuntimeException("状态数据 byte[] 转 Map 异常!");
                 }
                 result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 航线规划:
             case 起飞:
@@ -182,7 +182,7 @@ public class TransferService {
             case 设置视频码流:
             case 切换SIM卡:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 isSuccess = buf.readByte();
                 result.put("执行结果", isSuccess);
                 if (isSuccess == 0) {
@@ -191,12 +191,12 @@ public class TransferService {
                 result.put("错误码", buf.readInt());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 实时激光测距:
             case 手动激光测距:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 isSuccess = buf.readByte();
                 result.put("执行结果", isSuccess);
                 if (isSuccess == 0) {
@@ -208,11 +208,11 @@ public class TransferService {
                 result.put("距离", buf.readFloat());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 打开单点测温:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 isSuccess = buf.readByte();
                 result.put("执行结果", isSuccess);
                 if (isSuccess == 0) {
@@ -223,11 +223,11 @@ public class TransferService {
                 result.put("温度", buf.readFloat());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 打开区域测温:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 isSuccess = buf.readByte();
                 result.put("执行结果", isSuccess);
                 if (isSuccess == 0) {
@@ -246,26 +246,26 @@ public class TransferService {
                 result.put("最高温度y坐标", buf.readFloat());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 无人机准备完成通知:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 result.put("电池电量", buf.readByte());
                 result.put("经度", buf.readDouble());
                 result.put("纬度", buf.readDouble());
                 result.put("海拔高度", buf.readInt());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 机场任务完成通知:
                 result.put("加密标志", buf.readByte());
-                result.put("动作编号", buf.readByte() & 0xFF);
+                result.put("动作编号", String.format("0x%02X", buf.readByte()));
                 result.put("媒体文件数量", buf.readShort());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                webSocketServer.sendMessage(result.get("云盒SN号").toString(), ResponseDto.wrapSuccess(result));
+                webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             default:
                 throw new RuntimeException("未知指令!");
@@ -485,7 +485,7 @@ public class TransferService {
             webSockReuseMap.put("action", "SERVER_ERROR");
             webSockReuseMap.put("error", errorMes);
             webSockReuseMap.putAll(map);
-            webSocketServer.sendMessage(channelMapKey, ResponseDto.wrapParamError(webSockReuseMap));
+            webSocketServer.sendMessage(channelMapKey, webSockReuseMap);
             throw new RuntimeException(errorMes);
         }
         return result;

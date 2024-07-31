@@ -62,7 +62,7 @@ public class WebSocketServer {
         this.publisher = publisher;
     }
 
-    public void sendMessage(String key, ResponseDto<Map<String, Object>> resp) {
+    public void sendMessage(String key, Map<String, Object> resp) {
 
         Channel channel = channelMap.get(key);
         if (null != channel && channel.isActive()) {

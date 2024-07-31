@@ -1,13 +1,11 @@
 package com.mdsd.cloud.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Map;
 
 /**
@@ -60,5 +58,10 @@ public class TestUtil {
         System.out.println(om.readValue(bytes1, Map.class));
 //        System.out.println(new String(bytes1,StandardCharsets.UTF_8));
 //        System.out.println(new String(Base64.getDecoder().decode(bytes1),StandardCharsets.UTF_8));
+
+        int byteValue = 125;
+        byte sssx = (byte) 0xD1;
+        String hexValue = String.format("0x%02X", sssx);
+        System.out.println(hexValue);
     }
 }
