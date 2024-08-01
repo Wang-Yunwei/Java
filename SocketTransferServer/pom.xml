@@ -106,6 +106,12 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
+		<profile>
+			<id>linux</id>
+			<properties>
+				<profiles.active>linux</profiles.active>
+			</properties>
+		</profile>
 	</profiles>
 
 </project>

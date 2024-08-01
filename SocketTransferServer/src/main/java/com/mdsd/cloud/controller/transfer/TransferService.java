@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
-import com.mdsd.cloud.response.ResponseDto;
 import com.mdsd.cloud.socket.SocketClient;
 import com.mdsd.cloud.socket.WebSocketServer;
 import com.mdsd.cloud.utils.ByteUtil;
@@ -29,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class TransferService {
 
-    private final SocketClient nettyClient;
+    private final SocketClient socketClient;
 
     private final WebSocketServer webSocketServer;
 
@@ -39,9 +38,9 @@ public class TransferService {
 
     HashMap<String, Object> webSockReuseMap = new HashMap<>();
 
-    public TransferService(SocketClient nettyClient, WebSocketServer webSocketServer) {
+    public TransferService(SocketClient socketClient, WebSocketServer webSocketServer) {
 
-        this.nettyClient = nettyClient;
+        this.socketClient = socketClient;
         this.webSocketServer = webSocketServer;
     }
 
@@ -56,26 +55,24 @@ public class TransferService {
         } else if (source instanceof SocketClient) {
             ByteBuf byteBuf = evn.getByteBuf();
             if (byteBuf.getShort(0) == 0x6A77) {
-                InstructEnum anEnum;
                 int instruct = byteBuf.getByte(4) & 0xFF;
+                InstructEnum anEnum = InstructEnum.getEnum(instruct);
                 // 指令过滤
-                switch (instruct) {
-                    case 0x01:// 注册
-                    case 0x02:// 心跳
-                    case 0x09:// 图片上传完成通知
-                    case 0x0A:// 云盒开关机通知
-                    case 0x0C:// 信道质量
-                    case 0xA8:// 实时状态
-                    case 0xA9:// 实时遥测
+                switch (anEnum) {
+                    case 注册:// 注册
+                    case 心跳:// 心跳
+                    case 图片上传完成通知:// 图片上传完成通知
+                    case 云盒开关机通知:// 云盒开关机通知
+                    case 信道质量:// 信道质量
+                    case 状态数据:// 实时状态
+                    case 遥测数据:// 实时遥测
+                    case MOP数据透传:// MOP数据透传
                         log.info("SocketClient_指令 <<< {}", String.format("0x%02X", instruct));
-                        anEnum = InstructEnum.getEnum(instruct);
                         break;
-                    case 0xDC:// MOP数据透传
-                        return;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
-                        log.info("SocketClient_指令_动作 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         anEnum = InstructEnum.getEnum(instruct, active);
+                        log.info("SocketClient_指令_动作 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         break;
                 }
                 if (null != anEnum) {
@@ -89,13 +86,16 @@ public class TransferService {
 
     private void socketClientChannelRead0Listener(InstructEnum param, ByteBuf buf) {
 
-        buf.skipBytes(5);
+        ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
+        if(channelMap.isEmpty()){
+            return;
+        }
+        buf.skipBytes(5);// 跳过 帧头、数据长度、指令编号
         Map<String, Object> result = new HashMap<>();
         result.put("指令编码", String.format("0x%02X", param.getInstruct()));
         result.put("action", "NEW_MESSAGE");
-        ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
         byte[] boxSnByte = new byte[15];// 云盒编号
-        byte[] dataByte;
+        byte[] contentByte;
         byte isSuccess;
         switch (param) {
             case 注册:
@@ -119,9 +119,9 @@ public class TransferService {
                 result.put("原图大小", buf.readLong());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                dataByte = new byte[buf.readableBytes()];
-                buf.readBytes(dataByte);
-                result.put("原图地址", ByteUtil.bytesToStringUTF8(dataByte));
+                contentByte = new byte[buf.readableBytes()];
+                buf.readBytes(contentByte);
+                result.put("原图地址", ByteUtil.bytesToStringUTF8(contentByte));
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 云盒开关机通知:
@@ -134,24 +134,24 @@ public class TransferService {
                 result.put("时间戳", buf.readUnsignedInt());// 终端到平台的延时
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                dataByte = new byte[buf.readableBytes()];
-                buf.readBytes(dataByte);
-                result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
+                contentByte = new byte[buf.readableBytes()];
+                buf.readBytes(contentByte);
+                result.put("数据", ByteUtil.bytesToStringUTF8(contentByte));
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 状态数据:
             case 遥测数据:
-                dataByte = new byte[buf.readableBytes()];
-                buf.readBytes(dataByte);
+                contentByte = new byte[buf.readableBytes()];
+                buf.readBytes(contentByte);
                 try {
-                    Map<String, String> map = om.readValue(dataByte, new TypeReference<>() {
+                    Map<String, String> map = om.readValue(contentByte, new TypeReference<>() {
 
                     });
                     result.put("云盒SN号", map.get("boxSn"));
                 } catch (IOException e) {
                     throw new RuntimeException("状态数据 byte[] 转 Map 异常!");
                 }
-                result.put("数据", ByteUtil.bytesToStringUTF8(dataByte));
+                result.put("数据", ByteUtil.bytesToStringUTF8(contentByte));
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 航线规划:
@@ -278,8 +278,8 @@ public class TransferService {
         int instruct = Integer.parseInt(map.get("指令编号"), 16);
         switch (instruct) {
             case 0x01:
-                // 执行TCP注册连接
-                nettyClient.connect();
+                // TODO 执行TCP注册连接
+//                nettyClient.connect();
                 break;
             default:
                 Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");
@@ -470,8 +470,7 @@ public class TransferService {
                         throw new RuntimeException("未知指令!");
                 }
                 buffer.setShort(2, buffer.readableBytes() - 4);//重新赋值数据长度
-                nettyClient.sendMessage(buffer);// 发送 TCP
-                buffer.release();// 释放 ByteBuf
+                socketClient.sendMessage(buffer);// 发送 TCP
                 break;
         }
     }

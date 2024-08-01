@@ -69,7 +69,7 @@ public class WebSocketServer {
             try {
                 String sendDate = om.writeValueAsString(resp);
                 channel.writeAndFlush(new TextWebSocketFrame(sendDate));
-                log.info("WebSocketServer_SendMassage >>> {}",sendDate);
+                log.info("WebSocketServer_SendMassage >>> {}", sendDate);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("数据转Json失败!");
             }
@@ -107,8 +107,8 @@ public class WebSocketServer {
                                                  map.clear();
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
-                                                     if(StringUtils.isEmpty(text)){
-                                                         return ;
+                                                     if (StringUtils.isEmpty(text)) {
+                                                         return;
                                                      }
                                                      Map<String, String> msgMap;
                                                      try {
@@ -118,7 +118,7 @@ public class WebSocketServer {
                                                          log.info("WebSocketServer_Receive <<< {}", msgMap.toString());
                                                          if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
-                                                             map.put("action","PONG_MESSAGE");
+                                                             map.put("action", "PONG_MESSAGE");
                                                              ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
                                                              log.info("WebSocketServer_Reply >>> {}", map);
                                                              return;
@@ -134,25 +134,27 @@ public class WebSocketServer {
                                                          throw new RuntimeException("数据解析失败");
                                                      }
                                                      // 保存连接信息并发送事件
-                                                     Assert.notNull(msgMap.get("云盒编号"),"云盒号为: NULL");
-                                                     Channel channel = channelMap.get(msgMap.get("云盒编号"));
-                                                     if (null == channel) {
+                                                     Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
+                                                     if (!msgMap.containsKey(msgMap.get("云盒编号"))) {
                                                          Iterator<String> iterator = channelMap.keys().asIterator();
-                                                         while (iterator.hasNext()){
+                                                         while (iterator.hasNext()) {
                                                              stringBuilder.setLength(0);
                                                              stringBuilder.append(iterator.next());
-                                                             if(iterator.hasNext()){
+                                                             if (iterator.hasNext()) {
                                                                  stringBuilder.append(",");
                                                              }
                                                          }
-                                                         if(stringBuilder.isEmpty()){
+                                                         if (stringBuilder.isEmpty()) {
                                                              log.info("当前注册云盒号: {}", msgMap.get("云盒编号"));
-                                                         }else{
-                                                             log.info("当前注册云盒号: {},已经注册云盒: {}", msgMap.get("云盒编号"),stringBuilder);
+                                                         } else {
+                                                             log.info("当前注册云盒号: {},已经注册云盒: {}", msgMap.get("云盒编号"), stringBuilder);
                                                          }
                                                          channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                      }
-                                                     publishEvent(msgMap);
+                                                     // 没有指令编号则不发送事件
+                                                     if (StringUtils.isNoneBlank(msgMap.get("指令编号"))) {
+                                                         publishEvent(msgMap);
+                                                     }
                                                  } else {
                                                      map.put("action", "ERROR_MESSAGE");
                                                      map.put("error", "未知数据类型!");
@@ -170,6 +172,7 @@ public class WebSocketServer {
 
                                                  map.clear();
                                                  ctx.executor().schedule(() -> {
+                                                     map.put("action", "READY_MESSAGE");
                                                      map.put("action", "READY_MESSAGE");
                                                      try {
                                                          ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));

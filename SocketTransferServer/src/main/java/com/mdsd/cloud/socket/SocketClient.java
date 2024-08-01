@@ -56,11 +56,11 @@ public class SocketClient {
 
     public void sendMessage(ByteBuf byteBuf) {
 
-        if (null != channel && channel.isActive()) {
-            channel.writeAndFlush(byteBuf);
-        } else {
-            throw new RuntimeException("SocketClient 连接不存在!");
+        if (channel == null || !channel.isActive()) {
+            throw new IllegalStateException("SocketClient 连接不存在!");
         }
+        channel.writeAndFlush(byteBuf);
+        log.info("SocketClient_SendMessage >>> {}", byteBuf);
     }
 
     private void publishEvent(ByteBuf byteBuf) {
@@ -111,34 +111,39 @@ public class SocketClient {
 
     public void connect() {
 
-        ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
-        channelFuture.addListener((ChannelFutureListener) future -> {
-            if (future.isSuccess()) {
-                // 连接成功后,发送注册请求
-                log.info("连接成功,开始发送注册请求! <<< {}",String.format("%s:%s",host,port));
-                channel = future.channel();
-                ByteBuf buf = Unpooled.buffer();
-                if(StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())){
-                    throw new RuntimeException("未找到 AccessToken,请确认已经调过 getToken 接口!");
+        if (null != channel && channel.isActive()) {
+
+        } else {
+            ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
+            channelFuture.addListener((ChannelFutureListener) future -> {
+                if (future.isSuccess()) {
+                    // 连接成功后,发送注册请求
+                    log.info("连接成功,开始发送注册请求! <<< {}", String.format("%s:%s", host, port));
+                    channel = future.channel();
+                    ByteBuf buf = Unpooled.buffer();
+                    if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
+                        throw new RuntimeException("未找到 AccessToken,请确认已经调过 getToken 接口!");
+                    }
+                    byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
+                    buf.writeShort(0x7479);
+                    buf.writeShort(bytes.length + 5);
+                    buf.writeByte(InstructEnum.注册.getInstruct());
+                    buf.writeInt(AuthSingleton.getInstance().getCompanyId());
+                    buf.writeBytes(bytes);
+                    channel.writeAndFlush(buf);
+                } else {
+                    // 重新连接
+                    int connectCount = 0;
+                    while (connectCount < 3) {
+                        log.info("正在第 {} 次尝试重新连接,3次失败后请重新发起注册请求!", connectCount + 1);
+                        Thread.sleep(1000 * 3);
+                        connectCount++;
+                        connect();
+                    }
                 }
-                byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
-                buf.writeShort(0x7479);
-                buf.writeShort(bytes.length + 5);
-                buf.writeByte(InstructEnum.注册.getInstruct());
-                buf.writeInt(AuthSingleton.getInstance().getCompanyId());
-                buf.writeBytes(bytes);
-                channel.writeAndFlush(buf);
-            } else {
-                // 重新连接
-                int connectCount = 0;
-                while (connectCount < 3) {
-                    log.info("正在第 {} 次尝试重新连接,3次失败后请重新发起注册请求!", connectCount + 1);
-                    Thread.sleep(1000 * 3);
-                    connectCount++;
-                    connect();
-                }
-            }
-        });
+            });
+        }
+
     }
 
     @PreDestroy

@@ -1,7 +1,5 @@
 package com.mdsd.cloud.config;
 
-import feign.Logger;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -10,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author WangYunwei [2024-07-15]
  */
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
+public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
