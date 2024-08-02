@@ -1,21 +1,28 @@
 server:
   port: ${env.port.sts}
+  ssl:
+    # 填写jks-password.txt文件内的密码
+    key-store-password: 123456
+    # JKS格式证书密钥库类型,PFX格式的证书密钥库类型为PKCS12
+    key-store-type: JKS
+    # 您需要使用实际的证书名称替换domain_name.jks
+    key-store: classpath:keystore.jks
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default: # 这里的default是默认配置，会应用于所有没有特定配置的Feign客户端
+            connectTimeout: 5000 # 连接超时时间，单位毫秒
+            readTimeout: 5000 # 读取超时时间，单位毫秒
+            loggerLevel: full # 日志级别
+            #customClient: # 这里是特定Feign客户端的配置，customClient是Feign客户端的名称
+            #connectTimeout: 3000
+            #readTimeout: 3000
+            #loggerLevel: headers # 只记录请求和响应的头部信息
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-logging:
-  level:
-    org.springframework.cloud.openfeign: DEBUG
-    # 为特定 Feign 客户端设置日志级别
-    # com.mdsd.cloud.feign: DEBUG
-feign:
-  client:
-    config:
-      default: # 默认配置
-        loggerType: FULL # 设置 Feign 的日志级别
-        # 或者为特定客户端设置
-        # yourClientName:
-        # loggerLevel: FULL
 # 服务器环境IP&PORT配置
 env:
   ip:

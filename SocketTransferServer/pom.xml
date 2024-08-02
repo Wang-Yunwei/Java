@@ -83,6 +83,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<!-- 不编译以下后缀文件 -->
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>
@@ -92,6 +102,7 @@
 					<include>application.yml</include>
 					<include>application-${profiles.active}.yml</include>
 					<include>*.xml</include>
+					<include>keystore.jks</include>
 				</includes>
 			</resource>
 		</resources>

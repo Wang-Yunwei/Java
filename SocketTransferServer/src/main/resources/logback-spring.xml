@@ -61,9 +61,10 @@
             <level>ERROR</level>
         </filter>
     </appender>
+
     <!-- 开发环境:打印控制台 -->
     <springProfile name="dev">
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="MY_CONSOLE"/>
         </root>
     </springProfile>
