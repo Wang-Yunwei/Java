@@ -1,0 +1,69 @@
+#      #线程回收
+#      remove-abandoned: true
+#      remove-abandoned-timeout: 180
+#      log-abandoned: true
+#      #建议配置为true不影响性能并且保证安全性,申请连接的时候检测,如果空闲时间大于timeBetweenEvictionRunsMillis,执行validationQuery检测连接是否有效
+#      test-while-idle: true
+#      #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+#      test-on-return: false
+#      #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+#      test-on-borrow: false
+#      #用来检测连接是否有效的sql,要求是一个查询语句,如果validationQuery为null、testOnBorrow、testOnReturn、testWhileIdle都不会其作用
+#      validation-query: SELECT 1
+#      validation-query-timeout: 1
+#      #有两个含义：1) Destroy线程会检测连接的间隔时间, 2) testWhileIdle的判断依据,详细看testWhileIdle属性的说明
+#      time-between-eviction-runs-millis: 15000
+#      #自动提交
+#      default-auto-commit: true
+#      connection-properties: socketTimeout=3000;connectTimeout=1000
+server:
+  port: 8090 #后端服务开启端口
+logging:
+  level: #日志打印级别
+    '[com.example.demo]': debug
+spring:
+  servlet:
+    multipart: #控制上传文件大小的配置
+      file-size-threshold: 50MB
+      max-file-size: 50MB
+      max-request-size: 50MB
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://10.152.9.18:3306/cpms_mrpi_mdsg?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Hongkong
+    username: cpms
+    password: 'U%!O#7YJL'
+    dbcp2:
+      initial-size: 2 # 连接池初始化时初始化的数据库连接数
+      max-total: 10 # 最大连接数
+      min-idle: 5 # 最小空闲值,当空闲的连接数少于阀值时,连接池就会预申请去一些连接,以免洪峰来时来不及申请
+      max-wait-millis: 1000 # 最大等待时间,单位:毫秒
+      default-query-timeout: 300 # 默认查询超时
+      default-auto-commit: true # 自动提交
+      max-conn-lifetime-millis: 500 # 最大连接存活时间
+  redis:
+    host: 10.152.9.18 # 连接IP
+    port: 6379 # 端口
+    database: 0
+    password: 'GH%AkMvzT'
+    jedis:
+      pool:
+        max-active: 10 # 连接池最大连接数,负值表示没有限制
+        max-wait: 3s # 连接池最大阻塞等待时间,负值表示没有限制
+        max-idle: 8 # 最大空闲连接数
+        min-idle: 3 # 最小空闲连接数
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml # 扫描mapper包中的所有 .xml 文件
+  #  type-aliases-package: com.chinamobile.cmss.cpms.mdsg.entity # 实体扫描，多个package用逗号或者分号分隔
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL日志
+    map-underscore-to-camel-case: true # 开启驼峰功能,将下划线映射到驼峰大小写
+    cache-enabled: false
+    jdbc-type-for-null: null #配置JdbcTypeForNull, oracle数据库必须配置
+  global-config:
+    db-config:
+      id-type: input # 主键类型
+    #      table-prefix: MDSD_ #表名前缀
+    #      logic-not-delete-value: 0 #逻辑未删除全局值（默认 0、表示未删除）
+    #      logic-delete-value: 1 #逻辑删除全局值（默认 1、表示已删除
+    #      logic-delete-field: delFlag# 逻辑删除全局字段 (默认无 设置会自动扫描实体字段)

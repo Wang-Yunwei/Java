@@ -1,0 +1,67 @@
+server:
+  port: 8080
+spring:
+  jackson:
+    # ALWAYS: 总是包含属性,不论其值是什么,这是默认值
+    # NON_NULL: 只包含非 null 的属性
+    # NON_ABSENT: 对于 Optional 类型，只包含存在的值
+    # NON_EMPTY: 只包含非空和非 null 的属性
+    # NON_DEFAULT: 只包含非默认值的属性
+    # CUSTOM: 使用自定义的 ValueFilter
+    default-property-inclusion: NON_EMPTY
+  servlet:
+    multipart: #控制上传文件大小的配置
+      file-size-threshold: 10MB
+      max-file-size: 10MB
+      max-request-size: 11MB
+  datasource:
+    # driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//${erdan.ip.db}:1521/orcl
+    # 如果你使用的是 MySQL, 你可以通过添加 URL 参数来启用 SQL 日志
+    # url: jdbc:mysql://localhost:3306/mdsd?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&logger=com.mysql.cj.jdbc.log.StandardLogger&logLevel=ALL
+    hikari: #SpringBoot 2.0 整合了hikari ,据说这是目前性能最好的java数据库连接池
+      username: PHEP
+      password: mdsd
+      # pool-name: Xue-HikariPool #连接池的用户定义名称,主要出现在日志记录和JMX管理控制台中以识别池和池配置
+      maximum-pool-size: 10 #最大连接数,小于等于0会被重置为默认值10,如果maxPoolSize小于1,则会被重置;当minIdle<=0被重置为DEFAULT_POOL_SIZE则为10;如果minIdle>0则重置为minIdle的值
+      minimum-idle: 3 #最小空闲连接,默认值10,minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+      connection-timeout: 1800000 #连接最大存活时间,不等于0且小于30秒,会被重置为默认值30分钟,设置应该比mysql设置的超时时间短
+      idle-timeout: 600000 #空闲连接超时时间,默认值600000(1000*60*10=10分钟)
+      max-lifetime: 1800000 # 此属性控制池中连接的最长生命周期,值0表示无限生命周期,默认1800000即30分钟
+      auto-commit: true # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+  redis:
+    host: ${erdan.ip.db}
+    port: 6379
+    database: 1
+    password: ENC(/Qtj3m1yusm0G+DoTdTKnJqSpgwcJy3X7f1Sv6DCWz8MHRFaRM5JLXpn1CDfvU6M)
+    jedis:
+      pool:
+        max-active: 16 # 连接池最大连接数,负值表示没有限制
+        max-wait: 30s # 连接池最大阻塞等待时间,负值表示没有限制
+        max-idle: 1 # 最大空闲连接数
+        min-idle: 0 # 最小空闲连接数
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml # 扫描mapper包中的所有 .xml 文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL日志
+    map-underscore-to-camel-case: true # 开启驼峰功能,将下划线映射到驼峰大小写
+    cache-enabled: false
+    jdbc-type-for-null: null #配置JdbcTypeForNull, oracle数据库必须配置
+# Swagger3 开关
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+# ERDAN开发环境IP&PORT配置
+erdan:
+  ip:
+    db: 192.168.0.126
+    server: 192.168.0.96
+    dasServer: 192.168.0.138
+    im: https://192.168.0.119
+  port:
+    phfa: 20220
+    auth: 8090
+    das: 8097
+    im: 48889

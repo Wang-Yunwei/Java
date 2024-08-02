@@ -64,6 +64,7 @@
 
     <!-- 开发环境:打印控制台 -->
     <springProfile name="dev">
+        <logger name="com.zaxxer.hikari" level="DEBUG"/>
         <root level="DEBUG">
             <appender-ref ref="MY_CONSOLE"/>
         </root>
