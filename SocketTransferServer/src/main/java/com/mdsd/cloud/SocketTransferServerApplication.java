@@ -14,7 +14,7 @@ public class SocketTransferServerApplication {
 
     public SocketTransferServerApplication(AuthService authService) {
 
-        this.authService = authService;
+        SocketTransferServerApplication.authService = authService;
     }
 
     public static void main(String[] args) {

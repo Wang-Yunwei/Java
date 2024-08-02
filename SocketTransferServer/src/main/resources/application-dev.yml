@@ -5,14 +5,14 @@ springdoc:
     path: /swagger-ui.html
 logging:
   level:
-    # org.springframework.cloud.openfeign.FeignClient: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
     # 为特定 Feign 客户端设置日志级别
-    com.mdsd.cloud.feign: DEBUG
+    # com.mdsd.cloud.feign: DEBUG
 feign:
   client:
     config:
       default: # 默认配置
-        loggerLevel: FULL # 设置 Feign 的日志级别
+        loggerType: FULL # 设置 Feign 的日志级别
         # 或者为特定客户端设置
         # yourClientName:
         # loggerLevel: FULL
