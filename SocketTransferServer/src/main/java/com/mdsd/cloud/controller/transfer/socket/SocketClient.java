@@ -1,4 +1,4 @@
-package com.mdsd.cloud.socket;
+package com.mdsd.cloud.controller.transfer.socket;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
@@ -86,6 +86,11 @@ public class SocketClient {
                                              @Override
                                              protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
 
+                                                 // 判断是否是心跳信息
+                                                 if (2 == msg.getByte(4)) {
+                                                     log.info("SocketClient_Receive <<< 心跳");
+//                                                     return;
+                                                 }
                                                  // 收到信息后发布事件
                                                  publishEvent(msg);
                                              }
@@ -112,7 +117,7 @@ public class SocketClient {
     public void connect() {
 
         if (null != channel && channel.isActive()) {
-
+            // TODO 如果存在连接则不再次请求连接
         } else {
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {

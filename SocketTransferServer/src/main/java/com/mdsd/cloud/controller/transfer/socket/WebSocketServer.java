@@ -1,11 +1,9 @@
-package com.mdsd.cloud.socket;
+package com.mdsd.cloud.controller.transfer.socket;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.event.SocketEvent;
-import com.mdsd.cloud.response.ResponseDto;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -172,8 +170,7 @@ public class WebSocketServer {
 
                                                  map.clear();
                                                  ctx.executor().schedule(() -> {
-                                                     map.put("action", "READY_MESSAGE");
-                                                     map.put("action", "READY_MESSAGE");
+                                                     map.put("action", "ERROR_MESSAGE");
                                                      try {
                                                          ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
                                                      } catch (JsonProcessingException e) {
