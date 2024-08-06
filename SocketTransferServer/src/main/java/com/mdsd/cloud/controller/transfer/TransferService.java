@@ -1,11 +1,11 @@
 package com.mdsd.cloud.controller.transfer;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
-import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.controller.transfer.socket.SocketClient;
 import com.mdsd.cloud.controller.transfer.socket.WebSocketServer;
+import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -16,7 +16,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +31,7 @@ public class TransferService {
 
     private final WebSocketServer webSocketServer;
 
-    private final ObjectMapper om = new ObjectMapper();
+//    private final ObjectMapper om = new ObjectMapper();
 
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
@@ -138,7 +137,11 @@ public class TransferService {
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                 contentByte = new byte[buf.readableBytes()];
                 buf.readBytes(contentByte);
-                result.put("数据", ByteUtil.bytesToStringUTF8(contentByte));
+                try {
+                    result.put("数据", TyjwProtoBuf.SignalInfo.parseFrom(contentByte));
+                } catch (InvalidProtocolBufferException e) {
+                    throw new RuntimeException(e);
+                }
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 状态数据:
@@ -146,14 +149,18 @@ public class TransferService {
                 contentByte = new byte[buf.readableBytes()];
                 buf.readBytes(contentByte);
                 try {
-                    Map<String, String> map = om.readValue(contentByte, new TypeReference<>() {
-
-                    });
-                    result.put("云盒SN号", map.get("boxSn"));
-                } catch (IOException e) {
-                    throw new RuntimeException("状态数据 byte[] 转 Map 异常!");
+                    if(param.getInstruct() == 0xA8){
+                        TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
+                        result.put("云盒SN号", uavState.getBoxSn());
+                        result.put("数据", uavState);
+                    }else{
+                        TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
+                        result.put("云盒SN号", telemetryData.getBoxSn());
+                        result.put("数据", telemetryData);
+                    }
+                } catch (InvalidProtocolBufferException e) {
+                    throw new RuntimeException(e);
                 }
-                result.put("数据", ByteUtil.bytesToStringUTF8(contentByte));
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 航线规划:

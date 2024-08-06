@@ -170,7 +170,7 @@ public class WebSocketServer {
 
                                                  map.clear();
                                                  ctx.executor().schedule(() -> {
-                                                     map.put("action", "ERROR_MESSAGE");
+                                                     map.put("action", "READY_MESSAGE");
                                                      try {
                                                          ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
                                                      } catch (JsonProcessingException e) {
