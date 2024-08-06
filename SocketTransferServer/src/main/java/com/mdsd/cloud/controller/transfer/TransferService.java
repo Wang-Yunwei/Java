@@ -1,6 +1,7 @@
 package com.mdsd.cloud.controller.transfer;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
 import com.mdsd.cloud.controller.transfer.socket.SocketClient;
@@ -31,7 +32,7 @@ public class TransferService {
 
     private final WebSocketServer webSocketServer;
 
-//    private final ObjectMapper om = new ObjectMapper();
+    JsonFormat.Printer printer = JsonFormat.printer();
 
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
@@ -68,12 +69,12 @@ public class TransferService {
                     case 状态数据:// 实时状态
                     case 遥测数据:// 实时遥测
                     case MOP数据透传:// MOP数据透传
-                        log.info("SocketClient_指令 <<< {}", String.format("0x%02X", instruct));
+                        log.info("SocketClient_Instruct <<< {}", String.format("0x%02X", instruct));
                         break;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
                         anEnum = InstructEnum.getEnum(instruct, active);
-                        log.info("SocketClient_指令_动作 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
+                        log.info("SocketClient_Instruct_Active <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         break;
                 }
                 if (null != anEnum) {
@@ -108,8 +109,7 @@ public class TransferService {
                 channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
                 break;
             case 心跳:
-                // 将心跳回复发送给所有 WebSocketClient
-                result.put("时间戳", buf.readLong());// 此值为心跳指令发送的时间戳原样返回
+                result.put("时间戳", buf.readLong());
                 channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
                 break;
             case 图片上传完成通知:
@@ -132,13 +132,14 @@ public class TransferService {
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             case 信道质量:
-                result.put("时间戳", buf.readUnsignedInt());// 终端到平台的延时
+                result.put("时间戳", buf.readUnsignedInt());
                 buf.readBytes(boxSnByte);
                 result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                 contentByte = new byte[buf.readableBytes()];
                 buf.readBytes(contentByte);
                 try {
-                    result.put("数据", TyjwProtoBuf.SignalInfo.parseFrom(contentByte));
+                    TyjwProtoBuf.SignalInfo signalInfo = TyjwProtoBuf.SignalInfo.parseFrom(contentByte);
+                    result.put("数据", printer.print(signalInfo));
                 } catch (InvalidProtocolBufferException e) {
                     throw new RuntimeException(e);
                 }
@@ -152,11 +153,11 @@ public class TransferService {
                     if(param.getInstruct() == 0xA8){
                         TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
                         result.put("云盒SN号", uavState.getBoxSn());
-                        result.put("数据", uavState);
+                        result.put("数据", printer.print(uavState));
                     }else{
                         TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
                         result.put("云盒SN号", telemetryData.getBoxSn());
-                        result.put("数据", telemetryData);
+                        result.put("数据", printer.print(telemetryData));
                     }
                 } catch (InvalidProtocolBufferException e) {
                     throw new RuntimeException(e);

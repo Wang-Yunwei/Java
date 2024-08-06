@@ -48,7 +48,7 @@ public class WebSocketServer {
 
     private final HashMap<String, String> map = new HashMap<>();
 
-    private final ObjectMapper om = new ObjectMapper();
+    private final ObjectMapper obm = new ObjectMapper();
 
     @Value("${env.port.web-socket-server}")
     private int port;
@@ -65,9 +65,8 @@ public class WebSocketServer {
         Channel channel = channelMap.get(key);
         if (null != channel && channel.isActive()) {
             try {
-                String sendDate = om.writeValueAsString(resp);
+                String sendDate = obm.writeValueAsString(resp);
                 channel.writeAndFlush(new TextWebSocketFrame(sendDate));
-                log.info("WebSocketServer_SendMassage >>> {}", sendDate);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("数据转Json失败!");
             }
@@ -110,14 +109,14 @@ public class WebSocketServer {
                                                      }
                                                      Map<String, String> msgMap;
                                                      try {
-                                                         msgMap = om.readValue(text, new TypeReference<>() {
+                                                         msgMap = obm.readValue(text, new TypeReference<>() {
 
                                                          });
                                                          log.info("WebSocketServer_Receive <<< {}", msgMap.toString());
                                                          if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
                                                              map.put("action", "PONG_MESSAGE");
-                                                             ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
+                                                             ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(map)));
                                                              log.info("WebSocketServer_Reply >>> {}", map);
                                                              return;
                                                          }
@@ -125,7 +124,7 @@ public class WebSocketServer {
                                                          map.put("action", "ERROR_MESSAGE");
                                                          map.put("error", "数据解析失败!");
                                                          try {
-                                                             ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
+                                                             ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(map)));
                                                          } catch (JsonProcessingException ex) {
                                                              throw new RuntimeException(ex);
                                                          }
@@ -157,7 +156,7 @@ public class WebSocketServer {
                                                      map.put("action", "ERROR_MESSAGE");
                                                      map.put("error", "未知数据类型!");
                                                      try {
-                                                         ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
+                                                         ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(map)));
                                                      } catch (JsonProcessingException e) {
                                                          throw new RuntimeException(e);
                                                      }
@@ -172,7 +171,7 @@ public class WebSocketServer {
                                                  ctx.executor().schedule(() -> {
                                                      map.put("action", "READY_MESSAGE");
                                                      try {
-                                                         ctx.writeAndFlush(new TextWebSocketFrame(om.writeValueAsString(map)));
+                                                         ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(map)));
                                                      } catch (JsonProcessingException e) {
                                                          throw new RuntimeException(e);
                                                      }

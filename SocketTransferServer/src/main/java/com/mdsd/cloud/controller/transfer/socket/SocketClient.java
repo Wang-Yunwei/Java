@@ -88,8 +88,8 @@ public class SocketClient {
 
                                                  // 判断是否是心跳信息
                                                  if (2 == msg.getByte(4)) {
-                                                     log.info("SocketClient_Receive <<< 心跳");
-//                                                     return;
+                                                     log.info("SocketClient_Receive <<< {}",String.format("0x%02X", msg.getByte(4)));
+                                                     return;
                                                  }
                                                  // 收到信息后发布事件
                                                  publishEvent(msg);
