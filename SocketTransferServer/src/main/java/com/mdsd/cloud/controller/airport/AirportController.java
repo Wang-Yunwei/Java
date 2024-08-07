@@ -36,28 +36,22 @@ public class AirportController {
     @GetMapping(name = "机库控制", path = "/hangarControl/{hangarId}/{instructId}")
     public ResponseDto<String> hangarControl(@PathVariable String hangarId,@PathVariable Integer instructId) {
 
-        service.hangarControl(hangarId,instructId);
-        return ResponseDto.wrapSuccess();
+
+        return ResponseDto.wrapSuccess(service.hangarControl(hangarId,instructId));
     }
 
     @Operation(summary = "规划机库航线")
     @PostMapping(name = "规划机库航线", path = "/line")
     public ResponseDto<String> line(@RequestBody PlanLineDTO param) {
 
-        try {
-            service.line(param);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("入参转JSON失败!");
-        }
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.line(param));
     }
 
     @Operation(summary = "修改机库信息")
     @PostMapping(name = "修改机库信息", path = "/update")
     public ResponseDto<String> update(@RequestBody UpdateAirportInp param) {
 
-        service.update(param);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.update(param));
     }
 
     @Operation(summary = "获取舱外视频地址")

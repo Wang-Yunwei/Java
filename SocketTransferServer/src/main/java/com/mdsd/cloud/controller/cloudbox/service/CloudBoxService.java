@@ -17,7 +17,7 @@ public interface CloudBoxService {
     /**
      * 修改云盒设置
      */
-    void update(UpdateCloudBoxInp param);
+    String update(UpdateCloudBoxInp param);
 
     /**
      * 获取飞行历史
@@ -27,17 +27,17 @@ public interface CloudBoxService {
     /**
      * 修改推流地址
      */
-    void updateLive(UpdateLiveInp param);
+    String updateLive(UpdateLiveInp param);
 
     /**
      * 开始直播推流
      */
-    void openLive(String boxSn);
+    String openLive(String boxSn);
 
     /**
      * 结束直播推流
      */
-    void closeLive(String boxSn);
+    String closeLive(String boxSn);
 
     /**
      * 获取直播地址

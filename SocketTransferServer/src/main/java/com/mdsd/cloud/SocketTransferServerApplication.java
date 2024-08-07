@@ -25,7 +25,7 @@ public class SocketTransferServerApplication {
 
         SpringApplication.run(SocketTransferServerApplication.class, args);
 
-        authService.getToken(new GetTokenInp());
+//        authService.getToken(new GetTokenInp());
     }
 
     /**

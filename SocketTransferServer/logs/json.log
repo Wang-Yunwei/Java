@@ -2593,3 +2593,1509 @@
 {"requestIP": "", "username": "", "timestamp": "2024-08-07 12:21:56", "requestDispatcherPath":
                 "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
                 "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:55", "requestDispatcherPath":
+                "", "message": "Starting SocketTransferServerApplication using Java 17.0.9 with PID 8 (D:\working-space\Git\Java\SocketTransferServer\target\classes started by WangYunwei in D:\working-space\Git\Java\SocketTransferServer)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:55", "requestDispatcherPath":
+                "", "message": "The following 2 profiles are active: "linux", "dev"", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:56", "requestDispatcherPath":
+                "", "message": "BeanFactory id=fc770c5a-54da-3c9a-b6a5-92c1992e0228", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:56", "requestDispatcherPath":
+                "", "message": "Tomcat initialized with port(s): 20240 (http)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:56", "requestDispatcherPath":
+                "", "message": "Initializing ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:56", "requestDispatcherPath":
+                "", "message": "Starting service [Tomcat]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:56", "requestDispatcherPath":
+                "", "message": "Starting Servlet engine: [Apache Tomcat/10.1.16]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:57", "requestDispatcherPath":
+                "", "message": "Initializing Spring embedded WebApplicationContext", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:57", "requestDispatcherPath":
+                "", "message": "Root WebApplicationContext: initialization completed in 1522 ms", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:58", "requestDispatcherPath":
+                "", "message": "Starting ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:58", "requestDispatcherPath":
+                "", "message": "Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:58", "requestDispatcherPath":
+                "", "message": "Started SocketTransferServerApplication in 4.187 seconds (process running for 4.977)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:31:58", "requestDispatcherPath":
+                "", "message": "================== 【START-UP SUCCESSFUL】 ==================", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:12", "requestDispatcherPath":
+                "", "message": "Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.", "stackTrace": "java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x05(0x010x000x05$0x030x030xb4m0xa90xc80x960x9fV0x080x860x8570xfd0x1bPAk0xa50xe60x89am0xd5$0x050xc60xad0x8d0xcbG0xf7S0xe3 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "Initializing Spring DispatcherServlet 'dispatcherServlet'", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "Initializing Servlet 'dispatcherServlet'", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "Completed initialization in 0 ms", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "项目启动后直接调用 getToken!", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "连接成功,开始发送注册请求! <<< 192.168.0.222:13002", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x01", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:58", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:32:59", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:00", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:01", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:02", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:03", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:04", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:05", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:06", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:07", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:08", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:09", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:10", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:11", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:12", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct_Active <<< 0xD1_0x26", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct_Active <<< 0xD1_0x22", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:13", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:14", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:15", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:16", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:17", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:18", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:19", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:20", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:21", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:22", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:23", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:24", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:25", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:26", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:27", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:28", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:29", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:30", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:31", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:32", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:33", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:34", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:35", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:36", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:37", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:38", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:39", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:40", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:41", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:42", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:43", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:44", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:45", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Receive <<< 0x02", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:46", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:47", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:48", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:48", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:48", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA8", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:48", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0xA9", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:48", "requestDispatcherPath":
+                "", "message": "SocketClient_Instruct <<< 0x0C", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:51", "requestDispatcherPath":
+                "", "message": "Starting SocketTransferServerApplication using Java 17.0.9 with PID 6492 (D:\working-space\Git\Java\SocketTransferServer\target\classes started by WangYunwei in D:\working-space\Git\Java\SocketTransferServer)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:51", "requestDispatcherPath":
+                "", "message": "The following 2 profiles are active: "linux", "dev"", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "BeanFactory id=fc770c5a-54da-3c9a-b6a5-92c1992e0228", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Tomcat initialized with port(s): 20240 (http)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Initializing ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Starting service [Tomcat]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Starting Servlet engine: [Apache Tomcat/10.1.16]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Initializing Spring embedded WebApplicationContext", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:52", "requestDispatcherPath":
+                "", "message": "Root WebApplicationContext: initialization completed in 1080 ms", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:53", "requestDispatcherPath":
+                "", "message": "Starting ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:53", "requestDispatcherPath":
+                "", "message": "Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:53", "requestDispatcherPath":
+                "", "message": "Started SocketTransferServerApplication in 3.187 seconds (process running for 3.865)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:33:53", "requestDispatcherPath":
+                "", "message": "================== 【START-UP SUCCESSFUL】 ==================", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:57", "requestDispatcherPath":
+                "", "message": "Starting SocketTransferServerApplication using Java 17.0.9 with PID 15212 (D:\working-space\Git\Java\SocketTransferServer\target\classes started by WangYunwei in D:\working-space\Git\Java\SocketTransferServer)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:57", "requestDispatcherPath":
+                "", "message": "The following 2 profiles are active: "linux", "dev"", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:58", "requestDispatcherPath":
+                "", "message": "BeanFactory id=fc770c5a-54da-3c9a-b6a5-92c1992e0228", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Tomcat initialized with port(s): 20240 (http)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Initializing ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Starting service [Tomcat]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Starting Servlet engine: [Apache Tomcat/10.1.16]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Initializing Spring embedded WebApplicationContext", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:34:59", "requestDispatcherPath":
+                "", "message": "Root WebApplicationContext: initialization completed in 1200 ms", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:35:00", "requestDispatcherPath":
+                "", "message": "Starting ProtocolHandler ["http-nio-20240"]", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:35:00", "requestDispatcherPath":
+                "", "message": "Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:35:00", "requestDispatcherPath":
+                "", "message": "Started SocketTransferServerApplication in 3.523 seconds (process running for 4.372)", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}
+{"requestIP": "", "username": "", "timestamp": "2024-08-07 15:35:00", "requestDispatcherPath":
+                "", "message": "================== 【START-UP SUCCESSFUL】 ==================", "stackTrace": "", "userAgents": "","logType":
+                "INFO","serviceName": "SocketTransferServer"}

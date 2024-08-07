@@ -36,8 +36,7 @@ public class CloudBoxController {
     @PostMapping(name = "修改云盒设置", path = "/update")
     public ResponseDto<String> update(@RequestBody UpdateCloudBoxInp param) {
 
-        service.update(param);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.update(param));
     }
 
     @Operation(summary = "获取飞行历史")
@@ -51,24 +50,21 @@ public class CloudBoxController {
     @PostMapping(name = "修改推流地址", path = "/updateLive")
     public ResponseDto<String> updateLive(@RequestBody UpdateLiveInp param) {
 
-        service.updateLive(param);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.updateLive(param));
     }
 
     @Operation(summary = "开始直播推流",description = "云盒默认为手动推流方式,如果需要开机自动推流请联系我方技术人员")
     @GetMapping(name = "开始直播推流", path = "/openLive/{boxSn}")
     public ResponseDto<String> openLive(@PathVariable String boxSn) {
 
-        service.openLive(boxSn);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.openLive(boxSn));
     }
 
     @Operation(summary = "结束直播推流")
     @GetMapping(name = "结束直播推流", path = "/closeLive/{boxSn}")
     public ResponseDto<String> closeLive(@PathVariable String boxSn) {
 
-        service.closeLive(boxSn);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(service.closeLive(boxSn));
     }
 
     @Operation(summary = "获取直播地址",description = "Rtsp推流时只返回rtsp拉流地址,rtmp推流时返回rtmp、flv和rtc拉流地址")
@@ -84,6 +80,5 @@ public class CloudBoxController {
 
         return ResponseDto.wrapSuccess(service.getPhotos(param));
     }
-
 
 }

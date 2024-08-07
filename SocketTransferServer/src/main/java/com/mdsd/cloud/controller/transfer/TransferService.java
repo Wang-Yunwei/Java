@@ -69,7 +69,7 @@ public class TransferService {
                     case 状态数据:// 实时状态
                     case 遥测数据:// 实时遥测
                     case MOP数据透传:// MOP数据透传
-                        log.info("SocketClient_Instruct <<< {}", String.format("0x%02X", instruct));
+//                        log.info("SocketClient_Instruct <<< {}", String.format("0x%02X", instruct));
                         break;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;

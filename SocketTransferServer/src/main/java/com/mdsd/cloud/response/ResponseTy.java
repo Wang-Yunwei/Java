@@ -2,6 +2,7 @@ package com.mdsd.cloud.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -10,12 +11,13 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@ToString
 public class ResponseTy<T> implements Serializable {
 
     /**
      * 0为成功,其它为失败
      */
-    private byte state;
+    private short state;
 
     /**
      * 操作描述,当state不为0时参见此值

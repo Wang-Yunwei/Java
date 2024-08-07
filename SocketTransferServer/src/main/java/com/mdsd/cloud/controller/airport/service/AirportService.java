@@ -18,17 +18,17 @@ public interface AirportService {
     /**
      * 机库控制
      */
-    void hangarControl(String hangarId, Integer instructId);
+    String hangarControl(String hangarId, Integer instructId);
 
     /**
      * 规划机库航线
      */
-    void line(PlanLineDTO param) throws JsonProcessingException;
+    String line(PlanLineDTO param);
 
     /**
      * 修改机库信息
      */
-    void update(UpdateAirportInp param);
+    String update(UpdateAirportInp param);
 
     /**
      * 获取舱外视频地址

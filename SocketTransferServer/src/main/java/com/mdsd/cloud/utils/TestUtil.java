@@ -24,7 +24,7 @@ public class TestUtil {
         byte[] bytes = Files.readAllBytes(path);
 
         String s = ByteUtil.bytesToStringUTF8(bytes);
-        System.out.println(s);
+        System.out.println(bytes.length);
 
 
     }

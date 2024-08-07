@@ -1,10 +1,13 @@
 package com.mdsd.cloud.controller.cloudbox.service.impl;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
+import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
+import com.mdsd.cloud.controller.auth.service.AuthService;
 import com.mdsd.cloud.controller.cloudbox.dto.*;
 import com.mdsd.cloud.controller.cloudbox.service.CloudBoxService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +16,15 @@ import java.util.List;
 /**
  * @author WangYunwei [2024-07-12]
  */
+@RequiredArgsConstructor
 @Service
 public class CloudBoxServiceImpl implements CloudBoxService {
 
     private final EApiFeign feign;
 
+    private final AuthService authService;
+
     private final AuthSingleton auth = AuthSingleton.getInstance();
-
-    public CloudBoxServiceImpl(EApiFeign feign) {
-
-        this.feign = feign;
-    }
 
     /**
      * 获取云盒列表
@@ -33,26 +34,41 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetCloudBoxListOup>> result = feign.cloudBoxList(auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == 0) {
-                return result.getContent();
-            } else {
-                throw new RuntimeException("获取云盒列表失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return getCloudBoxList();
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return getCloudBoxList();
         }
-        return null;
     }
 
     /**
      * 修改云盒设置
      */
     @Override
-    public void update(UpdateCloudBoxInp param) {
+    public String update(UpdateCloudBoxInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() != 0) {
-                throw new RuntimeException("修改云盒设置失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return update(param);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return update(param);
         }
     }
 
@@ -64,26 +80,41 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<HistoryOup>> result = feign.history(param, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == 0) {
-                return result.getContent();
-            } else {
-                throw new RuntimeException("获取飞行历史失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return history(param);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return history(param);
         }
-        return null;
     }
 
     /**
      * 修改推流地址
      */
     @Override
-    public void updateLive(UpdateLiveInp param) {
+    public String updateLive(UpdateLiveInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() != 0) {
-                throw new RuntimeException("修改推流地址失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return updateLive(param);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return updateLive(param);
         }
     }
 
@@ -91,13 +122,22 @@ public class CloudBoxServiceImpl implements CloudBoxService {
      * 开始直播推流
      */
     @Override
-    public void openLive(String boxSn) {
+    public String openLive(String boxSn) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() != 0) {
-                throw new RuntimeException("开始直播推流失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return openLive(boxSn);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return openLive(boxSn);
         }
     }
 
@@ -105,13 +145,22 @@ public class CloudBoxServiceImpl implements CloudBoxService {
      * 结束直播推流
      */
     @Override
-    public void closeLive(String boxSn) {
+    public String closeLive(String boxSn) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() != 0) {
-                throw new RuntimeException("结束直播推流失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return closeLive(boxSn);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return closeLive(boxSn);
         }
     }
 
@@ -123,13 +172,19 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == 0) {
-                return result.getContent();
-            } else {
-                throw new RuntimeException("获取直播地址失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return getLiveAddress(boxSn);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return getLiveAddress(boxSn);
         }
-        return null;
     }
 
     /**
@@ -140,12 +195,18 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetPhotosOup>> result = feign.getPhotos(param, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == 0) {
-                return result.getContent();
-            } else {
-                throw new RuntimeException("获取任务照片失败!");
+            switch (result.getState()) {
+                case 0:
+                    return result.getContent();
+                case 201:
+                    authService.getToken(new GetTokenInp());
+                    return getPhotos(param);
+                default:
+                    throw new RuntimeException(result.toString());
             }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return getPhotos(param);
         }
-        return null;
     }
 }
