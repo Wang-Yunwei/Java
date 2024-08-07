@@ -32,9 +32,9 @@ public class TransferService {
 
     private final WebSocketServer webSocketServer;
 
-    JsonFormat.Printer printer = JsonFormat.printer();
-
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
+
+    JsonFormat.Printer printer = JsonFormat.printer();
 
     HashMap<String, Object> webSockReuseMap = new HashMap<>();
 
@@ -438,6 +438,7 @@ public class TransferService {
                     break;
                 case 实时喊话:
                 case 录音喊话:
+                    // TODO 需要特殊处理
                     buffer.writeBytes(ByteUtil.stringToByte(getValue(map.get("云盒编号"), "音频数据", map)));
                     break;
                 case 文字喊话:

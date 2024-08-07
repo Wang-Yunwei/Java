@@ -50,7 +50,7 @@ public class WebSocketServer {
 
     private final ObjectMapper obm = new ObjectMapper();
 
-    @Value("${env.port.web-socket-server}")
+    @Value("${env.port.web_socket_server}")
     private int port;
 
     private final ApplicationEventPublisher publisher;
