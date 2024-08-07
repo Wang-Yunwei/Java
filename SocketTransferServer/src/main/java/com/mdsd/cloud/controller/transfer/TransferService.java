@@ -150,11 +150,11 @@ public class TransferService {
                 contentByte = new byte[buf.readableBytes()];
                 buf.readBytes(contentByte);
                 try {
-                    if(param.getInstruct() == 0xA8){
+                    if (param.getInstruct() == 0xA8) {
                         TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
                         result.put("云盒SN号", uavState.getBoxSn());
                         result.put("数据", printer.print(uavState));
-                    }else{
+                    } else {
                         TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
                         result.put("云盒SN号", telemetryData.getBoxSn());
                         result.put("数据", printer.print(telemetryData));
@@ -286,10 +286,7 @@ public class TransferService {
 
         Assert.notNull(map.get("指令编号"), "指令不能为: NULL");
         int instruct = Integer.parseInt(map.get("指令编号"), 16);
-        if (instruct == InstructEnum.注册.getInstruct()) {
-            // TODO 执行TCP注册连接
-//            socketClient.connect();
-        } else {
+        if (socketClient.isActiveChannel()) {
             Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");
             InstructEnum anEnum;
             if (null != map.get("动作编号")) {
@@ -479,6 +476,15 @@ public class TransferService {
             }
             buffer.setShort(2, buffer.readableBytes() - 4);//重新赋值数据长度
             socketClient.sendMessage(buffer);// 发送 TCP
+        } else {
+            if (instruct == InstructEnum.注册.getInstruct()) {
+                socketClient.connect();
+                return;
+            }
+            Map<String, Object> result = new HashMap<>();
+            result.put("action", "SERVER_ERROR");
+            result.put("error", "客户端连接不存在, 请发送注册指令!");
+            webSocketServer.sendMessage(map.get("云盒编号"), result);
         }
     }
 

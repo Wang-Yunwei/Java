@@ -54,6 +54,10 @@ public class SocketClient {
         this.publisher = publisher;
     }
 
+    public boolean isActiveChannel(){
+        return channel != null && channel.isActive();
+    }
+
     public void sendMessage(ByteBuf byteBuf) {
 
         if (channel == null || !channel.isActive()) {
