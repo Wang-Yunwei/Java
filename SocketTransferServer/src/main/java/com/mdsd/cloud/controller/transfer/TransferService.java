@@ -12,11 +12,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,8 +35,6 @@ public class TransferService {
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
     JsonFormat.Printer printer = JsonFormat.printer();
-
-    HashMap<String, Object> webSockReuseMap = new HashMap<>();
 
     public TransferService(SocketClient socketClient, WebSocketServer webSocketServer) {
 
@@ -314,12 +312,12 @@ public class TransferService {
                 case 云台转动_基于角度_左:
                 case 云台转动_基于角度_左上:
                 case 云台转动_基于角度_停止:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "转动角度", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("转动角度")));
                     break;
                 case 云台转动_基于角度_绝对值控制:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "俯仰", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "平移", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "横滚", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("俯仰")));
+                    buffer.writeFloat(Float.parseFloat(map.get("平移")));
+                    buffer.writeFloat(Float.parseFloat(map.get("横滚")));
                     break;
                 case 变倍加:
                 case 变倍减:
@@ -328,22 +326,22 @@ public class TransferService {
                     // TODO 变倍停止
                     break;
                 case 变倍到指定倍数:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "变倍数值", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("变倍数值")));
                     break;
                 case 航线规划:
-                    buffer.writeBytes(ByteUtil.stringToByte(getValue(map.get("云盒编号"), "航线数据", map)));
+                    buffer.writeBytes(ByteUtil.stringToByte(map.get("航线数据")));
                     break;
                 case 起飞:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "飞起高度", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("飞起高度")));
                     break;
                 case 返航:
                 case 返航到指定机场:
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "返航高度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "机库经度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "机库纬度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "备降点经度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "备降点纬度", map)));
-                    buffer.writeBytes(ByteUtil.stringToByte(getValue(map.get("云盒编号"), "机库ID", map)));
+                    buffer.writeShort(Short.parseShort(map.get("返航高度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("机库经度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("机库纬度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("备降点经度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("备降点纬度")));
+                    buffer.writeBytes(ByteUtil.stringToByte(map.get("机库ID")));
                     break;
                 case 取消返航:
                 case 降落:
@@ -371,18 +369,18 @@ public class TransferService {
                 case 链路设置:
                 case 喊话模式切换:
                 case 设置循环播放:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "数据", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("数据")));
                     break;
                 case 手动激光测距:
                 case 对焦:
                 case 打开单点测温:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "X点坐标", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "Y点坐标", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("X点坐标")));
+                    buffer.writeFloat(Float.parseFloat(map.get("Y点坐标")));
                     break;
                 case 设置相机模式:
                 case 切换视频源:
                 case 切换摄像头:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "动作参数", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("动作参数")));
                     break;
                 case 拍照:
                 case 开始录像:
@@ -390,64 +388,64 @@ public class TransferService {
                     // TODO 停止录像
                     break;
                 case 方向控制:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "前后速度", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "左右速度", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "上下速度", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "偏航角", map)));
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "执行时间", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("前后速度")));
+                    buffer.writeFloat(Float.parseFloat(map.get("左右速度")));
+                    buffer.writeFloat(Float.parseFloat(map.get("上下速度")));
+                    buffer.writeFloat(Float.parseFloat(map.get("偏航角")));
+                    buffer.writeShort(Short.parseShort(map.get("执行时间")));
                     break;
                 case 强制降落:
                 case 关闭单点测温:
                     // TODO 关闭单点测温
                     break;
                 case 打开区域测温:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "X1点坐标", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "Y1点坐标", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "X2点坐标", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "Y2点坐标", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("X1点坐标")));
+                    buffer.writeFloat(Float.parseFloat(map.get("Y1点坐标")));
+                    buffer.writeFloat(Float.parseFloat(map.get("X2点坐标")));
+                    buffer.writeFloat(Float.parseFloat(map.get("Y2点坐标")));
                     break;
                 case 关闭区域测温:
                     // TODO 关闭区域测温
                     break;
                 case 设置返航点:
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "经度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "纬度", map)));
+                    buffer.writeDouble(Double.parseDouble(map.get("经度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("纬度")));
                     break;
                 case 指点飞行:
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "经度", map)));
-                    buffer.writeDouble(Double.parseDouble(getValue(map.get("云盒编号"), "经度", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "高度", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "速度", map)));
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "飞行模式", map)));
+                    buffer.writeDouble(Double.parseDouble(map.get("经度")));
+                    buffer.writeDouble(Double.parseDouble(map.get("经度")));
+                    buffer.writeFloat(Float.parseFloat(map.get("高度")));
+                    buffer.writeFloat(Float.parseFloat(map.get("速度")));
+                    buffer.writeByte(Integer.parseInt(map.get("飞行模式")));
                     break;
                 case 停止指点飞行:
                 case 格式化存储卡:
                     // TODO 格式化存储卡
                     break;
                 case 云台转动_基于速度:
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "俯仰", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "平移", map)));
-                    buffer.writeFloat(Float.parseFloat(getValue(map.get("云盒编号"), "横滚", map)));
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "执行时间", map)));
+                    buffer.writeFloat(Float.parseFloat(map.get("俯仰")));
+                    buffer.writeFloat(Float.parseFloat(map.get("平移")));
+                    buffer.writeFloat(Float.parseFloat(map.get("横滚")));
+                    buffer.writeShort(Short.parseShort(map.get("执行时间")));
                     break;
                 case 设置视频码流:
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "水平像素", map)));
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "垂直像素", map)));
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "帧率", map)));
-                    buffer.writeShort(Short.parseShort(getValue(map.get("云盒编号"), "码率", map)));
+                    buffer.writeShort(Short.parseShort(map.get("水平像素")));
+                    buffer.writeShort(Short.parseShort(map.get("垂直像素")));
+                    buffer.writeByte(Integer.parseInt(map.get("帧率")));
+                    buffer.writeShort(Short.parseShort(map.get("码率")));
                     break;
                 case 实时喊话:
                 case 录音喊话:
                     // TODO 需要特殊处理
-                    buffer.writeBytes(ByteUtil.stringToByte(getValue(map.get("云盒编号"), "音频数据", map)));
+                    buffer.writeBytes(Base64.getDecoder().decode(map.get("音频数据")));
                     break;
                 case 文字喊话:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "语速设置", map)));
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "声音", map)));
-                    buffer.writeBytes(ByteUtil.stringToByte(getValue(map.get("云盒编号"), "文字数据", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("语速设置")));
+                    buffer.writeByte(Integer.parseInt(map.get("声音")));
+                    buffer.writeBytes(ByteUtil.stringToByte(map.get("文字数据")));
                     break;
                 case 设置音量:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "音量", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("音量")));
                     break;
                 case 停止喊话:
                     // TODO 停止喊话
@@ -467,7 +465,7 @@ public class TransferService {
                 case 转动控制:
                 case 设置喷火时间:
                 case 避开喷火区开关:
-                    buffer.writeByte(Integer.parseInt(getValue(map.get("云盒编号"), "动作数据", map)));
+                    buffer.writeByte(Integer.parseInt(map.get("动作数据")));
                     break;
                 case MOP数据透传:
                     // TODO MOP数据透传
@@ -487,20 +485,5 @@ public class TransferService {
             result.put("error", "客户端连接不存在, 请发送注册指令!");
             webSocketServer.sendMessage(map.get("云盒编号"), result);
         }
-    }
-
-    private String getValue(String channelMapKey, String mapKey, Map<String, String> map) {
-
-        String result = map.get(mapKey);
-        if (StringUtils.isEmpty(result)) {
-            String errorMes = String.format("%s IS NULL", mapKey);
-            webSockReuseMap.clear();
-            webSockReuseMap.put("action", "ERROR_MESSAGE");
-            webSockReuseMap.put("error", errorMes);
-            webSockReuseMap.putAll(map);
-            webSocketServer.sendMessage(channelMapKey, webSockReuseMap);
-            throw new RuntimeException(errorMes);
-        }
-        return result;
     }
 }

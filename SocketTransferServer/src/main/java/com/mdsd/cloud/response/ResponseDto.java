@@ -36,8 +36,14 @@ public final class ResponseDto<T> implements Serializable {
         return new ResponseDto<T>().setBody(body);
     }
 
-    public static <T> ResponseDto<T> wrapParamError(final T body) {
+    public static <T> ResponseDto<T> wrapFailure(final T body,String code) {
 
-        return new ResponseDto<T>().setBody(body).setCode("000001").setMessage("PARAMETER ERROR");
+        return new ResponseDto<T>().setBody(body).setCode("000001").setMessage("FAILURE");
     }
+
+    public static <T> ResponseDto<T> wrapFailure(final T body,String code, String message) {
+        
+        return new ResponseDto<T>().setBody(body).setCode(code).setMessage(message);
+    }
+
 }
