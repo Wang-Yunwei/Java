@@ -6,7 +6,7 @@ import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
 import com.mdsd.cloud.controller.auth.service.AuthService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
-import com.mdsd.cloud.controller.transfer.socket.SocketClient;
+import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.utils.MD5HashGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

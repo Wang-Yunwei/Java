@@ -1,4 +1,4 @@
-package com.mdsd.cloud.config;
+package com.mdsd.cloud.configuration;
 
 
 import io.swagger.v3.oas.models.OpenAPI;

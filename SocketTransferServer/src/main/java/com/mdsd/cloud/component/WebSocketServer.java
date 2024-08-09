@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.transfer.socket;
+package com.mdsd.cloud.component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

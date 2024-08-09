@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.transfer.socket;
+package com.mdsd.cloud.component;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.enums.InstructEnum;
@@ -56,7 +56,7 @@ public class SocketClient {
         this.publisher = publisher;
     }
 
-    public boolean isActiveChannel(){
+    public boolean isActiveChannel() {
         return channel != null && channel.isActive();
     }
 
@@ -95,7 +95,7 @@ public class SocketClient {
 
                                                  // 判断是否是心跳信息
                                                  if (2 == msg.getByte(4)) {
-                                                     log.info("SocketClient_Receive <<< {}",String.format("0x%02X", msg.getByte(4)));
+                                                     log.info("SocketClient_Receive <<< {}", String.format("0x%02X", msg.getByte(4)));
                                                      return;
                                                  }
                                                  // 收到信息后发布事件
@@ -123,39 +123,34 @@ public class SocketClient {
 
     public void connect() {
 
-        if (null != channel && channel.isActive()) {
-            // TODO 如果存在连接则不再次请求连接
-        } else {
-            ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
-            channelFuture.addListener((ChannelFutureListener) future -> {
-                if (future.isSuccess()) {
-                    // 连接成功后,发送注册请求
-                    log.info("连接成功,开始发送注册请求! <<< {}", String.format("%s:%s", host, port));
-                    channel = future.channel();
-                    ByteBuf buf = Unpooled.buffer();
-                    if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
-                        throw new BusinessException("未找到 AccessToken,请确认已经调过 getToken 接口!");
-                    }
-                    byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
-                    buf.writeShort(0x7479);
-                    buf.writeShort(bytes.length + 5);
-                    buf.writeByte(InstructEnum.注册.getInstruct());
-                    buf.writeInt(AuthSingleton.getInstance().getCompanyId());
-                    buf.writeBytes(bytes);
-                    channel.writeAndFlush(buf);
-                } else {
-                    // 重新连接
-                    int connectCount = 0;
-                    while (connectCount < 3) {
-                        log.info("正在第 {} 次尝试重新连接,3次失败后请重新发起注册请求!", connectCount + 1);
-                        Thread.sleep(1000 * 3);
-                        connectCount++;
-                        connect();
-                    }
+        ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
+        channelFuture.addListener((ChannelFutureListener) future -> {
+            if (future.isSuccess()) {
+                // 连接成功后,发送注册请求
+                log.info("连接 {} 成功,开始发送注册请求!", String.format("%s:%s", host, port));
+                channel = future.channel();
+                ByteBuf buf = Unpooled.buffer();
+                if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
+                    throw new BusinessException("未找到 AccessToken,请确认已经调过 getToken 接口!");
                 }
-            });
-        }
-
+                byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
+                buf.writeShort(0x7479);
+                buf.writeShort(bytes.length + 5);
+                buf.writeByte(InstructEnum.注册.getInstruct());
+                buf.writeInt(AuthSingleton.getInstance().getCompanyId());
+                buf.writeBytes(bytes);
+                channel.writeAndFlush(buf);
+            } else {
+                // 重新连接
+                int connectCount = 0;
+                while (connectCount < 3) {
+                    log.info("...正在第 {} 次尝试重新连接!", connectCount + 1);
+                    Thread.sleep(1000 * 3);
+                    connectCount++;
+                    connect();
+                }
+            }
+        });
     }
 
     @PreDestroy
