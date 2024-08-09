@@ -3,9 +3,9 @@ package com.mdsd.cloud.controller.transfer;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
-import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.controller.transfer.socket.SocketClient;
 import com.mdsd.cloud.controller.transfer.socket.WebSocketServer;
+import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
@@ -36,8 +36,6 @@ public class TransferService {
 
     JsonFormat.Printer printer = JsonFormat.printer();
 
-    StringBuilder recording = new StringBuilder();
-
     public TransferService(SocketClient socketClient, WebSocketServer webSocketServer) {
 
         this.socketClient = socketClient;
@@ -46,6 +44,7 @@ public class TransferService {
 
     @EventListener
     public void handleSocketEvent(SocketEvent evn) {
+
 
         // 访问事件源和消息
         Object source = evn.getSource();
@@ -438,15 +437,7 @@ public class TransferService {
                     break;
                 case 实时喊话:
                 case 录音喊话:
-                    if (anEnum.getAction() == 0x03) {
-                        if ("false".equals(map.get("isLastChunk"))){
-                            if("0".equals(map.get("isLastChunk"))){
-                                recording.setLength(0);
-                            }
-                            recording.append(map.get("音频数据"));
-                        }
-                    }
-                    buffer.writeBytes(anEnum.getAction() == 0x02 ? Base64.getDecoder().decode(recording.toString()):Base64.getDecoder().decode(map.get("音频数据")));
+                    buffer.writeBytes(Base64.getDecoder().decode(map.get("音频数据")));
                     break;
                 case 文字喊话:
                     buffer.writeByte(Integer.parseInt(map.get("语速设置")));

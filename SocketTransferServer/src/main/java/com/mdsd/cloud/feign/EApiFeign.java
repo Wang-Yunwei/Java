@@ -49,6 +49,12 @@ public interface EApiFeign {
     @GetMapping(name = "获取任务照片", path = "/box/photos")
     ResponseTy<List<GetPhotosOup>> getPhotos(@RequestBody GetPhotosInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
+    @PostMapping(name = "航线转换", path = "/line/kmz/convert")
+    ResponseTy<String> convert(@RequestBody HistoryInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+
+    @PostMapping(name = "立即执行航线模板任务", path = "/execute/template")
+    ResponseTy<String> template(@RequestBody HistoryInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+
     @GetMapping(name = "机库列表", path = "/hangar/list")
     ResponseTy<String> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
