@@ -105,7 +105,7 @@ public class WebSocketServer {
                                                  map.clear();
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
-                                                     log.info("WebSocketServer_Receive <<< {}", text);
+                                                     log.info("<<< {}", text);
                                                      if (StringUtils.isEmpty(text)) {
                                                          return;
                                                      }
@@ -119,7 +119,7 @@ public class WebSocketServer {
                                                              // 心跳数据直接回复
                                                              map.put("action", "PONG_MESSAGE");
                                                              ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(map)));
-                                                             log.info("WebSocketServer_Reply >>> {}", map);
+                                                             log.info(">>> {}", map);
                                                              return;
                                                          }
                                                      } catch (JsonProcessingException e) {

@@ -1,8 +1,5 @@
 package com.mdsd.cloud.response;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 /**
