@@ -174,6 +174,9 @@ public class CloudBoxServiceImpl implements CloudBoxService {
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
             switch (result.getState()) {
                 case 0:
+                    if(StringUtils.isNoneBlank(result.getContent().getFlv())){
+                        result.getContent().setFlv(result.getContent().getFlv().replace("222.92.145.250","192.168.0.222"));
+                    }
                     return result.getContent();
                 case 201:
                     authService.getToken(new GetTokenInp());
