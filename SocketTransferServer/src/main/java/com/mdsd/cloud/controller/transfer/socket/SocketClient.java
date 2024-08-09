@@ -3,6 +3,7 @@ package com.mdsd.cloud.controller.transfer.socket;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.response.BusinessException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -133,7 +134,7 @@ public class SocketClient {
                     channel = future.channel();
                     ByteBuf buf = Unpooled.buffer();
                     if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
-                        throw new RuntimeException("未找到 AccessToken,请确认已经调过 getToken 接口!");
+                        throw new BusinessException("未找到 AccessToken,请确认已经调过 getToken 接口!");
                     }
                     byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
                     buf.writeShort(0x7479);

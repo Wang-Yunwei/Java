@@ -7,6 +7,7 @@ import com.mdsd.cloud.controller.transfer.socket.SocketClient;
 import com.mdsd.cloud.controller.transfer.socket.WebSocketServer;
 import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -81,7 +82,7 @@ public class TransferService {
                 }
             }
         } else {
-            throw new RuntimeException("未知事件源!");
+            throw new BusinessException("未知事件源!");
         }
     }
 
@@ -277,7 +278,7 @@ public class TransferService {
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             default:
-                throw new RuntimeException("未知指令!");
+                throw new BusinessException("未知指令!");
         }
     }
 
@@ -471,7 +472,7 @@ public class TransferService {
                     // TODO MOP数据透传
                     break;
                 default:
-                    throw new RuntimeException("未知指令!");
+                    throw new BusinessException("未知指令!");
             }
             buffer.setShort(2, buffer.readableBytes() - 4);//重新赋值数据长度
             socketClient.sendMessage(buffer);// 发送 TCP

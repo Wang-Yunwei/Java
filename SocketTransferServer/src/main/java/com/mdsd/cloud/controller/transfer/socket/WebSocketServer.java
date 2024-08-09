@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.response.BusinessException;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -68,7 +69,7 @@ public class WebSocketServer {
                 String sendDate = obm.writeValueAsString(resp);
                 channel.writeAndFlush(new TextWebSocketFrame(sendDate));
             } catch (JsonProcessingException e) {
-                throw new RuntimeException("数据转Json失败!");
+                throw new BusinessException("数据转Json失败!");
             }
         }
     }
@@ -129,7 +130,7 @@ public class WebSocketServer {
                                                          } catch (JsonProcessingException ex) {
                                                              throw new RuntimeException(ex);
                                                          }
-                                                         throw new RuntimeException("数据解析失败");
+                                                         throw new BusinessException("数据解析失败");
                                                      }
                                                      // 保存连接信息并发送事件
                                                      Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
@@ -161,7 +162,7 @@ public class WebSocketServer {
                                                      } catch (JsonProcessingException e) {
                                                          throw new RuntimeException(e);
                                                      }
-                                                     throw new RuntimeException("未知数据类型!");
+                                                     throw new BusinessException("未知数据类型!");
                                                  }
                                              }
 
