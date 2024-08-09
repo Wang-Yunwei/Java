@@ -104,6 +104,7 @@ public class WebSocketServer {
                                                  map.clear();
                                                  if (msg instanceof TextWebSocketFrame textMsg) {
                                                      String text = textMsg.text();
+                                                     log.info("WebSocketServer_Receive <<< {}", text);
                                                      if (StringUtils.isEmpty(text)) {
                                                          return;
                                                      }
@@ -112,7 +113,7 @@ public class WebSocketServer {
                                                          msgMap = obm.readValue(text, new TypeReference<>() {
 
                                                          });
-                                                         log.info("WebSocketServer_Receive <<< {}", msgMap.toString());
+
                                                          if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
                                                              map.put("action", "PONG_MESSAGE");

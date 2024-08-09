@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.transfer.enums;
+package com.mdsd.cloud.enums;
 
 import lombok.Getter;
 

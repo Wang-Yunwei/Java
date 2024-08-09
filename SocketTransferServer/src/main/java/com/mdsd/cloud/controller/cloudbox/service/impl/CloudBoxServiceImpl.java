@@ -5,6 +5,7 @@ import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
 import com.mdsd.cloud.controller.cloudbox.dto.*;
 import com.mdsd.cloud.controller.cloudbox.service.CloudBoxService;
+import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
 import lombok.RequiredArgsConstructor;
@@ -34,10 +35,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetCloudBoxListOup>> result = feign.cloudBoxList(auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return getCloudBoxList();
                 default:
@@ -57,10 +58,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return update(param);
                 default:
@@ -80,10 +81,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<HistoryOup>> result = feign.history(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return history(param);
                 default:
@@ -103,10 +104,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return updateLive(param);
                 default:
@@ -126,10 +127,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return openLive(boxSn);
                 default:
@@ -149,10 +150,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return closeLive(boxSn);
                 default:
@@ -172,13 +173,13 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
-                    if(StringUtils.isNoneBlank(result.getContent().getFlv())){
-                        result.getContent().setFlv(result.getContent().getFlv().replace("222.92.145.250","192.168.0.222"));
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
+                    if (StringUtils.isNoneBlank(result.getContent().getFlv())) {
+                        result.getContent().setFlv(result.getContent().getFlv().replace("222.92.145.250", "192.168.0.222"));
                     }
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return getLiveAddress(boxSn);
                 default:
@@ -198,10 +199,10 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetPhotosOup>> result = feign.getPhotos(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return getPhotos(param);
                 default:

@@ -1,7 +1,7 @@
 package com.mdsd.cloud.controller.transfer.socket;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.transfer.enums.InstructEnum;
+import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;

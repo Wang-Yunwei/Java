@@ -10,6 +10,7 @@ import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
 import com.mdsd.cloud.controller.cloudbox.dto.GetCloudBoxListOup;
+import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
 import lombok.RequiredArgsConstructor;
@@ -45,10 +46,10 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return null;
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return hangarList();
                 default:
@@ -68,10 +69,10 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.hangarControl(hangarId, instructId, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return hangarControl(hangarId, instructId);
                 default:
@@ -101,10 +102,10 @@ public class AirportServiceImpl implements AirportService {
             map.put("lineData", bas);
             ResponseTy<String> result = feign.line(map, auth.getCompanyId(), auth.getAccessToken());
 
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return line(param);
                 default:
@@ -124,10 +125,10 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateHangar(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return update(param);
                 default:
@@ -147,10 +148,10 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.videoOut(hangarId, type, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return videoOut(hangarId,type);
                 default:
@@ -170,10 +171,10 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.videoIn(hangarId, type, auth.getCompanyId(), auth.getAccessToken());
-            switch (result.getState()) {
-                case 0:
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
                     return result.getContent();
-                case 201:
+                case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return videoIn(hangarId,type);
                 default:
