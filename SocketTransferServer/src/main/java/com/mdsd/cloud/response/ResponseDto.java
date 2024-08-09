@@ -22,9 +22,18 @@ public final class ResponseDto<T> implements Serializable {
 
     private String message = "SUCCESS";
 
-    private Date timestamp = new Date();
+    private LocalDateTime timestamp = LocalDateTime.now();
 
     private T body;
+
+    public ResponseDto() {
+    }
+
+    public ResponseDto(BusinessException e) {
+
+        this.code = e.getCode();
+        this.message = e.getMessage();
+    }
 
     public static <T> ResponseDto<T> wrapSuccess() {
 
@@ -36,14 +45,14 @@ public final class ResponseDto<T> implements Serializable {
         return new ResponseDto<T>().setBody(body);
     }
 
-    public static <T> ResponseDto<T> wrapFailure(final T body,String code) {
+    public static <T> ResponseDto<T> wrapException(final RuntimeException e) {
 
-        return new ResponseDto<T>().setBody(body).setCode("000001").setMessage("FAILURE");
+        return wrapException(new RuntimeException(e));
     }
 
-    public static <T> ResponseDto<T> wrapFailure(final T body,String code, String message) {
-        
-        return new ResponseDto<T>().setBody(body).setCode(code).setMessage(message);
+    public static <T> ResponseDto<T> wrapException(final BusinessException e) {
+
+        return new ResponseDto<T>(e);
     }
 
 }

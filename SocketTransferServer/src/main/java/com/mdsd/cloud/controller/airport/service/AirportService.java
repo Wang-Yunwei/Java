@@ -1,9 +1,9 @@
 package com.mdsd.cloud.controller.airport.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mdsd.cloud.controller.airport.dto.HangarListOup;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
+
+import java.util.List;
 
 /**
  * @author WangYunwei [2024-07-12]
@@ -13,7 +13,7 @@ public interface AirportService {
     /**
      * 机库列表
      */
-    HangarListOup hangarList();
+    List<String> hangarList();
 
     /**
      * 机库控制

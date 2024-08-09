@@ -1,7 +1,5 @@
 package com.mdsd.cloud.controller.airport;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mdsd.cloud.controller.airport.dto.HangarListOup;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
@@ -9,6 +7,8 @@ import com.mdsd.cloud.response.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author WangYunwei [2024-07-11]
@@ -27,15 +27,14 @@ public class AirportController {
 
     @Operation(summary = "机库列表",description = "获取用户名下所有机场")
     @GetMapping(name = "机库列表", path = "/hangarList")
-    public ResponseDto<HangarListOup> hangarList() {
+    public ResponseDto<List<String>> hangarList() {
 
         return ResponseDto.wrapSuccess(service.hangarList());
     }
 
     @Operation(summary = "机库控制",description = "发送机场控制命令")
     @GetMapping(name = "机库控制", path = "/hangarControl/{hangarId}/{instructId}")
-    public ResponseDto<String> hangarControl(@PathVariable String hangarId,@PathVariable Integer instructId) {
-
+    public ResponseDto<String> hangarControl(@PathVariable String hangarId, @PathVariable Integer instructId) {
 
         return ResponseDto.wrapSuccess(service.hangarControl(hangarId,instructId));
     }

@@ -2,16 +2,15 @@ package com.mdsd.cloud.controller.airport.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.airport.dto.HangarListOup;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
-import com.mdsd.cloud.controller.cloudbox.dto.GetCloudBoxListOup;
 import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
+import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,18 +41,18 @@ public class AirportServiceImpl implements AirportService {
      * 机库列表
      */
     @Override
-    public HangarListOup hangarList() {
+    public List<String> hangarList() {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy<String> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<List<String>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
             switch (StateEnum.getStateEnum(result.getState())) {
                 case STATE_0:
-                    return null;
+                    result.getContent();
                 case STATE_201:
                     authService.getToken(new GetTokenInp());
                     return hangarList();
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -76,7 +75,7 @@ public class AirportServiceImpl implements AirportService {
                     authService.getToken(new GetTokenInp());
                     return hangarControl(hangarId, instructId);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -109,7 +108,7 @@ public class AirportServiceImpl implements AirportService {
                     authService.getToken(new GetTokenInp());
                     return line(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -132,7 +131,7 @@ public class AirportServiceImpl implements AirportService {
                     authService.getToken(new GetTokenInp());
                     return update(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -153,13 +152,13 @@ public class AirportServiceImpl implements AirportService {
                     return result.getContent();
                 case STATE_201:
                     authService.getToken(new GetTokenInp());
-                    return videoOut(hangarId,type);
+                    return videoOut(hangarId, type);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
-            return videoOut(hangarId,type);
+            return videoOut(hangarId, type);
         }
     }
 
@@ -176,13 +175,13 @@ public class AirportServiceImpl implements AirportService {
                     return result.getContent();
                 case STATE_201:
                     authService.getToken(new GetTokenInp());
-                    return videoIn(hangarId,type);
+                    return videoIn(hangarId, type);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
-            return videoIn(hangarId,type);
+            return videoIn(hangarId, type);
         }
     }
 }

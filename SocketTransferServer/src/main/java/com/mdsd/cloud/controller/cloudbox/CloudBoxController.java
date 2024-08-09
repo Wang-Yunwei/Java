@@ -1,11 +1,13 @@
 package com.mdsd.cloud.controller.cloudbox;
 
+import com.mdsd.cloud.controller.airport.dto.TemplateInp;
 import com.mdsd.cloud.controller.cloudbox.dto.*;
 import com.mdsd.cloud.controller.cloudbox.service.CloudBoxService;
 import com.mdsd.cloud.response.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -46,14 +48,14 @@ public class CloudBoxController {
         return ResponseDto.wrapSuccess(service.history(param));
     }
 
-    @Operation(summary = "修改推流地址",description = "当需要将云盒视频推流到第三方流媒体服务器时调此接口修改推流地址")
+    @Operation(summary = "修改推流地址", description = "当需要将云盒视频推流到第三方流媒体服务器时调此接口修改推流地址")
     @PostMapping(name = "修改推流地址", path = "/updateLive")
     public ResponseDto<String> updateLive(@RequestBody UpdateLiveInp param) {
 
         return ResponseDto.wrapSuccess(service.updateLive(param));
     }
 
-    @Operation(summary = "开始直播推流",description = "云盒默认为手动推流方式,如果需要开机自动推流请联系我方技术人员")
+    @Operation(summary = "开始直播推流", description = "云盒默认为手动推流方式,如果需要开机自动推流请联系我方技术人员")
     @GetMapping(name = "开始直播推流", path = "/openLive/{boxSn}")
     public ResponseDto<String> openLive(@PathVariable String boxSn) {
 
@@ -67,7 +69,7 @@ public class CloudBoxController {
         return ResponseDto.wrapSuccess(service.closeLive(boxSn));
     }
 
-    @Operation(summary = "获取直播地址",description = "Rtsp推流时只返回rtsp拉流地址,rtmp推流时返回rtmp、flv和rtc拉流地址")
+    @Operation(summary = "获取直播地址", description = "Rtsp推流时只返回rtsp拉流地址,rtmp推流时返回rtmp、flv和rtc拉流地址")
     @GetMapping(name = "获取直播地址", path = "/getLiveAddress/{boxSn}")
     public ResponseDto<GetLiveAddressOup> getLiveAddress(@PathVariable String boxSn) {
 
@@ -79,6 +81,20 @@ public class CloudBoxController {
     public ResponseDto<List<GetPhotosOup>> getPhotos(@RequestBody GetPhotosInp param) {
 
         return ResponseDto.wrapSuccess(service.getPhotos(param));
+    }
+
+    @Operation(summary = "航线转换 (Kmz转Protobuf)")
+    @PostMapping(name = "航线转换", path = "/convert")
+    public ResponseDto<String> convert(@RequestParam(value = "kmzFile") MultipartFile file) {
+
+        return ResponseDto.wrapSuccess(service.convert(file));
+    }
+
+    @Operation(summary = "机场或云盒立即执行指定的航线模板任务")
+    @PostMapping(name = "立即执行航线模板任务", path = "/template")
+    public ResponseDto<String> template(@RequestBody TemplateInp param) {
+
+        return ResponseDto.wrapSuccess(service.template(param));
     }
 
 }

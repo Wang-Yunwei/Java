@@ -1,6 +1,11 @@
 package com.mdsd.cloud.controller.cloudbox.service;
 
+import com.mdsd.cloud.controller.airport.dto.TemplateInp;
 import com.mdsd.cloud.controller.cloudbox.dto.*;
+import com.mdsd.cloud.response.ResponseDto;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -48,4 +53,14 @@ public interface CloudBoxService {
      * 获取任务照片
      */
     List<GetPhotosOup> getPhotos(GetPhotosInp param);
+
+    /**
+     * 航线转换
+     */
+    String convert(MultipartFile file);
+
+    /**
+     * 立即执行航线模板任务
+     */
+    String template(TemplateInp param);
 }

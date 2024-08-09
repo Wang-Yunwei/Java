@@ -1,5 +1,6 @@
 package com.mdsd.cloud.controller.cloudbox.service.impl;
 
+import com.mdsd.cloud.controller.airport.dto.TemplateInp;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
@@ -7,10 +8,12 @@ import com.mdsd.cloud.controller.cloudbox.dto.*;
 import com.mdsd.cloud.controller.cloudbox.service.CloudBoxService;
 import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
+import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return getCloudBoxList();
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -65,7 +68,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return update(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -88,7 +91,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return history(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -111,7 +114,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return updateLive(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -134,7 +137,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return openLive(boxSn);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -157,7 +160,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return closeLive(boxSn);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -183,7 +186,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return getLiveAddress(boxSn);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -206,11 +209,57 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                     authService.getToken(new GetTokenInp());
                     return getPhotos(param);
                 default:
-                    throw new RuntimeException(result.toString());
+                    throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
             return getPhotos(param);
+        }
+    }
+
+    /**
+     * 航线转换
+     */
+    @Override
+    public String convert(MultipartFile file) {
+
+        if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+            ResponseTy<String> result = feign.convert(file, auth.getCompanyId(), auth.getAccessToken());
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
+                    return result.getContent();
+                case STATE_201:
+                    authService.getToken(new GetTokenInp());
+                    return convert(file);
+                default:
+                    throw new BusinessException(result.toString());
+            }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return convert(file);
+        }
+    }
+
+    /**
+     * 立即执行航线模板任务
+     */
+    @Override
+    public String template(TemplateInp param) {
+
+        if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+            ResponseTy<String> result = feign.template(param, auth.getCompanyId(), auth.getAccessToken());
+            switch (StateEnum.getStateEnum(result.getState())) {
+                case STATE_0:
+                    return result.getContent();
+                case STATE_201:
+                    authService.getToken(new GetTokenInp());
+                    return template(param);
+                default:
+                    throw new BusinessException(result.toString());
+            }
+        } else {
+            authService.getToken(new GetTokenInp());
+            return template(param);
         }
     }
 }

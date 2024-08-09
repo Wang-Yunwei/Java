@@ -1,5 +1,6 @@
 package com.mdsd.cloud.feign;
 
+import com.mdsd.cloud.controller.airport.dto.TemplateInp;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
@@ -7,6 +8,7 @@ import com.mdsd.cloud.controller.cloudbox.dto.*;
 import com.mdsd.cloud.response.ResponseTy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -50,13 +52,13 @@ public interface EApiFeign {
     ResponseTy<List<GetPhotosOup>> getPhotos(@RequestBody GetPhotosInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "航线转换", path = "/line/kmz/convert")
-    ResponseTy<String> convert(@RequestBody HistoryInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> convert(@RequestParam(value = "kmzFile") final MultipartFile file, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @PostMapping(name = "立即执行航线模板任务", path = "/execute/template")
-    ResponseTy<String> template(@RequestBody HistoryInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<String> template(@RequestBody TemplateInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库列表", path = "/hangar/list")
-    ResponseTy<String> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<List<String>> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库控制", path = "/hangar/{hangarId}/{instructId}")
     ResponseTy<String> hangarControl(@PathVariable String hangarId, @PathVariable Integer instructId, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
