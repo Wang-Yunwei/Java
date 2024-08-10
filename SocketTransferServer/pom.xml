@@ -63,6 +63,11 @@
 			<artifactId>protobuf-java-util</artifactId>
 			<version>3.25.2</version>
 		</dependency>
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>8.5.11</version>
+		</dependency>
 
 	</dependencies>
 
