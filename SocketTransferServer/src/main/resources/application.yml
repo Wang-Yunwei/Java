@@ -6,3 +6,6 @@ spring:
     name: SocketTransferServer
   profiles:
     include: @profiles.active@
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
