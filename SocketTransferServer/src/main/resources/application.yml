@@ -19,7 +19,7 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 minio:
-  endpoint: http://127.0.0.1:9000
+  endpoint: http://192.168.0.221:9000
   access-key: 0a75wAuJjOu4eDM2xw2p
   secret-key: s2ZvhoPCUnFLldFtRDTl9VRxv5TEzmoQc5dZYeUC
   bucket-name: mdsd-m350

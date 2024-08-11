@@ -116,8 +116,9 @@
 				<includes>
 					<include>application.yml</include>
 					<include>application-${profiles.active}.yml</include>
-					<include>*.xml</include>
+					<include>logback-spring.xml</include>
 					<include>keystore.jks</include>
+					<include>*.json</include>
 				</includes>
 			</resource>
 		</resources>
