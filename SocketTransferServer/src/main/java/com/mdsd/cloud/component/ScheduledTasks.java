@@ -24,11 +24,9 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 0/5 * * * ?")
     public void every_5min() {
-        log.info("ScheduledTasks --> every_5min");
+        log.info("every_5min");
         if (!socketClient.isActiveChannel()) {
-            log.info("Socket client disconnect, Sch");
             authService.getToken(new GetTokenInp());
         }
     }
-
 }

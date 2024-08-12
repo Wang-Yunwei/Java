@@ -438,7 +438,11 @@ public class TransferService {
                     break;
                 case 实时喊话:
                 case 录音喊话:
-                    buffer.writeBytes(Base64.getDecoder().decode(map.get("音频数据")));
+                    String inData = map.get("音频数据");
+                    byte[] inDataBy = Base64.getDecoder().decode(inData);
+
+                    log.info("音频长度: {}",inDataBy.length);
+                    buffer.writeBytes(inDataBy);
                     break;
                 case 文字喊话:
                     buffer.writeByte(Integer.parseInt(map.get("语速设置")));
