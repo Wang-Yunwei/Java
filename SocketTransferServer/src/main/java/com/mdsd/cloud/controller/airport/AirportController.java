@@ -50,7 +50,7 @@ public class AirportController {
     @PostMapping(name = "修改机库信息", path = "/update")
     public ResponseDto<String> update(@RequestBody UpdateAirportInp param) {
 
-        return ResponseDto.wrapSuccess(service.update(param));
+        return ResponseDto.wrapSuccess(service.updateAirport(param));
     }
 
     @Operation(summary = "获取舱外视频地址")

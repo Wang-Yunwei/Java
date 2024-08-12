@@ -45,14 +45,17 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<String>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return hangarList();
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield hangarList();
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -68,14 +71,17 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.hangarControl(hangarId, instructId, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return hangarControl(hangarId, instructId);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield hangarControl(hangarId, instructId);
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -91,7 +97,7 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             HashMap<String, String> map = new HashMap<>();
-            String jsonStr = null;
+            String jsonStr;
             try {
                 jsonStr = om.writeValueAsString(param);
             } catch (JsonProcessingException e) {
@@ -100,15 +106,17 @@ public class AirportServiceImpl implements AirportService {
             String bas = Base64.getEncoder().encodeToString(jsonStr.getBytes());
             map.put("lineData", bas);
             ResponseTy<String> result = feign.line(map, auth.getCompanyId(), auth.getAccessToken());
-
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return line(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield line(param);
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -120,22 +128,25 @@ public class AirportServiceImpl implements AirportService {
      * 修改机库信息
      */
     @Override
-    public String update(UpdateAirportInp param) {
+    public String updateAirport(UpdateAirportInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateHangar(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return update(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield updateAirport(param);
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
-            return update(param);
+            return updateAirport(param);
         }
     }
 
@@ -147,14 +158,17 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.videoOut(hangarId, type, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return videoOut(hangarId, type);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield videoOut(hangarId, type);
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -170,14 +184,17 @@ public class AirportServiceImpl implements AirportService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.videoIn(hangarId, type, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return videoIn(hangarId, type);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if (null != stateEnum) {
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield videoIn(hangarId, type);
+                    }
+                };
+            } else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());

@@ -19,7 +19,7 @@ public interface CloudBoxService {
     /**
      * 修改云盒设置
      */
-    String update(UpdateCloudBoxInp param);
+    String updateCloudBox(UpdateCloudBoxInp param);
 
     /**
      * 获取飞行历史

@@ -28,7 +28,7 @@ public interface AirportService {
     /**
      * 修改机库信息
      */
-    String update(UpdateAirportInp param);
+    String updateAirport(UpdateAirportInp param);
 
     /**
      * 获取舱外视频地址

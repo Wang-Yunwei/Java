@@ -38,7 +38,7 @@ public class CloudBoxController {
     @PostMapping(name = "修改云盒设置", path = "/update")
     public ResponseDto<String> update(@RequestBody UpdateCloudBoxInp param) {
 
-        return ResponseDto.wrapSuccess(service.update(param));
+        return ResponseDto.wrapSuccess(service.updateCloudBox(param));
     }
 
     @Operation(summary = "获取飞行历史")

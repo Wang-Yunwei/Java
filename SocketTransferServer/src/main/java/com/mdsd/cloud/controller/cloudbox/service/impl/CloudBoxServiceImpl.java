@@ -28,7 +28,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
     private final AuthService authService;
 
-    private final AuthSingleton auth = AuthSingleton.getInstance();
+    AuthSingleton auth = AuthSingleton.getInstance();
 
     /**
      * 获取云盒列表
@@ -38,14 +38,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetCloudBoxListOup>> result = feign.cloudBoxList(auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return getCloudBoxList();
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield getCloudBoxList();
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -57,22 +60,26 @@ public class CloudBoxServiceImpl implements CloudBoxService {
      * 修改云盒设置
      */
     @Override
-    public String update(UpdateCloudBoxInp param) {
+    public String updateCloudBox(UpdateCloudBoxInp param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return update(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield updateCloudBox(param);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
+
         } else {
             authService.getToken(new GetTokenInp());
-            return update(param);
+            return updateCloudBox(param);
         }
     }
 
@@ -84,14 +91,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<HistoryOup>> result = feign.history(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return history(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield history(param);
+                    }
+                };
+            }else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -107,14 +117,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return updateLive(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield updateLive(param);
+                    }
+                };
+            }else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -130,14 +143,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return openLive(boxSn);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield openLive(boxSn);
+                    }
+                };
+            }else {
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -153,14 +169,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return closeLive(boxSn);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield closeLive(boxSn);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -176,17 +195,22 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    if (StringUtils.isNoneBlank(result.getContent().getFlv())) {
-                        result.getContent().setFlv(result.getContent().getFlv().replace("222.92.145.250", "192.168.0.222"));
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> {
+                        if (StringUtils.isNoneBlank(result.getContent().getFlv())) {
+                            result.getContent().setFlv(result.getContent().getFlv().replace("222.92.145.250", "192.168.0.222"));
+                        }
+                        yield result.getContent();
                     }
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return getLiveAddress(boxSn);
-                default:
-                    throw new BusinessException(result.toString());
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield getLiveAddress(boxSn);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -202,14 +226,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<List<GetPhotosOup>> result = feign.getPhotos(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return getPhotos(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield getPhotos(param);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -225,14 +252,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.convert(file, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return convert(file);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield convert(file);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
@@ -248,14 +278,17 @@ public class CloudBoxServiceImpl implements CloudBoxService {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             ResponseTy<String> result = feign.template(param, auth.getCompanyId(), auth.getAccessToken());
-            switch (StateEnum.getStateEnum(result.getState())) {
-                case STATE_0:
-                    return result.getContent();
-                case STATE_201:
-                    authService.getToken(new GetTokenInp());
-                    return template(param);
-                default:
-                    throw new BusinessException(result.toString());
+            StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
+            if(null != stateEnum){
+                return switch (stateEnum) {
+                    case STATE_0 -> result.getContent();
+                    case STATE_201 -> {
+                        authService.getToken(new GetTokenInp());
+                        yield template(param);
+                    }
+                };
+            }else{
+                throw new BusinessException(result.toString());
             }
         } else {
             authService.getToken(new GetTokenInp());
