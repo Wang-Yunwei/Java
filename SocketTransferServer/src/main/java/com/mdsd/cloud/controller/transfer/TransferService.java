@@ -48,8 +48,6 @@ public class TransferService {
     @EventListener
     public void handleSocketEvent(SocketEvent evn) {
 
-
-        // 访问事件源和消息
         Object source = evn.getSource();
         if (source instanceof WebSocketServer) {
             webSocketServerChannelReadListener(evn.getMap());
@@ -63,20 +61,19 @@ public class TransferService {
                 }
                 // 指令过滤
                 switch (anEnum) {
-                    case 注册:// 注册
-                    case 心跳:// 心跳
-                    case 图片上传完成通知:// 图片上传完成通知
-                    case 云盒开关机通知:// 云盒开关机通知
-                    case 信道质量:// 信道质量
-                    case 状态数据:// 实时状态
-                    case 遥测数据:// 实时遥测
-                    case MOP数据透传:// MOP数据透传
-//                        log.info("SocketClient_Instruct <<< {}", String.format("0x%02X", instruct));
+                    case 注册:
+                    case 心跳:
+                    case 图片上传完成通知:
+                    case 云盒开关机通知:
+                    case 信道质量:
+                    case 状态数据:
+                    case 遥测数据:
+                    case MOP数据透传:
                         break;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
                         anEnum = InstructEnum.getEnum(instruct, active);
-                        log.info("SocketClient_Instruct_Active <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
+                        log.info("SocketClient_Receive <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         break;
                 }
                 if (null != anEnum) {
@@ -99,8 +96,8 @@ public class TransferService {
         result.put("指令编码", String.format("0x%02X", param.getInstruct()));
         result.put("action", "NEW_MESSAGE");
         byte[] boxSnByte = new byte[15];// 云盒编号
-        byte[] contentByte;
-        byte isSuccess;
+        byte[] contentByte;// buffer中的内容
+        byte isSuccess;// 是否成功
         switch (param) {
             case 注册:
                 isSuccess = buf.readByte();
@@ -338,7 +335,7 @@ public class TransferService {
         buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
         buf.writeByte(anEnum.getAction());// 动作编号
 
-        if(null != anEnum){
+        if (null != anEnum.getArgs()) {
             for (String str : anEnum.getArgs()) {
                 String[] split = str.split("-");
                 switch (split[1]) {

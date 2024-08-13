@@ -114,7 +114,6 @@ public class WebSocketServer {
                                                          msgMap = obm.readValue(text, new TypeReference<>() {
 
                                                          });
-
                                                          if ("PING_MESSAGE".equals(msgMap.get("action"))) {
                                                              // 心跳数据直接回复
                                                              map.put("action", "PONG_MESSAGE");
@@ -134,25 +133,23 @@ public class WebSocketServer {
                                                      }
                                                      // 保存连接信息并发送事件
                                                      Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
-                                                     if (!msgMap.containsKey(msgMap.get("云盒编号"))) {
-                                                         Iterator<String> iterator = channelMap.keys().asIterator();
-                                                         while (iterator.hasNext()) {
-                                                             stringBuilder.setLength(0);
-                                                             stringBuilder.append(iterator.next());
-                                                             if (iterator.hasNext()) {
-                                                                 stringBuilder.append(",");
+                                                     if (msgMap.containsKey(msgMap.get("云盒编号"))) {
+                                                         // 云盒编号已经注册判断连接是否存活
+                                                         Channel channel = channelMap.get(msgMap.get("云盒编号"));
+                                                         if (null != channel && channel.isActive()) {
+                                                             // 不再重复注册,判断是否有指令编号
+                                                             if (StringUtils.isNoneBlank(msgMap.get("指令编号"))) {
+                                                                 publishEvent(msgMap);
                                                              }
-                                                         }
-                                                         if (stringBuilder.isEmpty()) {
-                                                             log.info("当前注册云盒号: {}", msgMap.get("云盒编号"));
                                                          } else {
-                                                             log.info("当前注册云盒号: {},已经注册云盒: {}", msgMap.get("云盒编号"), stringBuilder);
+                                                             // 替换当前连接
+                                                             log.info("云盒替换当前连接: {}",msgMap.get("云盒编号"));
+                                                             channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
+                                                     } else {
+                                                         // 注册云盒编号
+                                                         log.info("注册云盒: {}",msgMap.get("云盒编号"));
                                                          channelMap.put(msgMap.get("云盒编号"), ctx.channel());
-                                                     }
-                                                     // 没有指令编号则不发送事件
-                                                     if (StringUtils.isNoneBlank(msgMap.get("指令编号"))) {
-                                                         publishEvent(msgMap);
                                                      }
                                                  } else {
                                                      map.put("action", "ERROR_MESSAGE");
