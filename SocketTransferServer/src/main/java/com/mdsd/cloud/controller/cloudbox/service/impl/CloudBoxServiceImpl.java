@@ -46,6 +46,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield getCloudBoxList();
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -72,6 +73,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield updateCloudBox(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -99,6 +101,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield history(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else {
                 throw new BusinessException(result.toString());
@@ -125,6 +128,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield updateLive(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else {
                 throw new BusinessException(result.toString());
@@ -151,6 +155,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield openLive(boxSn);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else {
                 throw new BusinessException(result.toString());
@@ -177,6 +182,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield closeLive(boxSn);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -208,6 +214,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield getLiveAddress(boxSn);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -234,6 +241,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield getPhotos(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -260,6 +268,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield convert(file);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());
@@ -286,6 +295,7 @@ public class CloudBoxServiceImpl implements CloudBoxService {
                         authService.getToken(new GetTokenInp());
                         yield template(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             }else{
                 throw new BusinessException(result.toString());

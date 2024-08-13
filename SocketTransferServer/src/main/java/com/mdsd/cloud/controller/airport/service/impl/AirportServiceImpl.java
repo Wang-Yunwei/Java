@@ -49,6 +49,7 @@ public class AirportServiceImpl implements AirportService {
             if (null != stateEnum) {
                 return switch (stateEnum) {
                     case STATE_0 -> result.getContent();
+                    case STATE_102 -> throw new BusinessException(stateEnum.getDescription());
                     case STATE_201 -> {
                         authService.getToken(new GetTokenInp());
                         yield hangarList();
@@ -79,6 +80,7 @@ public class AirportServiceImpl implements AirportService {
                         authService.getToken(new GetTokenInp());
                         yield hangarControl(hangarId, instructId);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             } else {
                 throw new BusinessException(result.toString());
@@ -114,6 +116,7 @@ public class AirportServiceImpl implements AirportService {
                         authService.getToken(new GetTokenInp());
                         yield line(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             } else {
                 throw new BusinessException(result.toString());
@@ -140,6 +143,7 @@ public class AirportServiceImpl implements AirportService {
                         authService.getToken(new GetTokenInp());
                         yield updateAirport(param);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             } else {
                 throw new BusinessException(result.toString());
@@ -166,6 +170,7 @@ public class AirportServiceImpl implements AirportService {
                         authService.getToken(new GetTokenInp());
                         yield videoOut(hangarId, type);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             } else {
                 throw new BusinessException(result.toString());
@@ -192,6 +197,7 @@ public class AirportServiceImpl implements AirportService {
                         authService.getToken(new GetTokenInp());
                         yield videoIn(hangarId, type);
                     }
+                    default -> throw new BusinessException(stateEnum.getDescription());
                 };
             } else {
                 throw new BusinessException(result.toString());

@@ -338,17 +338,19 @@ public class TransferService {
         buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
         buf.writeByte(anEnum.getAction());// 动作编号
 
-        for (String str : anEnum.getArgs()) {
-            String[] split = str.split("-");
-            switch (split[1]) {
-                case "byte" -> buf.writeByte(Byte.parseByte(map.get(split[0])));
-                case "bytes" -> buf.writeBytes(ByteUtil.stringToByte(map.get(split[0])));
-                case "short" -> buf.writeShort(Short.parseShort(map.get(split[0])));
-                case "int" -> buf.writeInt(Integer.parseInt(map.get(split[0])));
-                case "long" -> buf.writeLong(Long.parseLong(map.get(split[0])));
-                case "float" -> buf.writeFloat(Float.parseFloat(map.get(split[0])));
-                case "double" -> buf.writeDouble(Double.parseDouble(map.get(split[0])));
-                case "base64" -> buf.writeBytes(Base64.getDecoder().decode(map.get(split[0])));
+        if(null != anEnum){
+            for (String str : anEnum.getArgs()) {
+                String[] split = str.split("-");
+                switch (split[1]) {
+                    case "byte" -> buf.writeByte(Byte.parseByte(map.get(split[0])));
+                    case "bytes" -> buf.writeBytes(ByteUtil.stringToByte(map.get(split[0])));
+                    case "short" -> buf.writeShort(Short.parseShort(map.get(split[0])));
+                    case "int" -> buf.writeInt(Integer.parseInt(map.get(split[0])));
+                    case "long" -> buf.writeLong(Long.parseLong(map.get(split[0])));
+                    case "float" -> buf.writeFloat(Float.parseFloat(map.get(split[0])));
+                    case "double" -> buf.writeDouble(Double.parseDouble(map.get(split[0])));
+                    case "base64" -> buf.writeBytes(Base64.getDecoder().decode(map.get(split[0])));
+                }
             }
         }
 
