@@ -3,7 +3,9 @@ package com.mdsd.cloud.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 /**
  * @author WangYunwei [2024-07-14]
@@ -39,5 +41,18 @@ public class ByteUtil {
     public static String bytesToStringUTF8(byte[] bytes){
 
         return new String(bytes,StandardCharsets.UTF_8);
+    }
+
+    public static List<byte[]> splitByteArray(byte[] originalBytes, int chunkSize) {
+        List<byte[]> subArrays = new ArrayList<>();
+
+        for (int i = 0; i < originalBytes.length; i += chunkSize) {
+            int end = Math.min(i + chunkSize, originalBytes.length);
+            byte[] subArray = new byte[end - i];
+            System.arraycopy(originalBytes, i, subArray, 0, subArray.length);
+            subArrays.add(subArray);
+        }
+
+        return subArrays;
     }
 }
