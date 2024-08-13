@@ -297,22 +297,36 @@ public class TransferService {
                         byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
                         List<byte[]> bytes = ByteUtil.splitByteArray(inData, 110);
                         for (byte[] by : bytes) {
-                            ByteBuf buf = Unpooled.buffer();
-                            buf.writeShort(InstructEnum.请求帧头.getInstruct());// 帧头
-                            buf.writeShort(0);// 数据长度,占位临时赋值为0
-                            buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
-                            buf.writeByte(anEnum.getInstruct());// 指令编号
-                            buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
-                            buf.writeByte(anEnum.getAction());// 动作编号
-                            buf.writeBytes(by);
-                            buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
-                            socketClient.sendMessage(buf);
+                            ByteBuf buf = aDefault.buffer();
+                            sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
+                                arg1.writeBytes(by);
+                            });
                         }
                     }
                     case MOP数据透传 -> {
                         // TODO 暂未使用
                     }
-                    default -> sendByteBuf(anEnum, map);
+                    default -> {
+                        ByteBuf buf = aDefault.buffer();
+                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
+                            if (null != arg2) {
+                                for (String str : arg2) {
+                                    String[] split = str.split("-");
+                                    switch (split[1]) {
+                                        case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split[0])));
+                                        case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split[0])));
+                                        case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split[0])));
+                                        case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split[0])));
+                                        case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split[0])));
+                                        case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split[0])));
+                                        case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split[0])));
+                                        case "base64" ->
+                                                arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split[0])));
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
             } else {
                 wssErrorMessage(map.get("云盒编号"), "未知指令!");
@@ -326,31 +340,15 @@ public class TransferService {
         }
     }
 
-    private void sendByteBuf(InstructEnum anEnum, Map<String, String> map) {
-        ByteBuf buf = aDefault.buffer();
+    private void sendByteBuf(ByteBuf buf, InstructEnum anEnum, Map<String, String> map, TransferFunction fun) {
+
         buf.writeShort(InstructEnum.请求帧头.getInstruct());// 帧头
         buf.writeShort(0);// 数据长度,占位临时赋值为0
         buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
         buf.writeByte(anEnum.getInstruct());// 指令编号
         buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
         buf.writeByte(anEnum.getAction());// 动作编号
-
-        if (null != anEnum.getArgs()) {
-            for (String str : anEnum.getArgs()) {
-                String[] split = str.split("-");
-                switch (split[1]) {
-                    case "byte" -> buf.writeByte(Byte.parseByte(map.get(split[0])));
-                    case "bytes" -> buf.writeBytes(ByteUtil.stringToByte(map.get(split[0])));
-                    case "short" -> buf.writeShort(Short.parseShort(map.get(split[0])));
-                    case "int" -> buf.writeInt(Integer.parseInt(map.get(split[0])));
-                    case "long" -> buf.writeLong(Long.parseLong(map.get(split[0])));
-                    case "float" -> buf.writeFloat(Float.parseFloat(map.get(split[0])));
-                    case "double" -> buf.writeDouble(Double.parseDouble(map.get(split[0])));
-                    case "base64" -> buf.writeBytes(Base64.getDecoder().decode(map.get(split[0])));
-                }
-            }
-        }
-
+        fun.argHandle(buf, anEnum.getArgs(), map);// 参数处理
         buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
         socketClient.sendMessage(buf);
     }
