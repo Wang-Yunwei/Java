@@ -287,7 +287,6 @@ public class TransferService {
 
     private void webSocketServerChannelReadListener(Map<String, String> map) throws IOException {
 
-        Assert.notNull(map.get("指令编号"), "指令不能为: NULL");
         int instruct = Integer.parseInt(map.get("指令编号"), 16);
         if (socketClient.isActiveChannel()) {
             Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");

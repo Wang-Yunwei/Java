@@ -140,7 +140,9 @@ public class WebSocketServer {
                                                              log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
                                                              channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
-                                                         publishEvent(msgMap);// 发出事件
+                                                         if (null != msgMap.get("指令编号")) {
+                                                             publishEvent(msgMap);// 发出事件
+                                                         }
                                                      } else {
                                                          // 注册云盒编号
                                                          log.info("注册云盒: {}", msgMap.get("云盒编号"));
