@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ public class ByteUtil {
 
     private final static ObjectMapper om = new ObjectMapper();
 
-    public static byte[] shortToByte(){
+    public static byte[] shortToByte() {
 
 
         byte[] result = new byte[2];
@@ -33,14 +32,14 @@ public class ByteUtil {
         return result;
     }
 
-    public static byte[] stringToByte(String str){
+    public static byte[] stringToByte(String str) {
 
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
-    public static String bytesToStringUTF8(byte[] bytes){
+    public static String bytesToStringUTF8(byte[] bytes) {
 
-        return new String(bytes,StandardCharsets.UTF_8);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     public static List<byte[]> splitByteArray(byte[] originalBytes, int chunkSize) {

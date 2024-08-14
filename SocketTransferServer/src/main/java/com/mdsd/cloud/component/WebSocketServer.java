@@ -26,7 +26,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -133,20 +132,20 @@ public class WebSocketServer {
                                                      }
                                                      // 保存连接信息并发送事件
                                                      Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
-                                                     if (msgMap.containsKey(msgMap.get("云盒编号"))) {
+                                                     if (channelMap.containsKey(msgMap.get("云盒编号"))) {
                                                          // 云盒编号已经注册判断连接是否存活
                                                          Channel channel = channelMap.get(msgMap.get("云盒编号"));
-                                                         if (null == channel ) {
+                                                         if (null == channel) {
                                                              // 替换当前连接
-                                                             log.info("云盒替换当前连接: {}",msgMap.get("云盒编号"));
+                                                             log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
                                                              channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
+                                                         publishEvent(msgMap);// 发出事件
                                                      } else {
                                                          // 注册云盒编号
-                                                         log.info("注册云盒: {}",msgMap.get("云盒编号"));
+                                                         log.info("注册云盒: {}", msgMap.get("云盒编号"));
                                                          channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                      }
-                                                     publishEvent(msgMap);// 发出事件
                                                  } else {
                                                      map.put("action", "ERROR_MESSAGE");
                                                      map.put("error", "未知数据类型!");

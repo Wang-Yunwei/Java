@@ -11,13 +11,13 @@ import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +31,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class TransferService {
 
-    private final SocketClient socketClient;
-
-    private final WebSocketServer webSocketServer;
-
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
     JsonFormat.Printer printer = JsonFormat.printer();
+
+    private final SocketClient socketClient;
+
+    private final WebSocketServer webSocketServer;
 
     public TransferService(SocketClient socketClient, WebSocketServer webSocketServer) {
 
@@ -50,7 +50,11 @@ public class TransferService {
 
         Object source = evn.getSource();
         if (source instanceof WebSocketServer) {
-            webSocketServerChannelReadListener(evn.getMap());
+            try {
+                webSocketServerChannelReadListener(evn.getMap());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else if (source instanceof SocketClient) {
             ByteBuf byteBuf = evn.getByteBuf();
             if (byteBuf.getShort(0) == 0x6A77) {
@@ -281,7 +285,7 @@ public class TransferService {
         }
     }
 
-    private void webSocketServerChannelReadListener(Map<String, String> map) {
+    private void webSocketServerChannelReadListener(Map<String, String> map) throws IOException {
 
         Assert.notNull(map.get("指令编号"), "指令不能为: NULL");
         int instruct = Integer.parseInt(map.get("指令编号"), 16);

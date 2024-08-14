@@ -14,7 +14,10 @@ spring:
     include: @profiles.active@
   servlet:
     multipart:
-      file-size-threshold: 65535B
+      max-file-size: 10MB
+      max-request-size: 11MB
+#      file-size-threshold: 65535B
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
