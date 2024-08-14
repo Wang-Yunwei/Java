@@ -357,6 +357,7 @@ public class TransferService {
         Map<String, Object> result = new HashMap<>();
         result.put("action", "SERVER_ERROR");
         result.put("error", message);
+        log.info(result.toString());
         webSocketServer.sendMessage(boxSn, result);
     }
 }
