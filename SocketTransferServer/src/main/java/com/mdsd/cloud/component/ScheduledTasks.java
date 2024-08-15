@@ -22,9 +22,9 @@ public class ScheduledTasks {
         this.socketClient = socketClient;
     }
 
-    @Scheduled(cron = "0 0/5 * * * ?")
-    public void every_5min() {
-        log.info("every_5min");
+    @Scheduled(cron = "*/30 * * * * ?")
+    public void SC_IsConnect() {
+        log.info("SC_IsConnect >>> Every 30second!");
         if (!socketClient.isActiveChannel()) {
             authService.getToken(new GetTokenInp());
         }

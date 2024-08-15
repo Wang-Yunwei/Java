@@ -134,14 +134,18 @@ public class WebSocketServer {
                                                      Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
                                                      if (channelMap.containsKey(msgMap.get("云盒编号"))) {
                                                          // 云盒编号已经注册判断连接是否存活
-                                                         Channel channel = channelMap.get(msgMap.get("云盒编号"));
-                                                         if (null == channel) {
-                                                             // 替换当前连接
-                                                             log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
-                                                             channelMap.put(msgMap.get("云盒编号"), ctx.channel());
-                                                         }
+//                                                         Channel channel = channelMap.get(msgMap.get("云盒编号"));
+//                                                         if (null == channel) {
+                                                         // 替换为当前连接
+//                                                         log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
+//                                                         channelMap.put(msgMap.get("云盒编号"), ctx.channel());
+//                                                         }
                                                          if (null != msgMap.get("指令编号")) {
                                                              publishEvent(msgMap);// 发出事件
+                                                         } else {
+                                                             // 替换为当前连接
+                                                             log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
+                                                             channelMap.put(msgMap.get("云盒编号"), ctx.channel());
                                                          }
                                                      } else {
                                                          // 注册云盒编号
