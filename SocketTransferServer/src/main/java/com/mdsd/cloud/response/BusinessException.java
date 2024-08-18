@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class BusinessException extends RuntimeException implements Serializable {
 
-    private String code;
+    private String code = "0x0000";
 
     private String message;
 
