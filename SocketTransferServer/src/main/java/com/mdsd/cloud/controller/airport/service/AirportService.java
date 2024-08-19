@@ -1,6 +1,7 @@
 package com.mdsd.cloud.controller.airport.service;
 
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface AirportService {
     /**
      * 机库列表
      */
-    List<String> hangarList();
+    List<RechargeDTO> hangarList();
 
     /**
      * 机库控制

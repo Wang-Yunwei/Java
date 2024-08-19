@@ -1,5 +1,6 @@
 package com.mdsd.cloud.feign;
 
+import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.TemplateInp;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
@@ -58,7 +59,7 @@ public interface EApiFeign {
     ResponseTy<String> template(@RequestBody TemplateInp param, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库列表", path = "/hangar/list")
-    ResponseTy<List<String>> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
+    ResponseTy<List<RechargeDTO>> hangarList(@RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);
 
     @GetMapping(name = "机库控制", path = "/hangar/{hangarId}/{instructId}")
     ResponseTy<String> hangarControl(@PathVariable String hangarId, @PathVariable Integer instructId, @RequestHeader(value = "x-cid") Integer companyId, @RequestHeader(value = "x-token") String accessToken);

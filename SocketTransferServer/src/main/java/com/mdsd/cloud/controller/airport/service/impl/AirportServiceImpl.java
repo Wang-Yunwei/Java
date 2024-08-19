@@ -3,6 +3,7 @@ package com.mdsd.cloud.controller.airport.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
@@ -41,10 +42,10 @@ public class AirportServiceImpl implements AirportService {
      * 机库列表
      */
     @Override
-    public List<String> hangarList() {
+    public List<RechargeDTO> hangarList() {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-            ResponseTy<List<String>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
+            ResponseTy<List<RechargeDTO>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
             StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
             if (null != stateEnum) {
                 return switch (stateEnum) {

@@ -1,6 +1,7 @@
 package com.mdsd.cloud.controller.airport;
 
 import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.response.ResponseDto;
@@ -27,7 +28,7 @@ public class AirportController {
 
     @Operation(summary = "机库列表",description = "获取用户名下所有机场")
     @GetMapping(name = "机库列表", path = "/hangarList")
-    public ResponseDto<List<String>> hangarList() {
+    public ResponseDto<List<RechargeDTO>> hangarList() {
 
         return ResponseDto.wrapSuccess(service.hangarList());
     }
