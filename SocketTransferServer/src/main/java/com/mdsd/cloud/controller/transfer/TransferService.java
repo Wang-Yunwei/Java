@@ -306,6 +306,9 @@ public class TransferService {
                             });
                         }
                     }
+                    case 航线规划 ->{
+
+                    }
                     case MOP数据透传 -> {
                         // TODO 暂未使用
                     }

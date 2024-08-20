@@ -1,6 +1,6 @@
 package com.mdsd.cloud.controller.airport.service;
 
-import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 
@@ -24,7 +24,7 @@ public interface AirportService {
     /**
      * 规划机库航线
      */
-    String line(PlanLineDTO param);
+    String line(PlanLineDataDTO param);
 
     /**
      * 修改机库信息

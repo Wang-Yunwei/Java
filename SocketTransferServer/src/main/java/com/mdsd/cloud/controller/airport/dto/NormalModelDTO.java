@@ -16,7 +16,7 @@ import java.util.List;
 public class NormalModelDTO {
 
     @Schema(description = "作业区域")
-    private List<PointDTO> area;
+    private List<PointDataDTO> area;
 
     @Schema(description = "建模平台编号(默认1): 1-瞰景,2-大势")
     private Integer serviceId;

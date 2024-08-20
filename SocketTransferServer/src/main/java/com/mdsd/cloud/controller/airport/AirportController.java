@@ -1,6 +1,6 @@
 package com.mdsd.cloud.controller.airport;
 
-import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
@@ -42,7 +42,7 @@ public class AirportController {
 
     @Operation(summary = "规划机库航线")
     @PostMapping(name = "规划机库航线", path = "/line")
-    public ResponseDto<String> line(@RequestBody PlanLineDTO param) {
+    public ResponseDto<String> line(@RequestBody PlanLineDataDTO param) {
 
         return ResponseDto.wrapSuccess(service.line(param));
     }
@@ -55,14 +55,14 @@ public class AirportController {
     }
 
     @Operation(summary = "获取舱外视频地址")
-    @PostMapping(name = "获取舱外视频地址", path = "/video/out/{hangarId}/{type}")
+    @GetMapping(name = "获取舱外视频地址", path = "/video/out/{hangarId}/{type}")
     public ResponseDto<String> videoOut(@PathVariable String hangarId,@PathVariable String type) {
 
         return ResponseDto.wrapSuccess(service.videoOut(hangarId,type));
     }
 
     @Operation(summary = "获取舱内视频地址")
-    @PostMapping(name = "获取舱内视频地址", path = "/video/{hangarId}/{type}")
+    @GetMapping(name = "获取舱内视频地址", path = "/video/{hangarId}/{type}")
     public ResponseDto<String> videoIn(@PathVariable String hangarId,@PathVariable String type) {
 
         return ResponseDto.wrapSuccess(service.videoIn(hangarId,type));

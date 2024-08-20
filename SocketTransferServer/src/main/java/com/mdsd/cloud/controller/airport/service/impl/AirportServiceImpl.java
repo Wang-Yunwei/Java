@@ -1,18 +1,19 @@
 package com.mdsd.cloud.controller.airport.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.airport.dto.PlanLineDTO;
+import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
 import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
+import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
+import com.mdsd.cloud.utils.ParameterMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -96,18 +97,12 @@ public class AirportServiceImpl implements AirportService {
      * 规划机库航线
      */
     @Override
-    public String line(PlanLineDTO param) {
+    public String line(PlanLineDataDTO param) {
 
         if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
             HashMap<String, String> map = new HashMap<>();
-            String jsonStr;
-            try {
-                jsonStr = om.writeValueAsString(param);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-            String bas = Base64.getEncoder().encodeToString(jsonStr.getBytes());
-            map.put("lineData", bas);
+            // 将数据映射到ProtoBuf
+            map.put("lineData", Base64.getEncoder().encodeToString(ParameterMapping.getPlanLineData(param).toByteArray()));
             ResponseTy<String> result = feign.line(map, auth.getCompanyId(), auth.getAccessToken());
             StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
             if (null != stateEnum) {

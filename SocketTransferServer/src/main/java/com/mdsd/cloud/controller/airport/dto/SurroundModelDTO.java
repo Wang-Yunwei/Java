@@ -16,7 +16,7 @@ import java.util.List;
 public class SurroundModelDTO {
 
     @Schema(description = "作业区域")
-    private List<PointDTO> area;
+    private List<PointDataDTO> area;
 
     @Schema(description = "建模平台编号: 1-瞰景,2-天宇")
     private Integer serviceId;
@@ -31,7 +31,7 @@ public class SurroundModelDTO {
     private Integer height;
 
     @Schema(description = "边界区域")
-    private List<PointDTO> boundary;
+    private List<PointDataDTO> boundary;
 
     @Schema(description = "曝光点数(范围: 12、16、20、24)")
     private Integer exposureCount;
