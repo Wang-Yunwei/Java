@@ -26,7 +26,7 @@ public class ScheduledTasks {
         this.socketClient = socketClient;
     }
 
-    @Scheduled(cron = "* */5 * * * ?")
+    @Scheduled(cron = "0 */5 * * * ?")
     public void TimedTask_AUTH_Token() {
         log.info("IsToken_AUTH >>> Every 5min!");
         if (Strings.isBlank(auth.getAccessToken())) {
