@@ -1,14 +1,17 @@
 package com.mdsd.cloud.controller.transfer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.component.WebSocketServer;
+import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.utils.ByteUtil;
+import com.mdsd.cloud.utils.ParameterMapping;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -30,6 +33,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Service
 public class TransferService {
+
+    ObjectMapper obm = new ObjectMapper();
 
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
@@ -307,7 +312,12 @@ public class TransferService {
                         }
                     }
                     case 航线规划 ->{
-
+                        PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
+                        TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
+                        ByteBuf buf = aDefault.buffer();
+                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
+                            arg1.writeBytes(planLineData.toByteArray());
+                        });
                     }
                     case MOP数据透传 -> {
                         // TODO 暂未使用
