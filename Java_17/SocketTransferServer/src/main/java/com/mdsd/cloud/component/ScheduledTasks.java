@@ -1,12 +1,12 @@
 package com.mdsd.cloud.component;
 
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * @author WangYunwei [2024-08-10]
@@ -29,7 +29,7 @@ public class ScheduledTasks {
     @Scheduled(cron = "* */5 * * * ?")
     public void TimedTask_AUTH_Token() {
         log.info("IsToken_AUTH >>> Every 5min!");
-        if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+        if (Strings.isBlank(auth.getAccessToken())) {
             authService.getToken();
         }
     }

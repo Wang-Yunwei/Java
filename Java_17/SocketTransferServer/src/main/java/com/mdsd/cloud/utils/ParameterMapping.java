@@ -4,7 +4,6 @@ import com.mdsd.cloud.controller.airport.dto.*;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -54,7 +53,7 @@ public class ParameterMapping {
             builder.setFlightPathMode(arg.getFlightPathMode());// 航线飞行模式: 1-直线飞行,2-协调转弯,3-曲线飞行(停),4-曲线飞行(不停)
         }
         if (null != arg.getDampingDistance()) {
-            builder.setDampingDistance(arg.getDampingDistance());// 转弯半径(仅协调转弯模式下有效),取值范围1~655.35单位:米,两点间距离要小于此值,此值要根据实际情况计算,切勿随便设此值
+            builder.setDampingDistance(arg.getDampingDistance());// 转弯半径(仅协调转弯模式下有效),取值范围1~655.35单位:米,两点之间距离要小于此值,此值要根据实际情况计算,切勿随便设此值
         }
         if (null != arg.getSafeGohomeFlag()) {
             builder.setSafeGohomeFlag(arg.getSafeGohomeFlag());// 是否为安全返航点: 0-不是,1-是 (暂时未启用)

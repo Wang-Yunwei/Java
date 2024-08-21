@@ -81,7 +81,6 @@ public class WebSocketServer {
     @PostConstruct
     public void startWebSocketServer() {
 
-        StringBuilder stringBuilder = new StringBuilder();
         // 创建服务端启动引导器
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         // 配置线程模型  EventLoop 等于 Thread
