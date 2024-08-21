@@ -1,12 +1,11 @@
 package com.mdsd.cloud.component;
 
-import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.auth.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
+import com.mdsd.cloud.controller.tyjw.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * @author WangYunwei [2024-08-10]

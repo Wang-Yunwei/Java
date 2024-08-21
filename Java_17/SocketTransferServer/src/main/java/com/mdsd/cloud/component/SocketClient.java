@@ -1,6 +1,6 @@
 package com.mdsd.cloud.component;
 
-import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
+import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.BusinessException;
