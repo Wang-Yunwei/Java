@@ -58,7 +58,7 @@ public class FileController {
         if (!file.isEmpty()) {
             try {
                 PutObjectArgs build = PutObjectArgs.builder().bucket(bucketName).object(file.getName()).stream(file.getInputStream(), -1, 10485760).build();
-                ObjectWriteResponse objectWriteResponse = objectWriteResponse = minioClient.putObject(build);
+                ObjectWriteResponse objectWriteResponse = minioClient.putObject(build);
                 return ResponseDto.wrapSuccess(objectWriteResponse);
             } catch (Exception e) {
                 throw new RuntimeException(e);

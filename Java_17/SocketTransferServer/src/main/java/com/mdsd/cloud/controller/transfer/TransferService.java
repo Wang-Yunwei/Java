@@ -306,18 +306,14 @@ public class TransferService {
                         List<byte[]> bytes = ByteUtil.splitByteArray(inData, 110);
                         for (byte[] by : bytes) {
                             ByteBuf buf = aDefault.buffer();
-                            sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
-                                arg1.writeBytes(by);
-                            });
+                            sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
                         }
                     }
                     case 航线规划 ->{
                         PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
                         TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
                         ByteBuf buf = aDefault.buffer();
-                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
-                            arg1.writeBytes(planLineData.toByteArray());
-                        });
+                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
                     }
                     case MOP数据透传 -> {
                         // TODO 暂未使用

@@ -1,6 +1,5 @@
 package com.mdsd.cloud.controller.airport.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
 import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
@@ -8,7 +7,6 @@ import com.mdsd.cloud.controller.airport.service.AirportService;
 import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.service.AuthService;
-import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.BusinessException;
@@ -36,8 +34,6 @@ public class AirportServiceImpl implements AirportService {
     private final AuthService authService;
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
-
-    private final ObjectMapper om = new ObjectMapper();
 
     /**
      * 机库列表
