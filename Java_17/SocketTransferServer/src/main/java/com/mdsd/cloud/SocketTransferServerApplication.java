@@ -10,35 +10,14 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@Slf4j
 @EnableScheduling
 @EnableFeignClients
 @SpringBootApplication
 public class SocketTransferServerApplication {
 
-    static AuthService authService;
-
-    public SocketTransferServerApplication(AuthService authService) {
-
-        SocketTransferServerApplication.authService = authService;
-    }
-
     public static void main(String[] args) {
 
         SpringApplication.run(SocketTransferServerApplication.class, args);
-
-        authService.getToken(new GetTokenInp());
-    }
-
-    /**
-     * 程序启动后立即执行
-     */
-    @Bean
-    CommandLineRunner startImmediatelyExecute(){
-
-        return args -> {
-            log.info("================== 【START-UP SUCCESSFUL】 ==================");
-        };
     }
 
 }

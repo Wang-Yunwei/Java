@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AuthService {
 
     /**
-     * 换取AccessToken(鉴权)
+     * 获取 AccessToken(天宇)
+     */
+    void getToken();
+
+    /**
+     * 获取 AccessToken(天宇)
      */
     GetTokenOup getToken(GetTokenInp param);
 }

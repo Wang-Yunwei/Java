@@ -4,9 +4,10 @@ import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
 import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
 import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
 import com.mdsd.cloud.controller.auth.service.AuthService;
+import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
+import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
-import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.utils.MD5HashGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,29 +23,32 @@ public class AuthServiceImpl implements AuthService {
 
     private final EApiFeign feign;
 
-    private final SocketClient socketClient;
+    /**
+     * 获取 AccessToken(天宇)
+     */
+    @Override
+    public void getToken() {
+
+        getToken(new GetTokenInp());
+    }
 
     /**
-     * 换取AccessToken(鉴权)
+     * 获取 AccessToken(天宇)
      */
     @Override
     public GetTokenOup getToken(GetTokenInp param) {
 
-        GetTokenOup result = new GetTokenOup();
-        String s = param.getAccessKeyId() + param.getAccessKeySecret() + param.getTimeStamp();
-        param.setEncryptStr(MD5HashGenerator.generateMD5(s));
+        log.info("获取 AccessToken");
+        String str = param.getAccessKeyId() + param.getAccessKeySecret() + param.getTimeStamp();
+        param.setEncryptStr(MD5HashGenerator.generateMD5(str));
         ResponseTy<GetTokenOup> token = feign.getToken(param);
-        if (0 == token.getState()) {
-            log.info("项目启动后直接调用 getToken!");
-            Integer companyId = token.getContent().getCompanyId();
-            String accessToken = token.getContent().getAccessToken();
-            AuthSingleton.getInstance().setCompanyId(companyId);
-            AuthSingleton.getInstance().setAccessToken(accessToken);
-            socketClient.connect();// 注册 socket 连接
-            result.setCompanyId(companyId);
-            result.setAccessToken(accessToken);
+        if (StateEnum.STATE_0.getKey() == token.getState()) {
+            AuthSingleton.getInstance().setCompanyId(token.getContent().getCompanyId());
+            AuthSingleton.getInstance().setAccessToken(token.getContent().getAccessToken());
+            return token.getContent();
+        } else {
+            throw new BusinessException(token.toString());
         }
-        return result;
     }
 }
 
