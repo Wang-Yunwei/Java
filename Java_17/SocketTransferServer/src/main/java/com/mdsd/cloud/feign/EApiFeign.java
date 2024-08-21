@@ -1,11 +1,11 @@
 package com.mdsd.cloud.feign;
 
-import com.mdsd.cloud.controller.airport.dto.RechargeDTO;
-import com.mdsd.cloud.controller.airport.dto.TemplateInp;
-import com.mdsd.cloud.controller.airport.dto.UpdateAirportInp;
-import com.mdsd.cloud.controller.auth.dto.GetTokenInp;
-import com.mdsd.cloud.controller.auth.dto.GetTokenOup;
-import com.mdsd.cloud.controller.cloudbox.dto.*;
+import com.mdsd.cloud.controller.tyjw.dto.RechargeDTO;
+import com.mdsd.cloud.controller.tyjw.dto.TemplateInp;
+import com.mdsd.cloud.controller.tyjw.dto.UpdateAirportInp;
+import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
+import com.mdsd.cloud.controller.tyjw.dto.GetTokenOup;
+import com.mdsd.cloud.controller.tyjw.dto.*;
 import com.mdsd.cloud.response.ResponseTy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

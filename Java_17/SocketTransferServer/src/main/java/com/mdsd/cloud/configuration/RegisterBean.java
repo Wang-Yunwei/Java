@@ -1,8 +1,8 @@
 package com.mdsd.cloud.configuration;
 
 import com.mdsd.cloud.component.SocketClient;
-import com.mdsd.cloud.controller.auth.dto.AuthSingleton;
-import com.mdsd.cloud.controller.auth.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
+import com.mdsd.cloud.controller.tyjw.service.AuthService;
 import io.minio.MinioClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

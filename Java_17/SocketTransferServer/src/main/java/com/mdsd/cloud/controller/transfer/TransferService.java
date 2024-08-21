@@ -5,7 +5,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.component.WebSocketServer;
-import com.mdsd.cloud.controller.airport.dto.PlanLineDataDTO;
+import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.InstructEnum;
 import com.mdsd.cloud.event.SocketEvent;
