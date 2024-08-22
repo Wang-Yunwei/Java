@@ -5,7 +5,6 @@ import com.mdsd.cloud.controller.tyjw.dto.*;
 import com.mdsd.cloud.controller.tyjw.service.CloudBoxService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,11 +13,14 @@ import java.util.List;
 /**
  * @author WangYunwei [2024-07-12]
  */
-@RequiredArgsConstructor
 @Service
 public class CloudBoxServiceImpl extends AbstractShareMethod implements CloudBoxService {
 
-    private final EApiFeign feign;
+    final EApiFeign feign;
+
+    public CloudBoxServiceImpl(EApiFeign feign) {
+        this.feign = feign;
+    }
 
     /**
      * 获取云盒列表

@@ -8,7 +8,6 @@ import com.mdsd.cloud.controller.tyjw.service.HangarService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
 import com.mdsd.cloud.utils.ParameterMapping;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,14 @@ import java.util.Map;
  * @author WangYunwei [2024-07-12]
  */
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class HangarServiceImpl extends AbstractShareMethod implements HangarService {
 
-    private final EApiFeign feign;
+    final EApiFeign feign;
+
+    public HangarServiceImpl(EApiFeign feign) {
+        this.feign = feign;
+    }
 
     /**
      * 机库列表
