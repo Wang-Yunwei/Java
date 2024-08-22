@@ -4,6 +4,8 @@ import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.AuthService;
 import io.minio.MinioClient;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class RegisterBean {
+public class RegSomeBean {
 
     final AuthService authService;
 
@@ -33,11 +35,18 @@ public class RegisterBean {
     @Value("${minio.secret-key}")
     private String secretKey;
 
-    public RegisterBean(AuthService authService, SocketClient socketClient) {
+    public RegSomeBean(AuthService authService, SocketClient socketClient) {
         this.authService = authService;
         this.socketClient = socketClient;
     }
 
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("SocketTransferServer")
+                        .description("This is a forwarding service")
+                        .version("20140712"));
+    }
 
     @Bean
     public MinioClient minioClient() {
