@@ -1,58 +1,24 @@
 package com.mdsd.cloud.controller.tyjw.service.impl;
 
-import com.mdsd.cloud.controller.tyjw.dto.TemplateInp;
-import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
-import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
-import com.mdsd.cloud.controller.tyjw.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.common.AbstractShareMethod;
 import com.mdsd.cloud.controller.tyjw.dto.*;
 import com.mdsd.cloud.controller.tyjw.service.CloudBoxService;
-import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.feign.EApiFeign;
-import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * @author WangYunwei [2024-07-12]
  */
 @RequiredArgsConstructor
 @Service
-public class CloudBoxServiceImpl implements CloudBoxService {
+public class CloudBoxServiceImpl extends AbstractShareMethod implements CloudBoxService {
 
     private final EApiFeign feign;
-
-    private final AuthService authService;
-
-    AuthSingleton auth = AuthSingleton.getInstance();
-
-    private <T> T handleAuth(Supplier<T> supplier) {
-        if (auth.getCompanyId() == null || !StringUtils.isNoneBlank(auth.getAccessToken())) {
-            authService.getToken(new GetTokenInp());
-        }
-        return supplier.get();
-    }
-
-    private <T> T processResult(ResponseTy<T> result) {
-        StateEnum stateEnum = StateEnum.getStateEnum(result.getState());
-        if (stateEnum != null) {
-            return switch (stateEnum) {
-                case STATE_0 -> result.getContent();
-                case STATE_201 -> {
-                    authService.getToken(new GetTokenInp());
-                    throw new BusinessException("Unexpected state: STATE_201 - Token refresh should be handled outside of this method.");
-                }
-                default -> throw new BusinessException(stateEnum.getDescription());
-            };
-        } else {
-            throw new BusinessException(result.toString());
-        }
-    }
 
     /**
      * 获取云盒列表
