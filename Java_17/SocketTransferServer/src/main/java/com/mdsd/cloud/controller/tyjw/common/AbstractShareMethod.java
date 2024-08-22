@@ -3,10 +3,12 @@ package com.mdsd.cloud.controller.tyjw.common;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
 import com.mdsd.cloud.controller.tyjw.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.service.impl.AuthServiceImpl;
 import com.mdsd.cloud.enums.StateEnum;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.function.Supplier;
 
@@ -15,15 +17,12 @@ import java.util.function.Supplier;
  */
 public abstract class AbstractShareMethod {
 
-    public AuthSingleton auth = AuthSingleton.getInstance();
-
+    @Autowired
     private AuthService authService;
 
-    public AbstractShareMethod() {}
+    public final AuthSingleton auth = AuthSingleton.getInstance();
 
-    public AbstractShareMethod(AuthService authService){
-        this.authService = authService;
-    }
+    public AbstractShareMethod() {}
 
     protected <T> T handleAuth(Supplier<T> supplier) {
         if (auth.getCompanyId() == null || !StringUtils.isNoneBlank(auth.getAccessToken())) {

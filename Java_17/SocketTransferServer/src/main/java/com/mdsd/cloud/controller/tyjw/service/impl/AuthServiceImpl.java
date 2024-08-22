@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
  * @author WangYunwei [2024-07-12]
  */
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
 
     private final EApiFeign feign;
+
+    public AuthServiceImpl(EApiFeign feign) {
+        this.feign = feign;
+    }
 
     /**
      * 获取 AccessToken(天宇)
