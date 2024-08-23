@@ -20,7 +20,7 @@ public class RechargeDTO {
     @Schema(description = "机场编号")
     private String hangarId;
 
-    @Schema(description = "机场类型: 1-充电机场")
+    @Schema(description = "机场类型: 1-充电机场, 2-换电机库, 3-大疆机库")
     private Byte hangarType;
 
     @Schema(description = "机场名称")
@@ -38,10 +38,10 @@ public class RechargeDTO {
     @Schema(description = "备降点纬度")
     private Double secondLat;
 
-    @Schema(description = "机场在线状态: 0-离线,1-在线")
+    @Schema(description = "机场在线状态: 0-离线, 1-在线")
     private Byte online;
 
-    @Schema(description = "舱外视频: 0-无,1-有")
+    @Schema(description = "舱外视频: 0-无, 1-有")
     private Byte outVideo;
 
     @Schema(description = "机场门状态: 打开(open)、关闭(close)、异常(error)")
@@ -65,13 +65,13 @@ public class RechargeDTO {
     @Schema(description = "无人机手柄状态: 打开(open)、关闭(close)、异常(error)")
     private String uavController;
 
-    @Schema(description = "风速 (m/s)")
-    private Float windspeed;
+    @Schema(description = "风速(m/s)")
+    private Float windSpeed;
 
-    @Schema(description = "风向 (北风、东北风、东风、东南风、南风、西南风、西风、西北风)")
-    private String winddirction;
+    @Schema(description = "风向")
+    private String windDirction;
 
-    @Schema(description = "是否下雨：0-无雨,1-有雨")
+    @Schema(description = "是否下雨：0-无雨, 1-有雨")
     private Byte rain;
 
     @Schema(description = "无人机电量: 未知状态(0)、0%~25%电量(1)、25%~50%电量(2)、50%~75%电量(3)、75%~100%电量(4)、满电量(100)")

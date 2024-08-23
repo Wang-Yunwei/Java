@@ -1,6 +1,8 @@
 package com.mdsd.cloud.controller.tyjw.service.impl;
 
+import com.mdsd.cloud.controller.tyjw.common.AbstractShareMethod;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
+import com.mdsd.cloud.controller.tyjw.dto.GetCloudBoxListOup;
 import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
 import com.mdsd.cloud.controller.tyjw.dto.GetTokenOup;
 import com.mdsd.cloud.controller.tyjw.service.AuthService;
@@ -13,12 +15,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author WangYunwei [2024-07-12]
  */
 @Slf4j
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl extends AbstractShareMethod implements AuthService {
 
     private final EApiFeign feign;
 
@@ -44,14 +48,13 @@ public class AuthServiceImpl implements AuthService {
         log.info("获取 AccessToken");
         String str = param.getAccessKeyId() + param.getAccessKeySecret() + param.getTimeStamp();
         param.setEncryptStr(MD5HashGenerator.generateMD5(str));
-        ResponseTy<GetTokenOup> token = feign.getToken(param);
-        if (StateEnum.STATE_0.getKey() == token.getState()) {
-            AuthSingleton.getInstance().setCompanyId(token.getContent().getCompanyId());
-            AuthSingleton.getInstance().setAccessToken(token.getContent().getAccessToken());
-            return token.getContent();
-        } else {
-            throw new BusinessException(token.toString());
-        }
+        return handleAuth(() ->{
+            ResponseTy<GetTokenOup> result = feign.getToken(param);
+            GetTokenOup getTokenOup = processResult(result);
+            AuthSingleton.getInstance().setCompanyId(getTokenOup.getCompanyId());
+            AuthSingleton.getInstance().setAccessToken(getTokenOup.getAccessToken());
+            return getTokenOup;
+        });
     }
 }
 
