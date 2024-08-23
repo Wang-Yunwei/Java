@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class GetLiveAddressOup {
 
     @Schema(description = "rtsp直播地址")

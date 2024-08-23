@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class GetPhotosOup {
 
     @Schema(description = "照片编号",example = "4297")

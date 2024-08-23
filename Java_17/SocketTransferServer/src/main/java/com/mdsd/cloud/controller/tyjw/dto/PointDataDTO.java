@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class PointDataDTO {
 
     @Schema(description = "经度")

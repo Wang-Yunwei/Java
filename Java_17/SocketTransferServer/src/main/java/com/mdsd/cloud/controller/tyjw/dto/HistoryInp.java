@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class HistoryInp {
 
     @Schema(description = "云盒编号,传此值查询指定云盒飞行历史,不传则查询用户名下云盒所有飞行历史")

@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class PlanLineDataDTO {
 
     @Schema(description = "结束航线后动作: 1-返航,2-原地悬停,3-原地降落,4-原地绕飞,5-返回至第一个航点并悬停")

@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class PointActionDTO {
 
     @Schema(description = "类型: 1-变焦,2-拍照,3-录像,4-停录,5-控制飞机机头偏航,6-控制云台俯仰,7-控制云台偏航,8-控制云台横滚,9-悬停,10-等距间隔拍照,11-等时间隔拍照,12-结束间隔拍照,13-单条喊话,14-开始循环喊话,15-结束循环喊话,16-对焦")

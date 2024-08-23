@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class UpdateLiveInp {
 
     @Schema(description = "云盒SN编号")

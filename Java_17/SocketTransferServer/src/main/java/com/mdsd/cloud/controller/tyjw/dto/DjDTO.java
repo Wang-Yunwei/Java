@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class DjDTO {
 
     @Schema(description = "机场绑定的云盒编号")

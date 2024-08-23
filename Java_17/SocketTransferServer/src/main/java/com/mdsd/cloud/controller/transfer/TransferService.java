@@ -286,7 +286,7 @@ public class TransferService {
                 webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                 break;
             default:
-                throw new BusinessException("未知指令!");
+                throw new BusinessException("SocketClient <<< 未知指令!");
         }
     }
 

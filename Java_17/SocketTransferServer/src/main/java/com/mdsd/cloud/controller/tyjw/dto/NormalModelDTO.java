@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class NormalModelDTO {
 
     @Schema(description = "作业区域")

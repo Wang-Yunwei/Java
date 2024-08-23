@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class GetTokenOup {
 
     @Schema(description = "云平台分配的用户ID")

@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class GetCloudBoxListOup {
 
     @Schema(description = "云盒SN编号",example = "M31220230425010")

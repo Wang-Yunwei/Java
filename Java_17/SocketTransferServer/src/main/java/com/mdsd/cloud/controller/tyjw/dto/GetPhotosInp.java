@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 public class GetPhotosInp {
 
     @Schema(description = "任务编号")
