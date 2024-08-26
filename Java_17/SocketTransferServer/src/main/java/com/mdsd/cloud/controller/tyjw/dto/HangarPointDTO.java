@@ -1,11 +1,8 @@
 package com.mdsd.cloud.controller.tyjw.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
 
 /**
  * @author WangYunwei [2024-07-27]
