@@ -16,7 +16,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class SocketClient {
 
-    @Setter
-    @Value("${env.ip.tyjw_server}")
+    @Value("${env.ip.tyjw}")
     private String host;
 
-    @Setter
-    @Value("${env.port.tyjw_socket}")
+    @Value("${env.port.tyjw.socket}")
     private int port;
 
     private final EventLoopGroup group = new NioEventLoopGroup();
@@ -121,9 +118,11 @@ public class SocketClient {
                 });
     }
 
+    int connectCount = 0;
+
     public void connect() {
 
-        if(!isActiveChannel()){
+        if (!isActiveChannel()) {
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
@@ -143,12 +142,12 @@ public class SocketClient {
                     channel.writeAndFlush(buf);
                 } else {
                     // 重新连接
-                    int connectCount = 0;
-                    while (connectCount < 3) {
-                        log.info("...正在第 {} 次尝试重新连接!", connectCount + 1);
+                    if (connectCount < 3) {
                         Thread.sleep(1000 * 3);
-                        connectCount++;
+                        log.info("...正在尝试第 {} 次重新连接: {}", ++connectCount);
                         connect();
+                    }else{
+                        log.error("尝试连接失败,请确认 SocketServer 是否存在!");
                     }
                 }
             });

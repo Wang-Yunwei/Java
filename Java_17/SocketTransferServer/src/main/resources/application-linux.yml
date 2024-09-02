@@ -1,12 +1,2 @@
-# 服务器环境IP&PORT配置
-env:
-  ip:
-    tyjw_server: 192.168.0.222
-  port:
-    sts: 20240
-    web_socket_server: 20241
-    tyjw_api: 12000
-    tyjw_socket: 13002
-
 server:
   port: ${env.port.sts}

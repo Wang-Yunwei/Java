@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -37,6 +38,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WebSocketServer {
 
+    @Value("${env.port.sts.web_socket_server}")
+    private int port;
+
     // 未连接队列(syn队列): 保存已经接收到SYN包但还未完成三次握手的连接请求
     private final EventLoopGroup parentGroup = new NioEventLoopGroup();
 
@@ -50,9 +54,6 @@ public class WebSocketServer {
 
     private final ObjectMapper obm = new ObjectMapper();
 
-    @Value("${env.port.web_socket_server}")
-    private int port;
-
     private final ApplicationEventPublisher publisher;
 
     public WebSocketServer(ApplicationEventPublisher publisher) {
@@ -60,6 +61,7 @@ public class WebSocketServer {
         this.publisher = publisher;
     }
 
+    @Async
     public void sendMessage(String key, Map<String, Object> resp) {
 
         Channel channel = channelMap.get(key);
