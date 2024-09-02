@@ -7,16 +7,3 @@ server:
     key-store-type: JKS
     # 您需要使用实际的证书名称替换domain_name.jks
     key-store: classpath:keystore.jks
-spring:
-  cloud:
-    openfeign:
-      client:
-        config:
-          default: # 这里的default是默认配置，会应用于所有没有特定配置的Feign客户端
-            connectTimeout: 5000 # 连接超时时间，单位毫秒
-            readTimeout: 5000 # 读取超时时间，单位毫秒
-            loggerLevel: FULL # 日志级别
-            #customClient: # 这里是特定Feign客户端的配置，customClient是Feign客户端的名称
-            #connectTimeout: 3000
-            #readTimeout: 3000
-            #loggerLevel: headers # 只记录请求和响应的头部信息

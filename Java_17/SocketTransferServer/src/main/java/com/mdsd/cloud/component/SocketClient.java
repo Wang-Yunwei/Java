@@ -144,10 +144,11 @@ public class SocketClient {
                     // 重新连接
                     if (connectCount < 3) {
                         Thread.sleep(1000 * 3);
-                        log.info("...正在尝试第 {} 次重新连接: {}", ++connectCount);
+                        log.info("...正在尝试第 {} 次重新连接!", ++connectCount);
                         connect();
                     }else{
                         log.error("尝试连接失败,请确认 SocketServer 是否存在!");
+                        connectCount = 0;// 重置尝试连接次数
                     }
                 }
             });

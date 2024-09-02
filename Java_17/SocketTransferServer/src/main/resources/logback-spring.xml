@@ -64,17 +64,21 @@
 
     <!-- 开发环境:打印控制台 -->
     <springProfile name="dev">
-<!--        <logger name="com.zaxxer.hikari" level="DEBUG"/>-->
+        <!-- logger name="com.zaxxer.hikari" level="DEBUG"/ -->
         <root level="DEBUG">
             <appender-ref ref="MY_CONSOLE"/>
         </root>
     </springProfile>
     <springProfile name="linux">
         <root level="INFO">
-            <appender-ref ref="MY_CONSOLE"/>
+            <appender-ref ref="MY_CONSOLE" >
+                <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                    <level>DEBUG</level>
+                </filter>
+            </appender-ref>
             <appender-ref ref="MY_FILE_INFO"/>
             <appender-ref ref="MY_FILE_ERROR"/>
-            <appender-ref ref="MY_FILE_JSON"/>
+            <!-- appender-ref ref="MY_FILE_JSON"/ -->
         </root>
     </springProfile>
 </configuration>
