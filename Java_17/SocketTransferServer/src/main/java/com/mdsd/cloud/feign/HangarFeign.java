@@ -47,6 +47,6 @@ public interface HangarFeign {
     Map<String, String> airClose(@RequestParam String closeaircomm);
 
     @GetMapping(name = "无人机 - 打开or关闭",path = "/uavcontroller")
-    Map<String, String> uavOpen(@RequestParam String controller);
+    Map<String, String> uavColl(@RequestParam String controller);
 
 }
