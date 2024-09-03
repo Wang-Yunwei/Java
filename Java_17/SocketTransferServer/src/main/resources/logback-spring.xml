@@ -70,6 +70,7 @@
         </root>
     </springProfile>
     <springProfile name="linux">
+        <logger name="com.mdsd.cloud.feign" level="DEBUG"/>
         <root level="INFO">
             <appender-ref ref="MY_CONSOLE" >
                 <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
