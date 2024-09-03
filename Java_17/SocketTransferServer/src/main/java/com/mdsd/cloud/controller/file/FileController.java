@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.File;
+package com.mdsd.cloud.controller.file;
 
 import com.mdsd.cloud.controller.transfer.TransferService;
 import com.mdsd.cloud.response.ResponseDto;
