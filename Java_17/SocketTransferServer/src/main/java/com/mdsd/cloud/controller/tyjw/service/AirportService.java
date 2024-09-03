@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author WangYunwei [2024-07-12]
  */
-public interface HangarService {
+public interface AirportService {
 
     /**
      * 机库列表

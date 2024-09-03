@@ -4,7 +4,7 @@ import com.mdsd.cloud.controller.tyjw.common.AbstractShareMethod;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.RechargeDTO;
 import com.mdsd.cloud.controller.tyjw.dto.UpdateAirportInp;
-import com.mdsd.cloud.controller.tyjw.service.HangarService;
+import com.mdsd.cloud.controller.tyjw.service.AirportService;
 import com.mdsd.cloud.feign.EApiFeign;
 import com.mdsd.cloud.response.ResponseTy;
 import com.mdsd.cloud.utils.ParameterMapping;
@@ -20,11 +20,11 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class HangarServiceImpl extends AbstractShareMethod implements HangarService {
+public class AirportServiceImpl extends AbstractShareMethod implements AirportService {
 
     final EApiFeign feign;
 
-    public HangarServiceImpl(EApiFeign feign) {
+    public AirportServiceImpl(EApiFeign feign) {
         this.feign = feign;
     }
 

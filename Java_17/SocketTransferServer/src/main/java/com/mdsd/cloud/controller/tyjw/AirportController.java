@@ -3,7 +3,7 @@ package com.mdsd.cloud.controller.tyjw;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.RechargeDTO;
 import com.mdsd.cloud.controller.tyjw.dto.UpdateAirportInp;
-import com.mdsd.cloud.controller.tyjw.service.HangarService;
+import com.mdsd.cloud.controller.tyjw.service.AirportService;
 import com.mdsd.cloud.response.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,11 +17,11 @@ import java.util.List;
 @Tag(name = "天宇 - 机场API")
 @RequestMapping(name = "机场API", path = "/airport")
 @RestController
-public class HangarController {
+public class AirportController {
 
-    private final HangarService service;
+    private final AirportService service;
 
-    public HangarController(HangarService service) {
+    public AirportController(AirportService service) {
 
         this.service = service;
     }
