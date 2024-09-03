@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * @author WangYunwei [2024-07-11]
  */
-@Tag(name = "云盒接口")
-@RequestMapping(name = "云盒接口", path = "/cloud_box")
+@Tag(name = "天宇 - 云盒API")
+@RequestMapping(name = "云盒API", path = "/cloud_box")
 @RestController
 public class CloudBoxController {
 

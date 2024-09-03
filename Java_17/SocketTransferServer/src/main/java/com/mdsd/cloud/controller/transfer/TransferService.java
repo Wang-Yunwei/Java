@@ -7,7 +7,7 @@ import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.component.WebSocketServer;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
-import com.mdsd.cloud.enums.InstructEnum;
+import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.utils.ByteUtil;
@@ -64,7 +64,7 @@ public class TransferService {
             ByteBuf byteBuf = evn.getByteBuf();
             if (byteBuf.getShort(0) == 0x6A77) {
                 int instruct = byteBuf.getByte(4) & 0xFF;
-                InstructEnum anEnum = InstructEnum.getEnum(instruct);
+                TyjwEnum anEnum = TyjwEnum.getEnum(instruct);
                 if (null == anEnum) {
                     return;
                 }
@@ -81,7 +81,7 @@ public class TransferService {
                         break;
                     default:
                         int active = byteBuf.getByte(6) & 0xFF;
-                        anEnum = InstructEnum.getEnum(instruct, active);
+                        anEnum = TyjwEnum.getEnum(instruct, active);
                         log.info("SocketClient_Receive <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         break;
                 }
@@ -94,7 +94,7 @@ public class TransferService {
         }
     }
 
-    private void socketClientChannelRead0Listener(InstructEnum param, ByteBuf buf) {
+    private void socketClientChannelRead0Listener(TyjwEnum param, ByteBuf buf) {
 
         ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
         if (channelMap.isEmpty()) {
@@ -296,7 +296,7 @@ public class TransferService {
         if (socketClient.isActiveChannel()) {
             Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");
             Assert.notNull(map.get("动作编号"), "动作编号不能为: NULL");
-            InstructEnum anEnum = InstructEnum.getEnum(instruct, Integer.parseInt(map.get("动作编号"), 16));
+            TyjwEnum anEnum = TyjwEnum.getEnum(instruct, Integer.parseInt(map.get("动作编号"), 16));
             if (null != anEnum) {
                 log.info("<<< {}", anEnum.name());
                 switch (anEnum) {
@@ -344,7 +344,7 @@ public class TransferService {
                 wssErrorMessage(map.get("云盒编号"), "未知指令!");
             }
         } else {
-            if (instruct == InstructEnum.注册.getInstruct()) {
+            if (instruct == TyjwEnum.注册.getInstruct()) {
                 socketClient.connect();
                 return;
             }
@@ -352,9 +352,9 @@ public class TransferService {
         }
     }
 
-    private void sendByteBuf(ByteBuf buf, InstructEnum anEnum, Map<String, String> map, TransferFunction fun) {
+    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, TransferFunction fun) {
 
-        buf.writeShort(InstructEnum.请求帧头.getInstruct());// 帧头
+        buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
         buf.writeShort(0);// 数据长度,占位临时赋值为0
         buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
         buf.writeByte(anEnum.getInstruct());// 指令编号

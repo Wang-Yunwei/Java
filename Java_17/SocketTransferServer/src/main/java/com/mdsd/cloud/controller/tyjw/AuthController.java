@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author WangYunwei [2024-07-12]
  */
-@Tag(name = "鉴权")
-@RequestMapping(name = "鉴权", path = "/auth")
+@Tag(name = "天宇 - 鉴权API")
+@RequestMapping(name = "鉴权API", path = "/auth")
 @RestController
 public class AuthController {
 

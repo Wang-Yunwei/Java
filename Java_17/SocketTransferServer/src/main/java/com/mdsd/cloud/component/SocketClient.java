@@ -1,7 +1,7 @@
 package com.mdsd.cloud.component;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
-import com.mdsd.cloud.enums.InstructEnum;
+import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.BusinessException;
 import io.netty.bootstrap.Bootstrap;
@@ -105,9 +105,9 @@ public class SocketClient {
                                                  // 发送心跳
                                                  if (evt instanceof IdleStateEvent) {
                                                      ByteBuf buf = Unpooled.buffer();
-                                                     buf.writeShort(InstructEnum.请求帧头.getInstruct());
+                                                     buf.writeShort(TyjwEnum.请求帧头.getInstruct());
                                                      buf.writeShort(0x09);
-                                                     buf.writeByte(InstructEnum.心跳.getInstruct());
+                                                     buf.writeByte(TyjwEnum.心跳.getInstruct());
                                                      buf.writeLong(System.currentTimeMillis());
                                                      ctx.writeAndFlush(buf);
                                                  }
@@ -134,9 +134,9 @@ public class SocketClient {
                         throw new BusinessException("未找到 AccessToken,请确认已经调过 getToken 接口!");
                     }
                     byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
-                    buf.writeShort(InstructEnum.请求帧头.getInstruct());
+                    buf.writeShort(TyjwEnum.请求帧头.getInstruct());
                     buf.writeShort(bytes.length + 5);
-                    buf.writeByte(InstructEnum.注册.getInstruct());
+                    buf.writeByte(TyjwEnum.注册.getInstruct());
                     buf.writeInt(AuthSingleton.getInstance().getCompanyId());
                     buf.writeBytes(bytes);
                     channel.writeAndFlush(buf);

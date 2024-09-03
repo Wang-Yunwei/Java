@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * @author WangYunwei [2024-07-11]
  */
-@Tag(name = "机场接口")
-@RequestMapping(name = "机场接口", path = "/airport")
+@Tag(name = "天宇 - 机场API")
+@RequestMapping(name = "机场API", path = "/airport")
 @RestController
 public class HangarController {
 

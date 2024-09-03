@@ -6,7 +6,7 @@ import lombok.Getter;
  * @author WangYunwei [2024-07-16]
  */
 @Getter
-public enum InstructEnum {
+public enum TyjwEnum {
 
     请求帧头(0x7479, 0, null),
     回复帧头(0x6A77, 0, null),
@@ -119,17 +119,17 @@ public enum InstructEnum {
 
     private String[] args;
 
-    InstructEnum(int instruct, int action, String[] args) {
+    TyjwEnum(int instruct, int action, String[] args) {
 
         this.instruct = instruct;
         this.action = action;
         this.args = args;
     }
 
-    public static InstructEnum getEnum(final int instruct) {
+    public static TyjwEnum getEnum(final int instruct) {
 
         if (0 != instruct) {
-            for (final InstructEnum item : InstructEnum.values()) {
+            for (final TyjwEnum item : TyjwEnum.values()) {
                 if (instruct == item.getInstruct()) {
                     return item;
                 }
@@ -138,11 +138,11 @@ public enum InstructEnum {
         return null;
     }
 
-    public static InstructEnum getEnum(final int instruct, int action) {
+    public static TyjwEnum getEnum(final int instruct, int action) {
 
         if (0 != instruct) {
 
-            for (final InstructEnum item : InstructEnum.values()) {
+            for (final TyjwEnum item : TyjwEnum.values()) {
                 if (instruct == item.getInstruct() && action == item.getAction()) {
                     return item;
                 }
