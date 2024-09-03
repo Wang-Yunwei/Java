@@ -2,7 +2,7 @@ package com.mdsd.cloud.configuration;
 
 import com.mdsd.cloud.component.SocketClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
-import com.mdsd.cloud.controller.tyjw.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import io.minio.MinioClient;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RegSomeBean {
 
-    final AuthService authService;
+    final ITyjwService tyjwService;
 
     final SocketClient socketClient;
 
@@ -35,8 +35,8 @@ public class RegSomeBean {
     @Value("${minio.secret-key}")
     private String secretKey;
 
-    public RegSomeBean(AuthService authService, SocketClient socketClient) {
-        this.authService = authService;
+    public RegSomeBean(ITyjwService tyjwService, SocketClient socketClient) {
+        this.tyjwService = tyjwService;
         this.socketClient = socketClient;
     }
 
@@ -58,11 +58,11 @@ public class RegSomeBean {
      * 程序启动后立即执行
      */
     @Bean
-    CommandLineRunner startImmediatelyExecute(){
+    CommandLineRunner startImmediatelyExecute() {
 
         return args -> {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
-            authService.getToken();
+            tyjwService.getToken();
             if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
                 socketClient.connect();
             }

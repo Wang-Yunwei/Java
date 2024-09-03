@@ -1,7 +1,7 @@
 package com.mdsd.cloud.component;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
-import com.mdsd.cloud.controller.tyjw.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTasks {
 
-    AuthService authService;
+    ITyjwService tyjwService;
 
     SocketClient socketClient;
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
 
-    public ScheduledTasks(AuthService authService, SocketClient socketClient) {
-        this.authService = authService;
+    public ScheduledTasks(ITyjwService tyjwService, SocketClient socketClient) {
+        this.tyjwService = tyjwService;
         this.socketClient = socketClient;
     }
 
@@ -29,7 +29,7 @@ public class ScheduledTasks {
     public void TimedTask_AUTH_Token() {
         log.info("IsToken_AUTH >>> Every 5min!");
         if (Strings.isBlank(auth.getAccessToken())) {
-            authService.getToken();
+            tyjwService.getToken();
         }
     }
 

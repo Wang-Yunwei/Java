@@ -2,7 +2,7 @@ package com.mdsd.cloud.controller.tyjw.common;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
-import com.mdsd.cloud.controller.tyjw.service.AuthService;
+import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 public abstract class AbstractShareMethod {
 
     @Autowired
-    private AuthService authService;
+    private ITyjwService service;
 
     public final AuthSingleton auth = AuthSingleton.getInstance();
 
@@ -25,7 +25,7 @@ public abstract class AbstractShareMethod {
 
     protected <T> T handleAuth(Supplier<T> supplier) {
         if (auth.getCompanyId() == null || !StringUtils.isNoneBlank(auth.getAccessToken())) {
-            authService.getToken(new GetTokenInp());
+            service.getToken(new GetTokenInp());
         }
         return supplier.get();
     }
