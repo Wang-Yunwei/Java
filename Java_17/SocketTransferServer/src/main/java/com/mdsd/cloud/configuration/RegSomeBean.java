@@ -1,6 +1,6 @@
 package com.mdsd.cloud.configuration;
 
-import com.mdsd.cloud.component.SocketClient;
+import com.mdsd.cloud.sockets.SocketClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import io.minio.MinioClient;

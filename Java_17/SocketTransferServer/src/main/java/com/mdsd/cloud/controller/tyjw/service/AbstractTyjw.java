@@ -1,8 +1,7 @@
-package com.mdsd.cloud.controller.tyjw.common;
+package com.mdsd.cloud.controller.tyjw.service;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.dto.GetTokenInp;
-import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.response.ResponseTy;
 import org.apache.commons.lang3.StringUtils;
@@ -13,14 +12,14 @@ import java.util.function.Supplier;
 /**
  * @author WangYunwei [2024-08-21]
  */
-public abstract class AbstractShareMethod {
+public abstract class AbstractTyjw {
 
     @Autowired
     private ITyjwService service;
 
     public final AuthSingleton auth = AuthSingleton.getInstance();
 
-    public AbstractShareMethod() {
+    public AbstractTyjw() {
     }
 
     protected <T> T handleAuth(Supplier<T> supplier) {

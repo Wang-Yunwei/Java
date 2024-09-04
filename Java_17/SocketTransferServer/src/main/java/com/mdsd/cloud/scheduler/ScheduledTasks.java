@@ -1,5 +1,6 @@
-package com.mdsd.cloud.component;
+package com.mdsd.cloud.scheduler;
 
+import com.mdsd.cloud.sockets.SocketClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import lombok.extern.slf4j.Slf4j;

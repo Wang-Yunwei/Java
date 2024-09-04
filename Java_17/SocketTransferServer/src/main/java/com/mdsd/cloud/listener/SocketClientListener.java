@@ -2,8 +2,8 @@ package com.mdsd.cloud.listener;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
-import com.mdsd.cloud.component.SocketClient;
-import com.mdsd.cloud.component.WebSocketServer;
+import com.mdsd.cloud.sockets.SocketClient;
+import com.mdsd.cloud.sockets.WebSocketServer;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
@@ -13,6 +13,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author WangYunwei [2024-09-04]
  */
 @Slf4j
+@Component
 public class SocketClientListener {
 
     JsonFormat.Printer printer = JsonFormat.printer();

@@ -2,8 +2,8 @@ package com.mdsd.cloud.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.component.SocketClient;
-import com.mdsd.cloud.component.WebSocketServer;
+import com.mdsd.cloud.sockets.SocketClient;
+import com.mdsd.cloud.sockets.WebSocketServer;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
@@ -14,6 +14,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.Base64;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author WangYunwei [2024-09-04]
  */
 @Slf4j
+@Component
 public class WebSocketListener {
 
     ObjectMapper obm = new ObjectMapper();
@@ -35,20 +37,20 @@ public class WebSocketListener {
 
     private final WebSocketServer webSocketServer;
 
-    public WebSocketListener(SocketClient socketClient,WebSocketServer webSocketServer) {
+    public WebSocketListener(SocketClient socketClient, WebSocketServer webSocketServer) {
         this.socketClient = socketClient;
         this.webSocketServer = webSocketServer;
     }
 
     @FunctionalInterface
-    public interface TransferFunction {
+    private interface WebSocketFunction<T1, T2, T3> {
 
-        void argHandle(ByteBuf arg1, String[] arg2, Map<String,String> arg3);
+        void dataHandle(T1 arg1, T2 arg2, T3 arg3);
     }
 
     @EventListener
     public void listen(SocketEvent evn) throws JsonProcessingException {
-        if(evn.getSource() instanceof WebSocketServer){
+        if (evn.getSource() instanceof WebSocketServer) {
             Map<String, String> map = evn.getMap();
             int instruct = Integer.parseInt(map.get("指令编号"), 16);
             if (socketClient.isActiveChannel()) {
@@ -67,7 +69,7 @@ public class WebSocketListener {
                                 sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
                             }
                         }
-                        case 航线规划 ->{
+                        case 航线规划 -> {
                             PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
                             TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
                             ByteBuf buf = aDefault.buffer();
@@ -111,7 +113,7 @@ public class WebSocketListener {
         }
     }
 
-    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, TransferFunction fun) {
+    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, WebSocketFunction<ByteBuf, String[], Map<String, String>> fun) {
 
         buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
         buf.writeShort(0);// 数据长度,占位临时赋值为0
@@ -119,7 +121,7 @@ public class WebSocketListener {
         buf.writeByte(anEnum.getInstruct());// 指令编号
         buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
         buf.writeByte(anEnum.getAction());// 动作编号
-        fun.argHandle(buf, anEnum.getArgs(), map);// 参数处理
+        fun.dataHandle(buf, anEnum.getArgs(), map);// 参数处理
         buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
         socketClient.sendMessage(buf);
     }

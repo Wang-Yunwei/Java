@@ -1,6 +1,6 @@
 package com.mdsd.cloud.controller.tyjw.service.impl;
 
-import com.mdsd.cloud.controller.tyjw.common.AbstractShareMethod;
+import com.mdsd.cloud.controller.tyjw.service.AbstractTyjw;
 import com.mdsd.cloud.controller.tyjw.dto.*;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.feign.EApiFeign;
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class TyjwServiceImpl extends AbstractShareMethod implements ITyjwService {
+public class TyjwServiceImpl extends AbstractTyjw implements ITyjwService {
 
     private final EApiFeign feign;
 
