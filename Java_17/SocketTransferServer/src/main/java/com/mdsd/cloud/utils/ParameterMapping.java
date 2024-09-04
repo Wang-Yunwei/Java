@@ -1,6 +1,5 @@
 package com.mdsd.cloud.utils;
 
-import com.mdsd.cloud.controller.transfer.dto.TyjwProtoBuf;
 import com.mdsd.cloud.controller.tyjw.dto.*;
 import org.springframework.util.CollectionUtils;
 

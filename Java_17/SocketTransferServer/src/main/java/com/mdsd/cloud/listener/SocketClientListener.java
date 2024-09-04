@@ -41,9 +41,6 @@ public class SocketClientListener {
             if (buf.getShort(0) == 0x6A77) {
                 int instruct = buf.getByte(4) & 0xFF;
                 TyjwEnum anEnum = TyjwEnum.getEnum(instruct);
-                if (null == anEnum) {
-                    return;
-                }
                 // 指令过滤
                 switch (anEnum) {
                     case 注册:
@@ -103,6 +100,7 @@ public class SocketClientListener {
                             result.put("状态", buf.readByte());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                            log.info("云盒开关机通知_状态: {}",result);
                             webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 信道质量:

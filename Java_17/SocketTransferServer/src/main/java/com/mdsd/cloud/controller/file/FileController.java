@@ -1,6 +1,5 @@
 package com.mdsd.cloud.controller.file;
 
-import com.mdsd.cloud.controller.transfer.TransferService;
 import com.mdsd.cloud.response.ResponseDto;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
@@ -34,12 +33,10 @@ public class FileController {
 
     MinioClient minioClient;
 
-    TransferService transferService;
 
-    public FileController(MinioClient minioClient, TransferService transferService) {
+    public FileController(MinioClient minioClient) {
 
         this.minioClient = minioClient;
-        this.transferService = transferService;
     }
 
     @Parameter(name = "file", required = true, schema = @Schema(type = "string", format = "binary"))

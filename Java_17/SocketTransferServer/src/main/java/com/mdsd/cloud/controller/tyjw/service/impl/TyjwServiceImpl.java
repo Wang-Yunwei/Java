@@ -1,6 +1,5 @@
 package com.mdsd.cloud.controller.tyjw.service.impl;
 
-import com.mdsd.cloud.controller.tyjw.service.AbstractTyjw;
 import com.mdsd.cloud.controller.tyjw.dto.*;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.feign.EApiFeign;
@@ -9,24 +8,44 @@ import com.mdsd.cloud.response.ResponseTy;
 import com.mdsd.cloud.utils.MD5HashGenerator;
 import com.mdsd.cloud.utils.ParameterMapping;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * @author WangYunwei [2024-09-03]
  */
 @Slf4j
 @Service
-public class TyjwServiceImpl extends AbstractTyjw implements ITyjwService {
+public class TyjwServiceImpl implements ITyjwService {
+
+    public final AuthSingleton auth = AuthSingleton.getInstance();
 
     private final EApiFeign feign;
 
     public TyjwServiceImpl(EApiFeign feign) {
         this.feign = feign;
+    }
+
+    private  <T> T handleAuth(Supplier<T> supplier) {
+        if (auth.getCompanyId() == null || !StringUtils.isNoneBlank(auth.getAccessToken())) {
+            getToken(new GetTokenInp());
+        }
+        return supplier.get();
+    }
+
+    private  <T> T processResult(ResponseTy<T> result) {
+
+        if (0 == result.getState()) {
+            return result.getContent();
+        } else {
+            throw new BusinessException(String.valueOf(result.getState()), result.getMessage());
+        }
     }
 
     /**
@@ -48,8 +67,8 @@ public class TyjwServiceImpl extends AbstractTyjw implements ITyjwService {
         param.setEncryptStr(MD5HashGenerator.generateMD5(str));
         ResponseTy<GetTokenOup> result = feign.getToken(param);
         if (0 == result.getState()) {
-            AuthSingleton.getInstance().setCompanyId(result.getContent().getCompanyId());
-            AuthSingleton.getInstance().setAccessToken(result.getContent().getAccessToken());
+            auth.setCompanyId(result.getContent().getCompanyId());
+            auth.setAccessToken(result.getContent().getAccessToken());
             return result.getContent();
         } else {
             throw new BusinessException(String.valueOf(result.getState()), result.getMessage());

@@ -1,6 +1,9 @@
 package com.mdsd.cloud.enums;
 
+import com.mdsd.cloud.response.BusinessException;
 import lombok.Getter;
+
+import java.util.Arrays;
 
 /**
  * @author WangYunwei [2024-07-16]
@@ -117,7 +120,7 @@ public enum TyjwEnum {
 
     private final int action;
 
-    private String[] args;
+    private final String[] args;
 
     TyjwEnum(int instruct, int action, String[] args) {
 
@@ -128,26 +131,11 @@ public enum TyjwEnum {
 
     public static TyjwEnum getEnum(final int instruct) {
 
-        if (0 != instruct) {
-            for (final TyjwEnum item : TyjwEnum.values()) {
-                if (instruct == item.getInstruct()) {
-                    return item;
-                }
-            }
-        }
-        return null;
+        return Arrays.stream(TyjwEnum.values()).filter(el -> instruct == el.getInstruct()).findAny().orElseThrow(() -> new BusinessException(String.format("未知指令: 0x%02X", instruct)));
     }
 
-    public static TyjwEnum getEnum(final int instruct, int action) {
+    public static TyjwEnum getEnum(int instruct, int action) {
 
-        if (0 != instruct) {
-
-            for (final TyjwEnum item : TyjwEnum.values()) {
-                if (instruct == item.getInstruct() && action == item.getAction()) {
-                    return item;
-                }
-            }
-        }
-        return null;
+        return Arrays.stream(TyjwEnum.values()).filter(el -> instruct == el.getInstruct() && action == el.getAction()).findFirst().orElseThrow(() -> new BusinessException(String.format("未知指令动作: 0x%02X_0x%02X",instruct,action)));
     }
 }
