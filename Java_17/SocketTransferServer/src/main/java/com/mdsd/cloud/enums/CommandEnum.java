@@ -22,18 +22,18 @@ public enum CommandEnum {
     机库_无人机_开启(0x30, 0x01, "open"),
     机库_无人机_关闭(0x30, 0x02, "close"),
 
-    机库_充电操作_开机(0x40,0x01,"TakeOff"),
-    机库_充电操作_关机(0x40,0x02,"DroneOff"),
-    机库_充电操作_待机(0x40,0x03,"Standby"),
-    机库_充电操作_充电(0x40,0x04,"Charge"),
-    机库_充电操作_检查(0x40,0x05,"Check"),
-;
-    private int command;
+    机库_充电操作_开机(0x40, 0x01, "TakeOff"),
+    机库_充电操作_关机(0x40, 0x02, "DroneOff"),
+    机库_充电操作_待机(0x40, 0x03, "Standby"),
+    机库_充电操作_充电(0x40, 0x04, "Charge"),
+    机库_充电操作_检查(0x40, 0x05, "Check");
 
-    private int action;
+    private final int command;
+
+    private final int action;
 
     @Getter
-    private String arg;
+    private final String arg;
 
     CommandEnum(int command, int action, String arg) {
         this.command = command;
@@ -43,8 +43,6 @@ public enum CommandEnum {
 
     public static CommandEnum getCommandEnum(int command, int action) {
 
-        return Arrays.stream(CommandEnum.values()).filter(el -> el.command == command && el.action == action).findFirst().orElseThrow(() -> {
-            throw new BusinessException("未知指令动作!");
-        });
+        return Arrays.stream(CommandEnum.values()).filter(el -> el.command == command && el.action == action).findFirst().orElseThrow(() -> new BusinessException("未知指令动作!"));
     }
 }
