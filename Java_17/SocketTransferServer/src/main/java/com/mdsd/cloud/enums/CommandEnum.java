@@ -20,8 +20,14 @@ public enum CommandEnum {
     机库_空调_关闭(0x20, 0x02, "310000"),
 
     机库_无人机_开启(0x30, 0x01, "open"),
-    机库_无人机_关闭(0x30, 0x02, "close");
+    机库_无人机_关闭(0x30, 0x02, "close"),
 
+    机库_充电操作_开机(0x40,0x01,"TakeOff"),
+    机库_充电操作_关机(0x40,0x02,"DroneOff"),
+    机库_充电操作_待机(0x40,0x03,"Standby"),
+    机库_充电操作_充电(0x40,0x04,"Charge"),
+    机库_充电操作_检查(0x40,0x05,"Check"),
+;
     private int command;
 
     private int action;

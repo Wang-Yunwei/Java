@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class OperateInp {
 
-    @Schema(description = "机库ID",example = "M31220230425010")
+    @Schema(description = "机库ID",example = "H202409040001")
     private String hangarId;
 
     @Schema(description = "指令: 0x00-舱门, 0x10-推杆, 0x20-空调, 0x30-无人机",example = "0x00")

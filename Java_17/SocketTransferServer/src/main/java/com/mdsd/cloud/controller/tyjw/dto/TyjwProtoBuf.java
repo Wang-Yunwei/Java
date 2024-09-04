@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.transfer.dto;
+package com.mdsd.cloud.controller.tyjw.dto;
 
 public final class TyjwProtoBuf {
   private TyjwProtoBuf() {}
