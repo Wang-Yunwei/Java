@@ -17,10 +17,10 @@ import java.util.Map;
 /**
  * @author WangYunwei [2024-07-11]
  */
-@FeignClient(name = "tyjw", url = "http://${env.ip.tyjw}:${env.port.tyjw}/eapi")
+@FeignClient(name = "TYJW", url = "http://${env.ip.tyjw}:${env.port.tyjw}/eapi")
 public interface EApiFeign {
 
-    @PostMapping(name = "换取AccessToken(鉴权)", path = "/auth/getToken")
+    @PostMapping(name = "获取 AccessToken (鉴权)", path = "/auth/getToken")
     ResponseTy<GetTokenOup> getToken(@RequestBody GetTokenInp param);
 
     @GetMapping(name = "获取云盒列表", path = "/box/list")
