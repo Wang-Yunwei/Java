@@ -16,12 +16,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 
-
     public class InterceptorImpl implements HandlerInterceptor {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-            log.info("拦截器 URI: {}", request.getRequestURI());
+            log.info("前置拦截器 URI: {}", request.getRequestURI());
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }
     }
