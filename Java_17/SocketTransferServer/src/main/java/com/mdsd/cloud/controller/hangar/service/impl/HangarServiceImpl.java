@@ -48,6 +48,13 @@ public class HangarServiceImpl implements IHangarService {
             case 机库_无人机_关闭:
                 feign.uavColl(commandEnum.getArg());
                 break;
+            case 机库_充电操作_开机:
+            case 机库_充电操作_关机:
+            case 机库_充电操作_待机:
+            case 机库_充电操作_充电:
+            case 机库_充电操作_检查:
+                feign.chargingOperation(commandEnum.getArg());
+                break;
         }
     }
 }

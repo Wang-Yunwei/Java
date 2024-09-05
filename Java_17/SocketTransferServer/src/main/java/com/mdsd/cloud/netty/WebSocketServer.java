@@ -1,4 +1,4 @@
-package com.mdsd.cloud.sockets;
+package com.mdsd.cloud.netty;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

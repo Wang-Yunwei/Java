@@ -1,4 +1,4 @@
-package com.mdsd.cloud.sockets;
+package com.mdsd.cloud.netty;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.TyjwEnum;
