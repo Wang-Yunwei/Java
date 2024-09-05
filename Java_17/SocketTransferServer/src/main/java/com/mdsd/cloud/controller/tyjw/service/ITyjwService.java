@@ -91,12 +91,12 @@ public interface ITyjwService {
     String updateAirport(UpdateAirportInp param);
 
     /**
-     * 获取舱外视频地址
+     * 机库 - 获取舱外视频地址
      */
     String videoOut(String hangarId, String type);
 
     /**
-     * 获取舱内视频地址
+     * 机库 - 获取舱内视频地址
      */
     String videoIn(String hangarId, String type);
 }

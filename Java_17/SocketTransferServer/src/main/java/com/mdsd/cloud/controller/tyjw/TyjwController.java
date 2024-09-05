@@ -25,8 +25,8 @@ public class TyjwController {
         this.service = service;
     }
 
-    @Operation(summary = "GetToken",description = "换取AccessToken(鉴权),同时执行TCP连接注册")
-    @PostMapping(name = "换取AccessToken(鉴权),同时执行TCP连接注册", path = "/auth/getToken")
+    @Operation(summary = "获取 AccessToken (鉴权)")
+    @PostMapping(name = "获取 AccessToken", path = "/auth/getToken")
     public ResponseDto<GetTokenOup> getToken(@RequestBody GetTokenInp param) {
 
         return ResponseDto.wrapSuccess(service.getToken(param));
@@ -118,7 +118,7 @@ public class TyjwController {
     }
 
     @Operation(summary = "机库 - 规划航线")
-    @PostMapping(name = "机库 - 规划航线", path = "/hangar/line")
+    @PostMapping(name = "机库 - 规划航线", path = "/airport/hangar/line")
     public ResponseDto<String> line(@RequestBody PlanLineDataDTO param) {
 
         return ResponseDto.wrapSuccess(service.line(param));

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author WangYunwei [2024-09-03]
  */
-@Tag(name = "机库API")
+@Tag(name = "机库 - API")
 @RequestMapping(name = "机库API", path = "/hangar")
 @RestController
 public class HangarController {
@@ -24,8 +24,8 @@ public class HangarController {
         this.hangarService = hangarService;
     }
 
-    @Operation(summary = "operate",description = "操作机库")
-    @PostMapping(name = "操作机库", path = "/operate")
+    @Operation(summary = "指令操作",description = "指令: 0x00-舱门, 0x10-推杆, 0x20-空调, 0x30-无人机; 动作: 0x01-开启, 0x02-关闭 (具体参数请查看入参 Schema)")
+    @PostMapping(name = "指令操作", path = "/operate")
     public ResponseDto<String> operate(@RequestBody OperateInp param){
 
         hangarService.operate(param);
