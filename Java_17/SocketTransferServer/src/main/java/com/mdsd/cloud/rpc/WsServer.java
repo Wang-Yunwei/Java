@@ -1,4 +1,4 @@
-package com.mdsd.cloud.netty;
+package com.mdsd.cloud.rpc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class WebSocketServer {
+public class WsServer {
 
     @Value("${env.port.sts.web_socket_server}")
     private int port;
@@ -56,7 +56,7 @@ public class WebSocketServer {
 
     private final ApplicationEventPublisher publisher;
 
-    public WebSocketServer(ApplicationEventPublisher publisher) {
+    public WsServer(ApplicationEventPublisher publisher) {
 
         this.publisher = publisher;
     }

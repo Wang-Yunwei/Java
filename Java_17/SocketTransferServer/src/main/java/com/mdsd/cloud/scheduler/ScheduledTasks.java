@@ -1,6 +1,6 @@
 package com.mdsd.cloud.scheduler;
 
-import com.mdsd.cloud.netty.SocketClient;
+import com.mdsd.cloud.rpc.TcpClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +17,11 @@ public class ScheduledTasks {
 
     ITyjwService tyjwService;
 
-    SocketClient socketClient;
+    TcpClient socketClient;
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
 
-    public ScheduledTasks(ITyjwService tyjwService, SocketClient socketClient) {
+    public ScheduledTasks(ITyjwService tyjwService, TcpClient socketClient) {
         this.tyjwService = tyjwService;
         this.socketClient = socketClient;
     }

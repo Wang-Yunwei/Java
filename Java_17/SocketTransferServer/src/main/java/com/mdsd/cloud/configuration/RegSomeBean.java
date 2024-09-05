@@ -1,6 +1,6 @@
 package com.mdsd.cloud.configuration;
 
-import com.mdsd.cloud.netty.SocketClient;
+import com.mdsd.cloud.rpc.TcpClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import io.minio.MinioClient;
@@ -22,7 +22,7 @@ public class RegSomeBean {
 
     final ITyjwService tyjwService;
 
-    final SocketClient socketClient;
+    final TcpClient socketClient;
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
 
@@ -35,7 +35,7 @@ public class RegSomeBean {
     @Value("${minio.secret-key}")
     private String secretKey;
 
-    public RegSomeBean(ITyjwService tyjwService, SocketClient socketClient) {
+    public RegSomeBean(ITyjwService tyjwService, TcpClient socketClient) {
         this.tyjwService = tyjwService;
         this.socketClient = socketClient;
     }

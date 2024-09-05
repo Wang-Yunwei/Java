@@ -2,8 +2,8 @@ package com.mdsd.cloud.listener;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
-import com.mdsd.cloud.netty.SocketClient;
-import com.mdsd.cloud.netty.WebSocketServer;
+import com.mdsd.cloud.rpc.TcpClient;
+import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
@@ -24,19 +24,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Slf4j
 @Component
-public class SocketClientListener {
+public class TcpClientListener {
 
     JsonFormat.Printer printer = JsonFormat.printer();
 
-    private final WebSocketServer webSocketServer;
+    private final WsServer wsServer;
 
-    public SocketClientListener(WebSocketServer webSocketServer) {
-        this.webSocketServer = webSocketServer;
+    public TcpClientListener(WsServer wsServer) {
+        this.wsServer = wsServer;
     }
 
     @EventListener
     public void listen(SocketEvent evn) {
-        if (evn.getSource() instanceof SocketClient) {
+        if (evn.getSource() instanceof TcpClient) {
             ByteBuf buf = evn.getByteBuf();
             if (buf.getShort(0) == 0x6A77) {
                 int instruct = buf.getByte(4) & 0xFF;
@@ -59,7 +59,7 @@ public class SocketClientListener {
                         break;
                 }
                 if (null != anEnum) {
-                    ConcurrentHashMap<String, Channel> channelMap = webSocketServer.getChannelMap();
+                    ConcurrentHashMap<String, Channel> channelMap = wsServer.getChannelMap();
                     if (channelMap.isEmpty()) {
                         return;
                     }
@@ -77,11 +77,11 @@ public class SocketClientListener {
                             if (isSuccess == 0) {
                                 result.put("action", "ERROR_MESSAGE");
                             }
-                            channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
+                            channelMap.forEach((key, value) -> wsServer.sendMessage(key, result));
                             break;
                         case 心跳:
                             result.put("时间戳", buf.readLong());
-                            channelMap.forEach((key, value) -> webSocketServer.sendMessage(key, result));
+                            channelMap.forEach((key, value) -> wsServer.sendMessage(key, result));
                             break;
                         case 图片上传完成通知:
                             result.put("加密标志", buf.readByte());
@@ -94,14 +94,14 @@ public class SocketClientListener {
                             contentByte = new byte[buf.readableBytes()];
                             buf.readBytes(contentByte);
                             result.put("原图地址", ByteUtil.bytesToStringUTF8(contentByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 云盒开关机通知:
                             result.put("状态", buf.readByte());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                             log.info("云盒开关机通知_状态: {}",result);
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 信道质量:
                             result.put("时间戳", buf.readUnsignedInt());
@@ -115,7 +115,7 @@ public class SocketClientListener {
                             } catch (InvalidProtocolBufferException e) {
                                 throw new RuntimeException(e);
                             }
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 状态数据:
                         case 遥测数据:
@@ -134,7 +134,7 @@ public class SocketClientListener {
                             } catch (InvalidProtocolBufferException e) {
                                 throw new RuntimeException(e);
                             }
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 航线规划:
                         case 起飞:
@@ -173,7 +173,7 @@ public class SocketClientListener {
                             result.put("错误码", buf.readInt());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 实时激光测距:
                         case 手动激光测距:
@@ -190,7 +190,7 @@ public class SocketClientListener {
                             result.put("距离", buf.readFloat());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 打开单点测温:
                             result.put("加密标志", buf.readByte());
@@ -205,7 +205,7 @@ public class SocketClientListener {
                             result.put("温度", buf.readFloat());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 打开区域测温:
                             result.put("加密标志", buf.readByte());
@@ -228,7 +228,7 @@ public class SocketClientListener {
                             result.put("最高温度y坐标", buf.readFloat());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 无人机准备完成通知:
                             result.put("加密标志", buf.readByte());
@@ -239,7 +239,7 @@ public class SocketClientListener {
                             result.put("海拔高度", buf.readInt());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 机场任务完成通知:
                             result.put("加密标志", buf.readByte());
@@ -247,10 +247,10 @@ public class SocketClientListener {
                             result.put("媒体文件数量", buf.readShort());
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            webSocketServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         default:
-                            throw new BusinessException("SocketClient <<< 未知指令!");
+                            throw new BusinessException("TcpClient <<< 未知指令!");
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.mdsd.cloud.netty;
+package com.mdsd.cloud.rpc;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.TyjwEnum;
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class SocketClient {
+public class TcpClient {
 
     @Value("${env.ip.tyjw}")
     private String host;
@@ -48,7 +48,7 @@ public class SocketClient {
     private final ApplicationEventPublisher publisher;
 
     @Autowired
-    public SocketClient(ApplicationEventPublisher publisher) {
+    public TcpClient(ApplicationEventPublisher publisher) {
 
         this.publisher = publisher;
     }
@@ -61,7 +61,7 @@ public class SocketClient {
     public void sendMessage(ByteBuf byteBuf) {
 
         if (channel == null || !channel.isActive()) {
-            throw new BusinessException("SocketClient 连接不存在!");
+            throw new BusinessException("TcpClient 连接不存在!");
         }
         log.info(">>> {}", byteBuf);
         channel.writeAndFlush(byteBuf);

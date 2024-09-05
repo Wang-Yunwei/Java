@@ -2,8 +2,8 @@ package com.mdsd.cloud.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.netty.SocketClient;
-import com.mdsd.cloud.netty.WebSocketServer;
+import com.mdsd.cloud.rpc.TcpClient;
+import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
@@ -27,19 +27,19 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class WebSocketListener {
+public class WsServerListener {
 
     ObjectMapper obm = new ObjectMapper();
 
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
-    private final SocketClient socketClient;
+    private final TcpClient tcpClient;
 
-    private final WebSocketServer webSocketServer;
+    private final WsServer wsServer;
 
-    public WebSocketListener(SocketClient socketClient, WebSocketServer webSocketServer) {
-        this.socketClient = socketClient;
-        this.webSocketServer = webSocketServer;
+    public WsServerListener(TcpClient tcpClient, WsServer wsServer) {
+        this.tcpClient = tcpClient;
+        this.wsServer = wsServer;
     }
 
     @FunctionalInterface
@@ -50,10 +50,10 @@ public class WebSocketListener {
 
     @EventListener
     public void listen(SocketEvent evn) throws JsonProcessingException {
-        if (evn.getSource() instanceof WebSocketServer) {
+        if (evn.getSource() instanceof WsServer) {
             Map<String, String> map = evn.getMap();
             int instruct = Integer.parseInt(map.get("指令编号"), 16);
-            if (socketClient.isActiveChannel()) {
+            if (tcpClient.isActiveChannel()) {
                 Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");
                 Assert.notNull(map.get("动作编号"), "动作编号不能为: NULL");
                 TyjwEnum anEnum = TyjwEnum.getEnum(instruct, Integer.parseInt(map.get("动作编号"), 16));
@@ -105,7 +105,7 @@ public class WebSocketListener {
                 }
             } else {
                 if (instruct == TyjwEnum.注册.getInstruct()) {
-                    socketClient.connect();
+                    tcpClient.connect();
                     return;
                 }
                 wssErrorMessage(map.get("云盒编号"), "客户端连接不存在, 请发送注册指令!");
@@ -123,7 +123,7 @@ public class WebSocketListener {
         buf.writeByte(anEnum.getAction());// 动作编号
         fun.dataHandle(buf, anEnum.getArgs(), map);// 参数处理
         buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
-        socketClient.sendMessage(buf);
+        tcpClient.sendMessage(buf);
     }
 
     private void wssErrorMessage(String boxSn, String message) {
@@ -131,6 +131,6 @@ public class WebSocketListener {
         result.put("action", "SERVER_ERROR");
         result.put("error", message);
         log.info(result.toString());
-        webSocketServer.sendMessage(boxSn, result);
+        wsServer.sendMessage(boxSn, result);
     }
 }
