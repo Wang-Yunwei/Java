@@ -4,13 +4,13 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.hangar.dto.OperateInp;
 import com.mdsd.cloud.controller.hangar.service.IHangarService;
-import com.mdsd.cloud.enums.CommandEnum;
-import com.mdsd.cloud.rpc.TcpClient;
-import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
+import com.mdsd.cloud.enums.CommandEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
 import com.mdsd.cloud.response.BusinessException;
+import com.mdsd.cloud.rpc.TcpClient;
+import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -19,7 +19,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -87,16 +86,9 @@ public class TcpClientListener {
                     byte isSuccess;// 是否成功
                     switch (anEnum) {
                         case 注册:
-                            isSuccess = buf.readByte();
-                            result.put("是否成功", isSuccess);
-                            if (isSuccess == 0) {
-                                result.put("action", "ERROR_MESSAGE");
-                            }
-                            channelMap.forEach((key, value) -> wsServer.sendMessage(key, result));
-                            break;
+                            result.put("是否成功", buf.readByte());
+                            log.info("注册: {}",result);
                         case 心跳:
-                            result.put("时间戳", buf.readLong());
-                            channelMap.forEach((key, value) -> wsServer.sendMessage(key, result));
                             break;
                         case 图片上传完成通知:
                             result.put("加密标志", buf.readByte());
@@ -147,12 +139,10 @@ public class TcpClientListener {
                                     result.put("云盒SN号", uavState.getBoxSn());
                                     result.put("数据", printer.print(uavState));
                                     batteryPower = uavState.getBatteryState().getBatteryPower(); //不断获取电池电量
-//                                    log.info("状态数据_电池状态 {}",uavState.getBatteryState().toString());
                                 } else {
                                     TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
                                     result.put("云盒SN号", telemetryData.getBoxSn());
                                     result.put("数据", printer.print(telemetryData));
-//                                    log.info("遥测数据_电池电量 {}",telemetryData.getBatteryPower());
                                 }
                             } catch (InvalidProtocolBufferException e) {
                                 throw new RuntimeException(e);

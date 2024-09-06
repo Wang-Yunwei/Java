@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -97,7 +98,9 @@ public class WsServer {
                                 .addLast(new ChunkedWriteHandler()) // 以块方式写的处理器
                                 .addLast(new HttpObjectAggregator(8192)) // 聚合 HTTP 消息
                                 .addLast(new WebSocketServerProtocolHandler("/websocket")) // 处理 WebSocket 握手
-                                .addLast(new ChannelInboundHandlerAdapter() {
+                                .addLast(
+
+                                        new ChannelInboundHandlerAdapter() {
 
                                              @Override
                                              public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -134,13 +137,6 @@ public class WsServer {
                                                      // 保存连接信息并发送事件
                                                      Assert.notNull(msgMap.get("云盒编号"), "云盒号为: NULL");
                                                      if (channelMap.containsKey(msgMap.get("云盒编号"))) {
-                                                         // 云盒编号已经注册判断连接是否存活
-//                                                         Channel channel = channelMap.get(msgMap.get("云盒编号"));
-//                                                         if (null == channel) {
-                                                         // 替换为当前连接
-//                                                         log.info("云盒替换当前连接: {}", msgMap.get("云盒编号"));
-//                                                         channelMap.put(msgMap.get("云盒编号"), ctx.channel());
-//                                                         }
                                                          if (null != msgMap.get("指令编号")) {
                                                              publishEvent(msgMap);// 发出事件
                                                          } else {
@@ -163,6 +159,22 @@ public class WsServer {
                                                      }
                                                      throw new BusinessException("未知数据类型!");
                                                  }
+                                             }
+
+                                             @Override
+                                             public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+
+                                                 synchronized (channelMap) {
+                                                     Iterator<Map.Entry<String, Channel>> iterator = channelMap.entrySet().iterator();
+                                                     while (iterator.hasNext()) {
+                                                         Map.Entry<String, Channel> next = iterator.next();
+                                                         if (!next.getValue().isActive()) {
+                                                             log.info("移除: {}", next.getKey());
+                                                             iterator.remove();
+                                                         }
+                                                     }
+                                                 }
+
                                              }
 
                                              @Override
