@@ -102,6 +102,7 @@ public class TcpClientListener {
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                             log.info("云盒开关机通知_状态: {}",result);
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
+                            //
                             break;
                         case 信道质量:
                             result.put("时间戳", buf.readUnsignedInt());
@@ -126,7 +127,9 @@ public class TcpClientListener {
                                     TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
                                     result.put("云盒SN号", uavState.getBoxSn());
                                     result.put("数据", printer.print(uavState));
+                                    log.info("状态数据");
                                 } else {
+                                    log.info("遥测数据");
                                     TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
                                     result.put("云盒SN号", telemetryData.getBoxSn());
                                     result.put("数据", printer.print(telemetryData));

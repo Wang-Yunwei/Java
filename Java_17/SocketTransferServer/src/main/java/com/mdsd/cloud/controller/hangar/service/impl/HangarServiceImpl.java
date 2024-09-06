@@ -6,6 +6,8 @@ import com.mdsd.cloud.enums.CommandEnum;
 import com.mdsd.cloud.feign.HangarFeign;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * @author WangYunwei [2024-09-03]
  */
@@ -22,7 +24,7 @@ public class HangarServiceImpl implements IHangarService {
      * 操作机库
      */
     @Override
-    public void operate(OperateInp param) {
+    public Map<String,String> operate(OperateInp param) {
 
         CommandEnum commandEnum = CommandEnum.getCommandEnum(param.getCommand(), param.getAction());
         switch (commandEnum) {
@@ -55,6 +57,9 @@ public class HangarServiceImpl implements IHangarService {
             case 机库_充电操作_检查:
                 feign.chargingOperation(commandEnum.getArg());
                 break;
+            default:
+                return feign.getState();
         }
+        return null;
     }
 }

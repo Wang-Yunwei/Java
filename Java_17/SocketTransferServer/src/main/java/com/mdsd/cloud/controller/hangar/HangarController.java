@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author WangYunwei [2024-09-03]
  */
@@ -24,11 +26,10 @@ public class HangarController {
         this.hangarService = hangarService;
     }
 
-    @Operation(summary = "指令操作",description = "指令: 0x00-舱门, 0x10-推杆, 0x20-空调, 0x30-无人机; 动作: 0x01-开启, 0x02-关闭 (具体参数请查看入参 Schema)")
+    @Operation(summary = "指令操作",description = "指令: 0x00-舱门, 0x01-推杆, 0x02-空调, 0x03-无人机; 动作: 0x01-开启, 0x02-关闭 (具体参数请查看入参 Schema)")
     @PostMapping(name = "指令操作", path = "/operate")
-    public ResponseDto<String> operate(@RequestBody OperateInp param){
+    public ResponseDto<Map<String,String>> operate(@RequestBody OperateInp param){
 
-        hangarService.operate(param);
-        return ResponseDto.wrapSuccess();
+        return ResponseDto.wrapSuccess(hangarService.operate(param));
     }
 }
