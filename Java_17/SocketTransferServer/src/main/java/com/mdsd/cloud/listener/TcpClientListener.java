@@ -2,6 +2,9 @@ package com.mdsd.cloud.listener;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
+import com.mdsd.cloud.controller.hangar.dto.OperateInp;
+import com.mdsd.cloud.controller.hangar.service.IHangarService;
+import com.mdsd.cloud.enums.CommandEnum;
 import com.mdsd.cloud.rpc.TcpClient;
 import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
@@ -14,10 +17,15 @@ import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author WangYunwei [2024-09-04]
@@ -26,13 +34,20 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class TcpClientListener {
 
+    ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
     JsonFormat.Printer printer = JsonFormat.printer();
 
     private final WsServer wsServer;
 
-    public TcpClientListener(WsServer wsServer) {
+    private final IHangarService hangarService;
+
+    public TcpClientListener(WsServer wsServer, IHangarService hangarService) {
         this.wsServer = wsServer;
+        this.hangarService = hangarService;
     }
+
+    private String batteryPower = null;
 
     @EventListener
     public void listen(SocketEvent evn) {
@@ -97,12 +112,16 @@ public class TcpClientListener {
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
                         case 云盒开关机通知:
-                            result.put("状态", buf.readByte());
+                            byte isShutdown = buf.readByte();
+                            result.put("状态", isShutdown);
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            log.info("云盒开关机通知_状态: {}",result);
+                            log.info("云盒开关机通知_状态: {}", result);
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
-                            //
+                            // TODO 暂不启用, 当收到关机通知后5分钟,判断是否需要执行充电
+//                            if(isShutdown == -1){
+//                                chargingUav();
+//                            }
                             break;
                         case 信道质量:
                             result.put("时间戳", buf.readUnsignedInt());
@@ -127,12 +146,13 @@ public class TcpClientListener {
                                     TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
                                     result.put("云盒SN号", uavState.getBoxSn());
                                     result.put("数据", printer.print(uavState));
-                                    log.info("状态数据");
+                                    batteryPower = uavState.getBatteryState().getBatteryPower(); //不断获取电池电量
+//                                    log.info("状态数据_电池状态 {}",uavState.getBatteryState().toString());
                                 } else {
-                                    log.info("遥测数据");
                                     TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
                                     result.put("云盒SN号", telemetryData.getBoxSn());
                                     result.put("数据", printer.print(telemetryData));
+//                                    log.info("遥测数据_电池电量 {}",telemetryData.getBatteryPower());
                                 }
                             } catch (InvalidProtocolBufferException e) {
                                 throw new RuntimeException(e);
@@ -258,5 +278,23 @@ public class TcpClientListener {
                 }
             }
         }
+    }
+
+    private void chargingUav(){
+        scheduledExecutorService.schedule(() ->{
+            Map<String, String> operate = hangarService.operate(new OperateInp().setCommand(CommandEnum.机库_状态.getCommand()).setAction(CommandEnum.机库_状态.getAction()));
+            if(!CollectionUtils.isEmpty(operate) && "close".equals(operate.get("charge_state"))){
+                String[] split = batteryPower.split("_"); // 当前 batteryPower 是云盒关机前的电量信息
+                // 当任意一边电池电量小于 90 时, 判定为需要充电
+                if( Integer.parseInt(split[0])  < 90 || Integer.parseInt(split[1]) < 90 ){
+                    log.info("当前电量小于 90% 开始执行充电: {}",batteryPower);
+                    // 执行充电
+                    hangarService.operate(new OperateInp().setCommand(CommandEnum.机库_充电操作_充电.getCommand()).setAction(CommandEnum.机库_充电操作_充电.getAction()));
+                    // 关闭推流
+                }else{
+                    log.info("电池电量大于 90% 不执行充电: {}",batteryPower);
+                }
+            }
+        },5, TimeUnit.MINUTES);
     }
 }

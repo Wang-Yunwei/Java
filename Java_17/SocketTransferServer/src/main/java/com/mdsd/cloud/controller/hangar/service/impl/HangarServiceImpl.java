@@ -28,27 +28,23 @@ public class HangarServiceImpl implements IHangarService {
 
         CommandEnum commandEnum = CommandEnum.getCommandEnum(param.getCommand(), param.getAction());
         switch (commandEnum) {
-            case 机库_舱门_开启:
+            case 机库_舱门_开:
                 feign.doorOpen(commandEnum.getArg());
                 break;
-            case 机库_舱门_关闭:
+            case 机库_舱门_关:
                 feign.doorClose(commandEnum.getArg());
                 break;
-            case 机库_推杆_开启:
+            case 机库_推杆_开:
                 feign.barOpen(commandEnum.getArg());
                 break;
-            case 机库_推杆_关闭:
+            case 机库_推杆_关:
                 feign.barClose(commandEnum.getArg());
                 break;
-            case 机库_空调_开启:
+            case 机库_空调_开:
                 feign.airOpen(commandEnum.getArg());
                 break;
-            case 机库_空调_关闭:
+            case 机库_空调_关:
                 feign.airClose(commandEnum.getArg());
-                break;
-            case 机库_无人机_开启:
-            case 机库_无人机_关闭:
-                feign.uavColl(commandEnum.getArg());
                 break;
             case 机库_充电操作_开机:
             case 机库_充电操作_关机:

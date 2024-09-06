@@ -46,9 +46,6 @@ public interface HangarFeign {
     @GetMapping(name = "空调 - 关闭", path = "/closeair")
     void airClose(@RequestParam String closeaircomm);
 
-    @GetMapping(name = "无人机 - 打开or关闭", path = "/uavcontroller")
-    void uavColl(@RequestParam String controller);
-
     @GetMapping(name = "无人机 - 充电操作", path = "/wfccontroller")
     void chargingOperation(@RequestParam String wfcommond);
 }
