@@ -1,2 +1,12 @@
 server:
   port: ${env.port.sts}
+spring:
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:20249
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
