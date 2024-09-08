@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -73,8 +74,8 @@ public class TcpClientListener {
                         break;
                 }
                 if (null != anEnum) {
-                    ConcurrentHashMap<String, Channel> channelMap = wsServer.getChannelMap();
-                    if (channelMap.isEmpty()) {
+                    ConcurrentHashMap<String, List<Channel>> channels = wsServer.getChannels();
+                    if (CollectionUtils.isEmpty(channels)) {
                         return;
                     }
                     buf.skipBytes(5);// 跳过 帧头、数据长度、指令编号

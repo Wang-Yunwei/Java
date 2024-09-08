@@ -40,20 +40,6 @@ public class RegSomeBean {
         this.socketClient = socketClient;
     }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("SocketTransferServer")
-                        .description("This is a forwarding service")
-                        .version("20140712"));
-    }
-
-    @Bean
-    public MinioClient minioClient() {
-
-        return MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
-    }
-
     /**
      * 程序启动后立即执行
      */
@@ -68,4 +54,20 @@ public class RegSomeBean {
             }
         };
     }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("SocketTransferServer")
+                        .description("This is a forwarding service")
+                        .version("20140712"));
+    }
+
+    @Bean
+    public MinioClient minioClient() {
+
+        return MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
+    }
+
+
 }

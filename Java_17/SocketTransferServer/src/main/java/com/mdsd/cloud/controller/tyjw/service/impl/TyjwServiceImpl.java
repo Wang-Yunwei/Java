@@ -155,6 +155,9 @@ public class TyjwServiceImpl implements ITyjwService {
 
         return handleAuth(() ->{
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
+            if (result.getState() == -201){
+                AuthSingleton.getInstance().setAccessToken(null);
+            }
             return processResult(result);
         });
     }
@@ -202,6 +205,9 @@ public class TyjwServiceImpl implements ITyjwService {
     public List<RechargeDTO> hangarList() {
         return handleAuth(() -> {
             ResponseTy<List<RechargeDTO>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
+            if (result.getState() == -201){
+                AuthSingleton.getInstance().setAccessToken(null);
+            }
             return processResult(result);
         });
     }

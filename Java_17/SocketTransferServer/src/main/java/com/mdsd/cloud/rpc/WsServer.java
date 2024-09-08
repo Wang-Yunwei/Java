@@ -123,7 +123,7 @@ public class WsServer {
                                                              }
                                                          } else {
                                                              // 注册: boxSn -> user -> connect (1:N:1)
-                                                             synchronized (channels){
+                                                             synchronized (channels) {
                                                                  String boxSn = ms.get("云盒编号");
                                                                  if (channels.containsKey(boxSn)) {
                                                                      List<Channel> channelList = channels.get(boxSn);
@@ -143,12 +143,18 @@ public class WsServer {
                                              public void handlerRemoved(ChannelHandlerContext ctx) {
                                                  synchronized (channels) {
                                                      ctx.channel().close();
-                                                     channels.keys().asIterator().forEachRemaining(el ->{
-                                                         Iterator<Channel> iterator = channels.get(el).iterator();
-                                                         while (iterator.hasNext()) {
-                                                             if (!iterator.next().isActive()){
-                                                                 channels.remove(el);
+                                                     channels.forEach((key, val) -> {
+                                                         if (val.size() > 0) {
+                                                             Iterator<Channel> iterator = val.iterator();
+                                                             while (iterator.hasNext()) {
+                                                                 if (!iterator.next().isActive()) {
+                                                                     log.info("删除云盒 {} 下不活跃 Channel", key);
+                                                                     iterator.remove();
+                                                                 }
                                                              }
+                                                         } else {
+                                                             log.info("云盒 {} 下无连接, 执行删除!", key);
+                                                             channels.remove(key);
                                                          }
                                                      });
                                                  }
@@ -185,7 +191,7 @@ public class WsServer {
         parentGroup.shutdownGracefully();
         childGroup.shutdownGracefully();
         if (!channels.isEmpty()) {
-            channels.values().forEach( el -> {
+            channels.values().forEach(el -> {
                 el.forEach(ChannelOutboundInvoker::close);
             });
         }
