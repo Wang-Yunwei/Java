@@ -32,19 +32,20 @@ public class TyjwServiceImpl implements ITyjwService {
         this.feign = feign;
     }
 
-    private  <T> T handleAuth(Supplier<T> supplier) {
+    private <T> T handleAuth(Supplier<T> supplier) {
         if (auth.getCompanyId() == null || !StringUtils.isNoneBlank(auth.getAccessToken())) {
             getToken(new GetTokenInp());
         }
         return supplier.get();
     }
 
-    private  <T> T processResult(ResponseTy<T> result) {
+    private <T> T processResult(ResponseTy<T> result) {
 
-        if (0 == result.getState()) {
+        if (result.getState() == 0) {
             return result.getContent();
         } else {
-            throw new BusinessException(String.valueOf(result.getState()), result.getMessage());
+            auth.setAccessToken(null);
+            throw new BusinessException(String.valueOf(result.getState()), result.getState() == -201 ? result.getMessage() + "(后台系统将在3分钟后自动尝试重新登录)" : result.getMessage());
         }
     }
 
@@ -81,7 +82,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public List<GetCloudBoxListOup> getCloudBoxList() {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<List<GetCloudBoxListOup>> result = feign.cloudBoxList(auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -93,7 +94,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String updateCloudBox(UpdateCloudBoxInp param) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.updateCloudBox(param, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -105,7 +106,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public List<HistoryOup> history(HistoryInp param) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<List<HistoryOup>> result = feign.history(param, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -117,7 +118,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String updateLive(UpdateLiveInp param) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.updateLive(param, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -129,7 +130,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String openLive(String boxSn) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.openLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -141,7 +142,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String closeLive(String boxSn) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.closeLive(boxSn, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -153,11 +154,8 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public GetLiveAddressOup getLiveAddress(String boxSn) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<GetLiveAddressOup> result = feign.getLiveAddress(boxSn, auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == -201){
-                AuthSingleton.getInstance().setAccessToken(null);
-            }
             return processResult(result);
         });
     }
@@ -168,7 +166,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public List<GetPhotosOup> getPhotos(GetPhotosInp param) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<List<GetPhotosOup>> result = feign.getPhotos(param, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -180,7 +178,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String convert(MultipartFile file) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.convert(file, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -192,7 +190,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public String template(TemplateInp param) {
 
-        return handleAuth(() ->{
+        return handleAuth(() -> {
             ResponseTy<String> result = feign.template(param, auth.getCompanyId(), auth.getAccessToken());
             return processResult(result);
         });
@@ -205,9 +203,6 @@ public class TyjwServiceImpl implements ITyjwService {
     public List<RechargeDTO> hangarList() {
         return handleAuth(() -> {
             ResponseTy<List<RechargeDTO>> result = feign.hangarList(auth.getCompanyId(), auth.getAccessToken());
-            if (result.getState() == -201){
-                AuthSingleton.getInstance().setAccessToken(null);
-            }
             return processResult(result);
         });
     }
