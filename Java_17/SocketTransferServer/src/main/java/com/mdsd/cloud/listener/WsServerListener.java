@@ -2,20 +2,20 @@ package com.mdsd.cloud.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.rpc.TcpClient;
-import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.rpc.TcpClient;
+import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.utils.ByteUtil;
 import com.mdsd.cloud.utils.ParameterMapping;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -52,10 +52,11 @@ public class WsServerListener {
     public void listen(SocketEvent evn) throws JsonProcessingException {
         if (evn.getSource() instanceof WsServer) {
             Map<String, String> map = evn.getMap();
+            if (StringUtils.isEmpty(map.get("动作编号"))) {
+                wssErrorMessage(map.get("云盒编号"), "动作编号不能为: NULL");
+            }
             int instruct = Integer.parseInt(map.get("指令编号"), 16);
             if (tcpClient.isActiveChannel()) {
-                Assert.notNull(map.get("云盒编号"), "云盒编号不能为: NULL");
-                Assert.notNull(map.get("动作编号"), "动作编号不能为: NULL");
                 TyjwEnum anEnum = TyjwEnum.getEnum(instruct, Integer.parseInt(map.get("动作编号"), 16));
                 if (null != anEnum) {
                     log.info("<<< {}", anEnum.name());

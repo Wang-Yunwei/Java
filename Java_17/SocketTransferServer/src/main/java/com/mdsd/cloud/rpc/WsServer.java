@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.event.SocketEvent;
-import com.mdsd.cloud.response.BusinessException;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -24,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -66,8 +64,8 @@ public class WsServer {
 
         List<Channel> channelList = channels.get(key);
         if (!CollectionUtils.isEmpty(channelList)) {
-            channelList.stream().filter(el -> el.isActive()).forEach(el -> {
-                String sendDate = null;
+            channelList.stream().filter(Channel::isActive).forEach(el -> {
+                String sendDate;
                 try {
                     sendDate = obm.writeValueAsString(resp);
                 } catch (JsonProcessingException e) {
@@ -118,7 +116,7 @@ public class WsServer {
                                                      }
                                                      if (StringUtils.isNoneBlank(ms.get("云盒编号"))) {
                                                          if (StringUtils.isNoneBlank(ms.get("指令编号"))) {
-                                                             if (StringUtils.isNoneBlank(ms.get("控制权"))) {
+                                                             if (StringUtils.isNoneBlank(ms.get("控制权")) && "1".equals(ms.get("控制权"))) {
                                                                  publishEvent(ms);// 发出事件
                                                              }
                                                          } else {
@@ -129,7 +127,7 @@ public class WsServer {
                                                                      List<Channel> channelList = channels.get(boxSn);
                                                                      channelList.add(ctx.channel());
                                                                  } else {
-                                                                     channels.put(boxSn, new ArrayList<Channel>() {{
+                                                                     channels.put(boxSn, new ArrayList<>() {{
                                                                          add(ctx.channel());
                                                                      }});
                                                                  }
@@ -144,7 +142,7 @@ public class WsServer {
                                                  synchronized (channels) {
                                                      ctx.channel().close();
                                                      channels.forEach((key, val) -> {
-                                                         if (val.size() > 0) {
+                                                         if (!val.isEmpty()) {
                                                              Iterator<Channel> iterator = val.iterator();
                                                              while (iterator.hasNext()) {
                                                                  if (!iterator.next().isActive()) {
@@ -191,9 +189,7 @@ public class WsServer {
         parentGroup.shutdownGracefully();
         childGroup.shutdownGracefully();
         if (!channels.isEmpty()) {
-            channels.values().forEach(el -> {
-                el.forEach(ChannelOutboundInvoker::close);
-            });
+            channels.values().forEach(el -> el.forEach(ChannelOutboundInvoker::close));
         }
     }
 }
