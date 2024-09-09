@@ -28,7 +28,7 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 */3 * * * ?")
     public void TimedTask_Token() {
-        log.info("Estimate_AccessToken_AUTH >>> Every 3min!");
+        log.info("Estimate_AccessToken >>> Every 3min!");
         if (Strings.isBlank(auth.getAccessToken())) {
             tyjwService.getToken();
         }
