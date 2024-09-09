@@ -61,6 +61,15 @@ public class WsServerListener {
                 if (null != anEnum) {
                     log.info("<<< {}", anEnum.name());
                     switch (anEnum) {
+                        case 航线规划 -> {
+                            PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
+                            TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
+                            ByteBuf buf = aDefault.buffer();
+                            sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
+                        }
+                        case 切换无人机控制权 -> {
+
+                        }
                         case 实时喊话 -> {
                             // TODO 暂不支持
                             byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
@@ -69,12 +78,6 @@ public class WsServerListener {
                                 ByteBuf buf = aDefault.buffer();
                                 sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
                             }
-                        }
-                        case 航线规划 -> {
-                            PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
-                            TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
-                            ByteBuf buf = aDefault.buffer();
-                            sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
                         }
                         case MOP数据透传 -> {
                             // TODO 暂未使用

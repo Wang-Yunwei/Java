@@ -23,8 +23,8 @@ import java.util.concurrent.TimeUnit;
  * @author WangYunwei [2024-08-11]
  */
 @Slf4j
-@Tag(name = "文件")
-@RequestMapping(name = "文件", path = "/file")
+@Tag(name = "文件 - API")
+@RequestMapping("/file")
 @RestController
 public class FileController {
 
@@ -49,7 +49,7 @@ public class FileController {
 
             )
     ))
-    @PostMapping(name = "文件上传", path = "/fileUpload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(name = "文件 - 上传", path = "/fileUpload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseDto<ObjectWriteResponse> fileUpload(@RequestParam(value = "file") MultipartFile file) {
 
         if (!file.isEmpty()) {
@@ -67,7 +67,7 @@ public class FileController {
     }
 
     @Operation(summary = "获取预签名 URL", description = "使用该 URL 直接上传文件到文件服务器 Minio,该 URL 包含了上传文件所需的权限和过期时间, 默认过期时间: 10min")
-    @GetMapping(name = "获取预签名 URL", path = "/getUploadUrl/{fileName}")
+    @GetMapping(name = "文件 - 获取预签名 URL", path = "/getUploadUrl/{fileName}")
     public ResponseDto<String> getUploadUrl(@PathVariable String fileName) {
 
         GetPresignedObjectUrlArgs build = GetPresignedObjectUrlArgs.builder().bucket(bucketName).method(Method.PUT).expiry(10, TimeUnit.MINUTES).object(fileName).build();
@@ -79,7 +79,7 @@ public class FileController {
     }
 
     @Operation(summary = "获取文件下载链接", description = "该接口会返回用于下载文件的链接, 默认过期时间: 1hours")
-    @GetMapping(name = "获取文件下载链接", path = "/getDownloadLink/{fileName}")
+    @GetMapping(name = "文件 - 获取下载链接", path = "/getDownloadLink/{fileName}")
     public ResponseDto<String> getDownloadLink(@PathVariable String fileName) {
 
         GetPresignedObjectUrlArgs build = GetPresignedObjectUrlArgs.builder().bucket(bucketName).method(Method.GET).expiry(1, TimeUnit.HOURS).object(fileName).build();
