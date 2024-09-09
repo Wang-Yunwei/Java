@@ -21,7 +21,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
         @Override
         public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
 
-            log.info("前置拦截器 URI: {}", request.getRequestURI());
+            log.info("前置拦截器 URL: {}", request.getRequestURL());
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }
     }
