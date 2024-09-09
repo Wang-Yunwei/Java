@@ -17,10 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author WangYunwei [2024-09-04]
@@ -67,9 +64,6 @@ public class WsServerListener {
                             ByteBuf buf = aDefault.buffer();
                             sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
                         }
-                        case 切换无人机控制权 -> {
-
-                        }
                         case 实时喊话 -> {
                             // TODO 暂不支持
                             byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
@@ -86,20 +80,21 @@ public class WsServerListener {
                             ByteBuf buf = aDefault.buffer();
                             sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
                                 if (null != arg2) {
-                                    for (String str : arg2) {
-                                        String[] split = str.split("-");
-                                        switch (split[1]) {
-                                            case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split[0])));
-                                            case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split[0])));
-                                            case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split[0])));
-                                            case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split[0])));
-                                            case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split[0])));
-                                            case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split[0])));
-                                            case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split[0])));
+                                    String[] split = arg2.split(";");
+                                    Arrays.stream(split).forEach(el -> {
+                                        String[] split1 = el.split("-");
+                                        switch (split1[1]) {
+                                            case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split1[0])));
+                                            case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split1[0])));
+                                            case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split1[0])));
+                                            case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split1[0])));
+                                            case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split1[0])));
+                                            case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split1[0])));
+                                            case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split1[0])));
                                             case "base64" ->
-                                                    arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split[0])));
+                                                    arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split1[0])));
                                         }
-                                    }
+                                    });
                                 }
                             });
                         }
@@ -117,7 +112,7 @@ public class WsServerListener {
         }
     }
 
-    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, WebSocketFunction<ByteBuf, String[], Map<String, String>> fun) {
+    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, WebSocketFunction<ByteBuf, String, Map<String, String>> fun) {
 
         buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
         buf.writeShort(0);// 数据长度,占位临时赋值为0

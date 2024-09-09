@@ -12,11 +12,10 @@ public class TestUtil {
 
     public static void main(String[] args) throws IOException {
 
-        byte b = (byte) 0xFF;
+        String str = "数据-byte;";
+        String[] split = str.split(";");
+        System.out.println(split.length);
 
-        System.out.println(b == -1);
-
-        String str = "{\"finishedAction\":\"2\",\"loseAction\":\"0\",\"maxSpeed\":15,\"autoSpeed\":8,\"homeHeight\":20,\"isSaveEnergyMode\":0,\"landPoint\":{\"boxSn\":\"M13220230801135\",\"hangarId\":\"YKM350WK20240816\",\"hangarType\":1,\"hangarName\":\" 麦迪350充电\",\"hangarLng\":120.77734338844112,\"hangarLat\":31.338550895708046,\"secondLng\":120.7771553,\"secondLat\":31.3385017,\"online\":1,\"outVideo\":1,\"hangarDoor\":\"close\",\"hangerBar\":\"open\",\"hangerTdBar\":\"open\",\"hangerLrBar\":\"open\",\"airCondition\":\"open\",\"chargeState\":\"standby\",\"uavController\":\"close\",\"windspeed\":null,\"winddirction\":null,\"rain\":0,\"batteryValue\":-1,\"instructList\":[{\"instructId\":1002,\"instructName\":\"打开舱门\"},{\"instructId\":1010,\"instructName\":\"推杆夹紧\"},{\"instructId\":1023,\"instructName\":\"关闭空调\"}],\"hangarLngLat\":[120.78169082791901,31.336546302112776],\"secondLngLat\":[120.78150843592671,31.33650250701692],\"distance\":\"51.44\",\"alternateLng\":120.77716076356012,\"alternateLat\":31.338506913988148,\"mediaUploadFlag\":0}}";
 
 //        ObjectMapper obm = new ObjectMapper();
 //
