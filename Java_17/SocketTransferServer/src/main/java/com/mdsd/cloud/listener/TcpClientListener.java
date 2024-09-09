@@ -109,9 +109,9 @@ public class TcpClientListener {
                             result.put("状态", isShutdown);
                             buf.readBytes(boxSnByte);
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                            log.info("云盒开关机通知_状态: {}", result);
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             // TODO 暂不启用, 当收到关机通知后5分钟,判断是否需要执行充电
+//                            log.info("云盒开关机通知_状态: {}", result);
 //                            if(isShutdown == -1){
 //                                chargingUav();
 //                            }
