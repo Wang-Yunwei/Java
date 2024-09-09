@@ -103,7 +103,6 @@ public class WsServer {
                                              protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
                                                  System.out.println("channelRead0" + tws.text());
                                                  String text = tws.text();
-                                                 log.info("<<< {}", text);
                                                  if (StringUtils.isNoneBlank(text)) {
                                                      Map<String, String> ms = obm.readValue(text, new TypeReference<>() {
                                                      });
@@ -111,10 +110,10 @@ public class WsServer {
                                                      if ("PING_MESSAGE".equals(ms.get("action"))) {
                                                          returnMap.put("action", "PONG_MESSAGE");
                                                          ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(ms)));
-                                                         log.info(">>> {}", returnMap);
                                                          return;
                                                      }
                                                      if (StringUtils.isNoneBlank(ms.get("云盒编号"))) {
+                                                         log.info("<<< {}", text);
                                                          if (StringUtils.isNoneBlank(ms.get("指令编号"))) {
                                                              if (StringUtils.isNoneBlank(ms.get("控制权")) && "1".equals(ms.get("控制权"))) {
                                                                  publishEvent(ms);// 发出事件

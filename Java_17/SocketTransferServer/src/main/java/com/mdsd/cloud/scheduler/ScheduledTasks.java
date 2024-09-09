@@ -17,28 +17,28 @@ public class ScheduledTasks {
 
     ITyjwService tyjwService;
 
-    TcpClient socketClient;
+    TcpClient tcpClient;
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
 
-    public ScheduledTasks(ITyjwService tyjwService, TcpClient socketClient) {
+    public ScheduledTasks(ITyjwService tyjwService, TcpClient tcpClient) {
         this.tyjwService = tyjwService;
-        this.socketClient = socketClient;
+        this.tcpClient = tcpClient;
     }
 
     @Scheduled(cron = "0 */3 * * * ?")
-    public void TimedTask_AUTH_Token() {
-        log.info("IsToken_AUTH >>> Every 3min!");
+    public void TimedTask_Token() {
+        log.info("Estimate_AccessToken_AUTH >>> Every 3min!");
         if (Strings.isBlank(auth.getAccessToken())) {
             tyjwService.getToken();
         }
     }
 
     @Scheduled(cron = "*/30 * * * * ?")
-    public void TimedTask_SC_Connect() {
-        log.info("IsConnect_SC >>> Every 30second!");
-        if (!socketClient.isActiveChannel()) {
-            socketClient.connect();
+    public void TimedTask_Connect() {
+        log.info("Estimate_ConnectStatus >>> Every 30second!");
+        if (!tcpClient.isActiveChannel()) {
+            tcpClient.connect();
         }
     }
 }
