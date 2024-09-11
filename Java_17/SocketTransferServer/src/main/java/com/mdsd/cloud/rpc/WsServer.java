@@ -3,7 +3,7 @@ package com.mdsd.cloud.rpc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.event.CommonEvent;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -80,7 +80,7 @@ public class WsServer {
 
     private void publishEvent(Map<String, String> map) {
 
-        publisher.publishEvent(new SocketEvent(this, map));
+        publisher.publishEvent(new CommonEvent(this, map));
     }
 
     @PostConstruct

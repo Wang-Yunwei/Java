@@ -10,19 +10,19 @@ import java.util.Map;
  * @author WangYunwei [2024-07-10]
  */
 @Getter
-public class SocketEvent extends ApplicationEvent {
+public class CommonEvent extends ApplicationEvent {
 
     private Map<String, String> map;
 
     private ByteBuf byteBuf;
 
-    public SocketEvent(Object source, Map<String, String> map) {
+    public CommonEvent(Object source, Map<String, String> map) {
 
         super(source);
         this.map = map;
     }
 
-    public SocketEvent(Object source, ByteBuf byteBuf) {
+    public CommonEvent(Object source, ByteBuf byteBuf) {
 
         super(source);
         this.byteBuf = byteBuf;

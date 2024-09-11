@@ -2,7 +2,7 @@ package com.mdsd.cloud.rpc;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.TyjwEnum;
-import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.response.BusinessException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -69,7 +69,7 @@ public class TcpClient {
 
     private void publishEvent(ByteBuf byteBuf) {
 
-        publisher.publishEvent(new SocketEvent(this, byteBuf));
+        publisher.publishEvent(new CommonEvent(this, byteBuf));
     }
 
     @PostConstruct

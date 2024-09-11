@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.TyjwEnum;
-import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.rpc.TcpClient;
 import com.mdsd.cloud.rpc.WsServer;
 import com.mdsd.cloud.utils.ByteUtil;
@@ -46,7 +46,7 @@ public class WsServerListener {
     }
 
     @EventListener
-    public void listen(SocketEvent evn) throws JsonProcessingException {
+    public void listen(CommonEvent evn) throws JsonProcessingException {
         if (evn.getSource() instanceof WsServer) {
             Map<String, String> map = evn.getMap();
             if (StringUtils.isEmpty(map.get("动作编号"))) {

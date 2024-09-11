@@ -7,7 +7,7 @@ import com.mdsd.cloud.controller.hangar.service.IHangarService;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.CommandEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
-import com.mdsd.cloud.event.SocketEvent;
+import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.response.BusinessException;
 import com.mdsd.cloud.rpc.TcpClient;
 import com.mdsd.cloud.rpc.WsServer;
@@ -50,7 +50,7 @@ public class TcpClientListener {
     private String batteryPower = null;
 
     @EventListener
-    public void listen(SocketEvent evn) {
+    public void listen(CommonEvent evn) {
         if (evn.getSource() instanceof TcpClient) {
             ByteBuf buf = evn.getByteBuf();
             if (buf.getShort(0) == 0x6A77) {
