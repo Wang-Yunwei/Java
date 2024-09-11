@@ -1,4 +1,4 @@
-package com.mdsd.cloud.rpc;
+package com.mdsd.cloud.utils.rpc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

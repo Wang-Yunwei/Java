@@ -1,4 +1,4 @@
-package com.mdsd.cloud.rpc;
+package com.mdsd.cloud.utils.rpc;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.TyjwEnum;
@@ -117,9 +117,7 @@ public class TcpClient {
                     }
                 });
     }
-
     int connectCount = 0;
-
     public void connect() {
 
         if (!isActiveChannel()) {
