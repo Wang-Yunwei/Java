@@ -1,4 +1,4 @@
-package com.mdsd.cloud.utils.rpc;
+package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.response.BusinessException;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.mdsd.cloud.utils.rpc;
+package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.enums.TyjwEnum;
