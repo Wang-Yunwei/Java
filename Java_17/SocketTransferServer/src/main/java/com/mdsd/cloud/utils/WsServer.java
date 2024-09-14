@@ -84,7 +84,7 @@ public class WsServer {
     }
 
     @PostConstruct
-    public void startWebSocketServer() {
+    public void createWsServer() {
 
         // 创建服务端启动引导器
         ServerBootstrap serverBootstrap = new ServerBootstrap();

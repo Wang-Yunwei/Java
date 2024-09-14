@@ -73,7 +73,7 @@ public class TcpClient {
     }
 
     @PostConstruct
-    private void create() {
+    private void createTcpClient() {
 
         bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_SNDBUF, 1024 * 1024)

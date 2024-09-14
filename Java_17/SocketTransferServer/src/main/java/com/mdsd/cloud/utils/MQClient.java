@@ -37,7 +37,7 @@ public class MQClient {
 
     public static void main(String[] args){
         MQClient mqClient = new MQClient();
-        mqClient.created("STS/subscribe/M350",0);
+        mqClient.createClient("STS/subscribe/M350",0);
         while (true){
 
         }
@@ -49,7 +49,7 @@ public class MQClient {
      * @param subscribeTopic 订阅_主题 例如: "STS/subscribe/M350"
      * @param subscribeQos   订阅_Qos
      */
-    public MqttClient created(String subscribeTopic, int subscribeQos) {
+    public MqttClient createClient(String subscribeTopic, int subscribeQos) {
 
         MqttClient mqttClient;
         try {
