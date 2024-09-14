@@ -1,17 +1,30 @@
 package com.mdsd.cloud.utils;
 
+import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Map;
 
 /**
  * @author WangYunwei [2024-07-14]
  */
 public class TestUtil {
 
+
+
+
     public static void main(String[] args) throws IOException {
 
-        String str = "数据-byte;";
-        String[] split = str.split(";");
-        System.out.println(split.length);
+        String str = "JLTPhuuSIpprAKvn6cI809LSmzNlNi8N7O+VKOqn4NXpLCSqVqj1x/YFsmMqzHQ4iHuA6r0yI3t6xYVlRIK0Jg==";
+        byte[] decode = Base64.getDecoder().decode(str.getBytes(StandardCharsets.UTF_8));
+
+
+        String s = new String(decode, StandardCharsets.UTF_8);
+
+        System.out.println(s);
 
 
 //        ObjectMapper obm = new ObjectMapper();

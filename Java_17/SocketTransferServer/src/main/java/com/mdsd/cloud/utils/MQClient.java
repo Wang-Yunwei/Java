@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MQClient {
 
-    @Value("tcp://${env.ip.sts}")
+    @Value("tcp://${env.ip.sts}:${env.port.sts.mqtt}")
     String serverURI;
 
     @Value("${spring.application.name}")
@@ -35,17 +35,25 @@ public class MQClient {
         }
     }
 
+    public static void main(String[] args){
+        MQClient mqClient = new MQClient();
+        mqClient.created("STS/subscribe/M350",0);
+        while (true){
+
+        }
+    }
+
     /**
      * MQTT - 创建客户端
      *
-     * @param subscribeTopic 订阅_主题
+     * @param subscribeTopic 订阅_主题 例如: "STS/subscribe/M350"
      * @param subscribeQos   订阅_Qos
      */
     public MqttClient created(String subscribeTopic, int subscribeQos) {
 
         MqttClient mqttClient;
         try {
-            mqttClient = new MqttClient(serverURI, clientId, new MemoryPersistence());
+            mqttClient = new MqttClient("tcp://192.168.0.221:1883", "SocketTransferServer", new MemoryPersistence());
             // 设置连接选项
             MqttConnectionOptions connOpts = new MqttConnectionOptions();
             connOpts.setUserName("admin");
@@ -67,7 +75,8 @@ public class MQClient {
 
         @Override
         public void disconnected(MqttDisconnectResponse disconnectResponse) {
-            System.out.println("disconnected---------");
+
+            log.info("disconnected---------{}", disconnectResponse.getReturnCode());
         }
 
         @Override
@@ -86,7 +95,7 @@ public class MQClient {
         @Override
         public void deliveryComplete(IMqttToken token) {
 
-            log.info("deliveryComplete --------- {}", token.isComplete());
+            log.info("deliveryComplete---------{}", token.isComplete());
         }
 
         /**

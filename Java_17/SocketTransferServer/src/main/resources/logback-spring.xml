@@ -21,7 +21,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/json.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>30</MaxHistory>
+            <MaxHistory>7</MaxHistory>
             <totalSizeCap>1GB</totalSizeCap>
             <MaxFileSize>9MB</MaxFileSize>
         </rollingPolicy>
@@ -33,7 +33,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>60</MaxHistory>
+            <MaxHistory>7</MaxHistory>
             <totalSizeCap>1GB</totalSizeCap>
             <MaxFileSize>9MB</MaxFileSize>
         </rollingPolicy>
@@ -48,7 +48,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>30</MaxHistory>
+            <MaxHistory>7</MaxHistory>
             <totalSizeCap>1GB</totalSizeCap>
             <MaxFileSize>9MB</MaxFileSize>
         </rollingPolicy>
