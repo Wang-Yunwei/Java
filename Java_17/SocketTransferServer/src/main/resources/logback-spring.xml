@@ -9,6 +9,9 @@
               value="${MY_CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <property name="MY_FILE_LOG_PATTERN"
               value="${MY_FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="LOG_MAX_HISTORY" value="7"/>
+    <property name="LOG_TOTAL_SIZE_CAP" value="1GB"/>
+    <property name="LOG_MAX_FILE_SIZE" value="9MB"/>
 
     <appender name="MY_FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/json.log</file>
@@ -21,9 +24,9 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/json.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>7</MaxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
-            <MaxFileSize>9MB</MaxFileSize>
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+            <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+            <MaxFileSize>${LOG_MAX_FILE_SIZE}</MaxFileSize>
         </rollingPolicy>
     </appender>
     <appender name="MY_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -33,9 +36,9 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>7</MaxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
-            <MaxFileSize>9MB</MaxFileSize>
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+            <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+            <MaxFileSize>${LOG_MAX_FILE_SIZE}</MaxFileSize>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -48,9 +51,9 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_PATH}/info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <MaxHistory>7</MaxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
-            <MaxFileSize>9MB</MaxFileSize>
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+            <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+            <MaxFileSize>${LOG_MAX_FILE_SIZE}</MaxFileSize>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
