@@ -13,7 +13,7 @@
     <property name="LOG_TOTAL_SIZE_CAP" value="1GB"/>
     <property name="LOG_MAX_FILE_SIZE" value="9MB"/>
 
-    <appender name="MY_FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="MY_FILE_LOG_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/json.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
@@ -29,7 +29,7 @@
             <MaxFileSize>${LOG_MAX_FILE_SIZE}</MaxFileSize>
         </rollingPolicy>
     </appender>
-    <appender name="MY_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="MY_FILE_LOG_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/error.log</file>
         <encoder charset="UTF-8">
             <pattern>${MY_FILE_LOG_PATTERN}</pattern>
@@ -44,7 +44,7 @@
             <level>ERROR</level>
         </filter>
     </appender>
-    <appender name="MY_FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="MY_FILE_LOG_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/info.log</file>
         <encoder charset="UTF-8">
             <pattern>${MY_FILE_LOG_PATTERN}</pattern>
@@ -59,7 +59,7 @@
             <level>INFO</level>
         </filter>
     </appender>
-    <appender name="MY_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="MY_CONSOLE_LOG" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${MY_CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
@@ -69,20 +69,20 @@
     <springProfile name="dev">
         <!-- logger name="com.zaxxer.hikari" level="DEBUG"/ -->
         <root level="DEBUG">
-            <appender-ref ref="MY_CONSOLE"/>
+            <appender-ref ref="MY_CONSOLE_LOG"/>
         </root>
     </springProfile>
     <springProfile name="linux">
         <logger name="com.mdsd.cloud.feign" level="DEBUG"/>
         <root level="INFO">
-            <appender-ref ref="MY_CONSOLE" >
+            <appender-ref ref="MY_CONSOLE_LOG" >
                 <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                     <level>DEBUG</level>
                 </filter>
             </appender-ref>
-            <appender-ref ref="MY_FILE_INFO"/>
-            <appender-ref ref="MY_FILE_ERROR"/>
-            <!-- appender-ref ref="MY_FILE_JSON"/ -->
+            <appender-ref ref="MY_FILE_LOG_INFO"/>
+            <appender-ref ref="MY_FILE_LOG_ERROR"/>
+            <!-- appender-ref ref="MY_FILE_LOG_JSON"/ -->
         </root>
     </springProfile>
 </configuration>
