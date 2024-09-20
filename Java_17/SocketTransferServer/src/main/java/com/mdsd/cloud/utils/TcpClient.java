@@ -49,7 +49,6 @@ public class TcpClient {
 
     @Autowired
     public TcpClient(ApplicationEventPublisher publisher) {
-
         this.publisher = publisher;
     }
 
@@ -59,7 +58,6 @@ public class TcpClient {
 
     @Async
     public void sendMessage(ByteBuf byteBuf) {
-
         if (channel == null || !channel.isActive()) {
             throw new BusinessException("TcpClient 连接不存在!");
         }
@@ -68,22 +66,19 @@ public class TcpClient {
     }
 
     private void publishEvent(ByteBuf byteBuf) {
-
         publisher.publishEvent(new CommonEvent(this, byteBuf));
     }
 
     @PostConstruct
     private void createTcpClient() {
-
         bootstrap.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_SNDBUF, 1024 * 1024)
                 .option(ChannelOption.SO_RCVBUF, 1024 * 1024)
                 .handler(new ChannelInitializer<SocketChannel>() {
-
                     @Override
                     protected void initChannel(SocketChannel ch) {
-
-                        ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(10240, 2, 2, 0, 0))
+                        ch.pipeline()
+                                .addLast(new LengthFieldBasedFrameDecoder(10240, 2, 2, 0, 0))
                                 .addLast("ping", new IdleStateHandler(0, 3, 0, TimeUnit.SECONDS))
                                 .addLast(new SimpleChannelInboundHandler<ByteBuf>() {
 
@@ -117,9 +112,10 @@ public class TcpClient {
                     }
                 });
     }
-    int connectCount = 0;
-    public void connect() {
 
+    int connectCount = 0;
+
+    public void connect() {
         if (!isActiveChannel()) {
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {
@@ -144,7 +140,7 @@ public class TcpClient {
                         Thread.sleep(1000 * 3);
                         log.info("...正在尝试第 {} 次重新连接!", ++connectCount);
                         connect();
-                    }else{
+                    } else {
                         log.error("尝试连接失败,请确认 SocketServer 是否存在!");
                         connectCount = 0;// 重置尝试连接次数
                     }
@@ -155,7 +151,6 @@ public class TcpClient {
 
     @PreDestroy
     public void destroy() {
-
         group.shutdownGracefully();
         if (null != channel) {
             channel.close();

@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * @author WangYunwei [2024-07-11]
  */
-@FeignClient(name = "TYJW", url = "http://${env.ip.tyjw}:${env.port.tyjw}/eapi")
+@FeignClient(name = "TYJW", url = "http://${env.ip.tyjw}:${env.port.tyjw.api}/eapi")
 public interface EApiFeign {
 
     @PostMapping(name = "获取 AccessToken (鉴权)", path = "/auth/getToken")

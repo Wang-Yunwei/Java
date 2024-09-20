@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author WangYunwei [2024-09-03]
  */
-@FeignClient(name = "JIKUPI", url = "http://${env.ip.jikupi}:${env.port.jikupi}")
+@FeignClient(name = "JIKUPI", url = "http://${env.ip.jikupi}:${env.port.jikupi.api}")
 public interface HangarFeign {
 
     @GetMapping(name = "获取配置信息", path = "/json_get_config")

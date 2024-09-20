@@ -91,6 +91,7 @@ public class WsServer {
         // 配置线程模型  EventLoop 等于 Thread
         serverBootstrap.group(parentGroup, childGroup)
                 .channel(NioServerSocketChannel.class) // 使用 NioServerSocketChannel 来作为服务器的通道实现
+                .localAddress(port)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() { // 添加一个 ChannelInitializer 来初始化每一个新的Channel
                     @Override
                     protected void initChannel(NioSocketChannel ch) {

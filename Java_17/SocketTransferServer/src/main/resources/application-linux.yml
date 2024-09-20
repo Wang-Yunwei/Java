@@ -1,5 +1,5 @@
 server:
-  port: ${env.port.sts}
+  port: ${env.port.sts.api}
 spring:
   boot:
     admin:

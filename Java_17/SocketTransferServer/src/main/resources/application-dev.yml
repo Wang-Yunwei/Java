@@ -1,5 +1,5 @@
 server:
-  port: ${env.port.sts}
+  port: ${env.port.sts.api}
   ssl:
     # 填写jks-password.txt文件内的密码
     key-store-password: 123456
