@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 /**
  * @author WangYunwei [2024-08-10]
@@ -69,5 +70,14 @@ public class RegSomeBean {
         return MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
     }
 
-
+//    @Bean
+//    public CommonsRequestLoggingFilter logFilter() {
+//        CommonsRequestLoggingFilter commonsRequestLoggingFilter = new CommonsRequestLoggingFilter();
+//        commonsRequestLoggingFilter.setIncludeQueryString(true); // 是否记录请求的查询参数信息
+//        commonsRequestLoggingFilter.setIncludePayload(true); // 是否记录请求body内容
+//        commonsRequestLoggingFilter.setIncludeHeaders(true); // 是否记录请求header信息
+//        commonsRequestLoggingFilter.setIncludeClientInfo(true); // 是否记录请求客户端信息
+//        commonsRequestLoggingFilter.setAfterMessagePrefix("REQUEST DATA: "); // 设置日期记录的前缀
+//        return commonsRequestLoggingFilter;
+//    }
 }

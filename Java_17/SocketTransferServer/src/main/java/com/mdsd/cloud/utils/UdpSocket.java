@@ -17,11 +17,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * @author WangYunwei [2024-09-14]
  */
-@Component
+
 public class UdpSocket {
     NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
 
-    @PostConstruct
     public void createUdpSocket() {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(eventExecutors)
@@ -41,7 +40,6 @@ public class UdpSocket {
 
     }
 
-    @PreDestroy
     public void destroy() {
         eventExecutors.shutdownGracefully();
     }
