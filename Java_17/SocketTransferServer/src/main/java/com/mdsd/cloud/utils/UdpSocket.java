@@ -48,7 +48,7 @@ public class UdpSocket {
                     }
                 });
         try {
-            log.info("<<< 启动UDP, 端口: {}", port);
+            log.info("<<< 启动 UDP Server, 端口: {}", port);
             bootstrap.bind(port).sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

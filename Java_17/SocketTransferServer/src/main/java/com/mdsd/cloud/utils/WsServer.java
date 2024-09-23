@@ -177,6 +177,7 @@ public class WsServer {
                 .childOption(ChannelOption.SO_KEEPALIVE, true); // 设置保持活动连接状态
         try {
             // 绑定端口并启动接收进来的连接
+            log.info("<<< 启动 WebSocketServer, 端口: {}", port);
             serverBootstrap.bind(port).sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
