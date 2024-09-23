@@ -1,7 +1,9 @@
 package com.mdsd.cloud.utils;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -14,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -43,8 +46,19 @@ public class UdpSocket {
 //                        pak.content().readableBytes();
 //                        ArrayBlockingQueue<DatagramPacket> objects = new ArrayBlockingQueue<>(1024);
 //                        objects.offer(pak);
-                        ctx.writeAndFlush(pak);
+                        ByteBuf content = pak.content();
+                        byte[] bytes = new byte[content.readableBytes()];
+                        content.readBytes(bytes);
+                        System.out.println(ByteUtil.bytesToStringUTF8(bytes));
+                        String str = "This is a Socket Transfer Server";
+                        DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(str.getBytes()), new  InetSocketAddress("172.31.101.126",49152));
+                        ctx.writeAndFlush(datagramPacket);
+                    }
 
+                    @Override
+                    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                        log.error("UDP Socket Exception: {}", cause);
+                        ctx.close(); // 关闭连接
                     }
                 });
         try {

@@ -107,6 +107,11 @@ public class TcpClient {
                                                      ctx.writeAndFlush(buf);
                                                  }
                                              }
+
+                                             @Override
+                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                                                 log.error(">>> Tcp Client: {}", cause.getMessage());
+                                             }
                                          }
                                 );
                     }

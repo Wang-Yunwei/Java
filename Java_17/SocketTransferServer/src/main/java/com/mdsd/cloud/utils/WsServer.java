@@ -169,6 +169,11 @@ public class WsServer {
                                                      }
                                                  }, 1, TimeUnit.SECONDS);
                                              }
+
+                                             @Override
+                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                                                 log.error(">>> Ws Server: {}", cause.getMessage());
+                                             }
                                          }
                                 );
                     }
