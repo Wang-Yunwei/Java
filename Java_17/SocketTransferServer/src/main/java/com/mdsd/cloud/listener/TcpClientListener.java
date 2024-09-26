@@ -7,11 +7,11 @@ import com.mdsd.cloud.controller.hangar.service.IHangarService;
 import com.mdsd.cloud.controller.tyjw.dto.TyjwProtoBuf;
 import com.mdsd.cloud.enums.CommandEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
+import com.mdsd.cloud.enums.TyjwReturnCodeEnum;
 import com.mdsd.cloud.event.CommonEvent;
-import com.mdsd.cloud.response.BusinessException;
+import com.mdsd.cloud.utils.ByteUtil;
 import com.mdsd.cloud.utils.TcpClient;
 import com.mdsd.cloud.utils.WsServer;
-import com.mdsd.cloud.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -88,7 +88,7 @@ public class TcpClientListener {
                     switch (anEnum) {
                         case 注册:
                             result.put("是否成功", buf.readByte());
-                            log.info("注册: {}",result);
+                            log.info("注册: {}", result);
                         case 心跳:
                             break;
                         case 图片上传完成通知:
@@ -255,6 +255,14 @@ public class TcpClientListener {
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
+                        case 返回码:
+                            result.put("加密标志", buf.readByte());
+                            result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                            int returnCode = buf.readInt();
+                            result.put("返回码", returnCode);
+                            result.put("返回信息", TyjwReturnCodeEnum.getMsg(returnCode));
+                            wsServer.sendMessage(null, result);
+                            break;
                         case 机场任务完成通知:
                             result.put("加密标志", buf.readByte());
                             result.put("动作编号", String.format("0x%02X", buf.readByte()));
@@ -263,29 +271,27 @@ public class TcpClientListener {
                             result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                             wsServer.sendMessage(result.get("云盒SN号").toString(), result);
                             break;
-                        default:
-                            throw new BusinessException("TcpClient <<< 未知指令!");
                     }
                 }
             }
         }
     }
 
-    private void chargingUav(){
-        scheduledExecutorService.schedule(() ->{
+    private void chargingUav() {
+        scheduledExecutorService.schedule(() -> {
             Map<String, String> operate = hangarService.operate(new OperateInp().setCommand(CommandEnum.机库_状态.getCommand()).setAction(CommandEnum.机库_状态.getAction()));
-            if(!CollectionUtils.isEmpty(operate) && "close".equals(operate.get("charge_state"))){
+            if (!CollectionUtils.isEmpty(operate) && "close".equals(operate.get("charge_state"))) {
                 String[] split = batteryPower.split("_"); // 当前 batteryPower 是云盒关机前的电量信息
                 // 当任意一边电池电量小于 90 时, 判定为需要充电
-                if( Integer.parseInt(split[0])  < 90 || Integer.parseInt(split[1]) < 90 ){
-                    log.info("当前电量小于 90% 开始执行充电: {}",batteryPower);
+                if (Integer.parseInt(split[0]) < 90 || Integer.parseInt(split[1]) < 90) {
+                    log.info("当前电量小于 90% 开始执行充电: {}", batteryPower);
                     // 执行充电
                     hangarService.operate(new OperateInp().setCommand(CommandEnum.机库_充电操作_充电.getCommand()).setAction(CommandEnum.机库_充电操作_充电.getAction()));
                     // 关闭推流
-                }else{
-                    log.info("电池电量大于 90% 不执行充电: {}",batteryPower);
+                } else {
+                    log.info("电池电量大于 90% 不执行充电: {}", batteryPower);
                 }
             }
-        },5, TimeUnit.MINUTES);
+        }, 5, TimeUnit.MINUTES);
     }
 }

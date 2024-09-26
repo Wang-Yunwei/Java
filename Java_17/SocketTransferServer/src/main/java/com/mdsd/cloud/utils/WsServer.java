@@ -61,25 +61,35 @@ public class WsServer {
 
     @Async
     public void sendMessage(String key, Map<String, Object> resp) {
-
-        List<Channel> channelList = channels.get(key);
-        if (!CollectionUtils.isEmpty(channelList)) {
-            channelList.stream().filter(Channel::isActive).forEach(el -> {
-                String sendDate;
-                try {
-                    sendDate = obm.writeValueAsString(resp);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-                if (null != sendDate) {
-                    el.writeAndFlush(new TextWebSocketFrame(sendDate));
-                }
+        if(StringUtils.isEmpty(key)){
+            channels.forEach((k,v) ->{
+                v.stream().filter(Channel::isActive).forEach(el ->{
+                    try {
+                        el.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(resp)));
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             });
+        }else{
+            List<Channel> channelList = channels.get(key);
+            if (!CollectionUtils.isEmpty(channelList)) {
+                channelList.stream().filter(Channel::isActive).forEach(el -> {
+                    String sendDate;
+                    try {
+                        sendDate = obm.writeValueAsString(resp);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (null != sendDate) {
+                        el.writeAndFlush(new TextWebSocketFrame(sendDate));
+                    }
+                });
+            }
         }
     }
 
     private void publishEvent(Map<String, String> map) {
-
         publisher.publishEvent(new CommonEvent(this, map));
     }
 
@@ -170,7 +180,7 @@ public class WsServer {
 
                                              @Override
                                              public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-                                                 log.error(">>> Ws Server: {}", cause.getMessage());
+                                                 log.error(">>> {}", cause.getMessage());
                                              }
                                          }
                                 );

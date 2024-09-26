@@ -1,0 +1,1594 @@
+{
+    "0": {
+        "en": "Execute waypoint v3 cmd successfully.",
+        "zh": "成功执行V3航线任务"
+    },
+    "1": {
+        "en": "Execute waypoint v3 mission id not match.",
+        "zh": "执行V3航线航点任务id不匹配"
+    },
+    "2": {
+        "en": "Execute waypoint v3 wayline info error.",
+        "zh": "执行V3航线信息错误"
+    },
+    "3": {
+        "en": "Execute waypoint v3 wpmz file not match.",
+        "zh": "执行V3航线WPMZ文件不匹配"
+    },
+    "4": {
+        "en": "Load waypoint v3 wpmz file error.",
+        "zh": "加载V3航线WPMZ文件失败"
+    },
+    "5": {
+        "en": "Execute waypoint v3 no break info error.",
+        "zh": "执行V3航线WPMZ文件不匹配"
+    },
+    "6": {
+        "en": "Execute waypoint v3 cmd invalid",
+        "zh": "执行V3航线指令无效"
+    },
+    "81": {
+        "en": "Automatic takeoff failed, battery voltage difference too large.",
+        "zh": "自动起飞失败，电池电压差过大"
+    },
+    "160": {
+        "en": "Failed to start route, no route uploaded.",
+        "zh": "开始航线失败,未上传航线"
+    },
+    "216": {
+        "en": "Photo taking failed, storage card full.",
+        "zh": "拍照失败，存储卡已满"
+    },
+    "224": {
+        "en": "Photo taking failed, payload not installed.",
+        "zh": "拍照失败，未安装载荷"
+    },
+    "225": {
+        "en": "Photo taking failed, payload not installed.",
+        "zh": "拍照失败，未安装载荷"
+    },
+    "227": {
+        "en": "Photo taking failed, no storage card installed.",
+        "zh": "拍照失败，未安装存储卡"
+    },
+    "257": {
+        "en": "Cannot start wayline when wayline running.",
+        "zh": "飞机正在航线中，重复执行航线"
+    },
+    "258": {
+        "en": "Cannot break wayline in current state. ",
+        "zh": "在当前状态下无法中断航线"
+    },
+    "259": {
+        "en": "Cannot stop wayline when wayline not running. ",
+        "zh": "航线未运行时不能停止航线"
+    },
+    "260": {
+        "en": "Cannot break wayline when wayline not running. ",
+        "zh": "航线未运行时不能暂停航线"
+    },
+    "261": {
+        "en": "Flight mission conflict, unable to obtain control auth of the aircraft. ",
+        "zh": "飞行任务冲突，无法获得飞机的控制权限"
+    },
+    "262": {
+        "en": "Failed to resume wayline in current state. ",
+        "zh": "当前状态下恢复航线失败"
+    },
+    "513": {
+        "en": "Execute waypoint v3 failed due to height limit.",
+        "zh": "执行V3航线失败由于航点高度超过区域限高"
+    },
+    "514": {
+        "en": "Execute waypoint v3 failed due to radius limit.",
+        "zh": "执行V3航线失败由于航线距离超过区域限远"
+    },
+    "515": {
+        "en": "Execute waypoint v3 failed due to cross flylimit area.",
+        "zh": "执行V3航线失败由于航线路径跨越禁飞区"
+    },
+    "516": {
+        "en": "Execute waypoint v3 failed due to low limit.",
+        "zh": "执行V3航线失败由于航点高度低于区域最小飞行高度"
+    },
+    "517": {
+        "en": "Execute waypoint v3 failed due to obstacal stop.",
+        "zh": "执行V3航线失败由于障碍物"
+    },
+    "518": {
+        "en": "Execute waypoint v3 failed due to rtk disconnect.",
+        "zh": "执行V3航线失败由于rtk断开连接"
+    },
+    "519": {
+        "en": "Execute waypoint v3 failed due to boundary limit.",
+        "zh": "执行V3航线失败由于禁飞区边界限制"
+    },
+    "520": {
+        "en": "Execute waypoint v3 failed due to rc pitch roll break.",
+        "zh": "执行V3航线失败由于遥控器失灵"
+    },
+    "521": {
+        "en": "Execute waypoint v3 failed due to airport height limit.",
+        "zh": "执行V3航线失败由于机场高度限制"
+    },
+    "522": {
+        "en": "Failed to request take off.",
+        "zh": "V3航线请求起飞失败"
+    },
+    "523": {
+        "en": "Failed to run auto take off.",
+        "zh": "V3航线自动起飞失败"
+    },
+    "524": {
+        "en": "Failed to request wayline. ",
+        "zh": "V3航线请求执行失败"
+    },
+    "525": {
+        "en": "Failed to agro plan.",
+        "zh": "计划航线执行失败"
+    },
+    "526": {
+        "en": "Failed to request quick take off assist.",
+        "zh": "请求快速起飞协助失败"
+    },
+    "527": {
+        "en": "Failed to run quick takeoff assist. ",
+        "zh": "快速起飞协助失败"
+    },
+    "528": {
+        "en": "Execute waypoint v3 failed due to vfence limit.",
+        "zh": "执行V3航线失败由于防御限制"
+    },
+    "769": {
+        "en": "Execute waypoint v3 failed due to gps invalid.",
+        "zh": "执行V3航线失败由于gps无效"
+    },
+    "770": {
+        "en": "Failed to start at current rc mode. ",
+        "zh": "执行V3航线失败由于遥控器档位模式"
+    },
+    "771": {
+        "en": "Execute waypoint v3 failed due to homepoint not recorded. ",
+        "zh": "执行V3航线失败由于返航点记录失败"
+    },
+    "772": {
+        "en": "Execute waypoint v3 failed due to lower battery. ",
+        "zh": "执行V3航线失败由于电量过低"
+    },
+    "773": {
+        "en": "Execute waypoint v3 failed due to return home.",
+        "zh": "执行V3航线失败由于返航"
+    },
+    "774": {
+        "en": "Execute waypoint v3 failed due to adsb error.",
+        "zh": "执行V3航线失败由于adsb错误"
+    },
+    "775": {
+        "en": "Execute waypoint v3 failed due to rc lost.",
+        "zh": "执行V3航线失败由于遥控器失联"
+    },
+    "776": {
+        "en": "Execute waypoint v3 failed due to rtk not ready.",
+        "zh": "执行V3航线失败由于rtk未准备好"
+    },
+    "777": {
+        "en": "Execute waypoint v3 failed due to drone is moving.",
+        "zh": "执行V3航线失败由于无人机正在移动"
+    },
+    "778": {
+        "en": "Execute waypoint v3 failed due to drone on ground motor on.",
+        "zh": "执行V3航线失败由于无人机在地面上，且电机已打开"
+    },
+    "779": {
+        "en": "Execute waypoint v3 failed due to surface follow camera invalid.",
+        "zh": "执行V3航线失败由于地面跟随相机无效"
+    },
+    "780": {
+        "en": "Execute waypoint v3 failed due to surface follow height invalid.",
+        "zh": "执行V3航线失败由于地面跟随高度无效"
+    },
+    "781": {
+        "en": "Execute waypoint v3 failed due to surface follow map wrong.",
+        "zh": "执行V3航线失败由于地面跟随地图错误"
+    },
+    "782": {
+        "en": "Execute waypoint v3 failed due to homepoint not match rtk.",
+        "zh": "执行V3航线失败由于返航点与rtk不一致"
+    },
+    "784": {
+        "en": "Execute waypoint v3 failed due to strong wind gohome.",
+        "zh": "执行V3航线失败由于风速过大"
+    },
+    "999": {
+        "en": "Uploading new routes is not allowed during route flights.",
+        "zh": "航线飞行中不允许上传新航线"
+    },
+    "1000": {
+        "en": "Incorrect formatting of routes.",
+        "zh": "航线格式错误"
+    },
+    "1001": {
+        "en": "Download Route Failure.",
+        "zh": "下载航线失败"
+    },
+    "1023": {
+        "en": "Execute waypoint v3 failed due to drone critical error. ",
+        "zh": "执行V3航线失败由于无人机严重错误"
+    },
+    "1025": {
+        "en": "Execute waypoint v3 failed due to cannot find payload.",
+        "zh": "执行V3航线失败由于无法找到有效载荷"
+    },
+    "1026": {
+        "en": "Execute waypoint v3 failed due to action execution failed.",
+        "zh": "执行V3航线失败由于操作执行失败"
+    },
+    "1027": {
+        "en": "Execute waypoint v3 failed due to farm no pesticide. ",
+        "zh": "执行V3航线失败由于未装载农药"
+    },
+    "1028": {
+        "en": "Execute waypoint v3 failed due to radar disconnect.",
+        "zh": "执行V3航线失败由于雷达异常断开"
+    },
+    "1200": {
+        "en": "M210 stop route error.",
+        "zh": "M210停止航线出错"
+    },
+    "1281": {
+        "en": "Execute waypoint v3 failed due to user exit.",
+        "zh": "执行V3航线失败由于用户退出"
+    },
+    "1282": {
+        "en": "Execute waypoint v3 failed due to user break.",
+        "zh": "执行V3航线失败由于用户中断"
+    },
+    "1283": {
+        "en": "Execute waypoint v3 failed due to user set gohome.",
+        "zh": "执行V3航线失败由于用户设置返航点"
+    },
+    "1284": {
+        "en": "Execute waypoint v3 failed due to user agro panner state change.",
+        "zh": "执行V3航线失败由于用户agro计划器状态更改"
+    },
+    "1285": {
+        "en": "Execute waypoint v3 failed due to user switch rc mode.",
+        "zh": "执行V3航线失败由于切换遥控器模式"
+    },
+    "1536": {
+        "en": "Execute waypoint v3 failed due to traj init failed.",
+        "zh": "执行V3航线失败由于航线轨迹初始化失败"
+    },
+    "1537": {
+        "en": "Execute waypoint v3 failed due to traj job exit but mis running. ",
+        "zh": "执行V3航线失败由于航线轨迹异常退出"
+    },
+    "1538": {
+        "en": "Execute waypoint v3 failed due to traj on ground motor is turn on.",
+        "zh": "执行V3航线失败由于在地面，且电机已打开"
+    },
+    "1539": {
+        "en": "Execute waypoint v3 failed due to traj invalid start index.",
+        "zh": "执行V3航线失败由于航线轨迹起始索引无效"
+    },
+    "1540": {
+        "en": "Execute waypoint v3 failed due to traj invalid csys mode.",
+        "zh": "执行V3航线失败由于航线轨迹的csys模式无效"
+    },
+    "1541": {
+        "en": "Execute waypoint v3 failed due to traj invalid height mode.",
+        "zh": "执行V3航线失败由于航线轨迹高度模式无效"
+    },
+    "1542": {
+        "en": "Execute waypoint v3 failed due to traj invalid fly wp mode.",
+        "zh": "执行V3航线失败由于航线轨迹航点无效"
+    },
+    "1543": {
+        "en": "Execute waypoint v3 failed due to traj invalid yaw mode.",
+        "zh": "执行V3航线失败由于航线轨迹偏航模式无效"
+    },
+    "1544": {
+        "en": "Execute waypoint v3 failed due to traj invalid turn dir mode.",
+        "zh": "执行V3航线失败由于航线轨迹模式无效"
+    },
+    "1545": {
+        "en": "Execute waypoint v3 failed due to traj invalid wp type. ",
+        "zh": "执行V3航线失败由于航线轨迹航点类型无效"
+    },
+    "1546": {
+        "en": "Execute waypoint v3 failed due to fir las wp type error.",
+        "zh": "执行V3航线失败由于第一个航点类型错误"
+    },
+    "1547": {
+        "en": "Execute waypoint v3 failed due to traj wp global vel out of range.",
+        "zh": "执行V3航线失败由于航线全局水平超出范围"
+    },
+    "1548": {
+        "en": "Execute waypoint v3 failed due to traj wp num out of range. ",
+        "zh": "执行V3航线失败由于航点数量超出范围"
+    },
+    "1549": {
+        "en": "Execute waypoint v3 failed due to traj lat or lon out of range.",
+        "zh": "执行V3航线失败由于航点经度或者维度超出范围"
+    },
+    "1550": {
+        "en": "Execute waypoint v3 failed due to traj damp dis out of range.",
+        "zh": "执行V3航线失败由于转弯半径超出范围"
+    },
+    "1551": {
+        "en": "Execute waypoint v3 failed due to traj max vel out of range. ",
+        "zh": "执行V3航线失败由于航线最大水平超出范围"
+    },
+    "1552": {
+        "en": "Execute waypoint v3 failed due to traj vel out of range.",
+        "zh": "执行V3航线失败由于航线超出范围"
+    },
+    "1553": {
+        "en": "Execute waypoint v3 failed due to traj wp yaw out of range. ",
+        "zh": "执行V3航线失败由于航迹偏航超出范围"
+    },
+    "1554": {
+        "en": "Execute waypoint v3 failed due to traj invalid yaw mode in vert segm. ",
+        "zh": "执行V3航线失败由于航线偏航模式无效"
+    },
+    "1555": {
+        "en": "Execute waypoint v3 failed due to traj wp break info mission id changed.",
+        "zh": "执行V3航线失败由于航线中断信息任务id改变"
+    },
+    "1556": {
+        "en": "Execute waypoint v3 failed due to traj wp break info progress out of range.",
+        "zh": "执行V3航线失败由于航线中断信息进度超出范围"
+    },
+    "1557": {
+        "en": "Execute waypoint v3 failed due to traj wp break info invalid mission state.",
+        "zh": "执行V3航线失败由于航线中断信息无效"
+    },
+    "1558": {
+        "en": "Execute waypoint v3 failed due to traj wp break info wp index out of range.",
+        "zh": "执行V3航线失败由于航线中断信息索引超出范围"
+    },
+    "1559": {
+        "en": "Execute waypoint v3 failed due to traj break lat or lon out of range.",
+        "zh": "执行V3航线失败由于航线中断经度或者维度超出范围"
+    },
+    "1560": {
+        "en": "Execute waypoint v3 failed due to traj break info wp yaw out of range.",
+        "zh": "执行V3航线失败由于航线中断信息偏离航线范围"
+    },
+    "1561": {
+        "en": "Execute waypoint v3 failed due to traj invalid break info flag. ",
+        "zh": "执行V3航线失败由于航迹无效中断信息标志"
+    },
+    "1562": {
+        "en": "Execute waypoint v3 failed due to traj get info failed.",
+        "zh": "执行V3航线失败由于获取航线信息失败"
+    },
+    "1563": {
+        "en": "Execute waypoint v3 failed due to traj generate failed.",
+        "zh": "执行V3航线失败由于航迹生成失败"
+    },
+    "1564": {
+        "en": "Execute waypoint v3 failed due to traj lib run failed.",
+        "zh": "执行V3航线失败由于航线lib库运行失败"
+    },
+    "1565": {
+        "en": "Execute waypoint v3 failed due to traj lib emergency brake.",
+        "zh": "执行V3航线失败由于紧急制动"
+    },
+    "1588": {
+        "en": "Execute waypoint v3 failed due to action not found.",
+        "zh": "执行V3航线失败由于动作点执行异常"
+    },
+    "1591": {
+        "en": "Execute waypoint v3 failed due to action index repeated.",
+        "zh": "执行V3航线失败由于动作点索引重复"
+    },
+    "1592": {
+        "en": "Execute waypoint v3 failed due to size too long or too short.",
+        "zh": "执行V3航线失败由于航线大小太长或太短"
+    },
+    "1593": {
+        "en": "Execute waypoint v3 failed due to action tree empty.",
+        "zh": "执行V3航线失败由于动作点树为空"
+    },
+    "1594": {
+        "en": "Execute waypoint v3 failed due to action tree layer empty.",
+        "zh": "执行V3航线失败由于动作点树层为空"
+    },
+    "1595": {
+        "en": "Execute waypoint v3 failed due to action repeated.",
+        "zh": "执行V3航线失败由于动作点重复"
+    },
+    "1596": {
+        "en": "Execute waypoint v3 failed due to action mode children num less than 2.",
+        "zh": "执行V3航线失败由于操作模式子数小于2"
+    },
+    "1597": {
+        "en": "Execute waypoint v3 failed due to action index out of range.",
+        "zh": "执行V3航线失败由于动作点索引超出范围"
+    },
+    "1598": {
+        "en": "Execute waypoint v3 failed due to action id is 65535.",
+        "zh": "执行V3航线失败由于动作点ID为65535"
+    },
+    "1599": {
+        "en": "Execute waypoint v3 failed due to action node child sum not equal next layer size.",
+        "zh": "执行V3航线失败由于动作子节点不一致"
+    },
+    "1600": {
+        "en": "Execute waypoint v3 failed due to action tree layer num too more.",
+        "zh": "执行V3航线失败由于动作树层数过多"
+    },
+    "1601": {
+        "en": "Execute waypoint v3 failed due to action tree layer num too less.",
+        "zh": "执行V3航线失败由于动作树层数太少"
+    },
+    "1602": {
+        "en": "Execute waypoint v3 failed due to action group num out of range. ",
+        "zh": "执行V3航线失败由于动作组超出范围"
+    },
+    "1603": {
+        "en": "Execute waypoint v3 failed due to action group valid range error.",
+        "zh": "执行V3航线失败由于动作组有效范围错误"
+    },
+    "1604": {
+        "en": "Execute waypoint v3 failed due to action tree root status invalid.",
+        "zh": "执行V3航线失败由于动作树根状态无效"
+    },
+    "1605": {
+        "en": "Execute waypoint v3 failed due to action tree mode status invalid. ",
+        "zh": "执行V3航线失败由于动作树模式状态无效"
+    },
+    "1606": {
+        "en": "Execute waypoint v3 failed due to break info action group id out of range. ",
+        "zh": "执行V3航线失败由于中断信息动作组id超出范围"
+    },
+    "1607": {
+        "en": "Execute waypoint v3 failed due to action status tree size error.",
+        "zh": "执行V3航线失败由于动作状态树大小错误"
+    },
+    "1608": {
+        "en": "Execute waypoint v3 failed due to break info trigger run result invalid.",
+        "zh": "执行V3航线失败由于中断信息触发运行结果无效"
+    },
+    "1609": {
+        "en": "Execute waypoint v3 failed due to break info action group id repeated. ",
+        "zh": "执行V3航线失败由于中断信息动作组id重复"
+    },
+    "1610": {
+        "en": "Execute waypoint v3 failed due to break info action location repeated.",
+        "zh": "执行V3航线失败由于中断信息动作位置重复"
+    },
+    "1611": {
+        "en": "Execute waypoint v3 failed due to break info action location out of range.",
+        "zh": "执行V3航线失败由于中断信息动作位置超出范围"
+    },
+    "1612": {
+        "en": "Execute waypoint v3 failed due to resume id not in break info. ",
+        "zh": "执行V3航线失败由于恢复id不在中断信息中"
+    },
+    "1613": {
+        "en": "Execute waypoint v3 failed due to modify action status from no interrupt to interrupt.",
+        "zh": "执行V3航线失败由于将动作状态从无中断修改为中断"
+    },
+    "1614": {
+        "en": "Execute waypoint v3 failed due to action resume failed for invalid resume info.",
+        "zh": "执行V3航线失败由于无效的恢复信息"
+    },
+    "1626": {
+        "en": "Incorrect parameters for switching video sources.",
+        "zh": "切换视频源参数不正确"
+    },
+    "1634": {
+        "en": "Execute waypoint v3 failed due to actuator not found.",
+        "zh": "执行V3航线失败由于未找到航点动作执行器"
+    },
+    "1649": {
+        "en": "Execute waypoint v3 failed due to trigger not found.",
+        "zh": "执行V3航线失败由于未找到航点动作触发器"
+    },
+    "1650": {
+        "en": "Execute waypoint v3 failed due to single time check failed. ",
+        "zh": "执行V3航线失败由于单次检查失败"
+    },
+    "1700": {
+        "en": "M210 start route error.",
+        "zh": "M210开始航线出错"
+    },
+    "1701": {
+        "en": "Failed to start the course, do not start the course again during the course.",
+        "zh": "开始航线失败,航线中请勿重复开始航线"
+    },
+    "1800": {
+        "en": "M210 Pause Route Error.",
+        "zh": "M210暂停航线出错"
+    },
+    "1801": {
+        "en": "Failed to pause the route,1:Please return to the flight after restarting the cloud box 2:Doesn't support to pause the route opened by RC.",
+        "zh": "暂停航线失败,1：重启云盒后请返航 2：不支持暂停遥控器开启的航线"
+    },
+    "1802": {
+        "en": "Failed to pause a route. Pause an unstarted route.",
+        "zh": "暂停航线失败,暂停一个未开始的航线"
+    },
+    "1900": {
+        "en": "M210 continue route error.",
+        "zh": "M210继续航线出错"
+    },
+    "1901": {
+        "en": "Failed to continue at breakpoint. Please terminate course.",
+        "zh": "断点续飞失败,请结束航线"
+    },
+    "1902": {
+        "en": "Safe return failed. Please take over manually.",
+        "zh": "安全返航失败,请手动接管返航"
+    },
+    "1903": {
+        "en": "Failed to recovery the route,1:Please return to the flight after restarting the cloud box 2:Doesn't support to pause the route opened by RC.",
+        "zh": "恢复航线失败,1：重启云盒后请返航 2：不支持恢复遥控器暂停的航线"
+    },
+    "2000": {
+        "en": "Failed to stop the route,1:Please return to the flight after restarting the cloud box 2:Doesn't support to pause the route opened by RC.",
+        "zh": "停止航线失败,1：重启云盒后请返航 2：不支持停止遥控器开启的航线"
+    },
+    "2121": {
+        "en": "Incorrect modification of return altitude parameter.",
+        "zh": "修改返航高度参数不正确"
+    },
+    "2200": {
+        "en": "Modify camera mode command error.",
+        "zh": "修改相机模式指令错误"
+    },
+    "2222": {
+        "en": "Modifying camera mode parameters incorrectly.",
+        "zh": "修改相机模式参数不正确"
+    },
+    "2400": {
+        "en": "Start recording in non-recording mode.",
+        "zh": "非录像模式下开始录像"
+    },
+    "2500": {
+        "en": "Stop recording when not recording.",
+        "zh": "非录像中停止录像"
+    },
+    "2600": {
+        "en": "Failed to switch to wide-angle video source, please check if the load has this function.",
+        "zh": "切换广角视频源失败,请确认载荷是否有该功能"
+    },
+    "2601": {
+        "en": "Failed to switch the zoom video source, please check if the load has this function.",
+        "zh": "切换变焦视频源失败,请确认载荷是否有该功能"
+    },
+    "2602": {
+        "en": "Failed to switch the infrared source, please check if the load has this function.",
+        "zh": "切换红外视频源失败,请确认载荷是否有该功能"
+    },
+    "2727": {
+        "en": "Switching camera parameters incorrectly.",
+        "zh": "切换摄像头参数不正确"
+    },
+    "3100": {
+        "en": "Failed to set landing point, get aircraft home point status error.",
+        "zh": "设置降落点失败,获取飞机HOME点状态异常"
+    },
+    "3131": {
+        "en": "Incorrectly set landing point parameters.",
+        "zh": "设置降落点参数不正确"
+    },
+    "5000": {
+        "en": "The video source cannot be switched while using QR code landing.",
+        "zh": "正在二维码降落中,禁止切换视频源"
+    },
+    "5001": {
+        "en": "QR code landing in process, camera mode change not allowed. ",
+        "zh": "正在二维码降落中,禁止修改相机模式"
+    },
+    "5002": {
+        "en": "Aircraft not in Go Home status, do not cancel Go Home.",
+        "zh": "当前飞行器不在返航中,请勿执行取消返航"
+    },
+    "5003": {
+        "en": "Failed to download V3 route",
+        "zh": "下载V3航线失败"
+    },
+    "5004": {
+        "en": "Aircraft on the ground, no need to Go Home.",
+        "zh": "飞行器在地面,无需返航"
+    },
+    "5005": {
+        "en": "Go Home in process",
+        "zh": "飞行器正在返航中"
+    },
+    "5006": {
+        "en": "Do not repeat start recording",
+        "zh": "请勿重复开始录像"
+    },
+    "5007": {
+        "en": "Failed to resume a route, trying to resume an unstarted route.",
+        "zh": "恢复航线失败,恢复一个未开始的航线"
+    },
+    "5008": {
+        "en": "Failed to stop a route, trying to stop an unstarted route.",
+        "zh": "停止航线失败,停止一个未开始的航线"
+    },
+    "5009": {
+        "en": "Cloudbox firmware is being upgraded. No takeoff.",
+        "zh": "云盒固件升级中,禁止起飞"
+    },
+    "5010": {
+        "en": "Cloudbox firmware is being upgraded. No start.",
+        "zh": "云盒固件升级中,禁止开始航线"
+    },
+    "5011": {
+        "en": "Cloudbox firmware does not support laser ranging, please contact technical support.",
+        "zh": "云盒固件不支持激光测距,请联系技术支持"
+    },
+    "6000": {
+        "en": "Click To Fly enabled",
+        "zh": "指点飞行开始成功"
+    },
+    "6001": {
+        "en": "Click To Fly target change successful.",
+        "zh": "指点飞行中途变更目标点成功"
+    },
+    "6002": {
+        "en": "Click To Fly disabled",
+        "zh": "停止指点飞行成功"
+    },
+    "6003": {
+        "en": "Manual focus succeeded",
+        "zh": "手动对焦成功"
+    },
+    "6004": {
+        "en": "Starting QR Code landing with payload camera",
+        "zh": "开始载荷精准降落"
+    },
+    "6005": {
+        "en": "Starting QR Code landing with bottom vision",
+        "zh": "开始下视精准降落"
+    },
+    "6006": {
+        "en": "The QR code is recognized successfully, the automatic landing will be canceled and start QR code landing.",
+        "zh": "二维码识别成功,即将取消自动降落进入二维码引导降落"
+    },
+    "6007": {
+        "en": "Successful precision landing.",
+        "zh": "精准降落成功"
+    },
+    "6008": {
+        "en": "Stop QR Code landing",
+        "zh": "停止精准降落"
+    },
+    "6009": {
+        "en": "Aircraft power off",
+        "zh": "无人机已关机"
+    },
+    "6010": {
+        "en": "Route execution completed",
+        "zh": "航线执行完成"
+    },
+    "6011": {
+        "en": "Reached assigned point, distance flight complete.",
+        "zh": "指定距离飞行完成,已到达目标点"
+    },
+    "6012": {
+        "en": "Assigned distance flight started successfully",
+        "zh": "指定距离飞行开始成功"
+    },
+    "6013": {
+        "en": "Successful change of target point in the middle of mission",
+        "zh": "指定距离飞行中途变更目标点成功"
+    },
+    "6014": {
+        "en": "Successful stopping of distance flight",
+        "zh": "停止指定距离飞行成功"
+    },
+    "6015": {
+        "en": "Real-time image transmission module initialized successfully",
+        "zh": "图片实时回传模块初始化成功"
+    },
+    "6016": {
+        "en": "Laser ranging started successfully.",
+        "zh": "开始激光测距成功"
+    },
+    "6017": {
+        "en": "Laser ranging ended successfully",
+        "zh": "结束激光测距成功"
+    },
+    "6018": {
+        "en": "Successful start of single-point temperature measurement",
+        "zh": "开始单点测温成功"
+    },
+    "6019": {
+        "en": "Successful end of single-point temperature measurement",
+        "zh": "结束单点测温成功"
+    },
+    "6020": {
+        "en": "Successful start area temperature measurement",
+        "zh": "开始区域测温成功"
+    },
+    "6021": {
+        "en": "Successful end area temperature measurement",
+        "zh": "结束区域测温成功"
+    },
+    "7001": {
+        "en": "Payload does not support switching video sources",
+        "zh": "载荷不支持切换视频源"
+    },
+    "7002": {
+        "en": "Switching video sources is not supported in FPV video",
+        "zh": "FPV视频中不支持切换视频源"
+    },
+    "7003": {
+        "en": "QR code landing in progress, unable to conrol payload.",
+        "zh": "正在二维码降落中,禁止控制载荷"
+    },
+    "7004": {
+        "en": "QR code landing in progress, unable to stop video.",
+        "zh": "正在二维码降落中,禁止关闭视频"
+    },
+    "7005": {
+        "en": "QR code landing in progress, unable to switch video stream",
+        "zh": "正在二维码降落中,禁止切换视频码流"
+    },
+    "7006": {
+        "en": "QR code landing in progress, unable to switch to FPV video.",
+        "zh": "正在二维码降落中,禁止切换FPV视频"
+    },
+    "7007": {
+        "en": "QR code landing in progress, unable to take picture.",
+        "zh": "正在二维码降落中,禁止拍照"
+    },
+    "7008": {
+        "en": "The current screen is already in FPV, please don't switch again.",
+        "zh": "当前画面已经是FPV,请勿重复切换"
+    },
+    "7009": {
+        "en": "The current screen is already in payload, please don't switch again.",
+        "zh": "当前画面已经是载荷,请勿重复切换"
+    },
+    "7010": {
+        "en": "Invalid operation, please get control first.",
+        "zh": "操控飞机无效,请先获取控制权"
+    },
+    "7011": {
+        "en": "Failed Click To Fly, please get control first.",
+        "zh": "指点飞行失败,请先获取控制权"
+    },
+    "7012": {
+        "en": "Failed Click To Fly, please take off first.",
+        "zh": "指点飞行失败,请将飞机升到空中"
+    },
+    "7013": {
+        "en": "Failed Click To Fly, target distance greater than 20KM",
+        "zh": "指点飞行失败,打点距离大于20KM"
+    },
+    "7014": {
+        "en": "Calibrating for precision landing, please do not use RC to control the payload.",
+        "zh": "精准降落校准载荷,请勿使用遥控器控制载荷"
+    },
+    "7015": {
+        "en": "This version of the cloud box firmware does not support the setup of PTZ mode, if you need to use it, please contact technical support to upgrade.",
+        "zh": "此版本云盒固件不支持设置云台模式,如需使用请联系技术支持升级"
+    },
+    "7016": {
+        "en": "The mission has been interrupted, Possible reasons [remote control shifting/aircraft forced return/network RTK signal loss/GPS signal loss].",
+        "zh": "航线任务已中断,可能原因【遥控器切挡/飞行器强制返航/网络RTK信号丢失/GPS信号丢失】"
+    },
+    "7017": {
+        "en": "The route mission has been stopped by remote controller.",
+        "zh": "航线任务已中断,遥控器取消航线"
+    },
+    "7018": {
+        "en": "The route mission stopped, please do not start the route with the motor on.",
+        "zh": "航线任务已中断,请勿在电机开启状态下开始航线"
+    },
+    "7019": {
+        "en": "The route mission stopped, automatic takeoff timeout",
+        "zh": "航线任务已中断,自动起飞超时"
+    },
+    "7020": {
+        "en": "The route mission stopped, automated takeoff did not reach predefined altitude",
+        "zh": "航线任务已中断,自动起飞未达到预定高度"
+    },
+    "7021": {
+        "en": "The route mission stopped, automated takeoff error.",
+        "zh": "航线任务已中断,自动起飞异常"
+    },
+    "7022": {
+        "en": "The route mission stopped, preempted by higher priority task.",
+        "zh": "航线任务已中断,被高优先级任务抢占"
+    },
+    "7023": {
+        "en": "The route mission stopped, unknown reason.",
+        "zh": "航线任务已中断,未知原因"
+    },
+    "7024": {
+        "en": "The route mission stopped, route plan failed.",
+        "zh": "航线任务已中断,航线规划失败"
+    },
+    "7025": {
+        "en": "Dock route plan failed, please check if take-off dock coordinate and alternate landing point coordinate set correctly.",
+        "zh": "机场航线规划失败,请检查起飞机场坐标和备降点坐标是否设置成功"
+    },
+    "7026": {
+        "en": "Dock route plan failed, please check if landing dock coordinate and alternate landing point coordinate set correctly.",
+        "zh": "机场航线规划失败,请检查降落机场坐标和备降点坐标是否设置成功"
+    },
+    "7027": {
+        "en": "Do not take off automatically during motor startup",
+        "zh": "电机启动中请勿自动起飞"
+    },
+    "7028": {
+        "en": "Do not take off automatically, aircraft is already in the air.",
+        "zh": "飞机已在空中请勿自动起飞"
+    },
+    "7029": {
+        "en": "Do not land automatically, aircraft is already on the ground.",
+        "zh": "飞机已在地面请勿自动降落"
+    },
+    "7030": {
+        "en": "Do not switch camera mode, please keep it in video mode during QR code precise landing.",
+        "zh": "正在二维码降落中,禁止切换载荷模式,请保持在录像模式下"
+    },
+    "7031": {
+        "en": "It is not allowed to get/release the joystick control  when the drone takes off. Suggestion: please do it before or after takeoff.",
+        "zh": "无人机起飞时不允许获取/释放操纵杆控制权限，建议:请在起飞前或起飞后进行操作"
+    },
+    "7032": {
+        "en": "It is not allowed to get/release the joystick control  when the drone landing. Suggestion: please do it before or after landed.",
+        "zh": "无人机降落时不允许获取/释放操纵杆控制权限，建议:请在降落前或降落后进行操作"
+    },
+    "7033": {
+        "en": "Failed to set altitude for one-click takeoff, please keep the remote controller connected with the aircraft for the first time to power on and take off.",
+        "zh": "一键起飞指定高度失败,飞行器首次上电起飞请保持遥控器与飞行器连接"
+    },
+    "7034": {
+        "en": "Do not apply emergency braking while the motor is starting.",
+        "zh": "电机启动中,请勿紧急制动"
+    },
+    "7035": {
+        "en": "Automatic takeoff failed. Please release the emergency brake first.",
+        "zh": "自动起飞失败,请先解除紧急制动"
+    },
+    "7036": {
+        "en": "Automatic go home failed. Please release the emergency brake first.",
+        "zh": "自动返航失败,请先解除紧急制动"
+    },
+    "7037": {
+        "en": "Automatic landing failed. Please release the emergency brake first.",
+        "zh": "自动降落失败,请先解除紧急制动"
+    },
+    "7038": {
+        "en": "Route start failed. Please release the emergency brake first.",
+        "zh": "开始任务失败,请先解除紧急制动"
+    },
+    "7039": {
+        "en": "Route resume failed. Please release the emergency brake first.",
+        "zh": "恢复任务失败,请先解除紧急制动"
+    },
+    "7040": {
+        "en": "Forced landing failed. Please release the emergency brake first.",
+        "zh": "强制降落失败,请先解除紧急制动"
+    },
+    "7041": {
+        "en": "Return to designated dock failed, aircraft detected on the ground.",
+        "zh": "返航到指定机场失败,检测到飞行器在地面"
+    },
+    "7042": {
+        "en": "Return to designated dock failed, aircraft is more than 20km away from dock.",
+        "zh": "返航到指定机场失败,飞机当前位置距离机场大于20KM"
+    },
+    "7043": {
+        "en": "Failed to return to the designated dock. Please release the emergency brake first.",
+        "zh": "返航到指定机场失败,请先解除紧急制动"
+    },
+    "7044": {
+        "en": "Click to fly failed, safe mode auto-takeoff failed.",
+        "zh": "打点飞行失败,安全模式自动起飞失败"
+    },
+    "7045": {
+        "en": "Click to fly failed, safe mode auto-takeoff time out.",
+        "zh": "打点飞行失败,安全模式自动起飞超时"
+    },
+    "7046": {
+        "en": "Click to fly failed, aircraft detected less than 3 meters from obstacles.",
+        "zh": "打点飞行失败,检测到飞行器距上障碍物距离小于3米"
+    },
+    "7047": {
+        "en": "Click to fly failed. Abnormal acquisition of aircraft control, please check the current aircraft mode.",
+        "zh": "打点飞行失败,获取飞机控制权异常,请检查当前飞机模式"
+    },
+    "7048": {
+        "en": "Click to fly failed. Please release the emergency brake first.",
+        "zh": "打点飞行失败,请先解除紧急制动"
+    },
+    "7049": {
+        "en": "Fly to given distance failed. Please release the emergency brake first.",
+        "zh": "指定距离飞行失败,请先解除紧急制动"
+    },
+    "7050": {
+        "en": "Fly to given distance failed. Abnormal acquisition of aircraft control, please check the current aircraft mode.",
+        "zh": "指定距离飞行失败,获取飞机控制权异常,请检查当前飞机模式"
+    },
+    "7051": {
+        "en": "Click to fly failed. Automatic takeoff failure in safe mode, the given point height cannot be less than 20 meters",
+        "zh": "打点飞行失败,安全模式自动起飞失败,打点高度不能小于20米"
+    },
+    "7052": {
+        "en": "Failed to return to the designated dock, the return altitude should be [20~1500] meters.",
+        "zh": "返航到指定机场失败,返航高度设置不正确,范围应在【20~1500】米"
+    },
+    "7053": {
+        "en": "Failed to modify return altitude, return altitude  should be [20~1500] meters.",
+        "zh": "修改返航高度失败,返航高度设置不正确,范围应在【20~1500】米"
+    },
+    "7054": {
+        "en": "Failed to turn on laser ranging, GPS signal weak, please move to an open area.",
+        "zh": "开启激光测距失败,GPS信号弱,请移至空旷地"
+    },
+    "7055": {
+        "en": "Failed to start single-point temperature measurement, failed to set single-point temperature measurement coordinates.",
+        "zh": "开始单点测温失败,设定单点测温坐标失败"
+    },
+    "7056": {
+        "en": "Failed to start area temperature measurement, failed to set area temperature measurement coordinates.",
+        "zh": "开始区域测温失败,设定区域测温坐标失败"
+    },
+    "7057": {
+        "en": "Click to fly failed, safe mode auto takeoff failed, GPS signal is weak, please move to an open area.",
+        "zh": "打点飞行失败,安全模式自动起飞失败,GPS信号弱,请移至空旷地"
+    },
+    "7058": {
+        "en": "The aircraft is on the ground. Do not force it to land.",
+        "zh": "飞行器已在地面请勿强制降落"
+    },
+    "7059": {
+        "en": "Cloudbox firmware version old, not support this function, please contact technical support to upgrade remotely.",
+        "zh": "云盒固件版本过低,不支持此功能,请联系技术支持远程升级"
+    },
+    "7060": {
+        "en": "Starting the route failed, please cancel the return flight first.",
+        "zh": "开始航线失败,请先取消返航"
+    },
+    "7061": {
+        "en": "Starting the route failed, please cancel the landing first.",
+        "zh": "开始航线失败,请先取消降落"
+    },
+    "7062": {
+        "en": "The scheduled flight failed. Please cancel the return flight first.",
+        "zh": "打点飞行失败,请先取消返航"
+    },
+    "7063": {
+        "en": "The scheduled flight failed, please cancel the landing first.",
+        "zh": "打点飞行失败,请先取消降落"
+    },
+    "7064": {
+        "en": "Failed to return to the designated airport, please cancel the landing first.",
+        "zh": "返航到指定机场失败,请先取消降落"
+    },
+    "7065": {
+        "en": "Switching FPV failed, the aircraft has no FPV lens.",
+        "zh": "切换FPV失败,飞行器无FPV镜头"
+    },
+    "7066": {
+        "en": "The real-time image retrieval function has failed. After the remote control format is completed, please restart the cloud box or aircraft.",
+        "zh": "图片实时回传功能已失效,遥控器格式完相机后请重启云盒或飞机"
+    },
+    "8000": {
+        "en": "Obstacle avoidance triggered in the middle of the route, passive trigger to pause.",
+        "zh": "航线中触发避障,被动触发暂停航线"
+    },
+    "8001": {
+        "en": "Click to fly exit, return or landing or forced landing status detected.",
+        "zh": "指点飞行退出,检测到返航或降落或强制降落状态"
+    },
+    "8002": {
+        "en": "Click to fly exit, aircraft detected on the ground",
+        "zh": "指点飞行退出,检测到飞机在地面"
+    },
+    "8003": {
+        "en": "The initialization of the real-time image transfer function is abnormal, please check whether the payload TF card is installed correctly.",
+        "zh": "初始化图片实时回传功能异常,请检查载荷TF卡是否安装"
+    },
+    "8004": {
+        "en": "The initialization of the real-time image transfer function is abnormal.",
+        "zh": "初始化图片实时回传功能异常"
+    },
+    "8005": {
+        "en": "Dock cover opening time out, about to approach the alternate landing point.",
+        "zh": "机场开仓超时,即将降落至备降点"
+    },
+    "8006": {
+        "en": "Dock cover opening failed, about to approach the alternate landing point.",
+        "zh": "机场开仓失败,即将降落至备降点"
+    },
+    "8007": {
+        "en": "QR code recognition time out, about to approach the alternate landing point.",
+        "zh": "二维码识别超时,即将降落至备降点"
+    },
+    "8008": {
+        "en": "QR code recognition time out, please switch to manual control",
+        "zh": "二维码识别超时,请人工接管"
+    },
+    "8009": {
+        "en": "QR code precision landing initialization failed, please check payload model",
+        "zh": "二维码精准降落初始化失败,请检查载荷类型"
+    },
+    "8010": {
+        "en": "The QR code is not recognized. About to land at the alternate landing point.",
+        "zh": "未识别到二维码,即将降落至备降点"
+    },
+    "8011": {
+        "en": "Passive return detected in QR code landing, please pay attention to aircraft battery level, take over with remote controller when necessary.",
+        "zh": "二维码降落中检测到被动返航,请注意飞机电量,必要时遥控器接管"
+    },
+    "8012": {
+        "en": "Cloud Box control lost, MSDK program seize control, risk of crash, please take over by remote controller.",
+        "zh": "云盒控制权丢失,MSDK程序抢夺控制权,有炸机风险请遥控器接管"
+    },
+    "8013": {
+        "en": "Cloud Box control lost, remote controller lost, reset.",
+        "zh": "云盒控制权丢失,遥控器失联重置"
+    },
+    "8014": {
+        "en": "Cloud Box control lost, remote controller not in P mode",
+        "zh": "云盒控制权丢失,遥控器非P挡"
+    },
+    "8015": {
+        "en": "Cloud Box control lost, remote controller mode switched.",
+        "zh": "云盒控制权丢失,遥控器切挡"
+    },
+    "8016": {
+        "en": "Cloud Box control lost, remote controller triggered pause.",
+        "zh": "云盒控制权丢失,遥控器暂停触发"
+    },
+    "8017": {
+        "en": "Cloud Box control lost, remote controller triggered Go Home.",
+        "zh": "云盒控制权丢失,遥控器触发返航"
+    },
+    "8018": {
+        "en": "Cloud Box control lost, aircraft Go Home by low battery, take caution to safety",
+        "zh": "云盒控制权丢失,飞机触发低电量返航,请注意安全"
+    },
+    "8019": {
+        "en": "Cloud Box control lost, aircraft forced landing by low battery, take caution to safety.",
+        "zh": "云盒控制权丢失,飞机触发低电量强制降落,请注意安全"
+    },
+    "8020": {
+        "en": "Cloud Box control lost, OSDK lost connection, please take control with remote controller.",
+        "zh": "云盒控制权丢失,OSDK断连,请遥控器接管飞机"
+    },
+    "8021": {
+        "en": "Cloud Box control lost, approaching GEO fence, please check airspace permission.",
+        "zh": "云盒控制权丢失,到达禁飞区边界,请确认空域"
+    },
+    "8022": {
+        "en": "The distance between the aircraft and the obstacle in front is less than 3 meters. Please fly with caution",
+        "zh": "飞机距前障碍物距离小于3米,请谨慎飞行"
+    },
+    "8023": {
+        "en": "The distance between the aircraft and the obstacle in right is less than 3 meters. Please fly with caution",
+        "zh": "飞机距右障碍物距离小于3米,请谨慎飞行"
+    },
+    "8024": {
+        "en": "The distance between the aircraft and the obstacle in backward is less than 3 meters. Please fly with caution",
+        "zh": "飞机距后障碍物距离小于3米,请谨慎飞行"
+    },
+    "8025": {
+        "en": "The distance between the aircraft and the obstacle in left is less than 3 meters. Please fly with caution",
+        "zh": "飞机距左障碍物距离小于3米,请谨慎飞行"
+    },
+    "8026": {
+        "en": "The distance between the aircraft and the obstacle above is less than 3 meters. Please fly with caution",
+        "zh": "飞机距上障碍物距离小于3米,请谨慎飞行"
+    },
+    "8027": {
+        "en": "The video codec module is abnormal, start to send the original picture, please do not use the remote controller to check the load media library for a long time.",
+        "zh": "视频编解码模块异常,开始发送原画,请不要用遥控器长时间查看载荷媒体库"
+    },
+    "8028": {
+        "en": "The video codec module is abnormal, about to approach the alternate landing point.",
+        "zh": "视频编解码模块异常,即将降落至备降点"
+    },
+    "8029": {
+        "en": "Click to fly exited, cloud box has no control.",
+        "zh": "指点飞行退出,检测到云盒无控制权"
+    },
+    "8030": {
+        "en": "The distance from the take-off dock to the alternate landing point is not reasonable, the range should be [5~500] meters, please reset it.",
+        "zh": "起飞机场备降点距机场距离不合理,范围应在【5~500】米,请重新设置"
+    },
+    "8031": {
+        "en": "The distance from the landing dock to the alternate landing point is not reasonable, the range should be [5~500] meters, please reset it.",
+        "zh": "降落机场备降点距机场距离不合理,范围应在【5~500】米,请重新设置"
+    },
+    "8032": {
+        "en": "One-click takeoff to given altitude exit, manual interruption of aircraft takeoff and elevation detected.",
+        "zh": "一键起飞指定高度退出,检测到手动中断飞机起飞升高"
+    },
+    "8033": {
+        "en": "One-click takeoff to given altitude exit, detected aircraft from upper obstacles less than 3 meters.",
+        "zh": "一键起飞指定高度退出,检测到飞行器距上障碍物距离小于3米"
+    },
+    "8034": {
+        "en": "One-click takeoff to given altitude exit, cloud box has no control.",
+        "zh": "一键起飞指定高度退出,检测到云盒无控制权"
+    },
+    "8035": {
+        "en": "One-click landing to given altitude exit, aircraft has cancelled landing.",
+        "zh": "一键降落指定高度退出,飞行器已取消降落"
+    },
+    "8036": {
+        "en": "One-click landing to given altitude exit, detected aircraft from bottom obstacles less than 10 meters.",
+        "zh": "一键降落指定高度退出,检测到飞行器距下障碍物距离小于10米"
+    },
+    "8037": {
+        "en": "Fly to given distance exit, detected aircraft not in air.",
+        "zh": "距离控制飞行退出,检测到飞行器不在空中"
+    },
+    "8038": {
+        "en": "Fly to given distance exit, detected cloud box lost control.",
+        "zh": "距离控制飞行退出,检测到云盒丢失控制权"
+    },
+    "8039": {
+        "en": "Fly to given distance exit, detected aircraft in Go Home.",
+        "zh": "距离控制飞行退出,检测到飞行器返航"
+    },
+    "8040": {
+        "en": "Fly to given distance exit, detected aircraft in landing.",
+        "zh": "距离控制飞行退出,检测到飞行器降落"
+    },
+    "8041": {
+        "en": "Fly to given distance exit, detected that the maximum control duration has been reached.",
+        "zh": "距离控制飞行退出,检测到已到达最长控制时长"
+    },
+    "8042": {
+        "en": "Aircraft is already outside GEO Fence, Controls are down. Return or land immediately.",
+        "zh": "飞行器已在自定义电子围栏外,控制已失效,请立即返航或降落"
+    },
+    "8043": {
+        "en": "Aircraft is already in no-fly zone, Controls are down. Return or land immediately.",
+        "zh": "飞行器已在自定义禁飞区内,控制已失效,请立即返航或降落"
+    },
+    "8044": {
+        "en": "One-click takeoff to given altitude exit, emergency brake detected.",
+        "zh": "一键起飞指定高度退出,检测到紧急制动"
+    },
+    "8045": {
+        "en": "Click to fly exit, emergency brake detected.",
+        "zh": "打点飞行退出,检测到紧急制动"
+    },
+    "8046": {
+        "en": "Please do not control the aircraft while it is hovering and waiting for the dock cover to open.",
+        "zh": "飞行器悬停等待机场开仓中,请勿操控飞行器"
+    },
+    "8047": {
+        "en": "Distance control flight exit, emergency braking detected.",
+        "zh": "距离控制飞行退出,检测到紧急制动"
+    },
+    "65535": {
+        "en": "Fatal error! Unexpected results!",
+        "zh": "致命错误！意外结果！"
+    },
+    "65536": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "65537": {
+        "en": "The minimum initial waypoint value is set greater than the maximum allowed.",
+        "zh": "最小初始航点值设置大于允许的最大航点值"
+    },
+    "65538": {
+        "en": "Minimum initial waypoint value less than the minimum number of waypoints allowed",
+        "zh": "最小初始航点值小于允许的最小航点数量"
+    },
+    "65539": {
+        "en": "Waypoint endpoint index equal to or greater than the total number of waypoints",
+        "zh": "航点终点指数等于或大于总航点数"
+    },
+    "65540": {
+        "en": "The start index is greater than the end index of the uploaded route.",
+        "zh": "开始指数大于上传的航线的终点指数"
+    },
+    "65541": {
+        "en": "The uploaded waypoint endpoint index is greater than the total number of initial waypoints.",
+        "zh": "上传的航点终点指数大于初始航点总数"
+    },
+    "65542": {
+        "en": "The first and last waypoint indices expected to be downloaded are not stored in the FC.",
+        "zh": "预期下载的首尾航点指数不在FC中存储的范围内"
+    },
+    "65544": {
+        "en": "Current position is far away from first waypoint.",
+        "zh": "当前位置远离第一个航点"
+    },
+    "65546": {
+        "en": "Adjacent waypoints are too close and the results may differ from reality.",
+        "zh": "两个相邻航点过于接近，其结果可能与实际不同"
+    },
+    "65547": {
+        "en": "Adjsvent waypoints are not within [0.5m, 5000m] and the result may be different from the reality.",
+        "zh": "两个相邻的航点不在[0.5m，5000m]范围内，其结果可能与实际不同"
+    },
+    "65548": {
+        "en": "The maximum speed of the upload route is greater than the overall maximum speed.",
+        "zh": "上传航线的最大速度大于总体最大速度"
+    },
+    "65549": {
+        "en": "Local cruising speed of uploaded routes is greater than the local maximum speed limit.",
+        "zh": "上传航线的本地巡航速度大于本地最高限速"
+    },
+    "65550": {
+        "en": "Local cruise speed of uploaded routes is greater than the overall maximum speed limit.",
+        "zh": "上传航线的本地巡航速度大于总体最高限速"
+    },
+    "65551": {
+        "en": "Overall maximum speed greater than the permissible maximum speed or less than the permissible minimum speed",
+        "zh": "总体最大速度大于允许的最大速度或小于允许的最小速度"
+    },
+    "65552": {
+        "en": "Overall cruise speed greater than overall maximum speed",
+        "zh": "总体巡航速度大于总体最大速度"
+    },
+    "65553": {
+        "en": "Return mode exceeds the return range set by the route",
+        "zh": "返航模式超出航线设置的返航范围"
+    },
+    "65554": {
+        "en": "The end operation exceeds the end range set for the planned route",
+        "zh": "结束操作超出计划航线设定的结束范围"
+    },
+    "65555": {
+        "en": "rc_lost_action is outside the rc_lost_action range set by the planned route",
+        "zh": "rc_lost_action超出计划航线设定的 rc_lost_action范围"
+    },
+    "65556": {
+        "en": "Invalid yaw angle pattern for uploaded routes. Refer to the yaw angle pattern definition in route planning.",
+        "zh": "上传航线的偏航角模式无效。参考航线规划中的偏航角模式定义。"
+    },
+    "65557": {
+        "en": "The yaw command in the upload route is out of range. Range should be at [-180 180] degrees",
+        "zh": "上传航线中的偏航指令不在范围内。范围应在 [-180 180]度"
+    },
+    "65558": {
+        "en": "Invalid yaw steering for upload routes. Should be 0:clockwise or 1:counterclockwise",
+        "zh": "上传航线的偏航转向无效。应为0:顺时针或1:逆时针"
+    },
+    "65559": {
+        "en": "Invalid route type for uploaded routes. Refer to the waypoint types defined in math\\u waypoint\\u planner.h",
+        "zh": "上载航线的航线类型无效。参考math\\u waypoint\\u planner.h中定义的航点类型"
+    },
+    "65560": {
+        "en": "Invalid start/stop command",
+        "zh": "开始/停止指令无效"
+    },
+    "65561": {
+        "en": "The pause/resume command is not part of any command",
+        "zh": "暂停/恢复指令不属于任何指令范围"
+    },
+    "65562": {
+        "en": "The break/restore command is not part of any command",
+        "zh": "break/restore命令不等于任何指令范围"
+    },
+    "65563": {
+        "en": "Initial reference point position coordinates out of set range",
+        "zh": "初始参考点位置坐标超出设定的范围"
+    },
+    "65564": {
+        "en": "Damping distance greater than or equal to adjacent waypoints",
+        "zh": "阻尼距离大于或等于相邻航点的距离"
+    },
+    "65565": {
+        "en": "Unable to set route exit type to route",
+        "zh": "无法将航线退出类型设置为航线"
+    },
+    "65566": {
+        "en": "Initial information of GCS not yet uploaded",
+        "zh": "地面站初始信息尚未上传"
+    },
+    "65567": {
+        "en": "Route not yet uploaded",
+        "zh": "航线尚未上传"
+    },
+    "65568": {
+        "en": "Minimum initial waypoints not uploaded",
+        "zh": "最小初始航点数未上传"
+    },
+    "65569": {
+        "en": "Waypoints were stared when the takeoff order was received.",
+        "zh": "收到起飞命令时航点计划已开始"
+    },
+    "65570": {
+        "en": "Waypoints  not running when stop order received",
+        "zh": "收到停止命令时航点计划未运行"
+    },
+    "65571": {
+        "en": "GCS not running (when PAUSE/RECOVERY)",
+        "zh": "地面站未启动（暂停/继续时）"
+    },
+    "65572": {
+        "en": "GCS not running (when BREAK/RESTORE)",
+        "zh": "地面站未启动(中断/恢复时)"
+    },
+    "65573": {
+        "en": "Not in waypoint mission (unable to pause/resume or interrupt/resume)",
+        "zh": "不在航点任务内（无法暂停/继续或中断/恢复）"
+    },
+    "65574": {
+        "en": "The current state is pause. The pause command cannot be used again.",
+        "zh": "当前状态是暂停，无法再次使用暂停命令"
+    },
+    "65575": {
+        "en": "Currently not in pause state, cannot use continue command",
+        "zh": "当前不在暂停状态，无法使用继续命令"
+    },
+    "65576": {
+        "en": "The current state is route broken and the break command cannot be used again.",
+        "zh": "当前状态是中断，无法再次使用中断命令"
+    },
+    "65577": {
+        "en": "Currently not in broken state, cannot use resume command",
+        "zh": "当前不在中断状态，无法使用恢复命令"
+    },
+    "65578": {
+        "en": "Configure to disable the use of the Pause/Recovery API",
+        "zh": "配置禁止使用暂停/继续API"
+    },
+    "65579": {
+        "en": "Configure to disable the use of the BREAK/RESTORE API",
+        "zh": "配置禁止使用中断/恢复API"
+    },
+    "65580": {
+        "en": "No record of restorable breakpoints",
+        "zh": "没有可还原断点的记录"
+    },
+    "65581": {
+        "en": "No recoverable track task points are currently recorded",
+        "zh": "当前没有记录可恢复的轨迹任务点"
+    },
+    "65582": {
+        "en": "There is no next trajectory mission point to recover from",
+        "zh": "没有下一个轨迹任务点可进行恢复"
+    },
+    "65583": {
+        "en": "There is no next next trajectory mission point to recover from",
+        "zh": "没有再下一个轨迹任务点可进行恢复"
+    },
+    "65584": {
+        "en": "Uploaded waypoint index is not continuous with stored waypoints",
+        "zh": "上传的航点索引与储存的航点不连续"
+    },
+    "65585": {
+        "en": "Selected route pattern to enter that is not set to this initial starting point.",
+        "zh": "选择进入的航线模式设置的不是这个初始起点的航线"
+    },
+    "65586": {
+        "en": "Waypoint plan is initiated during waypoint started",
+        "zh": "航点计划在航点初始化时已启动"
+    },
+    "65587": {
+        "en": "Waypoint damping distance out of set range",
+        "zh": "航点阻尼距离超出设定范围"
+    },
+    "65588": {
+        "en": "Waypoint coordinates located beyond reasonable limits",
+        "zh": "航点坐标位置超出合理范围"
+    },
+    "65589": {
+        "en": "Wrong type of first waypoint, unable to start route",
+        "zh": "首个航点类型错误，无法启动航线"
+    },
+    "65590": {
+        "en": "Waypoint height out of altitude range",
+        "zh": "航点位置超出高度范围"
+    },
+    "65592": {
+        "en": "Waypoint distance out of range",
+        "zh": "航点位置超出距离范围"
+    },
+    "65593": {
+        "en": "Waypoint height out of altitude range",
+        "zh": "航点位置超出高度范围"
+    },
+    "65696": {
+        "en": "Route not uploaded",
+        "zh": "未上传航线"
+    },
+    "131072": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "131073": {
+        "en": "Waypoint check failed",
+        "zh": "航点验证失败"
+    },
+    "131074": {
+        "en": "Home point not recorded",
+        "zh": "原点尚未记录"
+    },
+    "131075": {
+        "en": "Current positioning accuracy is low due to poor GPS signals",
+        "zh": "由于GPS信号不良，当前定位精度较低"
+    },
+    "131077": {
+        "en": "RTK not connected or invalid",
+        "zh": "rtk未连接或无效"
+    },
+    "196608": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "196609": {
+        "en": "Track cross NFZ",
+        "zh": "轨道穿过NFZ"
+    },
+    "196610": {
+        "en": "Current capacity of a smart battery or voltage of a non-smart battery is below the threshold of level 1 or 2",
+        "zh": "智能电池的电流容量或非智能电池的电压低于1级或2级阈值"
+    },
+    "4194304": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4194305": {
+        "en": "The ID of the action is duplicated.",
+        "zh": "操作的ID是重复的"
+    },
+    "4194306": {
+        "en": "Memory space not enough.",
+        "zh": "内存空间不足"
+    },
+    "4194307": {
+        "en": "The size of the buffer used to get the operation information is smaller than the operation size.",
+        "zh": "用于获取操作信息的缓冲区大小小于操作大小"
+    },
+    "4194308": {
+        "en": "Action ID not found.",
+        "zh": "找不到操作的ID"
+    },
+    "4194309": {
+        "en": "Download action start ID is greater than end ID.",
+        "zh": "下载操作开始ID大于操作结束ID"
+    },
+    "4194310": {
+        "en": "Unable to download or get min/max operation IDs of no-op items stored.",
+        "zh": "无法下载或获取操作内核中存储的无操作项的最小-最大操作ID"
+    },
+    "4259840": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4259841": {
+        "en": "The type ID of the trigger is invalid.",
+        "zh": "触发器的类型ID无效"
+    },
+    "4259873": {
+        "en": "End index in reach waypoint trigger is less than start index.",
+        "zh": "到达航路点触发器中的结束索引小于开始索引"
+    },
+    "4259874": {
+        "en": "Interval greater than the difference from the start index to the end index.",
+        "zh": "间隔大于开始索引到结束索引的差值"
+    },
+    "4259875": {
+        "en": "Automatic termination, interval greater than the difference from the start index to the end index.",
+        "zh": "自动终止，间隔大于开始索引到结束索引的差值"
+    },
+    "4259905": {
+        "en": "Association type greater than maximum.",
+        "zh": "关联类型大于最大值"
+    },
+    "4259969": {
+        "en": "Interval type greater than maximum.",
+        "zh": "间隔类型大于最大值"
+    },
+    "4325376": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4325377": {
+        "en": "Execution of actuators is not supported, e.g., attempts to stop the camera recording.",
+        "zh": "不支持执行致动器，例如，尝试停止摄像机拍摄"
+    },
+    "4325378": {
+        "en": "The type ID of the actuator is invalid.",
+        "zh": "执行器的类型ID无效"
+    },
+    "4325379": {
+        "en": "The function ID of the actuator is invalid.",
+        "zh": "执行器的功能ID无效"
+    },
+    "4390912": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4390913": {
+        "en": "Unable to send single shot cmd to camera.",
+        "zh": "无法将快照cmd发送到相机"
+    },
+    "4390914": {
+        "en": "Unable to send video start command to camera.",
+        "zh": "无法向摄像头发送视频启动命令"
+    },
+    "4390915": {
+        "en": "Unable to send video stop command to camera.",
+        "zh": "无法向摄像头发送视频停止命令"
+    },
+    "4390916": {
+        "en": "Camera focus parameter xy out of valid range (0,1).",
+        "zh": "相机焦点参数xy超出有效范围（0,1）"
+    },
+    "4390917": {
+        "en": "Unable to send focus command to camera.",
+        "zh": "无法向摄像头发送调焦指令"
+    },
+    "4390918": {
+        "en": "Unable to send focalize command to camera.",
+        "zh": "无法向摄像头发送聚焦指令"
+    },
+    "4390919": {
+        "en": "The focal length of the camera's focus function is out of the effective range.",
+        "zh": "相机对焦功能的焦距超出有效范围"
+    },
+    "4391168": {
+        "en": "The camera can't execute commands.",
+        "zh": "相机无法执行命令"
+    },
+    "4456448": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4456449": {
+        "en": "Invalid control parameters.",
+        "zh": "控制参数无效"
+    },
+    "4456450": {
+        "en": "Invalid duration parameter.",
+        "zh": "时间参数无效"
+    },
+    "4456451": {
+        "en": "Unable to reach target angle.",
+        "zh": "无法到达目标角度"
+    },
+    "4456452": {
+        "en": "Gimbal busy or not available.",
+        "zh": "转向设备忙或无转向设备"
+    },
+    "4456453": {
+        "en": "indexing error.",
+        "zh": "索引错误"
+    },
+    "4587520": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4587521": {
+        "en": "Yaw angle greater than maximum yaw angle.",
+        "zh": "偏航角大于最大偏航角"
+    },
+    "4587522": {
+        "en": "Timeout, unable to reach target yaw angle",
+        "zh": "超时，无法达到目标偏航角"
+    },
+    "4587523": {
+        "en": "Yaw angle occupied.",
+        "zh": "偏航角已占用"
+    },
+    "4587524": {
+        "en": "The set yaw angle is the same as the present value.",
+        "zh": "设置偏航角与现在的值相同"
+    },
+    "4653056": {
+        "en": "Succeeded",
+        "zh": "成功"
+    },
+    "4653057": {
+        "en": "Failure to send payload control command.",
+        "zh": "载荷控制指令发送失败"
+    },
+    "4653058": {
+        "en": "Payload control command execution failure.",
+        "zh": "载荷控制指令执行失败"
+    }
+}

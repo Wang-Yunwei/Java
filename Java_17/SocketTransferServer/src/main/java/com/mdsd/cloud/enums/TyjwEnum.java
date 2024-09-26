@@ -86,6 +86,7 @@ public enum TyjwEnum {
     切换SIM卡(0xD2, 0x06, "数据-byte;"),
     打开关闭AI识别(0xD2, 0x10, "数据-byte;"),
     链路设置(0xD2, 0x1F, "数据-byte;"),
+    返回码(0xD2, 0xFF, null),
 
     喊话模式切换(0xD3, 0x01, "数据-byte;"),
     实时喊话(0xD3, 0x02, "音频数据-base64;"),

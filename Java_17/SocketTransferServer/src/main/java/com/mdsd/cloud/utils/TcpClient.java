@@ -108,7 +108,7 @@ public class TcpClient {
 
                                              @Override
                                              public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-                                                 log.error(">>> Tcp Client: {}", cause.getMessage());
+                                                 log.error(">>> {}", cause.getMessage());
                                              }
                                          }
                                 );
