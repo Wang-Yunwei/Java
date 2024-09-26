@@ -84,7 +84,6 @@ public class TcpClient {
 
                                              @Override
                                              protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
-
                                                  // 判断是否是心跳信息
                                                  if (2 == msg.getByte(4)) {
                                                      log.info("<<< {}", String.format("0x%02X", msg.getByte(4)));
@@ -96,7 +95,6 @@ public class TcpClient {
 
                                              @Override
                                              public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
-
                                                  // 发送心跳
                                                  if (evt instanceof IdleStateEvent) {
                                                      ByteBuf buf = Unpooled.buffer();
@@ -122,7 +120,7 @@ public class TcpClient {
 
     public void connect() {
         if (!isActiveChannel()) {
-            log.info("<<< 启动 TCP Client, 连接: {}:{}", host, port);
+            log.info(">>> 启动 TCP Client, 连接: {}:{}", host, port);
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {

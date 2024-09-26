@@ -85,7 +85,6 @@ public class WsServer {
 
     @PostConstruct
     public void createWsServer() {
-
         // 创建服务端启动引导器
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         // 配置线程模型  EventLoop 等于 Thread
@@ -102,7 +101,6 @@ public class WsServer {
                                 .addLast(new SimpleChannelInboundHandler<TextWebSocketFrame>() {
                                              @Override
                                              protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
-                                                 System.out.println("channelRead0" + tws.text());
                                                  String text = tws.text();
                                                  if (StringUtils.isNoneBlank(text)) {
                                                      Map<String, String> ms = obm.readValue(text, new TypeReference<>() {
