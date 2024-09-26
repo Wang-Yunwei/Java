@@ -259,8 +259,9 @@ public class TcpClientListener {
                             result.put("加密标志", buf.readByte());
                             result.put("动作编号", String.format("0x%02X", buf.readByte()));
                             int returnCode = buf.readInt();
-                            result.put("返回码", returnCode);
-                            result.put("返回信息", TyjwReturnCodeEnum.getMsg(returnCode));
+                            result.put("action", "SERVER_ERROR");
+                            result.put("code", returnCode);
+                            result.put("message", TyjwReturnCodeEnum.getMsg(returnCode));
                             wsServer.sendMessage(null, result);
                             break;
                         case 机场任务完成通知:
