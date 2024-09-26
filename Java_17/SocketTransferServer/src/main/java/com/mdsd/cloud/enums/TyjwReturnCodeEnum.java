@@ -407,9 +407,9 @@ public enum TyjwReturnCodeEnum {
     RETURN_CODE_4653057(4653057, "载荷控制指令发送失败"),
     RETURN_CODE_4653058(4653058, "载荷控制指令执行失败");
 
-    private int code;
+    private final int code;
 
-    private String msg;
+    private final String msg;
 
     TyjwReturnCodeEnum(int code, String msg) {
         this.code = code;
