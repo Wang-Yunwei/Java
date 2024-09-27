@@ -127,7 +127,7 @@ public class WsServerListener {
 
     private void wssErrorMessage(String boxSn, String message) {
         Map<String, Object> result = new HashMap<>();
-        result.put("action", "SERVER_ERROR");
+        result.put("action", "ERROR_MESSAGE");
         result.put("message", message);
         log.info(result.toString());
         wsServer.sendMessage(boxSn, result);

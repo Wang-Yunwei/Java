@@ -259,7 +259,7 @@ public class TcpClientListener {
                             result.put("加密标志", buf.readByte());
                             result.put("动作编号", String.format("0x%02X", buf.readByte()));
                             int returnCode = buf.readInt();
-                            result.put("action", "SERVER_ERROR");
+                            result.put("action", "ERROR_MESSAGE");
                             result.put("code", returnCode);
                             result.put("message", TyjwReturnCodeEnum.getMsg(returnCode));
                             wsServer.sendMessage(null, result);
