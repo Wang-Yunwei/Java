@@ -63,7 +63,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public GetTokenOup getToken(GetTokenInp param) {
 
-        log.info("获取 AccessToken");
+        log.info(">>> 获取 AccessToken");
         String str = param.getAccessKeyId() + param.getAccessKeySecret() + param.getTimeStamp();
         param.setEncryptStr(MD5HashGenerator.generateMD5(str));
         ResponseTy<GetTokenOup> result = feign.getToken(param);

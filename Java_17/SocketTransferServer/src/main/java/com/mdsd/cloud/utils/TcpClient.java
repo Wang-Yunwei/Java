@@ -120,7 +120,7 @@ public class TcpClient {
 
     public void connect() {
         if (!isActiveChannel()) {
-            log.info(">>> 启动 TCP Client, 连接: {}:{}", host, port);
+            log.info(">>> 启动 TCP 客户端,连接: {}:{}", host, port);
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
