@@ -1,6 +1,7 @@
 package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
+import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.response.BusinessException;
@@ -18,7 +19,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
@@ -32,6 +32,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class TcpClient {
+
+    final ITyjwService tyjwService;
 
     @Value("${env.ip.tyjw}")
     private String host;
@@ -47,8 +49,8 @@ public class TcpClient {
 
     private final ApplicationEventPublisher publisher;
 
-    @Autowired
-    public TcpClient(ApplicationEventPublisher publisher) {
+    public TcpClient(ITyjwService tyjwService, ApplicationEventPublisher publisher) {
+        this.tyjwService = tyjwService;
         this.publisher = publisher;
     }
 
@@ -107,7 +109,7 @@ public class TcpClient {
                                              }
 
                                              @Override
-                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
                                                  log.error(">>> {}", cause.getMessage());
                                              }
                                          }
@@ -120,16 +122,16 @@ public class TcpClient {
 
     public void connect() {
         if (!isActiveChannel()) {
-            log.info(">>> 启动 TCP 客户端,连接: {}:{}", host, port);
+            log.info(">>> 启动 TCP 客户端, 连接: {}:{}", host, port);
             ChannelFuture channelFuture = bootstrap.connect(host, port).syncUninterruptibly();
             channelFuture.addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
                     // 连接成功后,发送注册请求
-                    log.info("连接 {} 成功,开始发送注册请求!", String.format("%s:%s", host, port));
+                    log.info(">>> 连接 {} 成功, 开始发送注册请求!", String.format("%s:%s", host, port));
                     channel = future.channel();
                     ByteBuf buf = Unpooled.buffer();
                     if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
-                        throw new BusinessException("未找到 AccessToken,请确认已经调过 getToken 接口!");
+                        tyjwService.getToken();
                     }
                     byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
                     buf.writeShort(TyjwEnum.请求帧头.getInstruct());
