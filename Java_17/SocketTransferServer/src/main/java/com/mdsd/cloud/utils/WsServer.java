@@ -147,7 +147,7 @@ public class WsServer {
                                                                  }
                                                                  // 每次重新连接自动获取一次控制权
                                                                  publishEvent(controlPower);
-                                                                 log.info("<<< 注册新连接, 并获取控制权 {}", controlPower);
+                                                                 log.info(">>> 注册新连接, 并获取控制权 {}", controlPower);
                                                              }
                                                          }
                                                      }
@@ -199,7 +199,7 @@ public class WsServer {
                 .childOption(ChannelOption.SO_KEEPALIVE, true); // 设置保持活动连接状态
         try {
             // 绑定端口并启动接收进来的连接
-            log.info("<<< 启动 WebSocketServer, 端口: {}", port);
+            log.info(">>> 启动 WebSocketServer, 端口: {}", port);
             serverBootstrap.bind(port).sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

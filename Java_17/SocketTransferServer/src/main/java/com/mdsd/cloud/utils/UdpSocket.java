@@ -64,7 +64,7 @@ public class UdpSocket {
                     }
                 });
         try {
-            log.info("<<< 启动 UDP Server, 端口: {}", port);
+            log.info(">>> 启动 UDP Server, 端口: {}", port);
             ChannelFuture sync = bootstrap.bind(port).sync();
             channel = sync.channel();
         } catch (InterruptedException e) {
