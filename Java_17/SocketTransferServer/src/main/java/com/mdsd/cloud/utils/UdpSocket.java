@@ -4,14 +4,13 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,6 +27,9 @@ public class UdpSocket {
 
     @Value("${env.port.sts.udp}")
     private int port;
+
+    @Getter
+    private Channel channel;
 
     NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
 
@@ -63,7 +65,8 @@ public class UdpSocket {
                 });
         try {
             log.info("<<< 启动 UDP Server, 端口: {}", port);
-            bootstrap.bind(port).sync();
+            ChannelFuture sync = bootstrap.bind(port).sync();
+            channel = sync.channel();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -36,6 +36,14 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WsServer {
 
+    private final static Map<String, String> controlPower = Map.of(
+            "云盒编号", "M13220230801135",
+            "指令编号", "D1",
+            "加密标志", "00",
+            "动作编号", "30",
+            "数据", "00"
+    );
+
     @Value("${env.port.sts.web_socket_server}")
     private int port;
 
@@ -61,17 +69,15 @@ public class WsServer {
 
     @Async
     public void sendMessage(String key, Map<String, Object> resp) {
-        if(StringUtils.isEmpty(key)){
-            channels.forEach((k,v) ->{
-                v.stream().filter(Channel::isActive).forEach(el ->{
-                    try {
-                        el.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(resp)));
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            });
-        }else{
+        if (StringUtils.isEmpty(key)) {
+            channels.forEach((k, v) -> v.stream().filter(Channel::isActive).forEach(el -> {
+                try {
+                    el.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(resp)));
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }));
+        } else {
             List<Channel> channelList = channels.get(key);
             if (!CollectionUtils.isEmpty(channelList)) {
                 channelList.stream().filter(Channel::isActive).forEach(el -> {
@@ -139,6 +145,9 @@ public class WsServer {
                                                                          add(ctx.channel());
                                                                      }});
                                                                  }
+                                                                 // 每次重新连接自动获取一次控制权
+                                                                 publishEvent(controlPower);
+                                                                 log.info("<<< 注册新连接, 并获取控制权 {}", controlPower);
                                                              }
                                                          }
                                                      }
@@ -179,7 +188,7 @@ public class WsServer {
                                              }
 
                                              @Override
-                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
                                                  log.error(">>> {}", cause.getMessage());
                                              }
                                          }

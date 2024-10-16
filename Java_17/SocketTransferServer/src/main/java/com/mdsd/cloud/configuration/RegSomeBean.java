@@ -58,10 +58,7 @@ public class RegSomeBean {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("SocketTransferServer")
-                        .description("This is a forwarding service")
-                        .version("20140712"));
+        return new OpenAPI().info(new Info().title("SocketTransferServer").description("This is a forwarding service").version("20140712"));
     }
 
     @Bean

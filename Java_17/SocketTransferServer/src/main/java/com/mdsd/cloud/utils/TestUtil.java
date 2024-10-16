@@ -1,5 +1,6 @@
 package com.mdsd.cloud.utils;
 
+import java.net.InetSocketAddress;
 import java.security.Key;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -24,7 +25,7 @@ public class TestUtil {
 
         String s = new String(decode, StandardCharsets.UTF_8);
 
-        System.out.println(s);
+        System.out.println(new InetSocketAddress(0));
 
 
 //        ObjectMapper obm = new ObjectMapper();

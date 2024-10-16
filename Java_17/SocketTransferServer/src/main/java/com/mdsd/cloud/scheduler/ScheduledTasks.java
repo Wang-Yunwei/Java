@@ -26,19 +26,19 @@ public class ScheduledTasks {
         this.tcpClient = tcpClient;
     }
 
-    @Scheduled(cron = "0 */3 * * * ?")
+    @Scheduled(cron = "0 0 19 * * ?")
     public void TimedTask_Token() {
-        log.info("Estimate_AccessToken >>> Every 3min!");
+        log.info("Get Access Token >>> Every day at 19:00");
         if (Strings.isBlank(auth.getAccessToken())) {
             tyjwService.getToken();
         }
     }
 
-    @Scheduled(cron = "*/30 * * * * ?")
-    public void TimedTask_Connect() {
-        log.info("Estimate_ConnectStatus >>> Every 30second!");
-        if (!tcpClient.isActiveChannel()) {
-            tcpClient.connect();
-        }
-    }
+//    @Scheduled(cron = "*/30 * * * * ?")
+//    public void TimedTask_Connect() {
+//        log.info("Estimate_ConnectStatus >>> Every 30second!");
+//        if (!tcpClient.isActiveChannel()) {
+//            tcpClient.connect();
+//        }
+//    }
 }
