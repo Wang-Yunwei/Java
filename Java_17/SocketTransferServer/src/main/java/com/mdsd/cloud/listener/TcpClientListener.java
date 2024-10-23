@@ -70,7 +70,7 @@ public class TcpClientListener {
                     default:
                         int active = buf.getByte(6) & 0xFF;
                         anEnum = TyjwEnum.getEnum(instruct, active);
-                        log.info("SocketClient_Receive <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
+                        log.info("<<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                         break;
                 }
                 if (null != anEnum) {
