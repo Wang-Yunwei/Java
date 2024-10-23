@@ -23,7 +23,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 
     public class InterceptorImpl implements HandlerInterceptor {
         @Override
-        public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
+        public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
             if(preHandleLog){
                 log.info("前置拦截器 URL: {}", request.getRequestURL());
             }
