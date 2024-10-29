@@ -1,9 +1,12 @@
 package com.mdsd.cloud.controller.tyjw.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mdsd.cloud.controller.tyjw.dto.*;
+import io.netty.buffer.ByteBuf;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author WangYunwei [2024-09-03]
@@ -99,4 +102,11 @@ public interface ITyjwService {
      * 机库 - 获取舱内视频地址
      */
     String videoIn(String hangarId, String type);
+
+    /**
+     * 天宇 - 消息处理
+     */
+    void tyjwTcpClient(ByteBuf buf);
+
+    void mdsdWebSocket(Map<String, String> map)throws JsonProcessingException;
 }

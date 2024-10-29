@@ -18,7 +18,7 @@ import java.util.List;
 public class TyjwController {
 
 
-    private final ITyjwService service;
+    final ITyjwService service;
 
     public TyjwController(ITyjwService service) {
 

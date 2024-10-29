@@ -2,6 +2,7 @@ package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
+import com.mdsd.cloud.enums.ServerEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.response.BusinessException;
@@ -68,7 +69,7 @@ public class TcpClient {
     }
 
     private void publishEvent(ByteBuf byteBuf) {
-        publisher.publishEvent(new CommonEvent(this, byteBuf));
+        publisher.publishEvent(new CommonEvent(ServerEnum.TYJW_TCP_CLIENT, byteBuf));
     }
 
     @PostConstruct
