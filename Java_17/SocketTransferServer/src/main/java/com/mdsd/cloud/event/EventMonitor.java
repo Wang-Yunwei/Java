@@ -2,7 +2,6 @@ package com.mdsd.cloud.event;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
-import com.mdsd.cloud.enums.ServerEnum;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 

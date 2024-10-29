@@ -13,7 +13,7 @@ import java.util.Map;
 @Getter
 public class CommonEvent extends ApplicationEvent {
 
-    private ServerEnum source;
+    private final ServerEnum source;
 
     private Map<String, String> map;
 
@@ -25,15 +25,9 @@ public class CommonEvent extends ApplicationEvent {
         this.map = map;
     }
 
-    public CommonEvent(Object source, Map<String, String> map) {
-
+    public CommonEvent(ServerEnum source, ByteBuf byteBuf) {
         super(source);
-        this.map = map;
-    }
-
-    public CommonEvent(Object source, ByteBuf byteBuf) {
-
-        super(source);
+        this.source = source;
         this.byteBuf = byteBuf;
     }
 
