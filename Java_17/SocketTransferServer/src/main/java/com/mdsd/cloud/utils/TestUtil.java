@@ -19,13 +19,16 @@ public class TestUtil {
 
     public static void main(String[] args) throws IOException {
 
-        String str = "JLTPhuuSIpprAKvn6cI809LSmzNlNi8N7O+VKOqn4NXpLCSqVqj1x/YFsmMqzHQ4iHuA6r0yI3t6xYVlRIK0Jg==";
-        byte[] decode = Base64.getDecoder().decode(str.getBytes(StandardCharsets.UTF_8));
+        String str = "9873-2739-4535-4199-9723-9926-44";
+//        byte[] decode = Base64.getDecoder().decode(str.getBytes(StandardCharsets.UTF_8));
 
+        byte[] bytes = ByteUtil.stringToByte(str);
 
-        String s = new String(decode, StandardCharsets.UTF_8);
+//        String s = new String(decode, StandardCharsets.UTF_8);
 
-        System.out.println(new InetSocketAddress(0));
+        System.out.println(bytes.length);
+
+        System.out.println(bytes);
 
 
 //        ObjectMapper obm = new ObjectMapper();
