@@ -106,7 +106,10 @@ public interface ITyjwService {
     /**
      * 天宇 - 消息处理
      */
-    void tyjwTcpClient(ByteBuf buf);
+    void handleTcpClient(ByteBuf buf);
 
-    void mdsdWebSocket(Map<String, String> map)throws JsonProcessingException;
+    /**
+     * 处理WebSocket数据
+     */
+    void handleWebSocket(Map<String, String> map)throws JsonProcessingException;
 }

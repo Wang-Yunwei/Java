@@ -58,7 +58,7 @@ public class TyjwServiceImpl implements ITyjwService {
 
     String batteryPower = null;
 
-    public TyjwServiceImpl(EApiFeign feign, TcpClient tcpClient,WsServer wsServer, IHangarService hangarService ) {
+    public TyjwServiceImpl(EApiFeign feign, TcpClient tcpClient, WsServer wsServer, IHangarService hangarService) {
         this.feign = feign;
         this.tcpClient = tcpClient;
         this.wsServer = wsServer;
@@ -306,85 +306,12 @@ public class TyjwServiceImpl implements ITyjwService {
         });
     }
 
+
+    /**
+     * 处理TcpClient数据
+     */
     @Override
-    public void mdsdWebSocket(Map<String, String> map)throws JsonProcessingException {
-        if (StringUtils.isEmpty(map.get("动作编号"))) {
-            wssErrorMessage(map.get("云盒编号"), "动作编号不能为: NULL");
-        }
-        TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(map.get("指令编号"), 16), Integer.parseInt(map.get("动作编号"), 16));
-        if (tcpClient.isActiveChannel()) {
-            log.info("<<< {}", anEnum.name());
-            switch (anEnum) {
-                case 航线规划 -> {
-                    PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
-                    TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
-                    ByteBuf buf = aDefault.buffer();
-                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
-                }
-                case 实时喊话 -> {
-                    // TODO 暂不支持
-                    byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
-                    List<byte[]> bytes = ByteUtil.splitByteArray(inData, 110);
-                    for (byte[] by : bytes) {
-                        ByteBuf buf = aDefault.buffer();
-                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
-                    }
-                }
-                case MOP数据透传 -> {
-                    // TODO 暂未使用
-                }
-                default -> {
-                    ByteBuf buf = aDefault.buffer();
-                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
-                        if (null != arg2) {
-                            String[] split = arg2.split(";");
-                            Arrays.stream(split).forEach(el -> {
-                                String[] split1 = el.split("-");
-                                switch (split1[1]) {
-                                    case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split1[0])));
-                                    case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split1[0])));
-                                    case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split1[0])));
-                                    case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split1[0])));
-                                    case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split1[0])));
-                                    case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split1[0])));
-                                    case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split1[0])));
-                                    case "base64" ->
-                                            arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split1[0])));
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-        } else {
-            wssErrorMessage(map.get("云盒编号"), "云盒端连接不存在, 正在尝试重新连接并尝试重新执行 {} 指令!");
-            tcpClient.connect();
-            mdsdWebSocket(map);
-        }
-    }
-
-    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, TyjwServiceImpl.WebSocketFunction<ByteBuf, String, Map<String, String>> fun) {
-        buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
-        buf.writeShort(0);// 数据长度,占位临时赋值为0
-        buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
-        buf.writeByte(anEnum.getInstruct());// 指令编号
-        buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
-        buf.writeByte(anEnum.getAction());// 动作编号
-        fun.dataHandle(buf, anEnum.getArgs(), map);// 参数处理
-        buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
-        tcpClient.sendMessage(buf);
-    }
-
-    private void wssErrorMessage(String boxSn, String message) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("action", "ERROR_MESSAGE");
-        result.put("message", message);
-        log.info(result.toString());
-        wsServer.sendMessage(boxSn, result);
-    }
-
-    @Override
-    public void tyjwTcpClient(ByteBuf buf) {
+    public void handleTcpClient(ByteBuf buf) {
         if (buf.getShort(0) == 0x6A77) {
             int instruct = buf.getByte(4) & 0xFF;
             TyjwEnum anEnum = TyjwEnum.getEnum(instruct);
@@ -625,5 +552,84 @@ public class TyjwServiceImpl implements ITyjwService {
                 }
             }
         }, 5, TimeUnit.MINUTES);
+    }
+
+    /**
+     * 处理WebSocket数据
+     */
+    @Override
+    public void handleWebSocket(Map<String, String> map) throws JsonProcessingException {
+        if (StringUtils.isEmpty(map.get("动作编号"))) {
+            wssErrorMessage(map.get("云盒编号"), "动作编号不能为: NULL");
+        }
+        TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(map.get("指令编号"), 16), Integer.parseInt(map.get("动作编号"), 16));
+        if (tcpClient.isActiveChannel()) {
+            log.info("<<< {}", anEnum.name());
+            switch (anEnum) {
+                case 航线规划 -> {
+                    PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
+                    TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
+                    ByteBuf buf = aDefault.buffer();
+                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
+                }
+                case 实时喊话 -> {
+                    // TODO 暂不支持
+                    byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
+                    List<byte[]> bytes = ByteUtil.splitByteArray(inData, 110);
+                    for (byte[] by : bytes) {
+                        ByteBuf buf = aDefault.buffer();
+                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
+                    }
+                }
+                case MOP数据透传 -> {
+                    // TODO 暂未使用
+                }
+                default -> {
+                    ByteBuf buf = aDefault.buffer();
+                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
+                        if (null != arg2) {
+                            String[] split = arg2.split(";");
+                            Arrays.stream(split).forEach(el -> {
+                                String[] split1 = el.split("-");
+                                switch (split1[1]) {
+                                    case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split1[0])));
+                                    case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split1[0])));
+                                    case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split1[0])));
+                                    case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split1[0])));
+                                    case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split1[0])));
+                                    case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split1[0])));
+                                    case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split1[0])));
+                                    case "base64" -> arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split1[0])));
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        } else {
+            wssErrorMessage(map.get("云盒编号"), "云盒端连接不存在, 正在尝试重新连接并尝试重新执行 {} 指令!");
+            tcpClient.connect();
+            handleWebSocket(map);
+        }
+    }
+
+    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, TyjwServiceImpl.WebSocketFunction<ByteBuf, String, Map<String, String>> fun) {
+        buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
+        buf.writeShort(0);// 数据长度,占位临时赋值为0
+        buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
+        buf.writeByte(anEnum.getInstruct());// 指令编号
+        buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
+        buf.writeByte(anEnum.getAction());// 动作编号
+        fun.dataHandle(buf, anEnum.getArgs(), map);// 参数处理
+        buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
+        tcpClient.sendMessage(buf);
+    }
+
+    private void wssErrorMessage(String boxSn, String message) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("action", "ERROR_MESSAGE");
+        result.put("message", message);
+        log.info(result.toString());
+        wsServer.sendMessage(boxSn, result);
     }
 }
