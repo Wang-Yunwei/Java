@@ -1,4 +1,4 @@
-package com.mdsd.cloud.scheduler;
+package com.mdsd.cloud.configuration;
 
 import com.mdsd.cloud.utils.TcpClient;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
