@@ -1,5 +1,6 @@
 package com.mdsd.cloud.utils;
 
+import com.mdsd.cloud.controller.dji.dto.Mdsd;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -33,6 +34,11 @@ public class UdpSocket {
 
     NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
 
+    Mdsd.SubscriptionTopic.Builder builder = Mdsd.SubscriptionTopic.newBuilder()
+            .setTopic(Mdsd.SubscriptionTopicActionEnum.DJI_QUATERNION)
+            .setFrequency(Mdsd.SubscriptionFreqActionEnum.DJI_400_HZ)
+            .setPushFrequency(100);
+
     @PostConstruct
     public void createUdpSocket() {
         Bootstrap bootstrap = new Bootstrap();
@@ -53,7 +59,7 @@ public class UdpSocket {
                         content.readBytes(bytes);
                         System.out.println(ByteUtil.bytesToStringUTF8(bytes));
                         String str = "This is a Socket Transfer Server";
-                        DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(str.getBytes()), new  InetSocketAddress("172.31.101.126",49152));
+                        DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(str.getBytes()), new  InetSocketAddress("172.22.163.211",49152));
                         ctx.writeAndFlush(datagramPacket);
                     }
 
