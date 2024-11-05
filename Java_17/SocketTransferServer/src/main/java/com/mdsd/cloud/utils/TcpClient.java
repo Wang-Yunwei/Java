@@ -1,7 +1,6 @@
 package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
-import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import com.mdsd.cloud.enums.ServerEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.CommonEvent;
@@ -19,7 +18,6 @@ import io.netty.handler.timeout.IdleStateHandler;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
