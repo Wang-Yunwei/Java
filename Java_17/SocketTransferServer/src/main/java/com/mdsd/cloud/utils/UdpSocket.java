@@ -1,6 +1,7 @@
 package com.mdsd.cloud.utils;
 
-import com.mdsd.cloud.controller.dji.dto.Mdsd;
+import com.google.protobuf.util.JsonFormat;
+import com.mdsd.cloud.controller.dji.dto.MdsdProtoBuf;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author WangYunwei [2024-09-14]
@@ -34,10 +34,12 @@ public class UdpSocket {
 
     NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
 
-    Mdsd.SubscriptionTopic.Builder builder = Mdsd.SubscriptionTopic.newBuilder()
-            .setTopic(Mdsd.SubscriptionTopicActionEnum.DJI_QUATERNION)
-            .setFrequency(Mdsd.SubscriptionFreqActionEnum.DJI_400_HZ)
-            .setPushFrequency(100);
+    JsonFormat.Printer printer = JsonFormat.printer();
+
+    MdsdProtoBuf.SubscriptionTopic build = MdsdProtoBuf.SubscriptionTopic.newBuilder()
+            .setTopic(MdsdProtoBuf.SubscriptionTopicActionEnum.DJI_QUATERNION)
+            .setFrequency(MdsdProtoBuf.SubscriptionFreqActionEnum.DJI_400_HZ)
+            .setPushFrequency(100).build();
 
     @PostConstruct
     public void createUdpSocket() {
@@ -57,9 +59,9 @@ public class UdpSocket {
                         ByteBuf content = pak.content();
                         byte[] bytes = new byte[content.readableBytes()];
                         content.readBytes(bytes);
-                        System.out.println(ByteUtil.bytesToStringUTF8(bytes));
-                        String str = "This is a Socket Transfer Server";
-                        DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(str.getBytes()), new  InetSocketAddress("172.22.163.211",49152));
+                        MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.parseFrom(bytes);
+                        System.out.println(printer.print(subscriptionTopic));
+                        DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(build.toByteArray()), new  InetSocketAddress("172.22.163.211",49152));
                         ctx.writeAndFlush(datagramPacket);
                     }
 

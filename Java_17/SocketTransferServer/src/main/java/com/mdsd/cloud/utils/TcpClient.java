@@ -34,8 +34,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TcpClient {
 
-    final ITyjwService tyjwService;
-
     @Value("${env.ip.tyjw}")
     private String host;
 
@@ -50,8 +48,7 @@ public class TcpClient {
 
     private final ApplicationEventPublisher publisher;
 
-    public TcpClient(ITyjwService tyjwService, ApplicationEventPublisher publisher) {
-        this.tyjwService = tyjwService;
+    public TcpClient( ApplicationEventPublisher publisher) {
         this.publisher = publisher;
     }
 
@@ -131,9 +128,6 @@ public class TcpClient {
                     log.info(">>> 连接 {} 成功, 开始发送注册请求!", String.format("%s:%s", host, port));
                     channel = future.channel();
                     ByteBuf buf = Unpooled.buffer();
-                    if (StringUtils.isEmpty(AuthSingleton.getInstance().getAccessToken())) {
-                        tyjwService.getToken();
-                    }
                     byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
                     buf.writeShort(TyjwEnum.请求帧头.getInstruct());
                     buf.writeShort(bytes.length + 5);

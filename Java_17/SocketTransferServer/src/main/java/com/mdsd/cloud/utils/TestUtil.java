@@ -1,15 +1,8 @@
 package com.mdsd.cloud.utils;
 
-import com.mdsd.cloud.controller.dji.dto.Mdsd;
+import com.mdsd.cloud.controller.dji.dto.MdsdProtoBuf;
 
-import java.net.InetSocketAddress;
-import java.security.Key;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Map;
 
 /**
  * @author WangYunwei [2024-07-14]
@@ -32,9 +25,9 @@ public class TestUtil {
 
 //        System.out.println(bytes);
 
-        Mdsd.SubscriptionTopic build = Mdsd.SubscriptionTopic.newBuilder()
-                .setTopic(Mdsd.SubscriptionTopicActionEnum.DJI_QUATERNION)
-                .setFrequency(Mdsd.SubscriptionFreqActionEnum.DJI_400_HZ)
+        MdsdProtoBuf.SubscriptionTopic build = MdsdProtoBuf.SubscriptionTopic.newBuilder()
+                .setTopic(MdsdProtoBuf.SubscriptionTopicActionEnum.DJI_QUATERNION)
+                .setFrequency(MdsdProtoBuf.SubscriptionFreqActionEnum.DJI_400_HZ)
                 .setPushFrequency(100).build();
 
         System.out.println(build);
@@ -44,7 +37,6 @@ public class TestUtil {
         System.out.println(build.getTopic().getValueDescriptor());
         System.out.println(build.getTopic().getDescriptorForType());
         System.out.println(build.getTopic().getNumber());
-
 
 //        ObjectMapper obm = new ObjectMapper();
 //
