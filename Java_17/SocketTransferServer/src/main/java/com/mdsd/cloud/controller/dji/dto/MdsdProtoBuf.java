@@ -26,105 +26,105 @@ public final class MdsdProtoBuf {
      * 日志
      * </pre>
      *
-     * <code>COMMAND_LOGGER = 0;</code>
+     * <code>LOGGER = 0;</code>
      */
-    COMMAND_LOGGER(0),
+    LOGGER(0),
     /**
      * <pre>
      * 飞控订阅
      * </pre>
      *
-     * <code>COMMAND_FC_SUBSCRIPTION = 1;</code>
+     * <code>FC_SUBSCRIPTION = 1;</code>
      */
-    COMMAND_FC_SUBSCRIPTION(1),
+    FC_SUBSCRIPTION(1),
     /**
      * <pre>
      * 相机管理
      * </pre>
      *
-     * <code>COMMAND_CAMERA_MANAGER = 2;</code>
+     * <code>CAMERA_MANAGER = 2;</code>
      */
-    COMMAND_CAMERA_MANAGER(2),
+    CAMERA_MANAGER(2),
     /**
      * <pre>
      * 云台管理
      * </pre>
      *
-     * <code>COMMAND_GIMBAL_MANAGER = 3;</code>
+     * <code>GIMBAL_MANAGER = 3;</code>
      */
-    COMMAND_GIMBAL_MANAGER(3),
+    GIMBAL_MANAGER(3),
     /**
      * <pre>
      * 电源管理
      * </pre>
      *
-     * <code>COMMAND_POWER_MANAGEMENT = 4;</code>
+     * <code>POWER_MANAGEMENT = 4;</code>
      */
-    COMMAND_POWER_MANAGEMENT(4),
+    POWER_MANAGEMENT(4),
     /**
      * <pre>
      * 飞行控制
      * </pre>
      *
-     * <code>COMMAND_FLIGHT_CONTROLLER = 5;</code>
+     * <code>FLIGHT_CONTROLLER = 5;</code>
      */
-    COMMAND_FLIGHT_CONTROLLER(5),
+    FLIGHT_CONTROLLER(5),
     /**
      * <pre>
      * HMS功能: 获取无人机的健康管理信息,有效监控无人机当前状态
      * </pre>
      *
-     * <code>COMMAND_HMS = 6;</code>
+     * <code>HMS = 6;</code>
      */
-    COMMAND_HMS(6),
+    HMS(6),
     /**
      * <pre>
      * 时间同步
      * </pre>
      *
-     * <code>COMMAND_TIME_SYNC = 7;</code>
+     * <code>TIME_SYNC = 7;</code>
      */
-    COMMAND_TIME_SYNC(7),
+    TIME_SYNC(7),
     /**
      * <pre>
      * 获取相机码流    
      * </pre>
      *
-     * <code>COMMAND_LIVE_VIEW = 8;</code>
+     * <code>LIVE_VIEW = 8;</code>
      */
-    COMMAND_LIVE_VIEW(8),
+    LIVE_VIEW(8),
     /**
      * <pre>
      * 本地升级
      * </pre>
      *
-     * <code>COMMAND_LOCAL_UPGRADE = 9;</code>
+     * <code>LOCAL_UPGRADE = 9;</code>
      */
-    COMMAND_LOCAL_UPGRADE(9),
+    LOCAL_UPGRADE(9),
     /**
      * <pre>
      * 精准定位
      * </pre>
      *
-     * <code>COMMAND_POSITIONING = 10;</code>
+     * <code>POSITIONING = 10;</code>
      */
-    COMMAND_POSITIONING(10),
+    POSITIONING(10),
     /**
      * <pre>
      * 运动规划
      * </pre>
      *
-     * <code>COMMAND_WAYPOINT = 11;</code>
+     * <code>WAYPOINT = 11;</code>
      */
-    COMMAND_WAYPOINT(11),
+    WAYPOINT(11),
     /**
      * <pre>
      * 喊话器控件
      * </pre>
      *
-     * <code>COMMAND_WIDGET = 12;</code>
+     * <code>WIDGET = 12;</code>
      */
-    COMMAND_WIDGET(12),
+    WIDGET(12),
     UNRECOGNIZED(-1),
     ;
 
@@ -133,105 +133,105 @@ public final class MdsdProtoBuf {
      * 日志
      * </pre>
      *
-     * <code>COMMAND_LOGGER = 0;</code>
+     * <code>LOGGER = 0;</code>
      */
-    public static final int COMMAND_LOGGER_VALUE = 0;
+    public static final int LOGGER_VALUE = 0;
     /**
      * <pre>
      * 飞控订阅
      * </pre>
      *
-     * <code>COMMAND_FC_SUBSCRIPTION = 1;</code>
+     * <code>FC_SUBSCRIPTION = 1;</code>
      */
-    public static final int COMMAND_FC_SUBSCRIPTION_VALUE = 1;
+    public static final int FC_SUBSCRIPTION_VALUE = 1;
     /**
      * <pre>
      * 相机管理
      * </pre>
      *
-     * <code>COMMAND_CAMERA_MANAGER = 2;</code>
+     * <code>CAMERA_MANAGER = 2;</code>
      */
-    public static final int COMMAND_CAMERA_MANAGER_VALUE = 2;
+    public static final int CAMERA_MANAGER_VALUE = 2;
     /**
      * <pre>
      * 云台管理
      * </pre>
      *
-     * <code>COMMAND_GIMBAL_MANAGER = 3;</code>
+     * <code>GIMBAL_MANAGER = 3;</code>
      */
-    public static final int COMMAND_GIMBAL_MANAGER_VALUE = 3;
+    public static final int GIMBAL_MANAGER_VALUE = 3;
     /**
      * <pre>
      * 电源管理
      * </pre>
      *
-     * <code>COMMAND_POWER_MANAGEMENT = 4;</code>
+     * <code>POWER_MANAGEMENT = 4;</code>
      */
-    public static final int COMMAND_POWER_MANAGEMENT_VALUE = 4;
+    public static final int POWER_MANAGEMENT_VALUE = 4;
     /**
      * <pre>
      * 飞行控制
      * </pre>
      *
-     * <code>COMMAND_FLIGHT_CONTROLLER = 5;</code>
+     * <code>FLIGHT_CONTROLLER = 5;</code>
      */
-    public static final int COMMAND_FLIGHT_CONTROLLER_VALUE = 5;
+    public static final int FLIGHT_CONTROLLER_VALUE = 5;
     /**
      * <pre>
      * HMS功能: 获取无人机的健康管理信息,有效监控无人机当前状态
      * </pre>
      *
-     * <code>COMMAND_HMS = 6;</code>
+     * <code>HMS = 6;</code>
      */
-    public static final int COMMAND_HMS_VALUE = 6;
+    public static final int HMS_VALUE = 6;
     /**
      * <pre>
      * 时间同步
      * </pre>
      *
-     * <code>COMMAND_TIME_SYNC = 7;</code>
+     * <code>TIME_SYNC = 7;</code>
      */
-    public static final int COMMAND_TIME_SYNC_VALUE = 7;
+    public static final int TIME_SYNC_VALUE = 7;
     /**
      * <pre>
      * 获取相机码流    
      * </pre>
      *
-     * <code>COMMAND_LIVE_VIEW = 8;</code>
+     * <code>LIVE_VIEW = 8;</code>
      */
-    public static final int COMMAND_LIVE_VIEW_VALUE = 8;
+    public static final int LIVE_VIEW_VALUE = 8;
     /**
      * <pre>
      * 本地升级
      * </pre>
      *
-     * <code>COMMAND_LOCAL_UPGRADE = 9;</code>
+     * <code>LOCAL_UPGRADE = 9;</code>
      */
-    public static final int COMMAND_LOCAL_UPGRADE_VALUE = 9;
+    public static final int LOCAL_UPGRADE_VALUE = 9;
     /**
      * <pre>
      * 精准定位
      * </pre>
      *
-     * <code>COMMAND_POSITIONING = 10;</code>
+     * <code>POSITIONING = 10;</code>
      */
-    public static final int COMMAND_POSITIONING_VALUE = 10;
+    public static final int POSITIONING_VALUE = 10;
     /**
      * <pre>
      * 运动规划
      * </pre>
      *
-     * <code>COMMAND_WAYPOINT = 11;</code>
+     * <code>WAYPOINT = 11;</code>
      */
-    public static final int COMMAND_WAYPOINT_VALUE = 11;
+    public static final int WAYPOINT_VALUE = 11;
     /**
      * <pre>
      * 喊话器控件
      * </pre>
      *
-     * <code>COMMAND_WIDGET = 12;</code>
+     * <code>WIDGET = 12;</code>
      */
-    public static final int COMMAND_WIDGET_VALUE = 12;
+    public static final int WIDGET_VALUE = 12;
 
 
     public final int getNumber() {
@@ -258,19 +258,19 @@ public final class MdsdProtoBuf {
      */
     public static CommandEnum forNumber(int value) {
       switch (value) {
-        case 0: return COMMAND_LOGGER;
-        case 1: return COMMAND_FC_SUBSCRIPTION;
-        case 2: return COMMAND_CAMERA_MANAGER;
-        case 3: return COMMAND_GIMBAL_MANAGER;
-        case 4: return COMMAND_POWER_MANAGEMENT;
-        case 5: return COMMAND_FLIGHT_CONTROLLER;
-        case 6: return COMMAND_HMS;
-        case 7: return COMMAND_TIME_SYNC;
-        case 8: return COMMAND_LIVE_VIEW;
-        case 9: return COMMAND_LOCAL_UPGRADE;
-        case 10: return COMMAND_POSITIONING;
-        case 11: return COMMAND_WAYPOINT;
-        case 12: return COMMAND_WIDGET;
+        case 0: return LOGGER;
+        case 1: return FC_SUBSCRIPTION;
+        case 2: return CAMERA_MANAGER;
+        case 3: return GIMBAL_MANAGER;
+        case 4: return POWER_MANAGEMENT;
+        case 5: return FLIGHT_CONTROLLER;
+        case 6: return HMS;
+        case 7: return TIME_SYNC;
+        case 8: return LIVE_VIEW;
+        case 9: return LOCAL_UPGRADE;
+        case 10: return POSITIONING;
+        case 11: return WAYPOINT;
+        case 12: return WIDGET;
         default: return null;
       }
     }
@@ -332,402 +332,402 @@ public final class MdsdProtoBuf {
    * 订阅主题 - 动作枚举
    * </pre>
    *
-   * Protobuf enum {@code SubscriptionTopicActionEnum}
+   * Protobuf enum {@code FcSubscriptionTopicEnum}
    */
-  public enum SubscriptionTopicActionEnum
+  public enum FcSubscriptionTopicEnum
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <pre>
      * 未知
      * </pre>
      *
-     * <code>DJI_SUBSCRIPTION_TOPIC_UNKNOWN = 0;</code>
+     * <code>SUBSCRIPTION_TOPIC_UNKNOWN = 0;</code>
      */
-    DJI_SUBSCRIPTION_TOPIC_UNKNOWN(0),
+    SUBSCRIPTION_TOPIC_UNKNOWN(0),
     /**
      * <pre>
      * 姿态四元数(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_QUATERNION = 256;</code>
+     * <code>QUATERNION = 256;</code>
      */
-    DJI_QUATERNION(256),
+    QUATERNION(256),
     /**
      * <pre>
      * 相对地面加速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_GROUND = 258;</code>
+     * <code>ACCELERATION_GROUND = 258;</code>
      */
-    DJI_ACCELERATION_GROUND(258),
+    ACCELERATION_GROUND(258),
     /**
      * <pre>
      * 相对机体加速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_BODY = 259;</code>
+     * <code>ACCELERATION_BODY = 259;</code>
      */
-    DJI_ACCELERATION_BODY(259),
+    ACCELERATION_BODY(259),
     /**
      * <pre>
      * 原始加速度(最大 400Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_RAW = 260;</code>
+     * <code>ACCELERATION_RAW = 260;</code>
      */
-    DJI_ACCELERATION_RAW(260),
+    ACCELERATION_RAW(260),
     /**
      * <pre>
      * 速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_VELOCITY = 261;</code>
+     * <code>VELOCITY = 261;</code>
      */
-    DJI_VELOCITY(261),
+    VELOCITY(261),
     /**
      * <pre>
      * 融合角速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ANGULAR_RATE_FUSIONED = 262;</code>
+     * <code>ANGULAR_RATE_FUSIONED = 262;</code>
      */
-    DJI_ANGULAR_RATE_FUSIONED(262),
+    ANGULAR_RATE_FUSIONED(262),
     /**
      * <pre>
      * 原始角速度(最大 400Hz)
      * </pre>
      *
-     * <code>DJI_ANGULAR_RATE_RAW = 263;</code>
+     * <code>ANGULAR_RATE_RAW = 263;</code>
      */
-    DJI_ANGULAR_RATE_RAW(263),
+    ANGULAR_RATE_RAW(263),
     /**
      * <pre>
      * 融合高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_FUSED = 264;</code>
+     * <code>ALTITUDE_FUSED = 264;</code>
      */
-    DJI_ALTITUDE_FUSED(264),
+    ALTITUDE_FUSED(264),
     /**
      * <pre>
      * 气压计高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_BAROMETER = 265;</code>
+     * <code>ALTITUDE_BAROMETER = 265;</code>
      */
-    DJI_ALTITUDE_BAROMETER(265),
+    ALTITUDE_BAROMETER(265),
     /**
      * <pre>
      * Home 点高度(最大 1Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_OF_HOMEPOINT = 266;</code>
+     * <code>ALTITUDE_OF_HOMEPOINT = 266;</code>
      */
-    DJI_ALTITUDE_OF_HOMEPOINT(266),
+    ALTITUDE_OF_HOMEPOINT(266),
     /**
      * <pre>
      * 融合相对地面高度(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_HEIGHT_FUSION = 267;</code>
+     * <code>HEIGHT_FUSION = 267;</code>
      */
-    DJI_HEIGHT_FUSION(267),
+    HEIGHT_FUSION(267),
     /**
      * <pre>
      * 相对地面高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_HEIGHT_RELATIVE = 268;</code>
+     * <code>HEIGHT_RELATIVE = 268;</code>
      */
-    DJI_HEIGHT_RELATIVE(268),
+    HEIGHT_RELATIVE(268),
     /**
      * <pre>
      * 融合位置坐标(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_POSITION_FUSED = 269;</code>
+     * <code>POSITION_FUSED = 269;</code>
      */
-    DJI_POSITION_FUSED(269),
+    POSITION_FUSED(269),
     /**
      * <pre>
      * GPS 日期,年月日(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_DATE = 270;</code>
+     * <code>GPS_DATE = 270;</code>
      */
-    DJI_GPS_DATE(270),
+    GPS_DATE(270),
     /**
      * <pre>
      * GPS 时间,时分秒(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_TIME = 271;</code>
+     * <code>GPS_TIME = 271;</code>
      */
-    DJI_GPS_TIME(271),
+    GPS_TIME(271),
     /**
      * <pre>
      * GPS 位置(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_POSITION = 272;</code>
+     * <code>GPS_POSITION = 272;</code>
      */
-    DJI_GPS_POSITION(272),
+    GPS_POSITION(272),
     /**
      * <pre>
      * GPS 速度(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_VELOCITY = 273;</code>
+     * <code>GPS_VELOCITY = 273;</code>
      */
-    DJI_GPS_VELOCITY(273),
+    GPS_VELOCITY(273),
     /**
      * <pre>
      * GPS 信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_DETAILS = 274;</code>
+     * <code>GPS_DETAILS = 274;</code>
      */
-    DJI_GPS_DETAILS(274),
+    GPS_DETAILS(274),
     /**
      * <pre>
      * GPS 信号强度(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GPS_SIGNAL_LEVEL = 275;</code>
+     * <code>GPS_SIGNAL_LEVEL = 275;</code>
      */
-    DJI_GPS_SIGNAL_LEVEL(275),
+    GPS_SIGNAL_LEVEL(275),
     /**
      * <pre>
      * RTK 位置(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_POSITION = 276;</code>
+     * <code>RTK_POSITION = 276;</code>
      */
-    DJI_RTK_POSITION(276),
+    RTK_POSITION(276),
     /**
      * <pre>
      * RTK 速度(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_VELOCITY = 277;</code>
+     * <code>RTK_VELOCITY = 277;</code>
      */
-    DJI_RTK_VELOCITY(277),
+    RTK_VELOCITY(277),
     /**
      * <pre>
      * RTK 航向角(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_YAW = 278;</code>
+     * <code>RTK_YAW = 278;</code>
      */
-    DJI_RTK_YAW(278),
+    RTK_YAW(278),
     /**
      * <pre>
      * RTK 位置信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_POSITION_INFO = 279;</code>
+     * <code>RTK_POSITION_INFO = 279;</code>
      */
-    DJI_RTK_POSITION_INFO(279),
+    RTK_POSITION_INFO(279),
     /**
      * <pre>
      * RTK 航向信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_YAW_INFO = 280;</code>
+     * <code>RTK_YAW_INFO = 280;</code>
      */
-    DJI_RTK_YAW_INFO(280),
+    RTK_YAW_INFO(280),
     /**
      * <pre>
      * 指南针信息(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_COMPASS = 281;</code>
+     * <code>COMPASS = 281;</code>
      */
-    DJI_COMPASS(281),
+    COMPASS(281),
     /**
      * <pre>
      * 遥控摇杆信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RC = 282;</code>
+     * <code>RC = 282;</code>
      */
-    DJI_RC(282),
+    RC(282),
     /**
      * <pre>
      * 云台角度(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_ANGLES = 283;</code>
+     * <code>GIMBAL_ANGLES = 283;</code>
      */
-    DJI_GIMBAL_ANGLES(283),
+    GIMBAL_ANGLES(283),
     /**
      * <pre>
      * 云台状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_STATUS = 284;</code>
+     * <code>GIMBAL_STATUS = 284;</code>
      */
-    DJI_GIMBAL_STATUS(284),
+    GIMBAL_STATUS(284),
     /**
      * <pre>
      * 飞行状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_FLIGHT = 285;</code>
+     * <code>STATUS_FLIGHT = 285;</code>
      */
-    DJI_STATUS_FLIGHT(285),
+    STATUS_FLIGHT(285),
     /**
      * <pre>
      * 飞行模式状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_DISPLAYMODE = 286;</code>
+     * <code>STATUS_DISPLAYMODE = 286;</code>
      */
-    DJI_STATUS_DISPLAYMODE(286),
+    STATUS_DISPLAYMODE(286),
     /**
      * <pre>
      * 起落架状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_LANDINGGEAR = 287;</code>
+     * <code>STATUS_LANDINGGEAR = 287;</code>
      */
-    DJI_STATUS_LANDINGGEAR(287),
+    STATUS_LANDINGGEAR(287),
     /**
      * <pre>
      * 电机启动错误码(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_MOTOR_START_ERROR = 288;</code>
+     * <code>STATUS_MOTOR_START_ERROR = 288;</code>
      */
-    DJI_STATUS_MOTOR_START_ERROR(288),
+    STATUS_MOTOR_START_ERROR(288),
     /**
      * <pre>
      * 电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_INFO = 289;</code>
+     * <code>BATTERY_INFO = 289;</code>
      */
-    DJI_BATTERY_INFO(289),
+    BATTERY_INFO(289),
     /**
      * <pre>
      * 设备控制信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_CONTROL_DEVICE = 290;</code>
+     * <code>CONTROL_DEVICE = 290;</code>
      */
-    DJI_CONTROL_DEVICE(290),
+    CONTROL_DEVICE(290),
     /**
      * <pre>
      * 硬件时钟同步(400Hz)
      * </pre>
      *
-     * <code>DJI_HARD_SYNC = 291;</code>
+     * <code>HARD_SYNC = 291;</code>
      */
-    DJI_HARD_SYNC(291),
+    HARD_SYNC(291),
     /**
      * <pre>
      * GPS 控制等级(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GPS_CONTROL_LEVEL = 292;</code>
+     * <code>GPS_CONTROL_LEVEL = 292;</code>
      */
-    DJI_GPS_CONTROL_LEVEL(292),
+    GPS_CONTROL_LEVEL(292),
     /**
      * <pre>
      * 带标记遥控遥感信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RC_WITH_FLAG_DATA = 293;</code>
+     * <code>RC_WITH_FLAG_DATA = 293;</code>
      */
-    DJI_RC_WITH_FLAG_DATA(293),
+    RC_WITH_FLAG_DATA(293),
     /**
      * <pre>
      * 电调数据(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_ESC_DATA = 294;</code>
+     * <code>ESC_DATA = 294;</code>
      */
-    DJI_ESC_DATA(294),
+    ESC_DATA(294),
     /**
      * <pre>
      * RTK 连接状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RTK_CONNECT_STATUS = 295;</code>
+     * <code>RTK_CONNECT_STATUS = 295;</code>
      */
-    DJI_RTK_CONNECT_STATUS(295),
+    RTK_CONNECT_STATUS(295),
     /**
      * <pre>
      * 云台控制模式(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_CONTROL_MODE = 296;</code>
+     * <code>GIMBAL_CONTROL_MODE = 296;</code>
      */
-    DJI_GIMBAL_CONTROL_MODE(296),
+    GIMBAL_CONTROL_MODE(296),
     /**
      * <pre>
      * 飞行异常信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_FLIGHT_ANOMALY = 297;</code>
+     * <code>FLIGHT_ANOMALY = 297;</code>
      */
-    DJI_FLIGHT_ANOMALY(297),
+    FLIGHT_ANOMALY(297),
     /**
      * <pre>
      * 笛卡尔坐标位置(200Hz)
      * </pre>
      *
-     * <code>DJI_POSITION_VO = 298;</code>
+     * <code>POSITION_VO = 298;</code>
      */
-    DJI_POSITION_VO(298),
+    POSITION_VO(298),
     /**
      * <pre>
      * 避障数据(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_AVOID_DATA = 299;</code>
+     * <code>AVOID_DATA = 299;</code>
      */
-    DJI_AVOID_DATA(299),
+    AVOID_DATA(299),
     /**
      * <pre>
      * 返航点设置状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_HOME_POINT_SET_STATUS = 300;</code>
+     * <code>HOME_POINT_SET_STATUS = 300;</code>
      */
-    DJI_HOME_POINT_SET_STATUS(300),
+    HOME_POINT_SET_STATUS(300),
     /**
      * <pre>
      * 返航点信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_HOME_POINT_INFO = 301;</code>
+     * <code>HOME_POINT_INFO = 301;</code>
      */
-    DJI_HOME_POINT_INFO(301),
+    HOME_POINT_INFO(301),
     /**
      * <pre>
      * 三云台信息,适用M300 RTK与M350 RTK上下三个云台的信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_THREE_GIMBAL_DATA = 302;</code>
+     * <code>THREE_GIMBAL_DATA = 302;</code>
      */
-    DJI_THREE_GIMBAL_DATA(302),
+    THREE_GIMBAL_DATA(302),
     /**
      * <pre>
      * 1号电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_SINGLE_INFO_INDEX1 = 303;</code>
+     * <code>BATTERY_SINGLE_INFO_INDEX1 = 303;</code>
      */
-    DJI_BATTERY_SINGLE_INFO_INDEX1(303),
+    BATTERY_SINGLE_INFO_INDEX1(303),
     /**
      * <pre>
      * 2号电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_SINGLE_INFO_INDEX2 = 304;</code>
+     * <code>BATTERY_SINGLE_INFO_INDEX2 = 304;</code>
      */
-    DJI_BATTERY_SINGLE_INFO_INDEX2(304),
+    BATTERY_SINGLE_INFO_INDEX2(304),
     UNRECOGNIZED(-1),
     ;
 
@@ -736,393 +736,393 @@ public final class MdsdProtoBuf {
      * 未知
      * </pre>
      *
-     * <code>DJI_SUBSCRIPTION_TOPIC_UNKNOWN = 0;</code>
+     * <code>SUBSCRIPTION_TOPIC_UNKNOWN = 0;</code>
      */
-    public static final int DJI_SUBSCRIPTION_TOPIC_UNKNOWN_VALUE = 0;
+    public static final int SUBSCRIPTION_TOPIC_UNKNOWN_VALUE = 0;
     /**
      * <pre>
      * 姿态四元数(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_QUATERNION = 256;</code>
+     * <code>QUATERNION = 256;</code>
      */
-    public static final int DJI_QUATERNION_VALUE = 256;
+    public static final int QUATERNION_VALUE = 256;
     /**
      * <pre>
      * 相对地面加速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_GROUND = 258;</code>
+     * <code>ACCELERATION_GROUND = 258;</code>
      */
-    public static final int DJI_ACCELERATION_GROUND_VALUE = 258;
+    public static final int ACCELERATION_GROUND_VALUE = 258;
     /**
      * <pre>
      * 相对机体加速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_BODY = 259;</code>
+     * <code>ACCELERATION_BODY = 259;</code>
      */
-    public static final int DJI_ACCELERATION_BODY_VALUE = 259;
+    public static final int ACCELERATION_BODY_VALUE = 259;
     /**
      * <pre>
      * 原始加速度(最大 400Hz)
      * </pre>
      *
-     * <code>DJI_ACCELERATION_RAW = 260;</code>
+     * <code>ACCELERATION_RAW = 260;</code>
      */
-    public static final int DJI_ACCELERATION_RAW_VALUE = 260;
+    public static final int ACCELERATION_RAW_VALUE = 260;
     /**
      * <pre>
      * 速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_VELOCITY = 261;</code>
+     * <code>VELOCITY = 261;</code>
      */
-    public static final int DJI_VELOCITY_VALUE = 261;
+    public static final int VELOCITY_VALUE = 261;
     /**
      * <pre>
      * 融合角速度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ANGULAR_RATE_FUSIONED = 262;</code>
+     * <code>ANGULAR_RATE_FUSIONED = 262;</code>
      */
-    public static final int DJI_ANGULAR_RATE_FUSIONED_VALUE = 262;
+    public static final int ANGULAR_RATE_FUSIONED_VALUE = 262;
     /**
      * <pre>
      * 原始角速度(最大 400Hz)
      * </pre>
      *
-     * <code>DJI_ANGULAR_RATE_RAW = 263;</code>
+     * <code>ANGULAR_RATE_RAW = 263;</code>
      */
-    public static final int DJI_ANGULAR_RATE_RAW_VALUE = 263;
+    public static final int ANGULAR_RATE_RAW_VALUE = 263;
     /**
      * <pre>
      * 融合高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_FUSED = 264;</code>
+     * <code>ALTITUDE_FUSED = 264;</code>
      */
-    public static final int DJI_ALTITUDE_FUSED_VALUE = 264;
+    public static final int ALTITUDE_FUSED_VALUE = 264;
     /**
      * <pre>
      * 气压计高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_BAROMETER = 265;</code>
+     * <code>ALTITUDE_BAROMETER = 265;</code>
      */
-    public static final int DJI_ALTITUDE_BAROMETER_VALUE = 265;
+    public static final int ALTITUDE_BAROMETER_VALUE = 265;
     /**
      * <pre>
      * Home 点高度(最大 1Hz)
      * </pre>
      *
-     * <code>DJI_ALTITUDE_OF_HOMEPOINT = 266;</code>
+     * <code>ALTITUDE_OF_HOMEPOINT = 266;</code>
      */
-    public static final int DJI_ALTITUDE_OF_HOMEPOINT_VALUE = 266;
+    public static final int ALTITUDE_OF_HOMEPOINT_VALUE = 266;
     /**
      * <pre>
      * 融合相对地面高度(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_HEIGHT_FUSION = 267;</code>
+     * <code>HEIGHT_FUSION = 267;</code>
      */
-    public static final int DJI_HEIGHT_FUSION_VALUE = 267;
+    public static final int HEIGHT_FUSION_VALUE = 267;
     /**
      * <pre>
      * 相对地面高度(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_HEIGHT_RELATIVE = 268;</code>
+     * <code>HEIGHT_RELATIVE = 268;</code>
      */
-    public static final int DJI_HEIGHT_RELATIVE_VALUE = 268;
+    public static final int HEIGHT_RELATIVE_VALUE = 268;
     /**
      * <pre>
      * 融合位置坐标(最大 200Hz)
      * </pre>
      *
-     * <code>DJI_POSITION_FUSED = 269;</code>
+     * <code>POSITION_FUSED = 269;</code>
      */
-    public static final int DJI_POSITION_FUSED_VALUE = 269;
+    public static final int POSITION_FUSED_VALUE = 269;
     /**
      * <pre>
      * GPS 日期,年月日(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_DATE = 270;</code>
+     * <code>GPS_DATE = 270;</code>
      */
-    public static final int DJI_GPS_DATE_VALUE = 270;
+    public static final int GPS_DATE_VALUE = 270;
     /**
      * <pre>
      * GPS 时间,时分秒(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_TIME = 271;</code>
+     * <code>GPS_TIME = 271;</code>
      */
-    public static final int DJI_GPS_TIME_VALUE = 271;
+    public static final int GPS_TIME_VALUE = 271;
     /**
      * <pre>
      * GPS 位置(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_POSITION = 272;</code>
+     * <code>GPS_POSITION = 272;</code>
      */
-    public static final int DJI_GPS_POSITION_VALUE = 272;
+    public static final int GPS_POSITION_VALUE = 272;
     /**
      * <pre>
      * GPS 速度(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_VELOCITY = 273;</code>
+     * <code>GPS_VELOCITY = 273;</code>
      */
-    public static final int DJI_GPS_VELOCITY_VALUE = 273;
+    public static final int GPS_VELOCITY_VALUE = 273;
     /**
      * <pre>
      * GPS 信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_GPS_DETAILS = 274;</code>
+     * <code>GPS_DETAILS = 274;</code>
      */
-    public static final int DJI_GPS_DETAILS_VALUE = 274;
+    public static final int GPS_DETAILS_VALUE = 274;
     /**
      * <pre>
      * GPS 信号强度(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GPS_SIGNAL_LEVEL = 275;</code>
+     * <code>GPS_SIGNAL_LEVEL = 275;</code>
      */
-    public static final int DJI_GPS_SIGNAL_LEVEL_VALUE = 275;
+    public static final int GPS_SIGNAL_LEVEL_VALUE = 275;
     /**
      * <pre>
      * RTK 位置(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_POSITION = 276;</code>
+     * <code>RTK_POSITION = 276;</code>
      */
-    public static final int DJI_RTK_POSITION_VALUE = 276;
+    public static final int RTK_POSITION_VALUE = 276;
     /**
      * <pre>
      * RTK 速度(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_VELOCITY = 277;</code>
+     * <code>RTK_VELOCITY = 277;</code>
      */
-    public static final int DJI_RTK_VELOCITY_VALUE = 277;
+    public static final int RTK_VELOCITY_VALUE = 277;
     /**
      * <pre>
      * RTK 航向角(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_YAW = 278;</code>
+     * <code>RTK_YAW = 278;</code>
      */
-    public static final int DJI_RTK_YAW_VALUE = 278;
+    public static final int RTK_YAW_VALUE = 278;
     /**
      * <pre>
      * RTK 位置信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_POSITION_INFO = 279;</code>
+     * <code>RTK_POSITION_INFO = 279;</code>
      */
-    public static final int DJI_RTK_POSITION_INFO_VALUE = 279;
+    public static final int RTK_POSITION_INFO_VALUE = 279;
     /**
      * <pre>
      * RTK 航向信息(最大 5Hz)
      * </pre>
      *
-     * <code>DJI_RTK_YAW_INFO = 280;</code>
+     * <code>RTK_YAW_INFO = 280;</code>
      */
-    public static final int DJI_RTK_YAW_INFO_VALUE = 280;
+    public static final int RTK_YAW_INFO_VALUE = 280;
     /**
      * <pre>
      * 指南针信息(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_COMPASS = 281;</code>
+     * <code>COMPASS = 281;</code>
      */
-    public static final int DJI_COMPASS_VALUE = 281;
+    public static final int COMPASS_VALUE = 281;
     /**
      * <pre>
      * 遥控摇杆信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RC = 282;</code>
+     * <code>RC = 282;</code>
      */
-    public static final int DJI_RC_VALUE = 282;
+    public static final int RC_VALUE = 282;
     /**
      * <pre>
      * 云台角度(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_ANGLES = 283;</code>
+     * <code>GIMBAL_ANGLES = 283;</code>
      */
-    public static final int DJI_GIMBAL_ANGLES_VALUE = 283;
+    public static final int GIMBAL_ANGLES_VALUE = 283;
     /**
      * <pre>
      * 云台状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_STATUS = 284;</code>
+     * <code>GIMBAL_STATUS = 284;</code>
      */
-    public static final int DJI_GIMBAL_STATUS_VALUE = 284;
+    public static final int GIMBAL_STATUS_VALUE = 284;
     /**
      * <pre>
      * 飞行状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_FLIGHT = 285;</code>
+     * <code>STATUS_FLIGHT = 285;</code>
      */
-    public static final int DJI_STATUS_FLIGHT_VALUE = 285;
+    public static final int STATUS_FLIGHT_VALUE = 285;
     /**
      * <pre>
      * 飞行模式状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_DISPLAYMODE = 286;</code>
+     * <code>STATUS_DISPLAYMODE = 286;</code>
      */
-    public static final int DJI_STATUS_DISPLAYMODE_VALUE = 286;
+    public static final int STATUS_DISPLAYMODE_VALUE = 286;
     /**
      * <pre>
      * 起落架状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_LANDINGGEAR = 287;</code>
+     * <code>STATUS_LANDINGGEAR = 287;</code>
      */
-    public static final int DJI_STATUS_LANDINGGEAR_VALUE = 287;
+    public static final int STATUS_LANDINGGEAR_VALUE = 287;
     /**
      * <pre>
      * 电机启动错误码(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_STATUS_MOTOR_START_ERROR = 288;</code>
+     * <code>STATUS_MOTOR_START_ERROR = 288;</code>
      */
-    public static final int DJI_STATUS_MOTOR_START_ERROR_VALUE = 288;
+    public static final int STATUS_MOTOR_START_ERROR_VALUE = 288;
     /**
      * <pre>
      * 电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_INFO = 289;</code>
+     * <code>BATTERY_INFO = 289;</code>
      */
-    public static final int DJI_BATTERY_INFO_VALUE = 289;
+    public static final int BATTERY_INFO_VALUE = 289;
     /**
      * <pre>
      * 设备控制信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_CONTROL_DEVICE = 290;</code>
+     * <code>CONTROL_DEVICE = 290;</code>
      */
-    public static final int DJI_CONTROL_DEVICE_VALUE = 290;
+    public static final int CONTROL_DEVICE_VALUE = 290;
     /**
      * <pre>
      * 硬件时钟同步(400Hz)
      * </pre>
      *
-     * <code>DJI_HARD_SYNC = 291;</code>
+     * <code>HARD_SYNC = 291;</code>
      */
-    public static final int DJI_HARD_SYNC_VALUE = 291;
+    public static final int HARD_SYNC_VALUE = 291;
     /**
      * <pre>
      * GPS 控制等级(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GPS_CONTROL_LEVEL = 292;</code>
+     * <code>GPS_CONTROL_LEVEL = 292;</code>
      */
-    public static final int DJI_GPS_CONTROL_LEVEL_VALUE = 292;
+    public static final int GPS_CONTROL_LEVEL_VALUE = 292;
     /**
      * <pre>
      * 带标记遥控遥感信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RC_WITH_FLAG_DATA = 293;</code>
+     * <code>RC_WITH_FLAG_DATA = 293;</code>
      */
-    public static final int DJI_RC_WITH_FLAG_DATA_VALUE = 293;
+    public static final int RC_WITH_FLAG_DATA_VALUE = 293;
     /**
      * <pre>
      * 电调数据(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_ESC_DATA = 294;</code>
+     * <code>ESC_DATA = 294;</code>
      */
-    public static final int DJI_ESC_DATA_VALUE = 294;
+    public static final int ESC_DATA_VALUE = 294;
     /**
      * <pre>
      * RTK 连接状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_RTK_CONNECT_STATUS = 295;</code>
+     * <code>RTK_CONNECT_STATUS = 295;</code>
      */
-    public static final int DJI_RTK_CONNECT_STATUS_VALUE = 295;
+    public static final int RTK_CONNECT_STATUS_VALUE = 295;
     /**
      * <pre>
      * 云台控制模式(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_GIMBAL_CONTROL_MODE = 296;</code>
+     * <code>GIMBAL_CONTROL_MODE = 296;</code>
      */
-    public static final int DJI_GIMBAL_CONTROL_MODE_VALUE = 296;
+    public static final int GIMBAL_CONTROL_MODE_VALUE = 296;
     /**
      * <pre>
      * 飞行异常信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_FLIGHT_ANOMALY = 297;</code>
+     * <code>FLIGHT_ANOMALY = 297;</code>
      */
-    public static final int DJI_FLIGHT_ANOMALY_VALUE = 297;
+    public static final int FLIGHT_ANOMALY_VALUE = 297;
     /**
      * <pre>
      * 笛卡尔坐标位置(200Hz)
      * </pre>
      *
-     * <code>DJI_POSITION_VO = 298;</code>
+     * <code>POSITION_VO = 298;</code>
      */
-    public static final int DJI_POSITION_VO_VALUE = 298;
+    public static final int POSITION_VO_VALUE = 298;
     /**
      * <pre>
      * 避障数据(最大 100Hz)
      * </pre>
      *
-     * <code>DJI_AVOID_DATA = 299;</code>
+     * <code>AVOID_DATA = 299;</code>
      */
-    public static final int DJI_AVOID_DATA_VALUE = 299;
+    public static final int AVOID_DATA_VALUE = 299;
     /**
      * <pre>
      * 返航点设置状态(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_HOME_POINT_SET_STATUS = 300;</code>
+     * <code>HOME_POINT_SET_STATUS = 300;</code>
      */
-    public static final int DJI_HOME_POINT_SET_STATUS_VALUE = 300;
+    public static final int HOME_POINT_SET_STATUS_VALUE = 300;
     /**
      * <pre>
      * 返航点信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_HOME_POINT_INFO = 301;</code>
+     * <code>HOME_POINT_INFO = 301;</code>
      */
-    public static final int DJI_HOME_POINT_INFO_VALUE = 301;
+    public static final int HOME_POINT_INFO_VALUE = 301;
     /**
      * <pre>
      * 三云台信息,适用M300 RTK与M350 RTK上下三个云台的信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_THREE_GIMBAL_DATA = 302;</code>
+     * <code>THREE_GIMBAL_DATA = 302;</code>
      */
-    public static final int DJI_THREE_GIMBAL_DATA_VALUE = 302;
+    public static final int THREE_GIMBAL_DATA_VALUE = 302;
     /**
      * <pre>
      * 1号电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_SINGLE_INFO_INDEX1 = 303;</code>
+     * <code>BATTERY_SINGLE_INFO_INDEX1 = 303;</code>
      */
-    public static final int DJI_BATTERY_SINGLE_INFO_INDEX1_VALUE = 303;
+    public static final int BATTERY_SINGLE_INFO_INDEX1_VALUE = 303;
     /**
      * <pre>
      * 2号电池信息(最大 50Hz)
      * </pre>
      *
-     * <code>DJI_BATTERY_SINGLE_INFO_INDEX2 = 304;</code>
+     * <code>BATTERY_SINGLE_INFO_INDEX2 = 304;</code>
      */
-    public static final int DJI_BATTERY_SINGLE_INFO_INDEX2_VALUE = 304;
+    public static final int BATTERY_SINGLE_INFO_INDEX2_VALUE = 304;
 
 
     public final int getNumber() {
@@ -1139,7 +1139,7 @@ public final class MdsdProtoBuf {
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @Deprecated
-    public static SubscriptionTopicActionEnum valueOf(int value) {
+    public static FcSubscriptionTopicEnum valueOf(int value) {
       return forNumber(value);
     }
 
@@ -1147,70 +1147,70 @@ public final class MdsdProtoBuf {
      * @param value The numeric wire value of the corresponding enum entry.
      * @return The enum associated with the given numeric wire value.
      */
-    public static SubscriptionTopicActionEnum forNumber(int value) {
+    public static FcSubscriptionTopicEnum forNumber(int value) {
       switch (value) {
-        case 0: return DJI_SUBSCRIPTION_TOPIC_UNKNOWN;
-        case 256: return DJI_QUATERNION;
-        case 258: return DJI_ACCELERATION_GROUND;
-        case 259: return DJI_ACCELERATION_BODY;
-        case 260: return DJI_ACCELERATION_RAW;
-        case 261: return DJI_VELOCITY;
-        case 262: return DJI_ANGULAR_RATE_FUSIONED;
-        case 263: return DJI_ANGULAR_RATE_RAW;
-        case 264: return DJI_ALTITUDE_FUSED;
-        case 265: return DJI_ALTITUDE_BAROMETER;
-        case 266: return DJI_ALTITUDE_OF_HOMEPOINT;
-        case 267: return DJI_HEIGHT_FUSION;
-        case 268: return DJI_HEIGHT_RELATIVE;
-        case 269: return DJI_POSITION_FUSED;
-        case 270: return DJI_GPS_DATE;
-        case 271: return DJI_GPS_TIME;
-        case 272: return DJI_GPS_POSITION;
-        case 273: return DJI_GPS_VELOCITY;
-        case 274: return DJI_GPS_DETAILS;
-        case 275: return DJI_GPS_SIGNAL_LEVEL;
-        case 276: return DJI_RTK_POSITION;
-        case 277: return DJI_RTK_VELOCITY;
-        case 278: return DJI_RTK_YAW;
-        case 279: return DJI_RTK_POSITION_INFO;
-        case 280: return DJI_RTK_YAW_INFO;
-        case 281: return DJI_COMPASS;
-        case 282: return DJI_RC;
-        case 283: return DJI_GIMBAL_ANGLES;
-        case 284: return DJI_GIMBAL_STATUS;
-        case 285: return DJI_STATUS_FLIGHT;
-        case 286: return DJI_STATUS_DISPLAYMODE;
-        case 287: return DJI_STATUS_LANDINGGEAR;
-        case 288: return DJI_STATUS_MOTOR_START_ERROR;
-        case 289: return DJI_BATTERY_INFO;
-        case 290: return DJI_CONTROL_DEVICE;
-        case 291: return DJI_HARD_SYNC;
-        case 292: return DJI_GPS_CONTROL_LEVEL;
-        case 293: return DJI_RC_WITH_FLAG_DATA;
-        case 294: return DJI_ESC_DATA;
-        case 295: return DJI_RTK_CONNECT_STATUS;
-        case 296: return DJI_GIMBAL_CONTROL_MODE;
-        case 297: return DJI_FLIGHT_ANOMALY;
-        case 298: return DJI_POSITION_VO;
-        case 299: return DJI_AVOID_DATA;
-        case 300: return DJI_HOME_POINT_SET_STATUS;
-        case 301: return DJI_HOME_POINT_INFO;
-        case 302: return DJI_THREE_GIMBAL_DATA;
-        case 303: return DJI_BATTERY_SINGLE_INFO_INDEX1;
-        case 304: return DJI_BATTERY_SINGLE_INFO_INDEX2;
+        case 0: return SUBSCRIPTION_TOPIC_UNKNOWN;
+        case 256: return QUATERNION;
+        case 258: return ACCELERATION_GROUND;
+        case 259: return ACCELERATION_BODY;
+        case 260: return ACCELERATION_RAW;
+        case 261: return VELOCITY;
+        case 262: return ANGULAR_RATE_FUSIONED;
+        case 263: return ANGULAR_RATE_RAW;
+        case 264: return ALTITUDE_FUSED;
+        case 265: return ALTITUDE_BAROMETER;
+        case 266: return ALTITUDE_OF_HOMEPOINT;
+        case 267: return HEIGHT_FUSION;
+        case 268: return HEIGHT_RELATIVE;
+        case 269: return POSITION_FUSED;
+        case 270: return GPS_DATE;
+        case 271: return GPS_TIME;
+        case 272: return GPS_POSITION;
+        case 273: return GPS_VELOCITY;
+        case 274: return GPS_DETAILS;
+        case 275: return GPS_SIGNAL_LEVEL;
+        case 276: return RTK_POSITION;
+        case 277: return RTK_VELOCITY;
+        case 278: return RTK_YAW;
+        case 279: return RTK_POSITION_INFO;
+        case 280: return RTK_YAW_INFO;
+        case 281: return COMPASS;
+        case 282: return RC;
+        case 283: return GIMBAL_ANGLES;
+        case 284: return GIMBAL_STATUS;
+        case 285: return STATUS_FLIGHT;
+        case 286: return STATUS_DISPLAYMODE;
+        case 287: return STATUS_LANDINGGEAR;
+        case 288: return STATUS_MOTOR_START_ERROR;
+        case 289: return BATTERY_INFO;
+        case 290: return CONTROL_DEVICE;
+        case 291: return HARD_SYNC;
+        case 292: return GPS_CONTROL_LEVEL;
+        case 293: return RC_WITH_FLAG_DATA;
+        case 294: return ESC_DATA;
+        case 295: return RTK_CONNECT_STATUS;
+        case 296: return GIMBAL_CONTROL_MODE;
+        case 297: return FLIGHT_ANOMALY;
+        case 298: return POSITION_VO;
+        case 299: return AVOID_DATA;
+        case 300: return HOME_POINT_SET_STATUS;
+        case 301: return HOME_POINT_INFO;
+        case 302: return THREE_GIMBAL_DATA;
+        case 303: return BATTERY_SINGLE_INFO_INDEX1;
+        case 304: return BATTERY_SINGLE_INFO_INDEX2;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<SubscriptionTopicActionEnum>
+    public static com.google.protobuf.Internal.EnumLiteMap<FcSubscriptionTopicEnum>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        SubscriptionTopicActionEnum> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<SubscriptionTopicActionEnum>() {
-            public SubscriptionTopicActionEnum findValueByNumber(int number) {
-              return SubscriptionTopicActionEnum.forNumber(number);
+        FcSubscriptionTopicEnum> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<FcSubscriptionTopicEnum>() {
+            public FcSubscriptionTopicEnum findValueByNumber(int number) {
+              return FcSubscriptionTopicEnum.forNumber(number);
             }
           };
 
@@ -1231,9 +1231,9 @@ public final class MdsdProtoBuf {
       return MdsdProtoBuf.getDescriptor().getEnumTypes().get(1);
     }
 
-    private static final SubscriptionTopicActionEnum[] VALUES = values();
+    private static final FcSubscriptionTopicEnum[] VALUES = values();
 
-    public static SubscriptionTopicActionEnum valueOf(
+    public static FcSubscriptionTopicEnum valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new IllegalArgumentException(
@@ -1247,11 +1247,11 @@ public final class MdsdProtoBuf {
 
     private final int value;
 
-    private SubscriptionTopicActionEnum(int value) {
+    private FcSubscriptionTopicEnum(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:SubscriptionTopicActionEnum)
+    // @@protoc_insertion_point(enum_scope:FcSubscriptionTopicEnum)
   }
 
   /**
@@ -1259,77 +1259,77 @@ public final class MdsdProtoBuf {
    * 数据订阅频率 - 枚举
    * </pre>
    *
-   * Protobuf enum {@code SubscriptionFreqActionEnum}
+   * Protobuf enum {@code SubscriptionFreqEnum}
    */
-  public enum SubscriptionFreqActionEnum
+  public enum SubscriptionFreqEnum
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>DJI_0_HZ = 0;</code>
+     * <code>HZ_0 = 0;</code>
      */
-    DJI_0_HZ(0),
+    HZ_0(0),
     /**
-     * <code>DJI_1_HZ = 1;</code>
+     * <code>HZ_1 = 1;</code>
      */
-    DJI_1_HZ(1),
+    HZ_1(1),
     /**
-     * <code>DJI_5_HZ = 5;</code>
+     * <code>HZ_5 = 5;</code>
      */
-    DJI_5_HZ(5),
+    HZ_5(5),
     /**
-     * <code>DJI_10_HZ = 10;</code>
+     * <code>HZ_10 = 10;</code>
      */
-    DJI_10_HZ(10),
+    HZ_10(10),
     /**
-     * <code>DJI_50_HZ = 50;</code>
+     * <code>HZ_50 = 50;</code>
      */
-    DJI_50_HZ(50),
+    HZ_50(50),
     /**
-     * <code>DJI_100_HZ = 100;</code>
+     * <code>HZ_100 = 100;</code>
      */
-    DJI_100_HZ(100),
+    HZ_100(100),
     /**
-     * <code>DJI_200_HZ = 200;</code>
+     * <code>HZ_200 = 200;</code>
      */
-    DJI_200_HZ(200),
+    HZ_200(200),
     /**
-     * <code>DJI_400_HZ = 400;</code>
+     * <code>HZ_400 = 400;</code>
      */
-    DJI_400_HZ(400),
+    HZ_400(400),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>DJI_0_HZ = 0;</code>
+     * <code>HZ_0 = 0;</code>
      */
-    public static final int DJI_0_HZ_VALUE = 0;
+    public static final int HZ_0_VALUE = 0;
     /**
-     * <code>DJI_1_HZ = 1;</code>
+     * <code>HZ_1 = 1;</code>
      */
-    public static final int DJI_1_HZ_VALUE = 1;
+    public static final int HZ_1_VALUE = 1;
     /**
-     * <code>DJI_5_HZ = 5;</code>
+     * <code>HZ_5 = 5;</code>
      */
-    public static final int DJI_5_HZ_VALUE = 5;
+    public static final int HZ_5_VALUE = 5;
     /**
-     * <code>DJI_10_HZ = 10;</code>
+     * <code>HZ_10 = 10;</code>
      */
-    public static final int DJI_10_HZ_VALUE = 10;
+    public static final int HZ_10_VALUE = 10;
     /**
-     * <code>DJI_50_HZ = 50;</code>
+     * <code>HZ_50 = 50;</code>
      */
-    public static final int DJI_50_HZ_VALUE = 50;
+    public static final int HZ_50_VALUE = 50;
     /**
-     * <code>DJI_100_HZ = 100;</code>
+     * <code>HZ_100 = 100;</code>
      */
-    public static final int DJI_100_HZ_VALUE = 100;
+    public static final int HZ_100_VALUE = 100;
     /**
-     * <code>DJI_200_HZ = 200;</code>
+     * <code>HZ_200 = 200;</code>
      */
-    public static final int DJI_200_HZ_VALUE = 200;
+    public static final int HZ_200_VALUE = 200;
     /**
-     * <code>DJI_400_HZ = 400;</code>
+     * <code>HZ_400 = 400;</code>
      */
-    public static final int DJI_400_HZ_VALUE = 400;
+    public static final int HZ_400_VALUE = 400;
 
 
     public final int getNumber() {
@@ -1346,7 +1346,7 @@ public final class MdsdProtoBuf {
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @Deprecated
-    public static SubscriptionFreqActionEnum valueOf(int value) {
+    public static SubscriptionFreqEnum valueOf(int value) {
       return forNumber(value);
     }
 
@@ -1354,29 +1354,29 @@ public final class MdsdProtoBuf {
      * @param value The numeric wire value of the corresponding enum entry.
      * @return The enum associated with the given numeric wire value.
      */
-    public static SubscriptionFreqActionEnum forNumber(int value) {
+    public static SubscriptionFreqEnum forNumber(int value) {
       switch (value) {
-        case 0: return DJI_0_HZ;
-        case 1: return DJI_1_HZ;
-        case 5: return DJI_5_HZ;
-        case 10: return DJI_10_HZ;
-        case 50: return DJI_50_HZ;
-        case 100: return DJI_100_HZ;
-        case 200: return DJI_200_HZ;
-        case 400: return DJI_400_HZ;
+        case 0: return HZ_0;
+        case 1: return HZ_1;
+        case 5: return HZ_5;
+        case 10: return HZ_10;
+        case 50: return HZ_50;
+        case 100: return HZ_100;
+        case 200: return HZ_200;
+        case 400: return HZ_400;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<SubscriptionFreqActionEnum>
+    public static com.google.protobuf.Internal.EnumLiteMap<SubscriptionFreqEnum>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        SubscriptionFreqActionEnum> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<SubscriptionFreqActionEnum>() {
-            public SubscriptionFreqActionEnum findValueByNumber(int number) {
-              return SubscriptionFreqActionEnum.forNumber(number);
+        SubscriptionFreqEnum> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<SubscriptionFreqEnum>() {
+            public SubscriptionFreqEnum findValueByNumber(int number) {
+              return SubscriptionFreqEnum.forNumber(number);
             }
           };
 
@@ -1397,9 +1397,9 @@ public final class MdsdProtoBuf {
       return MdsdProtoBuf.getDescriptor().getEnumTypes().get(2);
     }
 
-    private static final SubscriptionFreqActionEnum[] VALUES = values();
+    private static final SubscriptionFreqEnum[] VALUES = values();
 
-    public static SubscriptionFreqActionEnum valueOf(
+    public static SubscriptionFreqEnum valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new IllegalArgumentException(
@@ -1413,11 +1413,11 @@ public final class MdsdProtoBuf {
 
     private final int value;
 
-    private SubscriptionFreqActionEnum(int value) {
+    private SubscriptionFreqEnum(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:SubscriptionFreqActionEnum)
+    // @@protoc_insertion_point(enum_scope:SubscriptionFreqEnum)
   }
 
   public interface PayloadOrBuilder extends
@@ -1709,7 +1709,7 @@ public final class MdsdProtoBuf {
       if (!getHardwareCodeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, hardwareCode_);
       }
-      if (command_ != CommandEnum.COMMAND_LOGGER.getNumber()) {
+      if (command_ != CommandEnum.LOGGER.getNumber()) {
         output.writeEnum(2, command_);
       }
       if (action_ != 0) {
@@ -1730,7 +1730,7 @@ public final class MdsdProtoBuf {
       if (!getHardwareCodeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, hardwareCode_);
       }
-      if (command_ != CommandEnum.COMMAND_LOGGER.getNumber()) {
+      if (command_ != CommandEnum.LOGGER.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, command_);
       }
@@ -2368,7 +2368,7 @@ public final class MdsdProtoBuf {
      * 订阅主题
      * </pre>
      *
-     * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+     * <code>.FcSubscriptionTopicEnum topic = 1;</code>
      * @return The enum numeric value on the wire for topic.
      */
     int getTopicValue();
@@ -2377,17 +2377,17 @@ public final class MdsdProtoBuf {
      * 订阅主题
      * </pre>
      *
-     * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+     * <code>.FcSubscriptionTopicEnum topic = 1;</code>
      * @return The topic.
      */
-    SubscriptionTopicActionEnum getTopic();
+    FcSubscriptionTopicEnum getTopic();
 
     /**
      * <pre>
      * 订阅频率
      * </pre>
      *
-     * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+     * <code>.SubscriptionFreqEnum frequency = 2;</code>
      * @return The enum numeric value on the wire for frequency.
      */
     int getFrequencyValue();
@@ -2396,10 +2396,10 @@ public final class MdsdProtoBuf {
      * 订阅频率
      * </pre>
      *
-     * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+     * <code>.SubscriptionFreqEnum frequency = 2;</code>
      * @return The frequency.
      */
-    SubscriptionFreqActionEnum getFrequency();
+    SubscriptionFreqEnum getFrequency();
 
     /**
      * <pre>
@@ -2594,7 +2594,7 @@ public final class MdsdProtoBuf {
      * 订阅主题
      * </pre>
      *
-     * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+     * <code>.FcSubscriptionTopicEnum topic = 1;</code>
      * @return The enum numeric value on the wire for topic.
      */
     @Override public int getTopicValue() {
@@ -2605,13 +2605,13 @@ public final class MdsdProtoBuf {
      * 订阅主题
      * </pre>
      *
-     * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+     * <code>.FcSubscriptionTopicEnum topic = 1;</code>
      * @return The topic.
      */
-    @Override public SubscriptionTopicActionEnum getTopic() {
+    @Override public FcSubscriptionTopicEnum getTopic() {
       @SuppressWarnings("deprecation")
-      SubscriptionTopicActionEnum result = SubscriptionTopicActionEnum.valueOf(topic_);
-      return result == null ? SubscriptionTopicActionEnum.UNRECOGNIZED : result;
+      FcSubscriptionTopicEnum result = FcSubscriptionTopicEnum.valueOf(topic_);
+      return result == null ? FcSubscriptionTopicEnum.UNRECOGNIZED : result;
     }
 
     public static final int FREQUENCY_FIELD_NUMBER = 2;
@@ -2621,7 +2621,7 @@ public final class MdsdProtoBuf {
      * 订阅频率
      * </pre>
      *
-     * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+     * <code>.SubscriptionFreqEnum frequency = 2;</code>
      * @return The enum numeric value on the wire for frequency.
      */
     @Override public int getFrequencyValue() {
@@ -2632,13 +2632,13 @@ public final class MdsdProtoBuf {
      * 订阅频率
      * </pre>
      *
-     * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+     * <code>.SubscriptionFreqEnum frequency = 2;</code>
      * @return The frequency.
      */
-    @Override public SubscriptionFreqActionEnum getFrequency() {
+    @Override public SubscriptionFreqEnum getFrequency() {
       @SuppressWarnings("deprecation")
-      SubscriptionFreqActionEnum result = SubscriptionFreqActionEnum.valueOf(frequency_);
-      return result == null ? SubscriptionFreqActionEnum.UNRECOGNIZED : result;
+      SubscriptionFreqEnum result = SubscriptionFreqEnum.valueOf(frequency_);
+      return result == null ? SubscriptionFreqEnum.UNRECOGNIZED : result;
     }
 
     public static final int DETAILS_FIELD_NUMBER = 3;
@@ -2767,10 +2767,10 @@ public final class MdsdProtoBuf {
     @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (topic_ != SubscriptionTopicActionEnum.DJI_SUBSCRIPTION_TOPIC_UNKNOWN.getNumber()) {
+      if (topic_ != FcSubscriptionTopicEnum.SUBSCRIPTION_TOPIC_UNKNOWN.getNumber()) {
         output.writeEnum(1, topic_);
       }
-      if (frequency_ != SubscriptionFreqActionEnum.DJI_0_HZ.getNumber()) {
+      if (frequency_ != SubscriptionFreqEnum.HZ_0.getNumber()) {
         output.writeEnum(2, frequency_);
       }
       com.google.protobuf.GeneratedMessageV3
@@ -2791,11 +2791,11 @@ public final class MdsdProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      if (topic_ != SubscriptionTopicActionEnum.DJI_SUBSCRIPTION_TOPIC_UNKNOWN.getNumber()) {
+      if (topic_ != FcSubscriptionTopicEnum.SUBSCRIPTION_TOPIC_UNKNOWN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, topic_);
       }
-      if (frequency_ != SubscriptionFreqActionEnum.DJI_0_HZ.getNumber()) {
+      if (frequency_ != SubscriptionFreqEnum.HZ_0.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, frequency_);
       }
@@ -3144,7 +3144,7 @@ public final class MdsdProtoBuf {
        * 订阅主题
        * </pre>
        *
-       * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+       * <code>.FcSubscriptionTopicEnum topic = 1;</code>
        * @return The enum numeric value on the wire for topic.
        */
       @Override public int getTopicValue() {
@@ -3155,7 +3155,7 @@ public final class MdsdProtoBuf {
        * 订阅主题
        * </pre>
        *
-       * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+       * <code>.FcSubscriptionTopicEnum topic = 1;</code>
        * @param value The enum numeric value on the wire for topic to set.
        * @return This builder for chaining.
        */
@@ -3170,25 +3170,25 @@ public final class MdsdProtoBuf {
        * 订阅主题
        * </pre>
        *
-       * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+       * <code>.FcSubscriptionTopicEnum topic = 1;</code>
        * @return The topic.
        */
       @Override
-      public SubscriptionTopicActionEnum getTopic() {
+      public FcSubscriptionTopicEnum getTopic() {
         @SuppressWarnings("deprecation")
-        SubscriptionTopicActionEnum result = SubscriptionTopicActionEnum.valueOf(topic_);
-        return result == null ? SubscriptionTopicActionEnum.UNRECOGNIZED : result;
+        FcSubscriptionTopicEnum result = FcSubscriptionTopicEnum.valueOf(topic_);
+        return result == null ? FcSubscriptionTopicEnum.UNRECOGNIZED : result;
       }
       /**
        * <pre>
        * 订阅主题
        * </pre>
        *
-       * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+       * <code>.FcSubscriptionTopicEnum topic = 1;</code>
        * @param value The topic to set.
        * @return This builder for chaining.
        */
-      public Builder setTopic(SubscriptionTopicActionEnum value) {
+      public Builder setTopic(FcSubscriptionTopicEnum value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3202,7 +3202,7 @@ public final class MdsdProtoBuf {
        * 订阅主题
        * </pre>
        *
-       * <code>.SubscriptionTopicActionEnum topic = 1;</code>
+       * <code>.FcSubscriptionTopicEnum topic = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearTopic() {
@@ -3218,7 +3218,7 @@ public final class MdsdProtoBuf {
        * 订阅频率
        * </pre>
        *
-       * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+       * <code>.SubscriptionFreqEnum frequency = 2;</code>
        * @return The enum numeric value on the wire for frequency.
        */
       @Override public int getFrequencyValue() {
@@ -3229,7 +3229,7 @@ public final class MdsdProtoBuf {
        * 订阅频率
        * </pre>
        *
-       * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+       * <code>.SubscriptionFreqEnum frequency = 2;</code>
        * @param value The enum numeric value on the wire for frequency to set.
        * @return This builder for chaining.
        */
@@ -3244,25 +3244,25 @@ public final class MdsdProtoBuf {
        * 订阅频率
        * </pre>
        *
-       * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+       * <code>.SubscriptionFreqEnum frequency = 2;</code>
        * @return The frequency.
        */
       @Override
-      public SubscriptionFreqActionEnum getFrequency() {
+      public SubscriptionFreqEnum getFrequency() {
         @SuppressWarnings("deprecation")
-        SubscriptionFreqActionEnum result = SubscriptionFreqActionEnum.valueOf(frequency_);
-        return result == null ? SubscriptionFreqActionEnum.UNRECOGNIZED : result;
+        SubscriptionFreqEnum result = SubscriptionFreqEnum.valueOf(frequency_);
+        return result == null ? SubscriptionFreqEnum.UNRECOGNIZED : result;
       }
       /**
        * <pre>
        * 订阅频率
        * </pre>
        *
-       * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+       * <code>.SubscriptionFreqEnum frequency = 2;</code>
        * @param value The frequency to set.
        * @return This builder for chaining.
        */
-      public Builder setFrequency(SubscriptionFreqActionEnum value) {
+      public Builder setFrequency(SubscriptionFreqEnum value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3276,7 +3276,7 @@ public final class MdsdProtoBuf {
        * 订阅频率
        * </pre>
        *
-       * <code>.SubscriptionFreqActionEnum frequency = 2;</code>
+       * <code>.SubscriptionFreqEnum frequency = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearFrequency() {
@@ -3546,43 +3546,43 @@ public final class MdsdProtoBuf {
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     java.util.List<SubscriptionTopic>
-        getSubscriptionTopicsList();
+        getSubscriptionTopicListList();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
-    SubscriptionTopic getSubscriptionTopics(int index);
+    SubscriptionTopic getSubscriptionTopicList(int index);
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
-    int getSubscriptionTopicsCount();
+    int getSubscriptionTopicListCount();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     java.util.List<? extends SubscriptionTopicOrBuilder>
-        getSubscriptionTopicsOrBuilderList();
+        getSubscriptionTopicListOrBuilderList();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
-    SubscriptionTopicOrBuilder getSubscriptionTopicsOrBuilder(
+    SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
         int index);
   }
   /**
@@ -3598,7 +3598,7 @@ public final class MdsdProtoBuf {
       super(builder);
     }
     private SubscriptionDto() {
-      subscriptionTopics_ = java.util.Collections.emptyList();
+      subscriptionTopicList_ = java.util.Collections.emptyList();
     }
 
     @Override
@@ -3634,10 +3634,10 @@ public final class MdsdProtoBuf {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                subscriptionTopics_ = new java.util.ArrayList<SubscriptionTopic>();
+                subscriptionTopicList_ = new java.util.ArrayList<SubscriptionTopic>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              subscriptionTopics_.add(
+              subscriptionTopicList_.add(
                   input.readMessage(SubscriptionTopic.parser(), extensionRegistry));
               break;
             }
@@ -3657,7 +3657,7 @@ public final class MdsdProtoBuf {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          subscriptionTopics_ = java.util.Collections.unmodifiableList(subscriptionTopics_);
+          subscriptionTopicList_ = java.util.Collections.unmodifiableList(subscriptionTopicList_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3676,64 +3676,64 @@ public final class MdsdProtoBuf {
               SubscriptionDto.class, Builder.class);
     }
 
-    public static final int SUBSCRIPTIONTOPICS_FIELD_NUMBER = 1;
-    private java.util.List<SubscriptionTopic> subscriptionTopics_;
+    public static final int SUBSCRIPTIONTOPICLIST_FIELD_NUMBER = 1;
+    private java.util.List<SubscriptionTopic> subscriptionTopicList_;
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     @Override
-    public java.util.List<SubscriptionTopic> getSubscriptionTopicsList() {
-      return subscriptionTopics_;
+    public java.util.List<SubscriptionTopic> getSubscriptionTopicListList() {
+      return subscriptionTopicList_;
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     @Override
     public java.util.List<? extends SubscriptionTopicOrBuilder>
-        getSubscriptionTopicsOrBuilderList() {
-      return subscriptionTopics_;
+        getSubscriptionTopicListOrBuilderList() {
+      return subscriptionTopicList_;
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     @Override
-    public int getSubscriptionTopicsCount() {
-      return subscriptionTopics_.size();
+    public int getSubscriptionTopicListCount() {
+      return subscriptionTopicList_.size();
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     @Override
-    public SubscriptionTopic getSubscriptionTopics(int index) {
-      return subscriptionTopics_.get(index);
+    public SubscriptionTopic getSubscriptionTopicList(int index) {
+      return subscriptionTopicList_.get(index);
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
      */
     @Override
-    public SubscriptionTopicOrBuilder getSubscriptionTopicsOrBuilder(
+    public SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
         int index) {
-      return subscriptionTopics_.get(index);
+      return subscriptionTopicList_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3750,8 +3750,8 @@ public final class MdsdProtoBuf {
     @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < subscriptionTopics_.size(); i++) {
-        output.writeMessage(1, subscriptionTopics_.get(i));
+      for (int i = 0; i < subscriptionTopicList_.size(); i++) {
+        output.writeMessage(1, subscriptionTopicList_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -3762,9 +3762,9 @@ public final class MdsdProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < subscriptionTopics_.size(); i++) {
+      for (int i = 0; i < subscriptionTopicList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, subscriptionTopics_.get(i));
+          .computeMessageSize(1, subscriptionTopicList_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3781,8 +3781,8 @@ public final class MdsdProtoBuf {
       }
       SubscriptionDto other = (SubscriptionDto) obj;
 
-      if (!getSubscriptionTopicsList()
-          .equals(other.getSubscriptionTopicsList())) return false;
+      if (!getSubscriptionTopicListList()
+          .equals(other.getSubscriptionTopicListList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3794,9 +3794,9 @@ public final class MdsdProtoBuf {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getSubscriptionTopicsCount() > 0) {
-        hash = (37 * hash) + SUBSCRIPTIONTOPICS_FIELD_NUMBER;
-        hash = (53 * hash) + getSubscriptionTopicsList().hashCode();
+      if (getSubscriptionTopicListCount() > 0) {
+        hash = (37 * hash) + SUBSCRIPTIONTOPICLIST_FIELD_NUMBER;
+        hash = (53 * hash) + getSubscriptionTopicListList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3926,17 +3926,17 @@ public final class MdsdProtoBuf {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getSubscriptionTopicsFieldBuilder();
+          getSubscriptionTopicListFieldBuilder();
         }
       }
       @Override
       public Builder clear() {
         super.clear();
-        if (subscriptionTopicsBuilder_ == null) {
-          subscriptionTopics_ = java.util.Collections.emptyList();
+        if (subscriptionTopicListBuilder_ == null) {
+          subscriptionTopicList_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          subscriptionTopicsBuilder_.clear();
+          subscriptionTopicListBuilder_.clear();
         }
         return this;
       }
@@ -3965,14 +3965,14 @@ public final class MdsdProtoBuf {
       public SubscriptionDto buildPartial() {
         SubscriptionDto result = new SubscriptionDto(this);
         int from_bitField0_ = bitField0_;
-        if (subscriptionTopicsBuilder_ == null) {
+        if (subscriptionTopicListBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            subscriptionTopics_ = java.util.Collections.unmodifiableList(subscriptionTopics_);
+            subscriptionTopicList_ = java.util.Collections.unmodifiableList(subscriptionTopicList_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.subscriptionTopics_ = subscriptionTopics_;
+          result.subscriptionTopicList_ = subscriptionTopicList_;
         } else {
-          result.subscriptionTopics_ = subscriptionTopicsBuilder_.build();
+          result.subscriptionTopicList_ = subscriptionTopicListBuilder_.build();
         }
         onBuilt();
         return result;
@@ -4022,29 +4022,29 @@ public final class MdsdProtoBuf {
 
       public Builder mergeFrom(SubscriptionDto other) {
         if (other == SubscriptionDto.getDefaultInstance()) return this;
-        if (subscriptionTopicsBuilder_ == null) {
-          if (!other.subscriptionTopics_.isEmpty()) {
-            if (subscriptionTopics_.isEmpty()) {
-              subscriptionTopics_ = other.subscriptionTopics_;
+        if (subscriptionTopicListBuilder_ == null) {
+          if (!other.subscriptionTopicList_.isEmpty()) {
+            if (subscriptionTopicList_.isEmpty()) {
+              subscriptionTopicList_ = other.subscriptionTopicList_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureSubscriptionTopicsIsMutable();
-              subscriptionTopics_.addAll(other.subscriptionTopics_);
+              ensureSubscriptionTopicListIsMutable();
+              subscriptionTopicList_.addAll(other.subscriptionTopicList_);
             }
             onChanged();
           }
         } else {
-          if (!other.subscriptionTopics_.isEmpty()) {
-            if (subscriptionTopicsBuilder_.isEmpty()) {
-              subscriptionTopicsBuilder_.dispose();
-              subscriptionTopicsBuilder_ = null;
-              subscriptionTopics_ = other.subscriptionTopics_;
+          if (!other.subscriptionTopicList_.isEmpty()) {
+            if (subscriptionTopicListBuilder_.isEmpty()) {
+              subscriptionTopicListBuilder_.dispose();
+              subscriptionTopicListBuilder_ = null;
+              subscriptionTopicList_ = other.subscriptionTopicList_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              subscriptionTopicsBuilder_ = 
+              subscriptionTopicListBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getSubscriptionTopicsFieldBuilder() : null;
+                   getSubscriptionTopicListFieldBuilder() : null;
             } else {
-              subscriptionTopicsBuilder_.addAllMessages(other.subscriptionTopics_);
+              subscriptionTopicListBuilder_.addAllMessages(other.subscriptionTopicList_);
             }
           }
         }
@@ -4078,30 +4078,30 @@ public final class MdsdProtoBuf {
       }
       private int bitField0_;
 
-      private java.util.List<SubscriptionTopic> subscriptionTopics_ =
+      private java.util.List<SubscriptionTopic> subscriptionTopicList_ =
         java.util.Collections.emptyList();
-      private void ensureSubscriptionTopicsIsMutable() {
+      private void ensureSubscriptionTopicListIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          subscriptionTopics_ = new java.util.ArrayList<SubscriptionTopic>(subscriptionTopics_);
+          subscriptionTopicList_ = new java.util.ArrayList<SubscriptionTopic>(subscriptionTopicList_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder> subscriptionTopicsBuilder_;
+          SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder> subscriptionTopicListBuilder_;
 
       /**
        * <pre>
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public java.util.List<SubscriptionTopic> getSubscriptionTopicsList() {
-        if (subscriptionTopicsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(subscriptionTopics_);
+      public java.util.List<SubscriptionTopic> getSubscriptionTopicListList() {
+        if (subscriptionTopicListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(subscriptionTopicList_);
         } else {
-          return subscriptionTopicsBuilder_.getMessageList();
+          return subscriptionTopicListBuilder_.getMessageList();
         }
       }
       /**
@@ -4109,13 +4109,13 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public int getSubscriptionTopicsCount() {
-        if (subscriptionTopicsBuilder_ == null) {
-          return subscriptionTopics_.size();
+      public int getSubscriptionTopicListCount() {
+        if (subscriptionTopicListBuilder_ == null) {
+          return subscriptionTopicList_.size();
         } else {
-          return subscriptionTopicsBuilder_.getCount();
+          return subscriptionTopicListBuilder_.getCount();
         }
       }
       /**
@@ -4123,13 +4123,13 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public SubscriptionTopic getSubscriptionTopics(int index) {
-        if (subscriptionTopicsBuilder_ == null) {
-          return subscriptionTopics_.get(index);
+      public SubscriptionTopic getSubscriptionTopicList(int index) {
+        if (subscriptionTopicListBuilder_ == null) {
+          return subscriptionTopicList_.get(index);
         } else {
-          return subscriptionTopicsBuilder_.getMessage(index);
+          return subscriptionTopicListBuilder_.getMessage(index);
         }
       }
       /**
@@ -4137,19 +4137,19 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder setSubscriptionTopics(
+      public Builder setSubscriptionTopicList(
           int index, SubscriptionTopic value) {
-        if (subscriptionTopicsBuilder_ == null) {
+        if (subscriptionTopicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.set(index, value);
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.set(index, value);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.setMessage(index, value);
+          subscriptionTopicListBuilder_.setMessage(index, value);
         }
         return this;
       }
@@ -4158,16 +4158,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder setSubscriptionTopics(
+      public Builder setSubscriptionTopicList(
           int index, SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicsBuilder_ == null) {
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.set(index, builderForValue.build());
+        if (subscriptionTopicListBuilder_ == null) {
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.set(index, builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.setMessage(index, builderForValue.build());
+          subscriptionTopicListBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -4176,18 +4176,18 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder addSubscriptionTopics(SubscriptionTopic value) {
-        if (subscriptionTopicsBuilder_ == null) {
+      public Builder addSubscriptionTopicList(SubscriptionTopic value) {
+        if (subscriptionTopicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.add(value);
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.add(value);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.addMessage(value);
+          subscriptionTopicListBuilder_.addMessage(value);
         }
         return this;
       }
@@ -4196,19 +4196,19 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder addSubscriptionTopics(
+      public Builder addSubscriptionTopicList(
           int index, SubscriptionTopic value) {
-        if (subscriptionTopicsBuilder_ == null) {
+        if (subscriptionTopicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.add(index, value);
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.add(index, value);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.addMessage(index, value);
+          subscriptionTopicListBuilder_.addMessage(index, value);
         }
         return this;
       }
@@ -4217,16 +4217,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder addSubscriptionTopics(
+      public Builder addSubscriptionTopicList(
           SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicsBuilder_ == null) {
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.add(builderForValue.build());
+        if (subscriptionTopicListBuilder_ == null) {
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.add(builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.addMessage(builderForValue.build());
+          subscriptionTopicListBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
@@ -4235,16 +4235,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder addSubscriptionTopics(
+      public Builder addSubscriptionTopicList(
           int index, SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicsBuilder_ == null) {
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.add(index, builderForValue.build());
+        if (subscriptionTopicListBuilder_ == null) {
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.add(index, builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.addMessage(index, builderForValue.build());
+          subscriptionTopicListBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -4253,17 +4253,17 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder addAllSubscriptionTopics(
+      public Builder addAllSubscriptionTopicList(
           Iterable<? extends SubscriptionTopic> values) {
-        if (subscriptionTopicsBuilder_ == null) {
-          ensureSubscriptionTopicsIsMutable();
+        if (subscriptionTopicListBuilder_ == null) {
+          ensureSubscriptionTopicListIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, subscriptionTopics_);
+              values, subscriptionTopicList_);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.addAllMessages(values);
+          subscriptionTopicListBuilder_.addAllMessages(values);
         }
         return this;
       }
@@ -4272,15 +4272,15 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder clearSubscriptionTopics() {
-        if (subscriptionTopicsBuilder_ == null) {
-          subscriptionTopics_ = java.util.Collections.emptyList();
+      public Builder clearSubscriptionTopicList() {
+        if (subscriptionTopicListBuilder_ == null) {
+          subscriptionTopicList_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.clear();
+          subscriptionTopicListBuilder_.clear();
         }
         return this;
       }
@@ -4289,15 +4289,15 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public Builder removeSubscriptionTopics(int index) {
-        if (subscriptionTopicsBuilder_ == null) {
-          ensureSubscriptionTopicsIsMutable();
-          subscriptionTopics_.remove(index);
+      public Builder removeSubscriptionTopicList(int index) {
+        if (subscriptionTopicListBuilder_ == null) {
+          ensureSubscriptionTopicListIsMutable();
+          subscriptionTopicList_.remove(index);
           onChanged();
         } else {
-          subscriptionTopicsBuilder_.remove(index);
+          subscriptionTopicListBuilder_.remove(index);
         }
         return this;
       }
@@ -4306,24 +4306,24 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public SubscriptionTopic.Builder getSubscriptionTopicsBuilder(
+      public SubscriptionTopic.Builder getSubscriptionTopicListBuilder(
           int index) {
-        return getSubscriptionTopicsFieldBuilder().getBuilder(index);
+        return getSubscriptionTopicListFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public SubscriptionTopicOrBuilder getSubscriptionTopicsOrBuilder(
+      public SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
           int index) {
-        if (subscriptionTopicsBuilder_ == null) {
-          return subscriptionTopics_.get(index);  } else {
-          return subscriptionTopicsBuilder_.getMessageOrBuilder(index);
+        if (subscriptionTopicListBuilder_ == null) {
+          return subscriptionTopicList_.get(index);  } else {
+          return subscriptionTopicListBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
@@ -4331,14 +4331,14 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
       public java.util.List<? extends SubscriptionTopicOrBuilder>
-           getSubscriptionTopicsOrBuilderList() {
-        if (subscriptionTopicsBuilder_ != null) {
-          return subscriptionTopicsBuilder_.getMessageOrBuilderList();
+           getSubscriptionTopicListOrBuilderList() {
+        if (subscriptionTopicListBuilder_ != null) {
+          return subscriptionTopicListBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(subscriptionTopics_);
+          return java.util.Collections.unmodifiableList(subscriptionTopicList_);
         }
       }
       /**
@@ -4346,10 +4346,10 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public SubscriptionTopic.Builder addSubscriptionTopicsBuilder() {
-        return getSubscriptionTopicsFieldBuilder().addBuilder(
+      public SubscriptionTopic.Builder addSubscriptionTopicListBuilder() {
+        return getSubscriptionTopicListFieldBuilder().addBuilder(
             SubscriptionTopic.getDefaultInstance());
       }
       /**
@@ -4357,11 +4357,11 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
-      public SubscriptionTopic.Builder addSubscriptionTopicsBuilder(
+      public SubscriptionTopic.Builder addSubscriptionTopicListBuilder(
           int index) {
-        return getSubscriptionTopicsFieldBuilder().addBuilder(
+        return getSubscriptionTopicListFieldBuilder().addBuilder(
             index, SubscriptionTopic.getDefaultInstance());
       }
       /**
@@ -4369,25 +4369,25 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopics = 1;</code>
+       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
        */
       public java.util.List<SubscriptionTopic.Builder>
-           getSubscriptionTopicsBuilderList() {
-        return getSubscriptionTopicsFieldBuilder().getBuilderList();
+           getSubscriptionTopicListBuilderList() {
+        return getSubscriptionTopicListFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder>
-          getSubscriptionTopicsFieldBuilder() {
-        if (subscriptionTopicsBuilder_ == null) {
-          subscriptionTopicsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getSubscriptionTopicListFieldBuilder() {
+        if (subscriptionTopicListBuilder_ == null) {
+          subscriptionTopicListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder>(
-                  subscriptionTopics_,
+                  subscriptionTopicList_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          subscriptionTopics_ = null;
+          subscriptionTopicList_ = null;
         }
-        return subscriptionTopicsBuilder_;
+        return subscriptionTopicListBuilder_;
       }
       @Override
       public final Builder setUnknownFields(
@@ -4473,60 +4473,51 @@ public final class MdsdProtoBuf {
     String[] descriptorData = {
       "\n\nmdsd.proto\"\\\n\007Payload\022\024\n\014hardwareCode\030" +
       "\001 \001(\t\022\035\n\007command\030\002 \001(\0162\014.CommandEnum\022\016\n\006" +
-      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\351\001\n\021Subscript" +
-      "ionTopic\022+\n\005topic\030\001 \001(\0162\034.SubscriptionTo" +
-      "picActionEnum\022.\n\tfrequency\030\002 \001(\0162\033.Subsc" +
-      "riptionFreqActionEnum\0220\n\007details\030\003 \003(\0132\037" +
-      ".SubscriptionTopic.DetailsEntry\022\025\n\rpushF" +
-      "requency\030\004 \001(\005\032.\n\014DetailsEntry\022\013\n\003key\030\001 " +
-      "\001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"A\n\017SubscriptionDt" +
-      "o\022.\n\022subscriptionTopics\030\001 \003(\0132\022.Subscrip" +
-      "tionTopic*\320\002\n\013CommandEnum\022\022\n\016COMMAND_LOG" +
-      "GER\020\000\022\033\n\027COMMAND_FC_SUBSCRIPTION\020\001\022\032\n\026CO" +
-      "MMAND_CAMERA_MANAGER\020\002\022\032\n\026COMMAND_GIMBAL" +
-      "_MANAGER\020\003\022\034\n\030COMMAND_POWER_MANAGEMENT\020\004" +
-      "\022\035\n\031COMMAND_FLIGHT_CONTROLLER\020\005\022\017\n\013COMMA" +
-      "ND_HMS\020\006\022\025\n\021COMMAND_TIME_SYNC\020\007\022\025\n\021COMMA" +
-      "ND_LIVE_VIEW\020\010\022\031\n\025COMMAND_LOCAL_UPGRADE\020" +
-      "\t\022\027\n\023COMMAND_POSITIONING\020\n\022\024\n\020COMMAND_WA" +
-      "YPOINT\020\013\022\022\n\016COMMAND_WIDGET\020\014*\204\n\n\033Subscri" +
-      "ptionTopicActionEnum\022\"\n\036DJI_SUBSCRIPTION" +
-      "_TOPIC_UNKNOWN\020\000\022\023\n\016DJI_QUATERNION\020\200\002\022\034\n" +
-      "\027DJI_ACCELERATION_GROUND\020\202\002\022\032\n\025DJI_ACCEL" +
-      "ERATION_BODY\020\203\002\022\031\n\024DJI_ACCELERATION_RAW\020" +
-      "\204\002\022\021\n\014DJI_VELOCITY\020\205\002\022\036\n\031DJI_ANGULAR_RAT" +
-      "E_FUSIONED\020\206\002\022\031\n\024DJI_ANGULAR_RATE_RAW\020\207\002" +
-      "\022\027\n\022DJI_ALTITUDE_FUSED\020\210\002\022\033\n\026DJI_ALTITUD" +
-      "E_BAROMETER\020\211\002\022\036\n\031DJI_ALTITUDE_OF_HOMEPO" +
-      "INT\020\212\002\022\026\n\021DJI_HEIGHT_FUSION\020\213\002\022\030\n\023DJI_HE" +
-      "IGHT_RELATIVE\020\214\002\022\027\n\022DJI_POSITION_FUSED\020\215" +
-      "\002\022\021\n\014DJI_GPS_DATE\020\216\002\022\021\n\014DJI_GPS_TIME\020\217\002\022" +
-      "\025\n\020DJI_GPS_POSITION\020\220\002\022\025\n\020DJI_GPS_VELOCI" +
-      "TY\020\221\002\022\024\n\017DJI_GPS_DETAILS\020\222\002\022\031\n\024DJI_GPS_S" +
-      "IGNAL_LEVEL\020\223\002\022\025\n\020DJI_RTK_POSITION\020\224\002\022\025\n" +
-      "\020DJI_RTK_VELOCITY\020\225\002\022\020\n\013DJI_RTK_YAW\020\226\002\022\032" +
-      "\n\025DJI_RTK_POSITION_INFO\020\227\002\022\025\n\020DJI_RTK_YA" +
-      "W_INFO\020\230\002\022\020\n\013DJI_COMPASS\020\231\002\022\013\n\006DJI_RC\020\232\002" +
-      "\022\026\n\021DJI_GIMBAL_ANGLES\020\233\002\022\026\n\021DJI_GIMBAL_S" +
-      "TATUS\020\234\002\022\026\n\021DJI_STATUS_FLIGHT\020\235\002\022\033\n\026DJI_" +
-      "STATUS_DISPLAYMODE\020\236\002\022\033\n\026DJI_STATUS_LAND" +
-      "INGGEAR\020\237\002\022!\n\034DJI_STATUS_MOTOR_START_ERR" +
-      "OR\020\240\002\022\025\n\020DJI_BATTERY_INFO\020\241\002\022\027\n\022DJI_CONT" +
-      "ROL_DEVICE\020\242\002\022\022\n\rDJI_HARD_SYNC\020\243\002\022\032\n\025DJI" +
-      "_GPS_CONTROL_LEVEL\020\244\002\022\032\n\025DJI_RC_WITH_FLA" +
-      "G_DATA\020\245\002\022\021\n\014DJI_ESC_DATA\020\246\002\022\033\n\026DJI_RTK_" +
-      "CONNECT_STATUS\020\247\002\022\034\n\027DJI_GIMBAL_CONTROL_" +
-      "MODE\020\250\002\022\027\n\022DJI_FLIGHT_ANOMALY\020\251\002\022\024\n\017DJI_" +
-      "POSITION_VO\020\252\002\022\023\n\016DJI_AVOID_DATA\020\253\002\022\036\n\031D" +
-      "JI_HOME_POINT_SET_STATUS\020\254\002\022\030\n\023DJI_HOME_" +
-      "POINT_INFO\020\255\002\022\032\n\025DJI_THREE_GIMBAL_DATA\020\256" +
-      "\002\022#\n\036DJI_BATTERY_SINGLE_INFO_INDEX1\020\257\002\022#" +
-      "\n\036DJI_BATTERY_SINGLE_INFO_INDEX2\020\260\002*\226\001\n\032" +
-      "SubscriptionFreqActionEnum\022\014\n\010DJI_0_HZ\020\000" +
-      "\022\014\n\010DJI_1_HZ\020\001\022\014\n\010DJI_5_HZ\020\005\022\r\n\tDJI_10_H" +
-      "Z\020\n\022\r\n\tDJI_50_HZ\0202\022\016\n\nDJI_100_HZ\020d\022\017\n\nDJ" +
-      "I_200_HZ\020\310\001\022\017\n\nDJI_400_HZ\020\220\003B\016B\014MdsdProt" +
-      "oBufb\006proto3"
+      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\337\001\n\021Subscript" +
+      "ionTopic\022\'\n\005topic\030\001 \001(\0162\030.FcSubscription" +
+      "TopicEnum\022(\n\tfrequency\030\002 \001(\0162\025.Subscript" +
+      "ionFreqEnum\0220\n\007details\030\003 \003(\0132\037.Subscript" +
+      "ionTopic.DetailsEntry\022\025\n\rpushFrequency\030\004" +
+      " \001(\005\032.\n\014DetailsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
+      "ue\030\002 \001(\t:\0028\001\"D\n\017SubscriptionDto\0221\n\025subsc" +
+      "riptionTopicList\030\001 \003(\0132\022.SubscriptionTop" +
+      "ic*\350\001\n\013CommandEnum\022\n\n\006LOGGER\020\000\022\023\n\017FC_SUB" +
+      "SCRIPTION\020\001\022\022\n\016CAMERA_MANAGER\020\002\022\022\n\016GIMBA" +
+      "L_MANAGER\020\003\022\024\n\020POWER_MANAGEMENT\020\004\022\025\n\021FLI" +
+      "GHT_CONTROLLER\020\005\022\007\n\003HMS\020\006\022\r\n\tTIME_SYNC\020\007" +
+      "\022\r\n\tLIVE_VIEW\020\010\022\021\n\rLOCAL_UPGRADE\020\t\022\017\n\013PO" +
+      "SITIONING\020\n\022\014\n\010WAYPOINT\020\013\022\n\n\006WIDGET\020\014*\274\010" +
+      "\n\027FcSubscriptionTopicEnum\022\036\n\032SUBSCRIPTIO" +
+      "N_TOPIC_UNKNOWN\020\000\022\017\n\nQUATERNION\020\200\002\022\030\n\023AC" +
+      "CELERATION_GROUND\020\202\002\022\026\n\021ACCELERATION_BOD" +
+      "Y\020\203\002\022\025\n\020ACCELERATION_RAW\020\204\002\022\r\n\010VELOCITY\020" +
+      "\205\002\022\032\n\025ANGULAR_RATE_FUSIONED\020\206\002\022\025\n\020ANGULA" +
+      "R_RATE_RAW\020\207\002\022\023\n\016ALTITUDE_FUSED\020\210\002\022\027\n\022AL" +
+      "TITUDE_BAROMETER\020\211\002\022\032\n\025ALTITUDE_OF_HOMEP" +
+      "OINT\020\212\002\022\022\n\rHEIGHT_FUSION\020\213\002\022\024\n\017HEIGHT_RE" +
+      "LATIVE\020\214\002\022\023\n\016POSITION_FUSED\020\215\002\022\r\n\010GPS_DA" +
+      "TE\020\216\002\022\r\n\010GPS_TIME\020\217\002\022\021\n\014GPS_POSITION\020\220\002\022" +
+      "\021\n\014GPS_VELOCITY\020\221\002\022\020\n\013GPS_DETAILS\020\222\002\022\025\n\020" +
+      "GPS_SIGNAL_LEVEL\020\223\002\022\021\n\014RTK_POSITION\020\224\002\022\021" +
+      "\n\014RTK_VELOCITY\020\225\002\022\014\n\007RTK_YAW\020\226\002\022\026\n\021RTK_P" +
+      "OSITION_INFO\020\227\002\022\021\n\014RTK_YAW_INFO\020\230\002\022\014\n\007CO" +
+      "MPASS\020\231\002\022\007\n\002RC\020\232\002\022\022\n\rGIMBAL_ANGLES\020\233\002\022\022\n" +
+      "\rGIMBAL_STATUS\020\234\002\022\022\n\rSTATUS_FLIGHT\020\235\002\022\027\n" +
+      "\022STATUS_DISPLAYMODE\020\236\002\022\027\n\022STATUS_LANDING" +
+      "GEAR\020\237\002\022\035\n\030STATUS_MOTOR_START_ERROR\020\240\002\022\021" +
+      "\n\014BATTERY_INFO\020\241\002\022\023\n\016CONTROL_DEVICE\020\242\002\022\016" +
+      "\n\tHARD_SYNC\020\243\002\022\026\n\021GPS_CONTROL_LEVEL\020\244\002\022\026" +
+      "\n\021RC_WITH_FLAG_DATA\020\245\002\022\r\n\010ESC_DATA\020\246\002\022\027\n" +
+      "\022RTK_CONNECT_STATUS\020\247\002\022\030\n\023GIMBAL_CONTROL" +
+      "_MODE\020\250\002\022\023\n\016FLIGHT_ANOMALY\020\251\002\022\020\n\013POSITIO" +
+      "N_VO\020\252\002\022\017\n\nAVOID_DATA\020\253\002\022\032\n\025HOME_POINT_S" +
+      "ET_STATUS\020\254\002\022\024\n\017HOME_POINT_INFO\020\255\002\022\026\n\021TH" +
+      "REE_GIMBAL_DATA\020\256\002\022\037\n\032BATTERY_SINGLE_INF" +
+      "O_INDEX1\020\257\002\022\037\n\032BATTERY_SINGLE_INFO_INDEX" +
+      "2\020\260\002*p\n\024SubscriptionFreqEnum\022\010\n\004HZ_0\020\000\022\010" +
+      "\n\004HZ_1\020\001\022\010\n\004HZ_5\020\005\022\t\n\005HZ_10\020\n\022\t\n\005HZ_50\0202" +
+      "\022\n\n\006HZ_100\020d\022\013\n\006HZ_200\020\310\001\022\013\n\006HZ_400\020\220\003B\016" +
+      "B\014MdsdProtoBufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4555,7 +4546,7 @@ public final class MdsdProtoBuf {
     internal_static_SubscriptionDto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubscriptionDto_descriptor,
-        new String[] { "SubscriptionTopics", });
+        new String[] { "SubscriptionTopicList", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

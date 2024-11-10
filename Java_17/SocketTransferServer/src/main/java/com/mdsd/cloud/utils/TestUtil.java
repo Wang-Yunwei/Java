@@ -1,7 +1,5 @@
 package com.mdsd.cloud.utils;
 
-import com.mdsd.cloud.controller.dji.dto.MdsdProtoBuf;
-
 import java.io.IOException;
 
 /**
@@ -24,19 +22,6 @@ public class TestUtil {
 //        System.out.println(bytes.length);
 
 //        System.out.println(bytes);
-
-        MdsdProtoBuf.SubscriptionTopic build = MdsdProtoBuf.SubscriptionTopic.newBuilder()
-                .setTopic(MdsdProtoBuf.SubscriptionTopicActionEnum.DJI_QUATERNION)
-                .setFrequency(MdsdProtoBuf.SubscriptionFreqActionEnum.DJI_400_HZ)
-                .setPushFrequency(100).build();
-
-        System.out.println(build);
-
-        System.out.println(build.getTopic());
-
-        System.out.println(build.getTopic().getValueDescriptor());
-        System.out.println(build.getTopic().getDescriptorForType());
-        System.out.println(build.getTopic().getNumber());
 
 //        ObjectMapper obm = new ObjectMapper();
 //
