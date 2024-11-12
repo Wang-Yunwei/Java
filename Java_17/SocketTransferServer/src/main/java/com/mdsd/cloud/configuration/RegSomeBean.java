@@ -1,6 +1,6 @@
 package com.mdsd.cloud.configuration;
 
-import com.mdsd.cloud.utils.TcpClient;
+import com.mdsd.cloud.controller.dji.service.IDjiService;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import io.minio.MinioClient;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 /**
  * @author WangYunwei [2024-08-10]
@@ -23,9 +22,12 @@ public class RegSomeBean {
 
     final ITyjwService tyjwService;
 
-    final TcpClient socketClient;
+    final IDjiService djiService;
 
-    private final AuthSingleton auth = AuthSingleton.getInstance();
+    public RegSomeBean(ITyjwService tyjwService, IDjiService djiService) {
+        this.tyjwService = tyjwService;
+        this.djiService = djiService;
+    }
 
     @Value("${minio.endpoint}")
     private String endpoint;
@@ -36,23 +38,19 @@ public class RegSomeBean {
     @Value("${minio.secret-key}")
     private String secretKey;
 
-    public RegSomeBean(ITyjwService tyjwService, TcpClient socketClient) {
-        this.tyjwService = tyjwService;
-        this.socketClient = socketClient;
-    }
+    private final AuthSingleton auth = AuthSingleton.getInstance();
 
-    /**
-     * 程序启动后立即执行
-     */
     @Bean
     CommandLineRunner startImmediatelyExecute() {
 
         return args -> {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
-            tyjwService.getToken();
-            if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-                socketClient.connect();
-            }
+//            tyjwService.getToken();
+//            if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+//                tyjwService.startTcpClient();
+//            }
+//            tyjwService.startWebSocket();
+            djiService.startUdp();
         };
     }
 
@@ -66,15 +64,4 @@ public class RegSomeBean {
 
         return MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
     }
-
-//    @Bean
-//    public CommonsRequestLoggingFilter logFilter() {
-//        CommonsRequestLoggingFilter commonsRequestLoggingFilter = new CommonsRequestLoggingFilter();
-//        commonsRequestLoggingFilter.setIncludeQueryString(true); // 是否记录请求的查询参数信息
-//        commonsRequestLoggingFilter.setIncludePayload(true); // 是否记录请求body内容
-//        commonsRequestLoggingFilter.setIncludeHeaders(true); // 是否记录请求header信息
-//        commonsRequestLoggingFilter.setIncludeClientInfo(true); // 是否记录请求客户端信息
-//        commonsRequestLoggingFilter.setAfterMessagePrefix("REQUEST DATA: "); // 设置日期记录的前缀
-//        return commonsRequestLoggingFilter;
-//    }
 }

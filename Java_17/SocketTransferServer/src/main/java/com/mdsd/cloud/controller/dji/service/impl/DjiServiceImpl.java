@@ -3,8 +3,10 @@ package com.mdsd.cloud.controller.dji.service.impl;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.dji.dto.MdsdProtoBuf;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
+import com.mdsd.cloud.utils.UdpSocket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
@@ -21,12 +23,17 @@ import java.net.InetSocketAddress;
 public class DjiServiceImpl implements IDjiService {
 
     JsonFormat.Printer printer = JsonFormat.printer();
-    MdsdProtoBuf.SubscriptionTopic build = MdsdProtoBuf.SubscriptionTopic.newBuilder()
+
+    MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.newBuilder()
             .setTopic(MdsdProtoBuf.FcSubscriptionTopicEnum.QUATERNION)
             .setFrequency(MdsdProtoBuf.SubscriptionFreqEnum.HZ_1)
             .setPushFrequency(100).build();
+    MdsdProtoBuf.Payload payload = MdsdProtoBuf.Payload.newBuilder().setHardwareCode("683fdd3936614637bb588712e652677f")
+            .setCommand(MdsdProtoBuf.CommandEnum.FC_SUBSCRIPTION)
+            .setAction(0x123)
+            .setBody(subscriptionTopic.toByteString()).build();
 
- class My extends SimpleChannelInboundHandler<DatagramPacket> {
+    class DjiChannelInboundHandler extends SimpleChannelInboundHandler<DatagramPacket> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket pak) throws Exception {
 //                        pak.content().readableBytes();
@@ -47,14 +54,17 @@ public class DjiServiceImpl implements IDjiService {
             System.out.println(printer.print(payload));
             MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.parseFrom(payload.getBody());
             System.out.println(printer.print(subscriptionTopic));
-            DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(build.toByteArray()), new InetSocketAddress(senderIp, senderPort));
+            DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.toByteArray()), new InetSocketAddress(senderIp, senderPort));
             ctx.writeAndFlush(datagramPacket);
         }
+    }
 
-        @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            log.error("UDP Socket Exception: {}", cause);
-            ctx.close(); // 关闭连接
+    @Override
+    public void startUdp() {
+
+        Channel udpSocket = UdpSocket.createUdpSocket(new DjiChannelInboundHandler(), 20242);
+        if (udpSocket != null && udpSocket.isActive()) {
+
         }
     }
 }

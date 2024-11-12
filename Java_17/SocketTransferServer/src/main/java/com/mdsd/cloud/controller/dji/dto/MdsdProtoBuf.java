@@ -2406,42 +2406,42 @@ public final class MdsdProtoBuf {
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
-    int getDetailsCount();
+    int getDetailMapCount();
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
-    boolean containsDetails(
+    boolean containsDetailMap(
         String key);
     /**
-     * Use {@link #getDetailsMap()} instead.
+     * Use {@link #getDetailMapMap()} instead.
      */
     @Deprecated
     java.util.Map<String, String>
-    getDetails();
+    getDetailMap();
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
     java.util.Map<String, String>
-    getDetailsMap();
+    getDetailMapMap();
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
 
-    String getDetailsOrDefault(
+    String getDetailMapOrDefault(
         String key,
         String defaultValue);
     /**
@@ -2449,10 +2449,10 @@ public final class MdsdProtoBuf {
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
 
-    String getDetailsOrThrow(
+    String getDetailMapOrThrow(
         String key);
 
     /**
@@ -2527,15 +2527,15 @@ public final class MdsdProtoBuf {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                details_ = com.google.protobuf.MapField.newMapField(
-                    DetailsDefaultEntryHolder.defaultEntry);
+                detailMap_ = com.google.protobuf.MapField.newMapField(
+                    DetailMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<String, String>
-              details__ = input.readMessage(
-                  DetailsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              details_.getMutableMap().put(
-                  details__.getKey(), details__.getValue());
+              detailMap__ = input.readMessage(
+                  DetailMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              detailMap_.getMutableMap().put(
+                  detailMap__.getKey(), detailMap__.getValue());
               break;
             }
             case 32: {
@@ -2573,7 +2573,7 @@ public final class MdsdProtoBuf {
         int number) {
       switch (number) {
         case 3:
-          return internalGetDetails();
+          return internalGetDetailMap();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -2641,81 +2641,81 @@ public final class MdsdProtoBuf {
       return result == null ? SubscriptionFreqEnum.UNRECOGNIZED : result;
     }
 
-    public static final int DETAILS_FIELD_NUMBER = 3;
-    private static final class DetailsDefaultEntryHolder {
+    public static final int DETAILMAP_FIELD_NUMBER = 3;
+    private static final class DetailMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           String, String> defaultEntry =
               com.google.protobuf.MapEntry
               .<String, String>newDefaultInstance(
-                  MdsdProtoBuf.internal_static_SubscriptionTopic_DetailsEntry_descriptor, 
+                  MdsdProtoBuf.internal_static_SubscriptionTopic_DetailMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "");
     }
     private com.google.protobuf.MapField<
-        String, String> details_;
+        String, String> detailMap_;
     private com.google.protobuf.MapField<String, String>
-    internalGetDetails() {
-      if (details_ == null) {
+    internalGetDetailMap() {
+      if (detailMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
-            DetailsDefaultEntryHolder.defaultEntry);
+            DetailMapDefaultEntryHolder.defaultEntry);
       }
-      return details_;
+      return detailMap_;
     }
 
-    public int getDetailsCount() {
-      return internalGetDetails().getMap().size();
+    public int getDetailMapCount() {
+      return internalGetDetailMap().getMap().size();
     }
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
 
     @Override
-    public boolean containsDetails(
+    public boolean containsDetailMap(
         String key) {
       if (key == null) { throw new NullPointerException(); }
-      return internalGetDetails().getMap().containsKey(key);
+      return internalGetDetailMap().getMap().containsKey(key);
     }
     /**
-     * Use {@link #getDetailsMap()} instead.
+     * Use {@link #getDetailMapMap()} instead.
      */
     @Override
     @Deprecated
-    public java.util.Map<String, String> getDetails() {
-      return getDetailsMap();
+    public java.util.Map<String, String> getDetailMap() {
+      return getDetailMapMap();
     }
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
     @Override
 
-    public java.util.Map<String, String> getDetailsMap() {
-      return internalGetDetails().getMap();
+    public java.util.Map<String, String> getDetailMapMap() {
+      return internalGetDetailMap().getMap();
     }
     /**
      * <pre>
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
     @Override
 
-    public String getDetailsOrDefault(
+    public String getDetailMapOrDefault(
         String key,
         String defaultValue) {
       if (key == null) { throw new NullPointerException(); }
       java.util.Map<String, String> map =
-          internalGetDetails().getMap();
+          internalGetDetailMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
@@ -2723,15 +2723,15 @@ public final class MdsdProtoBuf {
      * 详情数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; details = 3;</code>
+     * <code>map&lt;string, string&gt; detailMap = 3;</code>
      */
     @Override
 
-    public String getDetailsOrThrow(
+    public String getDetailMapOrThrow(
         String key) {
       if (key == null) { throw new NullPointerException(); }
       java.util.Map<String, String> map =
-          internalGetDetails().getMap();
+          internalGetDetailMap().getMap();
       if (!map.containsKey(key)) {
         throw new IllegalArgumentException();
       }
@@ -2776,8 +2776,8 @@ public final class MdsdProtoBuf {
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
-          internalGetDetails(),
-          DetailsDefaultEntryHolder.defaultEntry,
+          internalGetDetailMap(),
+          DetailMapDefaultEntryHolder.defaultEntry,
           3);
       if (pushFrequency_ != 0) {
         output.writeInt32(4, pushFrequency_);
@@ -2800,14 +2800,14 @@ public final class MdsdProtoBuf {
           .computeEnumSize(2, frequency_);
       }
       for (java.util.Map.Entry<String, String> entry
-           : internalGetDetails().getMap().entrySet()) {
+           : internalGetDetailMap().getMap().entrySet()) {
         com.google.protobuf.MapEntry<String, String>
-        details__ = DetailsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        detailMap__ = DetailMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(3, details__);
+            .computeMessageSize(3, detailMap__);
       }
       if (pushFrequency_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -2830,8 +2830,8 @@ public final class MdsdProtoBuf {
 
       if (topic_ != other.topic_) return false;
       if (frequency_ != other.frequency_) return false;
-      if (!internalGetDetails().equals(
-          other.internalGetDetails())) return false;
+      if (!internalGetDetailMap().equals(
+          other.internalGetDetailMap())) return false;
       if (getPushFrequency()
           != other.getPushFrequency()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -2849,9 +2849,9 @@ public final class MdsdProtoBuf {
       hash = (53 * hash) + topic_;
       hash = (37 * hash) + FREQUENCY_FIELD_NUMBER;
       hash = (53 * hash) + frequency_;
-      if (!internalGetDetails().getMap().isEmpty()) {
-        hash = (37 * hash) + DETAILS_FIELD_NUMBER;
-        hash = (53 * hash) + internalGetDetails().hashCode();
+      if (!internalGetDetailMap().getMap().isEmpty()) {
+        hash = (37 * hash) + DETAILMAP_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetDetailMap().hashCode();
       }
       hash = (37 * hash) + PUSHFREQUENCY_FIELD_NUMBER;
       hash = (53 * hash) + getPushFrequency();
@@ -2967,7 +2967,7 @@ public final class MdsdProtoBuf {
           int number) {
         switch (number) {
           case 3:
-            return internalGetDetails();
+            return internalGetDetailMap();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -2978,7 +2978,7 @@ public final class MdsdProtoBuf {
           int number) {
         switch (number) {
           case 3:
-            return internalGetMutableDetails();
+            return internalGetMutableDetailMap();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -3014,7 +3014,7 @@ public final class MdsdProtoBuf {
 
         frequency_ = 0;
 
-        internalGetMutableDetails().clear();
+        internalGetMutableDetailMap().clear();
         pushFrequency_ = 0;
 
         return this;
@@ -3046,8 +3046,8 @@ public final class MdsdProtoBuf {
         int from_bitField0_ = bitField0_;
         result.topic_ = topic_;
         result.frequency_ = frequency_;
-        result.details_ = internalGetDetails();
-        result.details_.makeImmutable();
+        result.detailMap_ = internalGetDetailMap();
+        result.detailMap_.makeImmutable();
         result.pushFrequency_ = pushFrequency_;
         onBuilt();
         return result;
@@ -3103,8 +3103,8 @@ public final class MdsdProtoBuf {
         if (other.frequency_ != 0) {
           setFrequencyValue(other.getFrequencyValue());
         }
-        internalGetMutableDetails().mergeFrom(
-            other.internalGetDetails());
+        internalGetMutableDetailMap().mergeFrom(
+            other.internalGetDetailMap());
         if (other.getPushFrequency() != 0) {
           setPushFrequency(other.getPushFrequency());
         }
@@ -3287,80 +3287,80 @@ public final class MdsdProtoBuf {
       }
 
       private com.google.protobuf.MapField<
-          String, String> details_;
+          String, String> detailMap_;
       private com.google.protobuf.MapField<String, String>
-      internalGetDetails() {
-        if (details_ == null) {
+      internalGetDetailMap() {
+        if (detailMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
-              DetailsDefaultEntryHolder.defaultEntry);
+              DetailMapDefaultEntryHolder.defaultEntry);
         }
-        return details_;
+        return detailMap_;
       }
       private com.google.protobuf.MapField<String, String>
-      internalGetMutableDetails() {
+      internalGetMutableDetailMap() {
         onChanged();;
-        if (details_ == null) {
-          details_ = com.google.protobuf.MapField.newMapField(
-              DetailsDefaultEntryHolder.defaultEntry);
+        if (detailMap_ == null) {
+          detailMap_ = com.google.protobuf.MapField.newMapField(
+              DetailMapDefaultEntryHolder.defaultEntry);
         }
-        if (!details_.isMutable()) {
-          details_ = details_.copy();
+        if (!detailMap_.isMutable()) {
+          detailMap_ = detailMap_.copy();
         }
-        return details_;
+        return detailMap_;
       }
 
-      public int getDetailsCount() {
-        return internalGetDetails().getMap().size();
+      public int getDetailMapCount() {
+        return internalGetDetailMap().getMap().size();
       }
       /**
        * <pre>
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
 
       @Override
-      public boolean containsDetails(
+      public boolean containsDetailMap(
           String key) {
         if (key == null) { throw new NullPointerException(); }
-        return internalGetDetails().getMap().containsKey(key);
+        return internalGetDetailMap().getMap().containsKey(key);
       }
       /**
-       * Use {@link #getDetailsMap()} instead.
+       * Use {@link #getDetailMapMap()} instead.
        */
       @Override
       @Deprecated
-      public java.util.Map<String, String> getDetails() {
-        return getDetailsMap();
+      public java.util.Map<String, String> getDetailMap() {
+        return getDetailMapMap();
       }
       /**
        * <pre>
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
       @Override
 
-      public java.util.Map<String, String> getDetailsMap() {
-        return internalGetDetails().getMap();
+      public java.util.Map<String, String> getDetailMapMap() {
+        return internalGetDetailMap().getMap();
       }
       /**
        * <pre>
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
       @Override
 
-      public String getDetailsOrDefault(
+      public String getDetailMapOrDefault(
           String key,
           String defaultValue) {
         if (key == null) { throw new NullPointerException(); }
         java.util.Map<String, String> map =
-            internalGetDetails().getMap();
+            internalGetDetailMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
@@ -3368,23 +3368,23 @@ public final class MdsdProtoBuf {
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
       @Override
 
-      public String getDetailsOrThrow(
+      public String getDetailMapOrThrow(
           String key) {
         if (key == null) { throw new NullPointerException(); }
         java.util.Map<String, String> map =
-            internalGetDetails().getMap();
+            internalGetDetailMap().getMap();
         if (!map.containsKey(key)) {
           throw new IllegalArgumentException();
         }
         return map.get(key);
       }
 
-      public Builder clearDetails() {
-        internalGetMutableDetails().getMutableMap()
+      public Builder clearDetailMap() {
+        internalGetMutableDetailMap().getMutableMap()
             .clear();
         return this;
       }
@@ -3393,13 +3393,13 @@ public final class MdsdProtoBuf {
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
 
-      public Builder removeDetails(
+      public Builder removeDetailMap(
           String key) {
         if (key == null) { throw new NullPointerException(); }
-        internalGetMutableDetails().getMutableMap()
+        internalGetMutableDetailMap().getMutableMap()
             .remove(key);
         return this;
       }
@@ -3408,22 +3408,22 @@ public final class MdsdProtoBuf {
        */
       @Deprecated
       public java.util.Map<String, String>
-      getMutableDetails() {
-        return internalGetMutableDetails().getMutableMap();
+      getMutableDetailMap() {
+        return internalGetMutableDetailMap().getMutableMap();
       }
       /**
        * <pre>
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
-      public Builder putDetails(
+      public Builder putDetailMap(
           String key,
           String value) {
         if (key == null) { throw new NullPointerException(); }
         if (value == null) { throw new NullPointerException(); }
-        internalGetMutableDetails().getMutableMap()
+        internalGetMutableDetailMap().getMutableMap()
             .put(key, value);
         return this;
       }
@@ -3432,12 +3432,12 @@ public final class MdsdProtoBuf {
        * 详情数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; details = 3;</code>
+       * <code>map&lt;string, string&gt; detailMap = 3;</code>
        */
 
-      public Builder putAllDetails(
+      public Builder putAllDetailMap(
           java.util.Map<String, String> values) {
-        internalGetMutableDetails().getMutableMap()
+        internalGetMutableDetailMap().getMutableMap()
             .putAll(values);
         return this;
       }
@@ -4453,10 +4453,10 @@ public final class MdsdProtoBuf {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_SubscriptionTopic_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SubscriptionTopic_DetailsEntry_descriptor;
+    internal_static_SubscriptionTopic_DetailMapEntry_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SubscriptionTopic_DetailsEntry_fieldAccessorTable;
+      internal_static_SubscriptionTopic_DetailMapEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_SubscriptionDto_descriptor;
   private static final 
@@ -4473,51 +4473,51 @@ public final class MdsdProtoBuf {
     String[] descriptorData = {
       "\n\nmdsd.proto\"\\\n\007Payload\022\024\n\014hardwareCode\030" +
       "\001 \001(\t\022\035\n\007command\030\002 \001(\0162\014.CommandEnum\022\016\n\006" +
-      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\337\001\n\021Subscript" +
+      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\345\001\n\021Subscript" +
       "ionTopic\022\'\n\005topic\030\001 \001(\0162\030.FcSubscription" +
       "TopicEnum\022(\n\tfrequency\030\002 \001(\0162\025.Subscript" +
-      "ionFreqEnum\0220\n\007details\030\003 \003(\0132\037.Subscript" +
-      "ionTopic.DetailsEntry\022\025\n\rpushFrequency\030\004" +
-      " \001(\005\032.\n\014DetailsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
-      "ue\030\002 \001(\t:\0028\001\"D\n\017SubscriptionDto\0221\n\025subsc" +
-      "riptionTopicList\030\001 \003(\0132\022.SubscriptionTop" +
-      "ic*\350\001\n\013CommandEnum\022\n\n\006LOGGER\020\000\022\023\n\017FC_SUB" +
-      "SCRIPTION\020\001\022\022\n\016CAMERA_MANAGER\020\002\022\022\n\016GIMBA" +
-      "L_MANAGER\020\003\022\024\n\020POWER_MANAGEMENT\020\004\022\025\n\021FLI" +
-      "GHT_CONTROLLER\020\005\022\007\n\003HMS\020\006\022\r\n\tTIME_SYNC\020\007" +
-      "\022\r\n\tLIVE_VIEW\020\010\022\021\n\rLOCAL_UPGRADE\020\t\022\017\n\013PO" +
-      "SITIONING\020\n\022\014\n\010WAYPOINT\020\013\022\n\n\006WIDGET\020\014*\274\010" +
-      "\n\027FcSubscriptionTopicEnum\022\036\n\032SUBSCRIPTIO" +
-      "N_TOPIC_UNKNOWN\020\000\022\017\n\nQUATERNION\020\200\002\022\030\n\023AC" +
-      "CELERATION_GROUND\020\202\002\022\026\n\021ACCELERATION_BOD" +
-      "Y\020\203\002\022\025\n\020ACCELERATION_RAW\020\204\002\022\r\n\010VELOCITY\020" +
-      "\205\002\022\032\n\025ANGULAR_RATE_FUSIONED\020\206\002\022\025\n\020ANGULA" +
-      "R_RATE_RAW\020\207\002\022\023\n\016ALTITUDE_FUSED\020\210\002\022\027\n\022AL" +
-      "TITUDE_BAROMETER\020\211\002\022\032\n\025ALTITUDE_OF_HOMEP" +
-      "OINT\020\212\002\022\022\n\rHEIGHT_FUSION\020\213\002\022\024\n\017HEIGHT_RE" +
-      "LATIVE\020\214\002\022\023\n\016POSITION_FUSED\020\215\002\022\r\n\010GPS_DA" +
-      "TE\020\216\002\022\r\n\010GPS_TIME\020\217\002\022\021\n\014GPS_POSITION\020\220\002\022" +
-      "\021\n\014GPS_VELOCITY\020\221\002\022\020\n\013GPS_DETAILS\020\222\002\022\025\n\020" +
-      "GPS_SIGNAL_LEVEL\020\223\002\022\021\n\014RTK_POSITION\020\224\002\022\021" +
-      "\n\014RTK_VELOCITY\020\225\002\022\014\n\007RTK_YAW\020\226\002\022\026\n\021RTK_P" +
-      "OSITION_INFO\020\227\002\022\021\n\014RTK_YAW_INFO\020\230\002\022\014\n\007CO" +
-      "MPASS\020\231\002\022\007\n\002RC\020\232\002\022\022\n\rGIMBAL_ANGLES\020\233\002\022\022\n" +
-      "\rGIMBAL_STATUS\020\234\002\022\022\n\rSTATUS_FLIGHT\020\235\002\022\027\n" +
-      "\022STATUS_DISPLAYMODE\020\236\002\022\027\n\022STATUS_LANDING" +
-      "GEAR\020\237\002\022\035\n\030STATUS_MOTOR_START_ERROR\020\240\002\022\021" +
-      "\n\014BATTERY_INFO\020\241\002\022\023\n\016CONTROL_DEVICE\020\242\002\022\016" +
-      "\n\tHARD_SYNC\020\243\002\022\026\n\021GPS_CONTROL_LEVEL\020\244\002\022\026" +
-      "\n\021RC_WITH_FLAG_DATA\020\245\002\022\r\n\010ESC_DATA\020\246\002\022\027\n" +
-      "\022RTK_CONNECT_STATUS\020\247\002\022\030\n\023GIMBAL_CONTROL" +
-      "_MODE\020\250\002\022\023\n\016FLIGHT_ANOMALY\020\251\002\022\020\n\013POSITIO" +
-      "N_VO\020\252\002\022\017\n\nAVOID_DATA\020\253\002\022\032\n\025HOME_POINT_S" +
-      "ET_STATUS\020\254\002\022\024\n\017HOME_POINT_INFO\020\255\002\022\026\n\021TH" +
-      "REE_GIMBAL_DATA\020\256\002\022\037\n\032BATTERY_SINGLE_INF" +
-      "O_INDEX1\020\257\002\022\037\n\032BATTERY_SINGLE_INFO_INDEX" +
-      "2\020\260\002*p\n\024SubscriptionFreqEnum\022\010\n\004HZ_0\020\000\022\010" +
-      "\n\004HZ_1\020\001\022\010\n\004HZ_5\020\005\022\t\n\005HZ_10\020\n\022\t\n\005HZ_50\0202" +
-      "\022\n\n\006HZ_100\020d\022\013\n\006HZ_200\020\310\001\022\013\n\006HZ_400\020\220\003B\016" +
-      "B\014MdsdProtoBufb\006proto3"
+      "ionFreqEnum\0224\n\tdetailMap\030\003 \003(\0132!.Subscri" +
+      "ptionTopic.DetailMapEntry\022\025\n\rpushFrequen" +
+      "cy\030\004 \001(\005\0320\n\016DetailMapEntry\022\013\n\003key\030\001 \001(\t\022" +
+      "\r\n\005value\030\002 \001(\t:\0028\001\"D\n\017SubscriptionDto\0221\n" +
+      "\025subscriptionTopicList\030\001 \003(\0132\022.Subscript" +
+      "ionTopic*\350\001\n\013CommandEnum\022\n\n\006LOGGER\020\000\022\023\n\017" +
+      "FC_SUBSCRIPTION\020\001\022\022\n\016CAMERA_MANAGER\020\002\022\022\n" +
+      "\016GIMBAL_MANAGER\020\003\022\024\n\020POWER_MANAGEMENT\020\004\022" +
+      "\025\n\021FLIGHT_CONTROLLER\020\005\022\007\n\003HMS\020\006\022\r\n\tTIME_" +
+      "SYNC\020\007\022\r\n\tLIVE_VIEW\020\010\022\021\n\rLOCAL_UPGRADE\020\t" +
+      "\022\017\n\013POSITIONING\020\n\022\014\n\010WAYPOINT\020\013\022\n\n\006WIDGE" +
+      "T\020\014*\274\010\n\027FcSubscriptionTopicEnum\022\036\n\032SUBSC" +
+      "RIPTION_TOPIC_UNKNOWN\020\000\022\017\n\nQUATERNION\020\200\002" +
+      "\022\030\n\023ACCELERATION_GROUND\020\202\002\022\026\n\021ACCELERATI" +
+      "ON_BODY\020\203\002\022\025\n\020ACCELERATION_RAW\020\204\002\022\r\n\010VEL" +
+      "OCITY\020\205\002\022\032\n\025ANGULAR_RATE_FUSIONED\020\206\002\022\025\n\020" +
+      "ANGULAR_RATE_RAW\020\207\002\022\023\n\016ALTITUDE_FUSED\020\210\002" +
+      "\022\027\n\022ALTITUDE_BAROMETER\020\211\002\022\032\n\025ALTITUDE_OF" +
+      "_HOMEPOINT\020\212\002\022\022\n\rHEIGHT_FUSION\020\213\002\022\024\n\017HEI" +
+      "GHT_RELATIVE\020\214\002\022\023\n\016POSITION_FUSED\020\215\002\022\r\n\010" +
+      "GPS_DATE\020\216\002\022\r\n\010GPS_TIME\020\217\002\022\021\n\014GPS_POSITI" +
+      "ON\020\220\002\022\021\n\014GPS_VELOCITY\020\221\002\022\020\n\013GPS_DETAILS\020" +
+      "\222\002\022\025\n\020GPS_SIGNAL_LEVEL\020\223\002\022\021\n\014RTK_POSITIO" +
+      "N\020\224\002\022\021\n\014RTK_VELOCITY\020\225\002\022\014\n\007RTK_YAW\020\226\002\022\026\n" +
+      "\021RTK_POSITION_INFO\020\227\002\022\021\n\014RTK_YAW_INFO\020\230\002" +
+      "\022\014\n\007COMPASS\020\231\002\022\007\n\002RC\020\232\002\022\022\n\rGIMBAL_ANGLES" +
+      "\020\233\002\022\022\n\rGIMBAL_STATUS\020\234\002\022\022\n\rSTATUS_FLIGHT" +
+      "\020\235\002\022\027\n\022STATUS_DISPLAYMODE\020\236\002\022\027\n\022STATUS_L" +
+      "ANDINGGEAR\020\237\002\022\035\n\030STATUS_MOTOR_START_ERRO" +
+      "R\020\240\002\022\021\n\014BATTERY_INFO\020\241\002\022\023\n\016CONTROL_DEVIC" +
+      "E\020\242\002\022\016\n\tHARD_SYNC\020\243\002\022\026\n\021GPS_CONTROL_LEVE" +
+      "L\020\244\002\022\026\n\021RC_WITH_FLAG_DATA\020\245\002\022\r\n\010ESC_DATA" +
+      "\020\246\002\022\027\n\022RTK_CONNECT_STATUS\020\247\002\022\030\n\023GIMBAL_C" +
+      "ONTROL_MODE\020\250\002\022\023\n\016FLIGHT_ANOMALY\020\251\002\022\020\n\013P" +
+      "OSITION_VO\020\252\002\022\017\n\nAVOID_DATA\020\253\002\022\032\n\025HOME_P" +
+      "OINT_SET_STATUS\020\254\002\022\024\n\017HOME_POINT_INFO\020\255\002" +
+      "\022\026\n\021THREE_GIMBAL_DATA\020\256\002\022\037\n\032BATTERY_SING" +
+      "LE_INFO_INDEX1\020\257\002\022\037\n\032BATTERY_SINGLE_INFO" +
+      "_INDEX2\020\260\002*p\n\024SubscriptionFreqEnum\022\010\n\004HZ" +
+      "_0\020\000\022\010\n\004HZ_1\020\001\022\010\n\004HZ_5\020\005\022\t\n\005HZ_10\020\n\022\t\n\005H" +
+      "Z_50\0202\022\n\n\006HZ_100\020d\022\013\n\006HZ_200\020\310\001\022\013\n\006HZ_40" +
+      "0\020\220\003B\016B\014MdsdProtoBufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4534,12 +4534,12 @@ public final class MdsdProtoBuf {
     internal_static_SubscriptionTopic_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubscriptionTopic_descriptor,
-        new String[] { "Topic", "Frequency", "Details", "PushFrequency", });
-    internal_static_SubscriptionTopic_DetailsEntry_descriptor =
+        new String[] { "Topic", "Frequency", "DetailMap", "PushFrequency", });
+    internal_static_SubscriptionTopic_DetailMapEntry_descriptor =
       internal_static_SubscriptionTopic_descriptor.getNestedTypes().get(0);
-    internal_static_SubscriptionTopic_DetailsEntry_fieldAccessorTable = new
+    internal_static_SubscriptionTopic_DetailMapEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SubscriptionTopic_DetailsEntry_descriptor,
+        internal_static_SubscriptionTopic_DetailMapEntry_descriptor,
         new String[] { "Key", "Value", });
     internal_static_SubscriptionDto_descriptor =
       getDescriptor().getMessageTypes().get(2);

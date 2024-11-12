@@ -14,6 +14,26 @@ import java.util.Map;
 public interface ITyjwService {
 
     /**
+     * 开始 WEBSOCKET_SERVER 监听
+     */
+    void startWebSocket();
+
+    /**
+     * WEBSOCKET_SERVER 消息处理
+     */
+    void handleWebSocket(Map<String, String> map) throws JsonProcessingException;
+
+    /**
+     * 开始 TCP 连接
+     */
+    void startTcpClient();
+
+    /**
+     * TCP_CLIENT 消息处理
+     */
+    void handleTcpClient(ByteBuf buf);
+
+    /**
      * 获取 AccessToken
      */
     void getToken();
@@ -102,14 +122,4 @@ public interface ITyjwService {
      * 机库 - 获取舱内视频地址
      */
     String videoIn(String hangarId, String type);
-
-    /**
-     * 天宇 - 消息处理
-     */
-    void handleTcpClient(ByteBuf buf);
-
-    /**
-     * 处理WebSocket数据
-     */
-    void handleWebSocket(Map<String, String> map)throws JsonProcessingException;
 }
