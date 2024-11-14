@@ -18,13 +18,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class RegSomeBean {
+public class RegBeanConf {
 
     final ITyjwService tyjwService;
 
     final IDjiService djiService;
 
-    public RegSomeBean(ITyjwService tyjwService, IDjiService djiService) {
+    public RegBeanConf(ITyjwService tyjwService, IDjiService djiService) {
         this.tyjwService = tyjwService;
         this.djiService = djiService;
     }

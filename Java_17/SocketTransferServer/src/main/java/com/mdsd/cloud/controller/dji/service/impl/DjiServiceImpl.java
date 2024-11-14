@@ -26,8 +26,6 @@ public class DjiServiceImpl implements IDjiService {
 
     JsonFormat.Printer printer = JsonFormat.printer();
 
-
-
     class DjiChannelInboundHandler extends SimpleChannelInboundHandler<DatagramPacket> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket pak) throws Exception {
