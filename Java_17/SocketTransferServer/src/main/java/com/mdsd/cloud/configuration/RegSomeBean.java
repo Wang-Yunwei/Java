@@ -45,12 +45,12 @@ public class RegSomeBean {
 
         return args -> {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
-//            tyjwService.getToken();
-//            if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-//                tyjwService.startTcpClient();
-//            }
-//            tyjwService.startWebSocket();
-            djiService.startUdp();
+            tyjwService.getToken();
+            if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+                tyjwService.startTcpClient();
+            }
+            tyjwService.startWebSocket();
+//            djiService.startUdp();
         };
     }
 

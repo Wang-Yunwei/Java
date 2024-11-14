@@ -37,7 +37,7 @@ public class MQClient {
 
     public static void main(String[] args){
         MQClient mqClient = new MQClient();
-        mqClient.createClient("STS/subscribe/M350",0);
+        mqClient.createClient("STS/subscribe/M350/0x123",0);
         while (true){
 
         }

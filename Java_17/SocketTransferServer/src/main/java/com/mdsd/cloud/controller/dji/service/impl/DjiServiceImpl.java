@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author WangYunwei [2024-11-01]
@@ -24,14 +26,7 @@ public class DjiServiceImpl implements IDjiService {
 
     JsonFormat.Printer printer = JsonFormat.printer();
 
-    MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.newBuilder()
-            .setTopic(MdsdProtoBuf.FcSubscriptionTopicEnum.QUATERNION)
-            .setFrequency(MdsdProtoBuf.SubscriptionFreqEnum.HZ_1)
-            .setPushFrequency(100).build();
-    MdsdProtoBuf.Payload payload = MdsdProtoBuf.Payload.newBuilder().setHardwareCode("683fdd3936614637bb588712e652677f")
-            .setCommand(MdsdProtoBuf.CommandEnum.FC_SUBSCRIPTION)
-            .setAction(0x123)
-            .setBody(subscriptionTopic.toByteString()).build();
+
 
     class DjiChannelInboundHandler extends SimpleChannelInboundHandler<DatagramPacket> {
         @Override
@@ -47,14 +42,32 @@ public class DjiServiceImpl implements IDjiService {
             // 打印信息
             System.out.println("Received packet from: " + senderIp + ":" + senderPort);
 
+            // 接收的数据
             ByteBuf content = pak.content();
             byte[] bytes = new byte[content.readableBytes()];
             content.readBytes(bytes);
+            // 打印 Payload
             MdsdProtoBuf.Payload payload = MdsdProtoBuf.Payload.parseFrom(bytes);
             System.out.println(printer.print(payload));
+            // 打印 SubscriptionTopic
             MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.parseFrom(payload.getBody());
             System.out.println(printer.print(subscriptionTopic));
-            DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.toByteArray()), new InetSocketAddress(senderIp, senderPort));
+            Map<String, String> topicDataMap = subscriptionTopic.getTopicDataMap();
+            System.out.println(topicDataMap.get("key1"));
+
+            // 发送数据
+            Map<String, String> detailMap = new HashMap<>();
+            detailMap.put("key1", "value1");
+            detailMap.put("key2", "value2");
+            MdsdProtoBuf.SubscriptionTopic subscriptionTopic1 = MdsdProtoBuf.SubscriptionTopic.newBuilder()
+                    .setTopic(MdsdProtoBuf.FcSubscriptionTopicEnum.QUATERNION)
+                    .setFrequency(MdsdProtoBuf.SubscriptionFreqEnum.HZ_1)
+                    .putAllTopicData(detailMap).build();
+            MdsdProtoBuf.Payload payload1 = MdsdProtoBuf.Payload.newBuilder().setHardwareCode("683fdd3936614637bb588712e652677f")
+                    .setCommand(MdsdProtoBuf.CommandEnum.FC_SUBSCRIPTION)
+                    .setAction(0x123)
+                    .setBody(subscriptionTopic.toByteString()).build();
+            DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload1.toByteArray()), new InetSocketAddress(senderIp, senderPort));
             ctx.writeAndFlush(datagramPacket);
         }
     }

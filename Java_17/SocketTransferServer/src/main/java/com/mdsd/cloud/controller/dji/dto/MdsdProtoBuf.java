@@ -2403,67 +2403,57 @@ public final class MdsdProtoBuf {
 
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
-    int getDetailMapCount();
+    int getTopicDataCount();
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
-    boolean containsDetailMap(
+    boolean containsTopicData(
         String key);
     /**
-     * Use {@link #getDetailMapMap()} instead.
+     * Use {@link #getTopicDataMap()} instead.
      */
     @Deprecated
     java.util.Map<String, String>
-    getDetailMap();
+    getTopicData();
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
     java.util.Map<String, String>
-    getDetailMapMap();
+    getTopicDataMap();
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
 
-    String getDetailMapOrDefault(
+    String getTopicDataOrDefault(
         String key,
         String defaultValue);
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
 
-    String getDetailMapOrThrow(
+    String getTopicDataOrThrow(
         String key);
-
-    /**
-     * <pre>
-     * 推送订阅数据频率, 单位: 毫秒
-     * </pre>
-     *
-     * <code>int32 pushFrequency = 4;</code>
-     * @return The pushFrequency.
-     */
-    int getPushFrequency();
   }
   /**
    * Protobuf type {@code SubscriptionTopic}
@@ -2527,20 +2517,15 @@ public final class MdsdProtoBuf {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                detailMap_ = com.google.protobuf.MapField.newMapField(
-                    DetailMapDefaultEntryHolder.defaultEntry);
+                topicData_ = com.google.protobuf.MapField.newMapField(
+                    TopicDataDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<String, String>
-              detailMap__ = input.readMessage(
-                  DetailMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              detailMap_.getMutableMap().put(
-                  detailMap__.getKey(), detailMap__.getValue());
-              break;
-            }
-            case 32: {
-
-              pushFrequency_ = input.readInt32();
+              topicData__ = input.readMessage(
+                  TopicDataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              topicData_.getMutableMap().put(
+                  topicData__.getKey(), topicData__.getValue());
               break;
             }
             default: {
@@ -2573,7 +2558,7 @@ public final class MdsdProtoBuf {
         int number) {
       switch (number) {
         case 3:
-          return internalGetDetailMap();
+          return internalGetTopicData();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -2641,116 +2626,101 @@ public final class MdsdProtoBuf {
       return result == null ? SubscriptionFreqEnum.UNRECOGNIZED : result;
     }
 
-    public static final int DETAILMAP_FIELD_NUMBER = 3;
-    private static final class DetailMapDefaultEntryHolder {
+    public static final int TOPICDATA_FIELD_NUMBER = 3;
+    private static final class TopicDataDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           String, String> defaultEntry =
               com.google.protobuf.MapEntry
               .<String, String>newDefaultInstance(
-                  MdsdProtoBuf.internal_static_SubscriptionTopic_DetailMapEntry_descriptor, 
+                  MdsdProtoBuf.internal_static_SubscriptionTopic_TopicDataEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "");
     }
     private com.google.protobuf.MapField<
-        String, String> detailMap_;
+        String, String> topicData_;
     private com.google.protobuf.MapField<String, String>
-    internalGetDetailMap() {
-      if (detailMap_ == null) {
+    internalGetTopicData() {
+      if (topicData_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
-            DetailMapDefaultEntryHolder.defaultEntry);
+            TopicDataDefaultEntryHolder.defaultEntry);
       }
-      return detailMap_;
+      return topicData_;
     }
 
-    public int getDetailMapCount() {
-      return internalGetDetailMap().getMap().size();
+    public int getTopicDataCount() {
+      return internalGetTopicData().getMap().size();
     }
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
 
     @Override
-    public boolean containsDetailMap(
+    public boolean containsTopicData(
         String key) {
       if (key == null) { throw new NullPointerException(); }
-      return internalGetDetailMap().getMap().containsKey(key);
+      return internalGetTopicData().getMap().containsKey(key);
     }
     /**
-     * Use {@link #getDetailMapMap()} instead.
+     * Use {@link #getTopicDataMap()} instead.
      */
     @Override
     @Deprecated
-    public java.util.Map<String, String> getDetailMap() {
-      return getDetailMapMap();
+    public java.util.Map<String, String> getTopicData() {
+      return getTopicDataMap();
     }
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
     @Override
 
-    public java.util.Map<String, String> getDetailMapMap() {
-      return internalGetDetailMap().getMap();
+    public java.util.Map<String, String> getTopicDataMap() {
+      return internalGetTopicData().getMap();
     }
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
     @Override
 
-    public String getDetailMapOrDefault(
+    public String getTopicDataOrDefault(
         String key,
         String defaultValue) {
       if (key == null) { throw new NullPointerException(); }
       java.util.Map<String, String> map =
-          internalGetDetailMap().getMap();
+          internalGetTopicData().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
      * <pre>
-     * 详情数据
+     * 主题数据
      * </pre>
      *
-     * <code>map&lt;string, string&gt; detailMap = 3;</code>
+     * <code>map&lt;string, string&gt; topicData = 3;</code>
      */
     @Override
 
-    public String getDetailMapOrThrow(
+    public String getTopicDataOrThrow(
         String key) {
       if (key == null) { throw new NullPointerException(); }
       java.util.Map<String, String> map =
-          internalGetDetailMap().getMap();
+          internalGetTopicData().getMap();
       if (!map.containsKey(key)) {
         throw new IllegalArgumentException();
       }
       return map.get(key);
-    }
-
-    public static final int PUSHFREQUENCY_FIELD_NUMBER = 4;
-    private int pushFrequency_;
-    /**
-     * <pre>
-     * 推送订阅数据频率, 单位: 毫秒
-     * </pre>
-     *
-     * <code>int32 pushFrequency = 4;</code>
-     * @return The pushFrequency.
-     */
-    @Override
-    public int getPushFrequency() {
-      return pushFrequency_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2776,12 +2746,9 @@ public final class MdsdProtoBuf {
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
-          internalGetDetailMap(),
-          DetailMapDefaultEntryHolder.defaultEntry,
+          internalGetTopicData(),
+          TopicDataDefaultEntryHolder.defaultEntry,
           3);
-      if (pushFrequency_ != 0) {
-        output.writeInt32(4, pushFrequency_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -2800,18 +2767,14 @@ public final class MdsdProtoBuf {
           .computeEnumSize(2, frequency_);
       }
       for (java.util.Map.Entry<String, String> entry
-           : internalGetDetailMap().getMap().entrySet()) {
+           : internalGetTopicData().getMap().entrySet()) {
         com.google.protobuf.MapEntry<String, String>
-        detailMap__ = DetailMapDefaultEntryHolder.defaultEntry.newBuilderForType()
+        topicData__ = TopicDataDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(3, detailMap__);
-      }
-      if (pushFrequency_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, pushFrequency_);
+            .computeMessageSize(3, topicData__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2830,10 +2793,8 @@ public final class MdsdProtoBuf {
 
       if (topic_ != other.topic_) return false;
       if (frequency_ != other.frequency_) return false;
-      if (!internalGetDetailMap().equals(
-          other.internalGetDetailMap())) return false;
-      if (getPushFrequency()
-          != other.getPushFrequency()) return false;
+      if (!internalGetTopicData().equals(
+          other.internalGetTopicData())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2849,12 +2810,10 @@ public final class MdsdProtoBuf {
       hash = (53 * hash) + topic_;
       hash = (37 * hash) + FREQUENCY_FIELD_NUMBER;
       hash = (53 * hash) + frequency_;
-      if (!internalGetDetailMap().getMap().isEmpty()) {
-        hash = (37 * hash) + DETAILMAP_FIELD_NUMBER;
-        hash = (53 * hash) + internalGetDetailMap().hashCode();
+      if (!internalGetTopicData().getMap().isEmpty()) {
+        hash = (37 * hash) + TOPICDATA_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetTopicData().hashCode();
       }
-      hash = (37 * hash) + PUSHFREQUENCY_FIELD_NUMBER;
-      hash = (53 * hash) + getPushFrequency();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2967,7 +2926,7 @@ public final class MdsdProtoBuf {
           int number) {
         switch (number) {
           case 3:
-            return internalGetDetailMap();
+            return internalGetTopicData();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -2978,7 +2937,7 @@ public final class MdsdProtoBuf {
           int number) {
         switch (number) {
           case 3:
-            return internalGetMutableDetailMap();
+            return internalGetMutableTopicData();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -3014,9 +2973,7 @@ public final class MdsdProtoBuf {
 
         frequency_ = 0;
 
-        internalGetMutableDetailMap().clear();
-        pushFrequency_ = 0;
-
+        internalGetMutableTopicData().clear();
         return this;
       }
 
@@ -3046,9 +3003,8 @@ public final class MdsdProtoBuf {
         int from_bitField0_ = bitField0_;
         result.topic_ = topic_;
         result.frequency_ = frequency_;
-        result.detailMap_ = internalGetDetailMap();
-        result.detailMap_.makeImmutable();
-        result.pushFrequency_ = pushFrequency_;
+        result.topicData_ = internalGetTopicData();
+        result.topicData_.makeImmutable();
         onBuilt();
         return result;
       }
@@ -3103,11 +3059,8 @@ public final class MdsdProtoBuf {
         if (other.frequency_ != 0) {
           setFrequencyValue(other.getFrequencyValue());
         }
-        internalGetMutableDetailMap().mergeFrom(
-            other.internalGetDetailMap());
-        if (other.getPushFrequency() != 0) {
-          setPushFrequency(other.getPushFrequency());
-        }
+        internalGetMutableTopicData().mergeFrom(
+            other.internalGetTopicData());
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -3287,119 +3240,119 @@ public final class MdsdProtoBuf {
       }
 
       private com.google.protobuf.MapField<
-          String, String> detailMap_;
+          String, String> topicData_;
       private com.google.protobuf.MapField<String, String>
-      internalGetDetailMap() {
-        if (detailMap_ == null) {
+      internalGetTopicData() {
+        if (topicData_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
-              DetailMapDefaultEntryHolder.defaultEntry);
+              TopicDataDefaultEntryHolder.defaultEntry);
         }
-        return detailMap_;
+        return topicData_;
       }
       private com.google.protobuf.MapField<String, String>
-      internalGetMutableDetailMap() {
+      internalGetMutableTopicData() {
         onChanged();;
-        if (detailMap_ == null) {
-          detailMap_ = com.google.protobuf.MapField.newMapField(
-              DetailMapDefaultEntryHolder.defaultEntry);
+        if (topicData_ == null) {
+          topicData_ = com.google.protobuf.MapField.newMapField(
+              TopicDataDefaultEntryHolder.defaultEntry);
         }
-        if (!detailMap_.isMutable()) {
-          detailMap_ = detailMap_.copy();
+        if (!topicData_.isMutable()) {
+          topicData_ = topicData_.copy();
         }
-        return detailMap_;
+        return topicData_;
       }
 
-      public int getDetailMapCount() {
-        return internalGetDetailMap().getMap().size();
+      public int getTopicDataCount() {
+        return internalGetTopicData().getMap().size();
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
 
       @Override
-      public boolean containsDetailMap(
+      public boolean containsTopicData(
           String key) {
         if (key == null) { throw new NullPointerException(); }
-        return internalGetDetailMap().getMap().containsKey(key);
+        return internalGetTopicData().getMap().containsKey(key);
       }
       /**
-       * Use {@link #getDetailMapMap()} instead.
+       * Use {@link #getTopicDataMap()} instead.
        */
       @Override
       @Deprecated
-      public java.util.Map<String, String> getDetailMap() {
-        return getDetailMapMap();
+      public java.util.Map<String, String> getTopicData() {
+        return getTopicDataMap();
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
       @Override
 
-      public java.util.Map<String, String> getDetailMapMap() {
-        return internalGetDetailMap().getMap();
+      public java.util.Map<String, String> getTopicDataMap() {
+        return internalGetTopicData().getMap();
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
       @Override
 
-      public String getDetailMapOrDefault(
+      public String getTopicDataOrDefault(
           String key,
           String defaultValue) {
         if (key == null) { throw new NullPointerException(); }
         java.util.Map<String, String> map =
-            internalGetDetailMap().getMap();
+            internalGetTopicData().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
       @Override
 
-      public String getDetailMapOrThrow(
+      public String getTopicDataOrThrow(
           String key) {
         if (key == null) { throw new NullPointerException(); }
         java.util.Map<String, String> map =
-            internalGetDetailMap().getMap();
+            internalGetTopicData().getMap();
         if (!map.containsKey(key)) {
           throw new IllegalArgumentException();
         }
         return map.get(key);
       }
 
-      public Builder clearDetailMap() {
-        internalGetMutableDetailMap().getMutableMap()
+      public Builder clearTopicData() {
+        internalGetMutableTopicData().getMutableMap()
             .clear();
         return this;
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
 
-      public Builder removeDetailMap(
+      public Builder removeTopicData(
           String key) {
         if (key == null) { throw new NullPointerException(); }
-        internalGetMutableDetailMap().getMutableMap()
+        internalGetMutableTopicData().getMutableMap()
             .remove(key);
         return this;
       }
@@ -3408,80 +3361,37 @@ public final class MdsdProtoBuf {
        */
       @Deprecated
       public java.util.Map<String, String>
-      getMutableDetailMap() {
-        return internalGetMutableDetailMap().getMutableMap();
+      getMutableTopicData() {
+        return internalGetMutableTopicData().getMutableMap();
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
-      public Builder putDetailMap(
+      public Builder putTopicData(
           String key,
           String value) {
         if (key == null) { throw new NullPointerException(); }
         if (value == null) { throw new NullPointerException(); }
-        internalGetMutableDetailMap().getMutableMap()
+        internalGetMutableTopicData().getMutableMap()
             .put(key, value);
         return this;
       }
       /**
        * <pre>
-       * 详情数据
+       * 主题数据
        * </pre>
        *
-       * <code>map&lt;string, string&gt; detailMap = 3;</code>
+       * <code>map&lt;string, string&gt; topicData = 3;</code>
        */
 
-      public Builder putAllDetailMap(
+      public Builder putAllTopicData(
           java.util.Map<String, String> values) {
-        internalGetMutableDetailMap().getMutableMap()
+        internalGetMutableTopicData().getMutableMap()
             .putAll(values);
-        return this;
-      }
-
-      private int pushFrequency_ ;
-      /**
-       * <pre>
-       * 推送订阅数据频率, 单位: 毫秒
-       * </pre>
-       *
-       * <code>int32 pushFrequency = 4;</code>
-       * @return The pushFrequency.
-       */
-      @Override
-      public int getPushFrequency() {
-        return pushFrequency_;
-      }
-      /**
-       * <pre>
-       * 推送订阅数据频率, 单位: 毫秒
-       * </pre>
-       *
-       * <code>int32 pushFrequency = 4;</code>
-       * @param value The pushFrequency to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPushFrequency(int value) {
-        
-        pushFrequency_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * 推送订阅数据频率, 单位: 毫秒
-       * </pre>
-       *
-       * <code>int32 pushFrequency = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPushFrequency() {
-        
-        pushFrequency_ = 0;
-        onChanged();
         return this;
       }
       @Override
@@ -3537,8 +3447,8 @@ public final class MdsdProtoBuf {
 
   }
 
-  public interface SubscriptionDtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SubscriptionDto)
+  public interface SubscriptionListOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SubscriptionList)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -3546,66 +3456,76 @@ public final class MdsdProtoBuf {
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     java.util.List<SubscriptionTopic>
-        getSubscriptionTopicListList();
+        getTopicListList();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
-    SubscriptionTopic getSubscriptionTopicList(int index);
+    SubscriptionTopic getTopicList(int index);
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
-    int getSubscriptionTopicListCount();
+    int getTopicListCount();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     java.util.List<? extends SubscriptionTopicOrBuilder>
-        getSubscriptionTopicListOrBuilderList();
+        getTopicListOrBuilderList();
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
-    SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
+    SubscriptionTopicOrBuilder getTopicListOrBuilder(
         int index);
+
+    /**
+     * <pre>
+     * 接收数据频率, 单位: 毫秒
+     * </pre>
+     *
+     * <code>int32 receiveFrequency = 2;</code>
+     * @return The receiveFrequency.
+     */
+    int getReceiveFrequency();
   }
   /**
-   * Protobuf type {@code SubscriptionDto}
+   * Protobuf type {@code SubscriptionList}
    */
-  public static final class SubscriptionDto extends
+  public static final class SubscriptionList extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:SubscriptionDto)
-      SubscriptionDtoOrBuilder {
+      // @@protoc_insertion_point(message_implements:SubscriptionList)
+      SubscriptionListOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use SubscriptionDto.newBuilder() to construct.
-    private SubscriptionDto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use SubscriptionList.newBuilder() to construct.
+    private SubscriptionList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private SubscriptionDto() {
-      subscriptionTopicList_ = java.util.Collections.emptyList();
+    private SubscriptionList() {
+      topicList_ = java.util.Collections.emptyList();
     }
 
     @Override
     @SuppressWarnings({"unused"})
     protected Object newInstance(
         UnusedPrivateParameter unused) {
-      return new SubscriptionDto();
+      return new SubscriptionList();
     }
 
     @Override
@@ -3613,7 +3533,7 @@ public final class MdsdProtoBuf {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SubscriptionDto(
+    private SubscriptionList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3634,11 +3554,16 @@ public final class MdsdProtoBuf {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                subscriptionTopicList_ = new java.util.ArrayList<SubscriptionTopic>();
+                topicList_ = new java.util.ArrayList<SubscriptionTopic>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              subscriptionTopicList_.add(
+              topicList_.add(
                   input.readMessage(SubscriptionTopic.parser(), extensionRegistry));
+              break;
+            }
+            case 16: {
+
+              receiveFrequency_ = input.readInt32();
               break;
             }
             default: {
@@ -3657,7 +3582,7 @@ public final class MdsdProtoBuf {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          subscriptionTopicList_ = java.util.Collections.unmodifiableList(subscriptionTopicList_);
+          topicList_ = java.util.Collections.unmodifiableList(topicList_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3665,75 +3590,90 @@ public final class MdsdProtoBuf {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return MdsdProtoBuf.internal_static_SubscriptionDto_descriptor;
+      return MdsdProtoBuf.internal_static_SubscriptionList_descriptor;
     }
 
     @Override
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return MdsdProtoBuf.internal_static_SubscriptionDto_fieldAccessorTable
+      return MdsdProtoBuf.internal_static_SubscriptionList_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              SubscriptionDto.class, Builder.class);
+              SubscriptionList.class, Builder.class);
     }
 
-    public static final int SUBSCRIPTIONTOPICLIST_FIELD_NUMBER = 1;
-    private java.util.List<SubscriptionTopic> subscriptionTopicList_;
+    public static final int TOPICLIST_FIELD_NUMBER = 1;
+    private java.util.List<SubscriptionTopic> topicList_;
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     @Override
-    public java.util.List<SubscriptionTopic> getSubscriptionTopicListList() {
-      return subscriptionTopicList_;
+    public java.util.List<SubscriptionTopic> getTopicListList() {
+      return topicList_;
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     @Override
     public java.util.List<? extends SubscriptionTopicOrBuilder>
-        getSubscriptionTopicListOrBuilderList() {
-      return subscriptionTopicList_;
+        getTopicListOrBuilderList() {
+      return topicList_;
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     @Override
-    public int getSubscriptionTopicListCount() {
-      return subscriptionTopicList_.size();
+    public int getTopicListCount() {
+      return topicList_.size();
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     @Override
-    public SubscriptionTopic getSubscriptionTopicList(int index) {
-      return subscriptionTopicList_.get(index);
+    public SubscriptionTopic getTopicList(int index) {
+      return topicList_.get(index);
     }
     /**
      * <pre>
      * 订阅主题列表
      * </pre>
      *
-     * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+     * <code>repeated .SubscriptionTopic topicList = 1;</code>
      */
     @Override
-    public SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
+    public SubscriptionTopicOrBuilder getTopicListOrBuilder(
         int index) {
-      return subscriptionTopicList_.get(index);
+      return topicList_.get(index);
+    }
+
+    public static final int RECEIVEFREQUENCY_FIELD_NUMBER = 2;
+    private int receiveFrequency_;
+    /**
+     * <pre>
+     * 接收数据频率, 单位: 毫秒
+     * </pre>
+     *
+     * <code>int32 receiveFrequency = 2;</code>
+     * @return The receiveFrequency.
+     */
+    @Override
+    public int getReceiveFrequency() {
+      return receiveFrequency_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3750,8 +3690,11 @@ public final class MdsdProtoBuf {
     @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < subscriptionTopicList_.size(); i++) {
-        output.writeMessage(1, subscriptionTopicList_.get(i));
+      for (int i = 0; i < topicList_.size(); i++) {
+        output.writeMessage(1, topicList_.get(i));
+      }
+      if (receiveFrequency_ != 0) {
+        output.writeInt32(2, receiveFrequency_);
       }
       unknownFields.writeTo(output);
     }
@@ -3762,9 +3705,13 @@ public final class MdsdProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < subscriptionTopicList_.size(); i++) {
+      for (int i = 0; i < topicList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, subscriptionTopicList_.get(i));
+          .computeMessageSize(1, topicList_.get(i));
+      }
+      if (receiveFrequency_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, receiveFrequency_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3776,13 +3723,15 @@ public final class MdsdProtoBuf {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof SubscriptionDto)) {
+      if (!(obj instanceof SubscriptionList)) {
         return super.equals(obj);
       }
-      SubscriptionDto other = (SubscriptionDto) obj;
+      SubscriptionList other = (SubscriptionList) obj;
 
-      if (!getSubscriptionTopicListList()
-          .equals(other.getSubscriptionTopicListList())) return false;
+      if (!getTopicListList()
+          .equals(other.getTopicListList())) return false;
+      if (getReceiveFrequency()
+          != other.getReceiveFrequency()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3794,78 +3743,80 @@ public final class MdsdProtoBuf {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getSubscriptionTopicListCount() > 0) {
-        hash = (37 * hash) + SUBSCRIPTIONTOPICLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getSubscriptionTopicListList().hashCode();
+      if (getTopicListCount() > 0) {
+        hash = (37 * hash) + TOPICLIST_FIELD_NUMBER;
+        hash = (53 * hash) + getTopicListList().hashCode();
       }
+      hash = (37 * hash) + RECEIVEFREQUENCY_FIELD_NUMBER;
+      hash = (53 * hash) + getReceiveFrequency();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SubscriptionDto parseFrom(byte[] data)
+    public static SubscriptionList parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static SubscriptionDto parseFrom(java.io.InputStream input)
+    public static SubscriptionList parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static SubscriptionDto parseDelimitedFrom(java.io.InputStream input)
+    public static SubscriptionList parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static SubscriptionDto parseDelimitedFrom(
+    public static SubscriptionList parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static SubscriptionDto parseFrom(
+    public static SubscriptionList parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3878,7 +3829,7 @@ public final class MdsdProtoBuf {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(SubscriptionDto prototype) {
+    public static Builder newBuilder(SubscriptionList prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @Override
@@ -3894,26 +3845,26 @@ public final class MdsdProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code SubscriptionDto}
+     * Protobuf type {@code SubscriptionList}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SubscriptionDto)
-        SubscriptionDtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:SubscriptionList)
+        SubscriptionListOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return MdsdProtoBuf.internal_static_SubscriptionDto_descriptor;
+        return MdsdProtoBuf.internal_static_SubscriptionList_descriptor;
       }
 
       @Override
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return MdsdProtoBuf.internal_static_SubscriptionDto_fieldAccessorTable
+        return MdsdProtoBuf.internal_static_SubscriptionList_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                SubscriptionDto.class, Builder.class);
+                SubscriptionList.class, Builder.class);
       }
 
-      // Construct using MdsdProtoBuf.SubscriptionDto.newBuilder()
+      // Construct using MdsdProtoBuf.SubscriptionList.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -3926,35 +3877,37 @@ public final class MdsdProtoBuf {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getSubscriptionTopicListFieldBuilder();
+          getTopicListFieldBuilder();
         }
       }
       @Override
       public Builder clear() {
         super.clear();
-        if (subscriptionTopicListBuilder_ == null) {
-          subscriptionTopicList_ = java.util.Collections.emptyList();
+        if (topicListBuilder_ == null) {
+          topicList_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          subscriptionTopicListBuilder_.clear();
+          topicListBuilder_.clear();
         }
+        receiveFrequency_ = 0;
+
         return this;
       }
 
       @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return MdsdProtoBuf.internal_static_SubscriptionDto_descriptor;
+        return MdsdProtoBuf.internal_static_SubscriptionList_descriptor;
       }
 
       @Override
-      public SubscriptionDto getDefaultInstanceForType() {
-        return SubscriptionDto.getDefaultInstance();
+      public SubscriptionList getDefaultInstanceForType() {
+        return SubscriptionList.getDefaultInstance();
       }
 
       @Override
-      public SubscriptionDto build() {
-        SubscriptionDto result = buildPartial();
+      public SubscriptionList build() {
+        SubscriptionList result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3962,18 +3915,19 @@ public final class MdsdProtoBuf {
       }
 
       @Override
-      public SubscriptionDto buildPartial() {
-        SubscriptionDto result = new SubscriptionDto(this);
+      public SubscriptionList buildPartial() {
+        SubscriptionList result = new SubscriptionList(this);
         int from_bitField0_ = bitField0_;
-        if (subscriptionTopicListBuilder_ == null) {
+        if (topicListBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            subscriptionTopicList_ = java.util.Collections.unmodifiableList(subscriptionTopicList_);
+            topicList_ = java.util.Collections.unmodifiableList(topicList_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.subscriptionTopicList_ = subscriptionTopicList_;
+          result.topicList_ = topicList_;
         } else {
-          result.subscriptionTopicList_ = subscriptionTopicListBuilder_.build();
+          result.topicList_ = topicListBuilder_.build();
         }
+        result.receiveFrequency_ = receiveFrequency_;
         onBuilt();
         return result;
       }
@@ -4012,41 +3966,44 @@ public final class MdsdProtoBuf {
       }
       @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SubscriptionDto) {
-          return mergeFrom((SubscriptionDto)other);
+        if (other instanceof SubscriptionList) {
+          return mergeFrom((SubscriptionList)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(SubscriptionDto other) {
-        if (other == SubscriptionDto.getDefaultInstance()) return this;
-        if (subscriptionTopicListBuilder_ == null) {
-          if (!other.subscriptionTopicList_.isEmpty()) {
-            if (subscriptionTopicList_.isEmpty()) {
-              subscriptionTopicList_ = other.subscriptionTopicList_;
+      public Builder mergeFrom(SubscriptionList other) {
+        if (other == SubscriptionList.getDefaultInstance()) return this;
+        if (topicListBuilder_ == null) {
+          if (!other.topicList_.isEmpty()) {
+            if (topicList_.isEmpty()) {
+              topicList_ = other.topicList_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureSubscriptionTopicListIsMutable();
-              subscriptionTopicList_.addAll(other.subscriptionTopicList_);
+              ensureTopicListIsMutable();
+              topicList_.addAll(other.topicList_);
             }
             onChanged();
           }
         } else {
-          if (!other.subscriptionTopicList_.isEmpty()) {
-            if (subscriptionTopicListBuilder_.isEmpty()) {
-              subscriptionTopicListBuilder_.dispose();
-              subscriptionTopicListBuilder_ = null;
-              subscriptionTopicList_ = other.subscriptionTopicList_;
+          if (!other.topicList_.isEmpty()) {
+            if (topicListBuilder_.isEmpty()) {
+              topicListBuilder_.dispose();
+              topicListBuilder_ = null;
+              topicList_ = other.topicList_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              subscriptionTopicListBuilder_ = 
+              topicListBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getSubscriptionTopicListFieldBuilder() : null;
+                   getTopicListFieldBuilder() : null;
             } else {
-              subscriptionTopicListBuilder_.addAllMessages(other.subscriptionTopicList_);
+              topicListBuilder_.addAllMessages(other.topicList_);
             }
           }
+        }
+        if (other.getReceiveFrequency() != 0) {
+          setReceiveFrequency(other.getReceiveFrequency());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4063,11 +4020,11 @@ public final class MdsdProtoBuf {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        SubscriptionDto parsedMessage = null;
+        SubscriptionList parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (SubscriptionDto) e.getUnfinishedMessage();
+          parsedMessage = (SubscriptionList) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -4078,30 +4035,30 @@ public final class MdsdProtoBuf {
       }
       private int bitField0_;
 
-      private java.util.List<SubscriptionTopic> subscriptionTopicList_ =
+      private java.util.List<SubscriptionTopic> topicList_ =
         java.util.Collections.emptyList();
-      private void ensureSubscriptionTopicListIsMutable() {
+      private void ensureTopicListIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          subscriptionTopicList_ = new java.util.ArrayList<SubscriptionTopic>(subscriptionTopicList_);
+          topicList_ = new java.util.ArrayList<SubscriptionTopic>(topicList_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder> subscriptionTopicListBuilder_;
+          SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder> topicListBuilder_;
 
       /**
        * <pre>
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public java.util.List<SubscriptionTopic> getSubscriptionTopicListList() {
-        if (subscriptionTopicListBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(subscriptionTopicList_);
+      public java.util.List<SubscriptionTopic> getTopicListList() {
+        if (topicListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(topicList_);
         } else {
-          return subscriptionTopicListBuilder_.getMessageList();
+          return topicListBuilder_.getMessageList();
         }
       }
       /**
@@ -4109,13 +4066,13 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public int getSubscriptionTopicListCount() {
-        if (subscriptionTopicListBuilder_ == null) {
-          return subscriptionTopicList_.size();
+      public int getTopicListCount() {
+        if (topicListBuilder_ == null) {
+          return topicList_.size();
         } else {
-          return subscriptionTopicListBuilder_.getCount();
+          return topicListBuilder_.getCount();
         }
       }
       /**
@@ -4123,13 +4080,13 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public SubscriptionTopic getSubscriptionTopicList(int index) {
-        if (subscriptionTopicListBuilder_ == null) {
-          return subscriptionTopicList_.get(index);
+      public SubscriptionTopic getTopicList(int index) {
+        if (topicListBuilder_ == null) {
+          return topicList_.get(index);
         } else {
-          return subscriptionTopicListBuilder_.getMessage(index);
+          return topicListBuilder_.getMessage(index);
         }
       }
       /**
@@ -4137,19 +4094,19 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder setSubscriptionTopicList(
+      public Builder setTopicList(
           int index, SubscriptionTopic value) {
-        if (subscriptionTopicListBuilder_ == null) {
+        if (topicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.set(index, value);
+          ensureTopicListIsMutable();
+          topicList_.set(index, value);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.setMessage(index, value);
+          topicListBuilder_.setMessage(index, value);
         }
         return this;
       }
@@ -4158,16 +4115,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder setSubscriptionTopicList(
+      public Builder setTopicList(
           int index, SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicListBuilder_ == null) {
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.set(index, builderForValue.build());
+        if (topicListBuilder_ == null) {
+          ensureTopicListIsMutable();
+          topicList_.set(index, builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.setMessage(index, builderForValue.build());
+          topicListBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -4176,18 +4133,18 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder addSubscriptionTopicList(SubscriptionTopic value) {
-        if (subscriptionTopicListBuilder_ == null) {
+      public Builder addTopicList(SubscriptionTopic value) {
+        if (topicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.add(value);
+          ensureTopicListIsMutable();
+          topicList_.add(value);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.addMessage(value);
+          topicListBuilder_.addMessage(value);
         }
         return this;
       }
@@ -4196,19 +4153,19 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder addSubscriptionTopicList(
+      public Builder addTopicList(
           int index, SubscriptionTopic value) {
-        if (subscriptionTopicListBuilder_ == null) {
+        if (topicListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.add(index, value);
+          ensureTopicListIsMutable();
+          topicList_.add(index, value);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.addMessage(index, value);
+          topicListBuilder_.addMessage(index, value);
         }
         return this;
       }
@@ -4217,16 +4174,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder addSubscriptionTopicList(
+      public Builder addTopicList(
           SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicListBuilder_ == null) {
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.add(builderForValue.build());
+        if (topicListBuilder_ == null) {
+          ensureTopicListIsMutable();
+          topicList_.add(builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.addMessage(builderForValue.build());
+          topicListBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
@@ -4235,16 +4192,16 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder addSubscriptionTopicList(
+      public Builder addTopicList(
           int index, SubscriptionTopic.Builder builderForValue) {
-        if (subscriptionTopicListBuilder_ == null) {
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.add(index, builderForValue.build());
+        if (topicListBuilder_ == null) {
+          ensureTopicListIsMutable();
+          topicList_.add(index, builderForValue.build());
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.addMessage(index, builderForValue.build());
+          topicListBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -4253,17 +4210,17 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder addAllSubscriptionTopicList(
+      public Builder addAllTopicList(
           Iterable<? extends SubscriptionTopic> values) {
-        if (subscriptionTopicListBuilder_ == null) {
-          ensureSubscriptionTopicListIsMutable();
+        if (topicListBuilder_ == null) {
+          ensureTopicListIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, subscriptionTopicList_);
+              values, topicList_);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.addAllMessages(values);
+          topicListBuilder_.addAllMessages(values);
         }
         return this;
       }
@@ -4272,15 +4229,15 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder clearSubscriptionTopicList() {
-        if (subscriptionTopicListBuilder_ == null) {
-          subscriptionTopicList_ = java.util.Collections.emptyList();
+      public Builder clearTopicList() {
+        if (topicListBuilder_ == null) {
+          topicList_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.clear();
+          topicListBuilder_.clear();
         }
         return this;
       }
@@ -4289,15 +4246,15 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public Builder removeSubscriptionTopicList(int index) {
-        if (subscriptionTopicListBuilder_ == null) {
-          ensureSubscriptionTopicListIsMutable();
-          subscriptionTopicList_.remove(index);
+      public Builder removeTopicList(int index) {
+        if (topicListBuilder_ == null) {
+          ensureTopicListIsMutable();
+          topicList_.remove(index);
           onChanged();
         } else {
-          subscriptionTopicListBuilder_.remove(index);
+          topicListBuilder_.remove(index);
         }
         return this;
       }
@@ -4306,24 +4263,24 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public SubscriptionTopic.Builder getSubscriptionTopicListBuilder(
+      public SubscriptionTopic.Builder getTopicListBuilder(
           int index) {
-        return getSubscriptionTopicListFieldBuilder().getBuilder(index);
+        return getTopicListFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public SubscriptionTopicOrBuilder getSubscriptionTopicListOrBuilder(
+      public SubscriptionTopicOrBuilder getTopicListOrBuilder(
           int index) {
-        if (subscriptionTopicListBuilder_ == null) {
-          return subscriptionTopicList_.get(index);  } else {
-          return subscriptionTopicListBuilder_.getMessageOrBuilder(index);
+        if (topicListBuilder_ == null) {
+          return topicList_.get(index);  } else {
+          return topicListBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
@@ -4331,14 +4288,14 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
       public java.util.List<? extends SubscriptionTopicOrBuilder>
-           getSubscriptionTopicListOrBuilderList() {
-        if (subscriptionTopicListBuilder_ != null) {
-          return subscriptionTopicListBuilder_.getMessageOrBuilderList();
+           getTopicListOrBuilderList() {
+        if (topicListBuilder_ != null) {
+          return topicListBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(subscriptionTopicList_);
+          return java.util.Collections.unmodifiableList(topicList_);
         }
       }
       /**
@@ -4346,10 +4303,10 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public SubscriptionTopic.Builder addSubscriptionTopicListBuilder() {
-        return getSubscriptionTopicListFieldBuilder().addBuilder(
+      public SubscriptionTopic.Builder addTopicListBuilder() {
+        return getTopicListFieldBuilder().addBuilder(
             SubscriptionTopic.getDefaultInstance());
       }
       /**
@@ -4357,11 +4314,11 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
-      public SubscriptionTopic.Builder addSubscriptionTopicListBuilder(
+      public SubscriptionTopic.Builder addTopicListBuilder(
           int index) {
-        return getSubscriptionTopicListFieldBuilder().addBuilder(
+        return getTopicListFieldBuilder().addBuilder(
             index, SubscriptionTopic.getDefaultInstance());
       }
       /**
@@ -4369,25 +4326,68 @@ public final class MdsdProtoBuf {
        * 订阅主题列表
        * </pre>
        *
-       * <code>repeated .SubscriptionTopic subscriptionTopicList = 1;</code>
+       * <code>repeated .SubscriptionTopic topicList = 1;</code>
        */
       public java.util.List<SubscriptionTopic.Builder>
-           getSubscriptionTopicListBuilderList() {
-        return getSubscriptionTopicListFieldBuilder().getBuilderList();
+           getTopicListBuilderList() {
+        return getTopicListFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder>
-          getSubscriptionTopicListFieldBuilder() {
-        if (subscriptionTopicListBuilder_ == null) {
-          subscriptionTopicListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getTopicListFieldBuilder() {
+        if (topicListBuilder_ == null) {
+          topicListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               SubscriptionTopic, SubscriptionTopic.Builder, SubscriptionTopicOrBuilder>(
-                  subscriptionTopicList_,
+                  topicList_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          subscriptionTopicList_ = null;
+          topicList_ = null;
         }
-        return subscriptionTopicListBuilder_;
+        return topicListBuilder_;
+      }
+
+      private int receiveFrequency_ ;
+      /**
+       * <pre>
+       * 接收数据频率, 单位: 毫秒
+       * </pre>
+       *
+       * <code>int32 receiveFrequency = 2;</code>
+       * @return The receiveFrequency.
+       */
+      @Override
+      public int getReceiveFrequency() {
+        return receiveFrequency_;
+      }
+      /**
+       * <pre>
+       * 接收数据频率, 单位: 毫秒
+       * </pre>
+       *
+       * <code>int32 receiveFrequency = 2;</code>
+       * @param value The receiveFrequency to set.
+       * @return This builder for chaining.
+       */
+      public Builder setReceiveFrequency(int value) {
+        
+        receiveFrequency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 接收数据频率, 单位: 毫秒
+       * </pre>
+       *
+       * <code>int32 receiveFrequency = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearReceiveFrequency() {
+        
+        receiveFrequency_ = 0;
+        onChanged();
+        return this;
       }
       @Override
       public final Builder setUnknownFields(
@@ -4402,41 +4402,41 @@ public final class MdsdProtoBuf {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:SubscriptionDto)
+      // @@protoc_insertion_point(builder_scope:SubscriptionList)
     }
 
-    // @@protoc_insertion_point(class_scope:SubscriptionDto)
-    private static final SubscriptionDto DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SubscriptionList)
+    private static final SubscriptionList DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new SubscriptionDto();
+      DEFAULT_INSTANCE = new SubscriptionList();
     }
 
-    public static SubscriptionDto getDefaultInstance() {
+    public static SubscriptionList getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SubscriptionDto>
-        PARSER = new com.google.protobuf.AbstractParser<SubscriptionDto>() {
+    private static final com.google.protobuf.Parser<SubscriptionList>
+        PARSER = new com.google.protobuf.AbstractParser<SubscriptionList>() {
       @Override
-      public SubscriptionDto parsePartialFrom(
+      public SubscriptionList parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SubscriptionDto(input, extensionRegistry);
+        return new SubscriptionList(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<SubscriptionDto> parser() {
+    public static com.google.protobuf.Parser<SubscriptionList> parser() {
       return PARSER;
     }
 
     @Override
-    public com.google.protobuf.Parser<SubscriptionDto> getParserForType() {
+    public com.google.protobuf.Parser<SubscriptionList> getParserForType() {
       return PARSER;
     }
 
     @Override
-    public SubscriptionDto getDefaultInstanceForType() {
+    public SubscriptionList getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4453,15 +4453,15 @@ public final class MdsdProtoBuf {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_SubscriptionTopic_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SubscriptionTopic_DetailMapEntry_descriptor;
+    internal_static_SubscriptionTopic_TopicDataEntry_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SubscriptionTopic_DetailMapEntry_fieldAccessorTable;
+      internal_static_SubscriptionTopic_TopicDataEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SubscriptionDto_descriptor;
+    internal_static_SubscriptionList_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SubscriptionDto_fieldAccessorTable;
+      internal_static_SubscriptionList_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4473,51 +4473,51 @@ public final class MdsdProtoBuf {
     String[] descriptorData = {
       "\n\nmdsd.proto\"\\\n\007Payload\022\024\n\014hardwareCode\030" +
       "\001 \001(\t\022\035\n\007command\030\002 \001(\0162\014.CommandEnum\022\016\n\006" +
-      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\345\001\n\021Subscript" +
+      "action\030\003 \001(\005\022\014\n\004body\030\004 \001(\014\"\316\001\n\021Subscript" +
       "ionTopic\022\'\n\005topic\030\001 \001(\0162\030.FcSubscription" +
       "TopicEnum\022(\n\tfrequency\030\002 \001(\0162\025.Subscript" +
-      "ionFreqEnum\0224\n\tdetailMap\030\003 \003(\0132!.Subscri" +
-      "ptionTopic.DetailMapEntry\022\025\n\rpushFrequen" +
-      "cy\030\004 \001(\005\0320\n\016DetailMapEntry\022\013\n\003key\030\001 \001(\t\022" +
-      "\r\n\005value\030\002 \001(\t:\0028\001\"D\n\017SubscriptionDto\0221\n" +
-      "\025subscriptionTopicList\030\001 \003(\0132\022.Subscript" +
-      "ionTopic*\350\001\n\013CommandEnum\022\n\n\006LOGGER\020\000\022\023\n\017" +
-      "FC_SUBSCRIPTION\020\001\022\022\n\016CAMERA_MANAGER\020\002\022\022\n" +
-      "\016GIMBAL_MANAGER\020\003\022\024\n\020POWER_MANAGEMENT\020\004\022" +
-      "\025\n\021FLIGHT_CONTROLLER\020\005\022\007\n\003HMS\020\006\022\r\n\tTIME_" +
-      "SYNC\020\007\022\r\n\tLIVE_VIEW\020\010\022\021\n\rLOCAL_UPGRADE\020\t" +
-      "\022\017\n\013POSITIONING\020\n\022\014\n\010WAYPOINT\020\013\022\n\n\006WIDGE" +
-      "T\020\014*\274\010\n\027FcSubscriptionTopicEnum\022\036\n\032SUBSC" +
-      "RIPTION_TOPIC_UNKNOWN\020\000\022\017\n\nQUATERNION\020\200\002" +
-      "\022\030\n\023ACCELERATION_GROUND\020\202\002\022\026\n\021ACCELERATI" +
-      "ON_BODY\020\203\002\022\025\n\020ACCELERATION_RAW\020\204\002\022\r\n\010VEL" +
-      "OCITY\020\205\002\022\032\n\025ANGULAR_RATE_FUSIONED\020\206\002\022\025\n\020" +
-      "ANGULAR_RATE_RAW\020\207\002\022\023\n\016ALTITUDE_FUSED\020\210\002" +
-      "\022\027\n\022ALTITUDE_BAROMETER\020\211\002\022\032\n\025ALTITUDE_OF" +
-      "_HOMEPOINT\020\212\002\022\022\n\rHEIGHT_FUSION\020\213\002\022\024\n\017HEI" +
-      "GHT_RELATIVE\020\214\002\022\023\n\016POSITION_FUSED\020\215\002\022\r\n\010" +
-      "GPS_DATE\020\216\002\022\r\n\010GPS_TIME\020\217\002\022\021\n\014GPS_POSITI" +
-      "ON\020\220\002\022\021\n\014GPS_VELOCITY\020\221\002\022\020\n\013GPS_DETAILS\020" +
-      "\222\002\022\025\n\020GPS_SIGNAL_LEVEL\020\223\002\022\021\n\014RTK_POSITIO" +
-      "N\020\224\002\022\021\n\014RTK_VELOCITY\020\225\002\022\014\n\007RTK_YAW\020\226\002\022\026\n" +
-      "\021RTK_POSITION_INFO\020\227\002\022\021\n\014RTK_YAW_INFO\020\230\002" +
-      "\022\014\n\007COMPASS\020\231\002\022\007\n\002RC\020\232\002\022\022\n\rGIMBAL_ANGLES" +
-      "\020\233\002\022\022\n\rGIMBAL_STATUS\020\234\002\022\022\n\rSTATUS_FLIGHT" +
-      "\020\235\002\022\027\n\022STATUS_DISPLAYMODE\020\236\002\022\027\n\022STATUS_L" +
-      "ANDINGGEAR\020\237\002\022\035\n\030STATUS_MOTOR_START_ERRO" +
-      "R\020\240\002\022\021\n\014BATTERY_INFO\020\241\002\022\023\n\016CONTROL_DEVIC" +
-      "E\020\242\002\022\016\n\tHARD_SYNC\020\243\002\022\026\n\021GPS_CONTROL_LEVE" +
-      "L\020\244\002\022\026\n\021RC_WITH_FLAG_DATA\020\245\002\022\r\n\010ESC_DATA" +
-      "\020\246\002\022\027\n\022RTK_CONNECT_STATUS\020\247\002\022\030\n\023GIMBAL_C" +
-      "ONTROL_MODE\020\250\002\022\023\n\016FLIGHT_ANOMALY\020\251\002\022\020\n\013P" +
-      "OSITION_VO\020\252\002\022\017\n\nAVOID_DATA\020\253\002\022\032\n\025HOME_P" +
-      "OINT_SET_STATUS\020\254\002\022\024\n\017HOME_POINT_INFO\020\255\002" +
-      "\022\026\n\021THREE_GIMBAL_DATA\020\256\002\022\037\n\032BATTERY_SING" +
-      "LE_INFO_INDEX1\020\257\002\022\037\n\032BATTERY_SINGLE_INFO" +
-      "_INDEX2\020\260\002*p\n\024SubscriptionFreqEnum\022\010\n\004HZ" +
-      "_0\020\000\022\010\n\004HZ_1\020\001\022\010\n\004HZ_5\020\005\022\t\n\005HZ_10\020\n\022\t\n\005H" +
-      "Z_50\0202\022\n\n\006HZ_100\020d\022\013\n\006HZ_200\020\310\001\022\013\n\006HZ_40" +
-      "0\020\220\003B\016B\014MdsdProtoBufb\006proto3"
+      "ionFreqEnum\0224\n\ttopicData\030\003 \003(\0132!.Subscri" +
+      "ptionTopic.TopicDataEntry\0320\n\016TopicDataEn" +
+      "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"S\n\020S" +
+      "ubscriptionList\022%\n\ttopicList\030\001 \003(\0132\022.Sub" +
+      "scriptionTopic\022\030\n\020receiveFrequency\030\002 \001(\005" +
+      "*\350\001\n\013CommandEnum\022\n\n\006LOGGER\020\000\022\023\n\017FC_SUBSC" +
+      "RIPTION\020\001\022\022\n\016CAMERA_MANAGER\020\002\022\022\n\016GIMBAL_" +
+      "MANAGER\020\003\022\024\n\020POWER_MANAGEMENT\020\004\022\025\n\021FLIGH" +
+      "T_CONTROLLER\020\005\022\007\n\003HMS\020\006\022\r\n\tTIME_SYNC\020\007\022\r" +
+      "\n\tLIVE_VIEW\020\010\022\021\n\rLOCAL_UPGRADE\020\t\022\017\n\013POSI" +
+      "TIONING\020\n\022\014\n\010WAYPOINT\020\013\022\n\n\006WIDGET\020\014*\274\010\n\027" +
+      "FcSubscriptionTopicEnum\022\036\n\032SUBSCRIPTION_" +
+      "TOPIC_UNKNOWN\020\000\022\017\n\nQUATERNION\020\200\002\022\030\n\023ACCE" +
+      "LERATION_GROUND\020\202\002\022\026\n\021ACCELERATION_BODY\020" +
+      "\203\002\022\025\n\020ACCELERATION_RAW\020\204\002\022\r\n\010VELOCITY\020\205\002" +
+      "\022\032\n\025ANGULAR_RATE_FUSIONED\020\206\002\022\025\n\020ANGULAR_" +
+      "RATE_RAW\020\207\002\022\023\n\016ALTITUDE_FUSED\020\210\002\022\027\n\022ALTI" +
+      "TUDE_BAROMETER\020\211\002\022\032\n\025ALTITUDE_OF_HOMEPOI" +
+      "NT\020\212\002\022\022\n\rHEIGHT_FUSION\020\213\002\022\024\n\017HEIGHT_RELA" +
+      "TIVE\020\214\002\022\023\n\016POSITION_FUSED\020\215\002\022\r\n\010GPS_DATE" +
+      "\020\216\002\022\r\n\010GPS_TIME\020\217\002\022\021\n\014GPS_POSITION\020\220\002\022\021\n" +
+      "\014GPS_VELOCITY\020\221\002\022\020\n\013GPS_DETAILS\020\222\002\022\025\n\020GP" +
+      "S_SIGNAL_LEVEL\020\223\002\022\021\n\014RTK_POSITION\020\224\002\022\021\n\014" +
+      "RTK_VELOCITY\020\225\002\022\014\n\007RTK_YAW\020\226\002\022\026\n\021RTK_POS" +
+      "ITION_INFO\020\227\002\022\021\n\014RTK_YAW_INFO\020\230\002\022\014\n\007COMP" +
+      "ASS\020\231\002\022\007\n\002RC\020\232\002\022\022\n\rGIMBAL_ANGLES\020\233\002\022\022\n\rG" +
+      "IMBAL_STATUS\020\234\002\022\022\n\rSTATUS_FLIGHT\020\235\002\022\027\n\022S" +
+      "TATUS_DISPLAYMODE\020\236\002\022\027\n\022STATUS_LANDINGGE" +
+      "AR\020\237\002\022\035\n\030STATUS_MOTOR_START_ERROR\020\240\002\022\021\n\014" +
+      "BATTERY_INFO\020\241\002\022\023\n\016CONTROL_DEVICE\020\242\002\022\016\n\t" +
+      "HARD_SYNC\020\243\002\022\026\n\021GPS_CONTROL_LEVEL\020\244\002\022\026\n\021" +
+      "RC_WITH_FLAG_DATA\020\245\002\022\r\n\010ESC_DATA\020\246\002\022\027\n\022R" +
+      "TK_CONNECT_STATUS\020\247\002\022\030\n\023GIMBAL_CONTROL_M" +
+      "ODE\020\250\002\022\023\n\016FLIGHT_ANOMALY\020\251\002\022\020\n\013POSITION_" +
+      "VO\020\252\002\022\017\n\nAVOID_DATA\020\253\002\022\032\n\025HOME_POINT_SET" +
+      "_STATUS\020\254\002\022\024\n\017HOME_POINT_INFO\020\255\002\022\026\n\021THRE" +
+      "E_GIMBAL_DATA\020\256\002\022\037\n\032BATTERY_SINGLE_INFO_" +
+      "INDEX1\020\257\002\022\037\n\032BATTERY_SINGLE_INFO_INDEX2\020" +
+      "\260\002*p\n\024SubscriptionFreqEnum\022\010\n\004HZ_0\020\000\022\010\n\004" +
+      "HZ_1\020\001\022\010\n\004HZ_5\020\005\022\t\n\005HZ_10\020\n\022\t\n\005HZ_50\0202\022\n" +
+      "\n\006HZ_100\020d\022\013\n\006HZ_200\020\310\001\022\013\n\006HZ_400\020\220\003B\016B\014" +
+      "MdsdProtoBufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4534,19 +4534,19 @@ public final class MdsdProtoBuf {
     internal_static_SubscriptionTopic_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubscriptionTopic_descriptor,
-        new String[] { "Topic", "Frequency", "DetailMap", "PushFrequency", });
-    internal_static_SubscriptionTopic_DetailMapEntry_descriptor =
+        new String[] { "Topic", "Frequency", "TopicData", });
+    internal_static_SubscriptionTopic_TopicDataEntry_descriptor =
       internal_static_SubscriptionTopic_descriptor.getNestedTypes().get(0);
-    internal_static_SubscriptionTopic_DetailMapEntry_fieldAccessorTable = new
+    internal_static_SubscriptionTopic_TopicDataEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SubscriptionTopic_DetailMapEntry_descriptor,
+        internal_static_SubscriptionTopic_TopicDataEntry_descriptor,
         new String[] { "Key", "Value", });
-    internal_static_SubscriptionDto_descriptor =
+    internal_static_SubscriptionList_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_SubscriptionDto_fieldAccessorTable = new
+    internal_static_SubscriptionList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SubscriptionDto_descriptor,
-        new String[] { "SubscriptionTopicList", });
+        internal_static_SubscriptionList_descriptor,
+        new String[] { "TopicList", "ReceiveFrequency", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
