@@ -47,6 +47,7 @@ public class RegSomeBean {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
             tyjwService.getToken();
             if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+                log.info("Access token: {}", auth.getAccessToken());
                 tyjwService.startTcpClient();
             }
             tyjwService.startWebSocket();

@@ -195,6 +195,7 @@ public class TyjwServiceImpl implements ITyjwService {
         sendMessage(boxSn, result);
     }
 
+    @ChannelHandler.Sharable
     class TyjwWsChannelInboundHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
@@ -339,12 +340,13 @@ public class TyjwServiceImpl implements ITyjwService {
         }
     }
 
+    @ChannelHandler.Sharable
     class TyjwChannelInboundHandler extends SimpleChannelInboundHandler<ByteBuf> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
             // 判断是否是心跳信息
             if (2 == msg.getByte(4)) {
-//                log.info(">>> {}", String.format("0x%02X", msg.getByte(4)));
+                log.info(">>> {}", String.format("0x%02X", msg.getByte(4)));
                 return;
             }
             // 收到信息后发布事件
@@ -618,6 +620,9 @@ public class TyjwServiceImpl implements ITyjwService {
                         result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                         sendMessage(result.get("云盒SN号").toString(), result);
                         break;
+                    default:
+                        log.info("未知指令!");
+                        break;
                 }
             }
         }
@@ -627,7 +632,7 @@ public class TyjwServiceImpl implements ITyjwService {
     /**
      * 获取 AccessToken
      */
-    @Scheduled(cron = "0 0 19 * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     @Override
     public void getToken() {
         log.info(">>> 获取 AccessToken");

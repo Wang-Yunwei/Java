@@ -10,15 +10,25 @@
 	</parent>
 	<groupId>com.mdsd</groupId>
 	<artifactId>SocketTransferServer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>SocketTransferServer</name>
 	<description>SocketTransferServer</description>
-	<url/>
+	<url>http://192.168.0.126:20240</url>
 	<licenses>
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>M2622</id>
+			<name>Wang Yunwei</name>
+			<email>wangyunwei_@outlook.com</email>
+			<organization>Suzhou MedicalSystem Technology Co.,Ltd.</organization>
+			<organizationUrl>http://www.medicalsystem.com.cn</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
