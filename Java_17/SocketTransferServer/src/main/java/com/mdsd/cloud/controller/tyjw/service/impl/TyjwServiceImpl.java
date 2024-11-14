@@ -344,12 +344,6 @@ public class TyjwServiceImpl implements ITyjwService {
     class TyjwChannelInboundHandler extends SimpleChannelInboundHandler<ByteBuf> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) {
-            // 判断是否是心跳信息
-            if (2 == msg.getByte(4)) {
-                log.info(">>> {}", String.format("0x%02X", msg.getByte(4)));
-                return;
-            }
-            // 收到信息后发布事件
             publishEvent(msg);
         }
 
@@ -407,20 +401,14 @@ public class TyjwServiceImpl implements ITyjwService {
             TyjwEnum anEnum = TyjwEnum.getEnum(instruct);
             // 指令过滤
             switch (anEnum) {
-                case 注册:
-                case 心跳:
-                case 图片上传完成通知:
-                case 云盒开关机通知:
-                case 信道质量:
-                case 状态数据:
-                case 遥测数据:
-                case MOP数据透传:
-                    break;
-                default:
+                case 注册, 心跳, 图片上传完成通知, 云盒开关机通知, 信道质量, 状态数据, 遥测数据, MOP数据透传 -> {
+//                    log.info(">>> {}", String.format("0x%02X", buf.getByte(4)));
+                }
+                default -> {
                     int active = buf.getByte(6) & 0xFF;
                     anEnum = TyjwEnum.getEnum(instruct, active);
                     log.info("<<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
-                    break;
+                }
             }
             if (null != anEnum) {
                 if (CollectionUtils.isEmpty(wsChannels)) {
@@ -458,11 +446,7 @@ public class TyjwServiceImpl implements ITyjwService {
                         buf.readBytes(boxSnByte);
                         result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                         sendMessage(result.get("云盒SN号").toString(), result);
-                        // TODO 暂不启用, 当收到关机通知后5分钟,判断是否需要执行充电
-//                            log.info("云盒开关机通知_状态: {}", result);
-//                            if(isShutdown == -1){
-//                                chargingUav();
-//                            }
+                        // TODO 当收到关机通知后5分钟,判断是否需要执行充电(暂不启用) if(isShutdown == -1){chargingUav();}
                         break;
                     case 信道质量:
                         result.put("时间戳", buf.readUnsignedInt());
@@ -635,7 +619,7 @@ public class TyjwServiceImpl implements ITyjwService {
     @Scheduled(cron = "0 0/3 * * * ?")
     @Override
     public void getToken() {
-        log.info(">>> 获取 AccessToken");
+        log.info(">>> AccessToken: 0 0/3 * * * ?");
         if (Strings.isBlank(auth.getAccessToken())) {
             getToken(new GetTokenInp());
         }
