@@ -10,3 +10,21 @@ management:
     web:
       exposure:
         include: '*'
+
+# IP and port configuration
+env:
+  ip:
+    sts: 192.168.0.221
+    tyjw: 192.168.0.222
+    jikupi: 192.168.14.120
+  port:
+    sts:
+      api: 20240
+      web_socket_server: 20241
+      udp: 20242
+      mqtt: 1883
+    tyjw:
+      api: 12000
+      tcp: 13002
+    jikupi:
+      api: 8000

@@ -7,3 +7,21 @@ server:
     key-store-type: JKS
     # 您需要使用实际的证书名称替换domain_name.jks
     key-store: classpath:keystore.jks
+
+# IP and port configuration
+env:
+  ip:
+    sts: 192.168.0.221
+    tyjw: 192.168.0.222
+    jikupi: 192.168.14.120
+  port:
+    sts:
+      api: 10240
+      web_socket_server: 10241
+      udp: 10242
+      mqtt: 1883
+    tyjw:
+      api: 12000
+      tcp: 13002
+    jikupi:
+      api: 8000

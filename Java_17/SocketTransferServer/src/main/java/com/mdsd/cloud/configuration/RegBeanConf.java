@@ -21,13 +21,14 @@ import org.springframework.context.annotation.Configuration;
 public class RegBeanConf {
 
     final ITyjwService tyjwService;
-
     final IDjiService djiService;
 
     public RegBeanConf(ITyjwService tyjwService, IDjiService djiService) {
         this.tyjwService = tyjwService;
         this.djiService = djiService;
     }
+
+    private final AuthSingleton auth = AuthSingleton.getInstance();
 
     @Value("${minio.endpoint}")
     private String endpoint;
@@ -37,8 +38,6 @@ public class RegBeanConf {
 
     @Value("${minio.secret-key}")
     private String secretKey;
-
-    private final AuthSingleton auth = AuthSingleton.getInstance();
 
     @Bean
     CommandLineRunner startImmediatelyExecute() {
@@ -51,7 +50,7 @@ public class RegBeanConf {
                 tyjwService.startTcpClient();
             }
             tyjwService.startWebSocket();
-//            djiService.startUdp();
+            djiService.startUdp();
         };
     }
 

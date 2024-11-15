@@ -1,5 +1,8 @@
 package com.mdsd.cloud.controller.dji.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.dji.dto.MdsdProtoBuf;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
@@ -23,7 +26,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DjiServiceImpl implements IDjiService {
-
+    private final ObjectMapper obm = new ObjectMapper();
     JsonFormat.Printer printer = JsonFormat.printer();
 
     class DjiChannelInboundHandler extends SimpleChannelInboundHandler<DatagramPacket> {
@@ -46,6 +49,12 @@ public class DjiServiceImpl implements IDjiService {
             content.readBytes(bytes);
             // 打印 Payload
             MdsdProtoBuf.Payload payload = MdsdProtoBuf.Payload.parseFrom(bytes);
+
+//            Map<String, Object> ms = obm.readValue(payload.getHardwareCode(), new TypeReference<>() {
+//            });
+            JsonNode jsonNode = obm.readTree(payload.getHardwareCode());
+            System.out.println(jsonNode.toString());
+
             System.out.println(printer.print(payload));
             // 打印 SubscriptionTopic
             MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.parseFrom(payload.getBody());
@@ -65,6 +74,7 @@ public class DjiServiceImpl implements IDjiService {
                     .setCommand(MdsdProtoBuf.CommandEnum.FC_SUBSCRIPTION)
                     .setAction(0x123)
                     .setBody(subscriptionTopic.toByteString()).build();
+
             DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload1.toByteArray()), new InetSocketAddress(senderIp, senderPort));
             ctx.writeAndFlush(datagramPacket);
         }
