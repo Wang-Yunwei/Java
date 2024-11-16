@@ -20,7 +20,7 @@ public class EventMonitor {
     @EventListener
     public void listen(CommonEvent param) throws JsonProcessingException {
         switch (param.getSource()) {
-            case MDSD_WEB_SOCKET -> service.handleWebSocket(param.getMap());
+            case MDSD_WEB_SOCKET -> service.handleWebSocket(param.getJsonNode());
             case TYJW_TCP_CLIENT -> service.handleTcpClient(param.getByteBuf());
             case JDI_UDP_SOCKET -> System.out.println("1");
             default -> System.out.println("default");

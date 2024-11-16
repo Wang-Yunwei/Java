@@ -6,12 +6,15 @@ import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
 import io.minio.MinioClient;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * @author WangYunwei [2024-08-10]
@@ -41,16 +44,18 @@ public class RegBeanConf {
 
     @Bean
     CommandLineRunner startImmediatelyExecute() {
-
         return args -> {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
-            tyjwService.getToken();
-            if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
-                log.info("Access token: {}", auth.getAccessToken());
-                tyjwService.startTcpClient();
+            if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                tyjwService.getToken();
+                if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
+                    log.info("Access token: {}", auth.getAccessToken());
+                    tyjwService.startTcpClient();
+                }
+                tyjwService.startWebSocket();
+            } else {
+                djiService.startUdp();
             }
-            tyjwService.startWebSocket();
-            djiService.startUdp();
         };
     }
 
@@ -61,7 +66,6 @@ public class RegBeanConf {
 
     @Bean
     public MinioClient minioClient() {
-
         return MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
     }
 }

@@ -1,6 +1,7 @@
 package com.mdsd.cloud.controller.tyjw.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.mdsd.cloud.controller.tyjw.dto.*;
 import io.netty.buffer.ByteBuf;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ public interface ITyjwService {
     /**
      * WEBSOCKET_SERVER 消息处理
      */
-    void handleWebSocket(Map<String, String> map) throws JsonProcessingException;
+    void handleWebSocket(JsonNode jsonNode) throws JsonProcessingException;
 
     /**
      * 开始 TCP 连接

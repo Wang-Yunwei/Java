@@ -3,6 +3,7 @@ package com.mdsd.cloud.controller.tyjw.dto;
 import io.netty.channel.Channel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.Map;
 
@@ -11,11 +12,12 @@ import java.util.Map;
  */
 @Getter
 @Setter
-public class WsChannels {
-
-    private String box;
+@Accessors(chain = true)
+public class WsChannelDetails {
 
     private String taskId;
+
+    private String controlPower;
 
     private Map<String, Channel> channels;
 }

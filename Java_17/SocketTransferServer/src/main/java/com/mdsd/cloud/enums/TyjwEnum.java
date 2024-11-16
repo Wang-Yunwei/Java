@@ -129,10 +129,6 @@ public enum TyjwEnum {
         this.args = args;
     }
 
-    public static TyjwEnum getEnum(final int instruct) {
-        return Arrays.stream(TyjwEnum.values()).filter(el -> instruct == el.getInstruct()).findAny().orElseThrow(() -> new BusinessException(String.format("未知指令: 0x%02X", instruct)));
-    }
-
     public static TyjwEnum getEnum(int instruct, int action) {
         return Arrays.stream(TyjwEnum.values()).filter(el -> instruct == el.getInstruct() && action == el.getAction()).findFirst().orElseThrow(() -> new BusinessException(String.format("未知指令动作: 0x%02X_0x%02X", instruct, action)));
     }

@@ -1,7 +1,7 @@
 package com.mdsd.cloud.controller.tyjw.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
@@ -68,17 +68,7 @@ public class TyjwServiceImpl implements ITyjwService {
 
     private final PooledByteBufAllocator aDefault = PooledByteBufAllocator.DEFAULT;
 
-    private final ConcurrentHashMap<String, List<Channel>> wsChannels = new ConcurrentHashMap<>();
-
-    private final HashMap<String, String> wsReturnMap = new HashMap<>();
-
-    private final static Map<String, String> controlPower = Map.of(
-            "云盒编号", "M13220230801135",
-            "指令编号", "D1",
-            "加密标志", "00",
-            "动作编号", "30",
-            "数据", "00"
-    );
+    private final ConcurrentHashMap<String, WsChannelDetails> wsChannels = new ConcurrentHashMap<>();
 
     @Value("${env.ip.tyjw}")
     private String host;
@@ -91,7 +81,7 @@ public class TyjwServiceImpl implements ITyjwService {
 
     private String batteryPower;
 
-    private Channel channel;
+    private Channel tcpChannel;
 
     @FunctionalInterface
     private interface WebSocketFunction<T1, T2, T3> {
@@ -114,8 +104,8 @@ public class TyjwServiceImpl implements ITyjwService {
         }
     }
 
-    private void publishEvent(Map<String, String> map) {
-        publisher.publishEvent(new CommonEvent(ServerEnum.MDSD_WEB_SOCKET, map));
+    private void publishEvent(JsonNode jsonNode) {
+        publisher.publishEvent(new CommonEvent(ServerEnum.MDSD_WEB_SOCKET, jsonNode));
     }
 
     private void publishEvent(ByteBuf byteBuf) {
@@ -123,26 +113,19 @@ public class TyjwServiceImpl implements ITyjwService {
     }
 
     private void sendMessage(String key, Map<String, Object> resp) {
-        if (StringUtils.isEmpty(key)) {
-            wsChannels.forEach((k, v) -> v.stream().filter(Channel::isActive).forEach(el -> {
+        if (!StringUtils.isEmpty(key)) {
+            WsChannelDetails wsChannelDetails = wsChannels.get(key);
+            if (wsChannelDetails != null && StringUtils.isNoneBlank(wsChannelDetails.getTaskId())) {
+                Map<String, Channel> channels = wsChannelDetails.getChannels();
+                String sendDate;
                 try {
-                    el.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(resp)));
+                    sendDate = obm.writeValueAsString(resp);
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
-            }));
-        } else {
-            List<Channel> channelList = wsChannels.get(key);
-            if (!CollectionUtils.isEmpty(channelList)) {
-                channelList.stream().filter(Channel::isActive).forEach(el -> {
-                    String sendDate;
-                    try {
-                        sendDate = obm.writeValueAsString(resp);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                    if (null != sendDate) {
-                        el.writeAndFlush(new TextWebSocketFrame(sendDate));
+                channels.forEach((k, v) -> {
+                    if (v.isActive()) {
+                        v.writeAndFlush(new TextWebSocketFrame(sendDate));
                     }
                 });
             }
@@ -150,11 +133,11 @@ public class TyjwServiceImpl implements ITyjwService {
     }
 
     private void sendMessage(ByteBuf byteBuf) {
-        if (channel == null || !channel.isActive()) {
+        if (tcpChannel == null || !tcpChannel.isActive()) {
             throw new BusinessException("TCP 连接不存在!");
         }
         log.info(">>> {}", byteBuf);
-        channel.writeAndFlush(byteBuf);
+        tcpChannel.writeAndFlush(byteBuf);
     }
 
     private void chargingUav() {
@@ -175,85 +158,72 @@ public class TyjwServiceImpl implements ITyjwService {
         }, 5, TimeUnit.MINUTES);
     }
 
-    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, Map<String, String> map, TyjwServiceImpl.WebSocketFunction<ByteBuf, String, Map<String, String>> fun) {
+    private void sendByteBuf(ByteBuf buf, TyjwEnum anEnum, JsonNode jsonNode, TyjwServiceImpl.WebSocketFunction<ByteBuf, String, JsonNode> fun) {
         buf.writeShort(TyjwEnum.请求帧头.getInstruct());// 帧头
         buf.writeShort(0);// 数据长度,占位临时赋值为0
-        buf.writeBytes(ByteUtil.stringToByte(map.get("云盒编号")));// 云盒编号
+        buf.writeBytes(ByteUtil.stringToByte(jsonNode.get("云盒编号").asText()));// 云盒编号
         buf.writeByte(anEnum.getInstruct());// 指令编号
-        buf.writeByte(Byte.parseByte(map.get("加密标志")));// 加密标志
+        buf.writeByte(Byte.parseByte(jsonNode.get("加密标志").asText()));// 加密标志
         buf.writeByte(anEnum.getAction());// 动作编号
-        fun.dataHandle(buf, anEnum.getArgs(), map);// 参数处理
+        fun.dataHandle(buf, anEnum.getArgs(), jsonNode);// 参数处理
         buf.setShort(2, buf.readableBytes() - 4);// 重新计算数据长度
         sendMessage(buf);
     }
 
-    private void wssErrorMessage(String boxSn, String message) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("action", "ERROR_MESSAGE");
-        result.put("message", message);
-        log.info(result.toString());
-        sendMessage(boxSn, result);
-    }
-
     @ChannelHandler.Sharable
     class TyjwWsChannelInboundHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-        @Override
-        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
-            String text = tws.text();
-            if (StringUtils.isNoneBlank(text)) {
-                Map<String, String> ms = obm.readValue(text, new TypeReference<>() {
-                });
-                // 心跳数据直接回复
-                if ("PING_MESSAGE".equals(ms.get("action"))) {
-                    wsReturnMap.put("action", "PONG_MESSAGE");
-                    ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(ms)));
-                    return;
-                }
-                if (StringUtils.isNoneBlank(ms.get("云盒编号"))) {
-                    log.info("<<< {}", text);
-                    if (StringUtils.isNoneBlank(ms.get("指令编号"))) {
-                        if (StringUtils.isNoneBlank(ms.get("控制权")) && "1".equals(ms.get("控制权"))) {
-                            publishEvent(ms);// 发出事件
-                        }
-                    } else {
-                        // 注册: boxSn -> user -> connect (1:N:1)
-                        synchronized (wsChannels) {
-                            String boxSn = ms.get("云盒编号");
-                            if (wsChannels.containsKey(boxSn)) {
-                                List<Channel> channelList = wsChannels.get(boxSn);
-                                channelList.add(ctx.channel());
-                            } else {
-                                wsChannels.put(boxSn, new ArrayList<>() {{
-                                    add(ctx.channel());
-                                }});
-                            }
-                            // 每次重新连接自动获取一次控制权
-                            publishEvent(controlPower);
-                            log.info(">>> 注册新连接, 并获取控制权 {}", controlPower);
-                        }
-                    }
-                }
-            }
-        }
+        Map<String, Object> wsReturnMap = new HashMap<>();
 
         @Override
-        public void handlerRemoved(ChannelHandlerContext ctx) {
-            synchronized (wsChannels) {
-                ctx.channel().close();
-                wsChannels.forEach((key, val) -> {
-                    if (!val.isEmpty()) {
-                        Iterator<Channel> iterator = val.iterator();
-                        while (iterator.hasNext()) {
-                            if (!iterator.next().isActive()) {
-                                log.info("删除云盒 {} 下不活跃 Channel", key);
-                                iterator.remove();
+        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
+
+            String text = tws.text();
+            if (StringUtils.isNoneBlank(text)) {
+                log.info("<<< {}", text);
+                JsonNode jsonNode = obm.readTree(text);
+                // 心跳数据直接回复
+                if ("PING_MESSAGE".equals(jsonNode.get("action").asText())) {
+                    wsReturnMap.put("action", "PONG_MESSAGE");
+                    ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(wsReturnMap)));
+                    return;
+                }
+                String boxNumber = jsonNode.get("云盒编号").asText();
+                String userId = jsonNode.get("用户ID").asText();
+                String taskId = jsonNode.get("任务ID").asText();
+                if (StringUtils.isNoneBlank(boxNumber) && StringUtils.isNoneBlank(userId) && StringUtils.isNoneBlank(taskId)) {
+                    if (wsChannels.containsKey(boxNumber)) {
+                        // 云盒已经注册, 判断用户是否注册
+                        WsChannelDetails wsChannelDetails = wsChannels.get(boxNumber);
+                        Map<String, Channel> channels = wsChannelDetails.getChannels();
+                        if (channels.containsKey(userId)) {
+                            // 用户已注册,判断 channel 是否活跃
+                            Channel wsChannel = channels.get(userId);
+                            if (wsChannel == null || !wsChannel.isActive()) {
+                                // 用户下无活跃的 channel
+                                channels.put(userId, ctx.channel());
+                            }
+                        } else {
+                            // 用户未注册
+                            if (wsChannelDetails.getTaskId().equals(taskId)) {
+                                channels.put(userId, ctx.channel());
                             }
                         }
+                        // 判断是否有控制权
+                        if (wsChannelDetails.getControlPower().equals(userId) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
+                            publishEvent(jsonNode);
+                        }
                     } else {
-                        log.info("云盒 {} 下无连接, 执行删除!", key);
-                        wsChannels.remove(key);
+                        // 未注册
+                        synchronized (wsChannels) {
+                            wsChannels.put(boxNumber, new WsChannelDetails()
+                                    .setTaskId(taskId)
+                                    .setControlPower(userId)
+                                    .setChannels(new HashMap<>() {{
+                                        put(userId, ctx.channel());
+                                    }}));
+                        }
                     }
-                });
+                }
             }
         }
 
@@ -287,56 +257,73 @@ public class TyjwServiceImpl implements ITyjwService {
      * WEBSOCKET_SERVER 消息处理
      */
     @Override
-    public void handleWebSocket(Map<String, String> map) throws JsonProcessingException {
-        if (StringUtils.isEmpty(map.get("动作编号"))) {
-            wssErrorMessage(map.get("云盒编号"), "动作编号不能为: NULL");
+    public void handleWebSocket(JsonNode jsonNode) {
+        Map<String, Object> wsReturnMap = new HashMap<>();
+        String boxNumber = jsonNode.get("云盒编号").asText();
+        String instruct = jsonNode.get("指令编号").asText();
+        String action = jsonNode.get("动作编号").asText();
+        if (StringUtils.isEmpty(instruct) && StringUtils.isEmpty(action)) {
+            wsReturnMap.put("action", "ERROR_MESSAGE");
+            wsReturnMap.put("message", "指令编号或动作编号不能为空!");
+            sendMessage(boxNumber, wsReturnMap);
         }
-        TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(map.get("指令编号"), 16), Integer.parseInt(map.get("动作编号"), 16));
-        if (null != channel && channel.isActive()) {
+        TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(instruct, 16), Integer.parseInt(action, 16));
+        if (null != tcpChannel && tcpChannel.isActive()) {
             log.info("<<< {}", anEnum.name());
             switch (anEnum) {
-                case 航线规划 -> {
-                    PlanLineDataDTO planLineDataDto = obm.readValue(map.get("航线数据"), PlanLineDataDTO.class);
-                    TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
-                    ByteBuf buf = aDefault.buffer();
-                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(planLineData.toByteArray()));
+                case 航线规划 -> sendByteBuf(aDefault.buffer(), anEnum, jsonNode, (arg1, arg2, arg3) -> {
+                    try {
+                        PlanLineDataDTO planLineDataDto = obm.readValue(jsonNode.get("航线数据").asText(), PlanLineDataDTO.class);
+                        TyjwProtoBuf.PlanLineData planLineData = ParameterMapping.getPlanLineData(planLineDataDto);
+                        arg1.writeBytes(planLineData.toByteArray());
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                case 切换无人机控制权 -> {
+                    WsChannelDetails wsChannelDetails = wsChannels.get(boxNumber);
+                    if (wsChannelDetails != null) {
+                        String userId = jsonNode.get("用户ID").asText();
+                        wsChannelDetails.setControlPower(userId);
+                        log.info(">>> 修改 {} 的控制权为 {}", boxNumber, userId);
+                        sendByteBuf(aDefault.buffer(), anEnum, jsonNode, (arg1, arg2, arg3) -> arg1.writeByte(Byte.parseByte(arg3.get("数据").asText())));
+                    }
                 }
                 case 实时喊话 -> {
                     // TODO 暂不支持
-                    byte[] inData = Base64.getDecoder().decode(map.get("音频数据"));
+                    byte[] inData = Base64.getDecoder().decode(jsonNode.get("音频数据").asText());
                     List<byte[]> bytes = ByteUtil.splitByteArray(inData, 110);
                     for (byte[] by : bytes) {
-                        ByteBuf buf = aDefault.buffer();
-                        sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> arg1.writeBytes(by));
+                        sendByteBuf(aDefault.buffer(), anEnum, jsonNode, (arg1, arg2, arg3) -> arg1.writeBytes(by));
                     }
                 }
                 case MOP数据透传 -> {
                     // TODO 暂未使用
                 }
-                default -> {
-                    ByteBuf buf = aDefault.buffer();
-                    sendByteBuf(buf, anEnum, map, (arg1, arg2, arg3) -> {
-                        if (null != arg2) {
-                            String[] split = arg2.split(";");
-                            Arrays.stream(split).forEach(el -> {
-                                String[] split1 = el.split("-");
-                                switch (split1[1]) {
-                                    case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split1[0])));
-                                    case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split1[0])));
-                                    case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split1[0])));
-                                    case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split1[0])));
-                                    case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split1[0])));
-                                    case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split1[0])));
-                                    case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split1[0])));
-                                    case "base64" -> arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split1[0])));
-                                }
-                            });
-                        }
-                    });
-                }
+                default -> sendByteBuf(aDefault.buffer(), anEnum, jsonNode, (arg1, arg2, arg3) -> {
+                    if (null != arg2) {
+                        String[] split = arg2.split(";");
+                        Arrays.stream(split).forEach(el -> {
+                            String[] split1 = el.split("-");
+                            switch (split1[1]) {
+                                case "byte" -> arg1.writeByte(Byte.parseByte(arg3.get(split1[0]).asText()));
+                                case "bytes" -> arg1.writeBytes(ByteUtil.stringToByte(arg3.get(split1[0]).asText()));
+                                case "short" -> arg1.writeShort(Short.parseShort(arg3.get(split1[0]).asText()));
+                                case "int" -> arg1.writeInt(Integer.parseInt(arg3.get(split1[0]).asText()));
+                                case "long" -> arg1.writeLong(Long.parseLong(arg3.get(split1[0]).asText()));
+                                case "float" -> arg1.writeFloat(Float.parseFloat(arg3.get(split1[0]).asText()));
+                                case "double" -> arg1.writeDouble(Double.parseDouble(arg3.get(split1[0]).asText()));
+                                case "base64" ->
+                                        arg1.writeBytes(Base64.getDecoder().decode(arg3.get(split1[0]).asText()));
+                            }
+                        });
+                    }
+                });
             }
         } else {
-            wssErrorMessage(map.get("云盒编号"), "TCP 连接不存在!");
+            wsReturnMap.put("action", "ERROR_MESSAGE");
+            wsReturnMap.put("message", "TCP 连接不存在!");
+            sendMessage(boxNumber, wsReturnMap);
         }
     }
 
@@ -376,7 +363,7 @@ public class TyjwServiceImpl implements ITyjwService {
             if (future.isSuccess()) {
                 // 连接成功后,发送注册请求
                 log.info(">>> 连接 {} 成功, 开始发送注册请求!", String.format("%s:%s", host, tcpPort));
-                channel = future.channel();
+                tcpChannel = future.channel();
                 ByteBuf buf = Unpooled.buffer();
                 byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
                 buf.writeShort(TyjwEnum.请求帧头.getInstruct());
@@ -384,7 +371,7 @@ public class TyjwServiceImpl implements ITyjwService {
                 buf.writeByte(TyjwEnum.注册.getInstruct());
                 buf.writeInt(AuthSingleton.getInstance().getCompanyId());
                 buf.writeBytes(bytes);
-                channel.writeAndFlush(buf);
+                tcpChannel.writeAndFlush(buf);
             } else {
                 throw new BusinessException(String.format(">>> 连接 TCP 服务, 失败 -> %s:%s", host, tcpPort));
             }
@@ -398,69 +385,75 @@ public class TyjwServiceImpl implements ITyjwService {
     public void handleTcpClient(ByteBuf buf) {
         if (buf.getShort(0) == 0x6A77) {
             int instruct = buf.getByte(4) & 0xFF;
-            TyjwEnum anEnum = TyjwEnum.getEnum(instruct);
-            // 指令过滤
-            switch (anEnum) {
-                case 注册, 心跳, 图片上传完成通知, 云盒开关机通知, 信道质量, 状态数据, 遥测数据, MOP数据透传 -> {
-//                    log.info(">>> {}", String.format("0x%02X", buf.getByte(4)));
-                }
-                default -> {
-                    int active = buf.getByte(6) & 0xFF;
-                    anEnum = TyjwEnum.getEnum(instruct, active);
-                    log.info("<<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
-                }
-            }
-            if (null != anEnum) {
-                if (CollectionUtils.isEmpty(wsChannels)) {
+            TyjwEnum anEnum = null;
+            // 指令过滤, 以下项没有 action
+            if (instruct == TyjwEnum.注册.getInstruct() ||
+                    instruct == TyjwEnum.心跳.getInstruct() ||
+                    instruct == TyjwEnum.图片上传完成通知.getInstruct() ||
+                    instruct == TyjwEnum.云盒开关机通知.getInstruct() ||
+                    instruct == TyjwEnum.信道质量.getInstruct() ||
+                    instruct == TyjwEnum.状态数据.getInstruct() ||
+                    instruct == TyjwEnum.遥测数据.getInstruct() ||
+                    instruct == TyjwEnum.MOP数据透传.getInstruct()
+            ) {
+                anEnum = TyjwEnum.getEnum(instruct, 0);
+                if (instruct == TyjwEnum.心跳.getInstruct()) {
+                    log.info(">>> TCP_{}", anEnum.name());
                     return;
                 }
+            } else {
+                int active = buf.getByte(6) & 0xFF;
+                anEnum = TyjwEnum.getEnum(instruct, active);
+                log.info("407 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
+            }
+            if (null != anEnum) {
                 buf.skipBytes(5);// 跳过 帧头、数据长度、指令编号
-                Map<String, Object> result = new HashMap<>();
-                result.put("指令编码", String.format("0x%02X", anEnum.getInstruct()));
-                result.put("action", "NEW_MESSAGE");
+                Map<String, Object> wsReturnMap = new HashMap<>();
+                wsReturnMap.put("指令编码", String.format("0x%02X", anEnum.getInstruct()));
+                wsReturnMap.put("action", "NEW_MESSAGE");
                 byte[] boxSnByte = new byte[15];// 云盒编号
                 byte[] contentByte;// buffer中的内容
                 byte isSuccess;// 是否成功
                 switch (anEnum) {
                     case 注册:
-                        result.put("是否成功", buf.readByte());
-                        log.info("注册: {}", result);
+                        wsReturnMap.put("是否成功", buf.readByte());
+                        log.info(">>> 注册: {}", wsReturnMap);
                     case 心跳:
                         break;
                     case 图片上传完成通知:
-                        result.put("加密标志", buf.readByte());
-                        result.put("经度", buf.readDouble());
-                        result.put("纬度", buf.readDouble());
-                        result.put("时间戳", buf.readLong());
-                        result.put("原图大小", buf.readLong());
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("经度", buf.readDouble());
+                        wsReturnMap.put("纬度", buf.readDouble());
+                        wsReturnMap.put("时间戳", buf.readLong());
+                        wsReturnMap.put("原图大小", buf.readLong());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                         contentByte = new byte[buf.readableBytes()];
                         buf.readBytes(contentByte);
-                        result.put("原图地址", ByteUtil.bytesToStringUTF8(contentByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("原图地址", ByteUtil.bytesToStringUTF8(contentByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 云盒开关机通知:
                         byte isShutdown = buf.readByte();
-                        result.put("状态", isShutdown);
+                        wsReturnMap.put("状态", isShutdown);
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         // TODO 当收到关机通知后5分钟,判断是否需要执行充电(暂不启用) if(isShutdown == -1){chargingUav();}
                         break;
                     case 信道质量:
-                        result.put("时间戳", buf.readUnsignedInt());
+                        wsReturnMap.put("时间戳", buf.readUnsignedInt());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
                         contentByte = new byte[buf.readableBytes()];
                         buf.readBytes(contentByte);
                         try {
                             TyjwProtoBuf.SignalInfo signalInfo = TyjwProtoBuf.SignalInfo.parseFrom(contentByte);
-                            result.put("数据", printer.print(signalInfo));
+                            wsReturnMap.put("数据", printer.print(signalInfo));
                         } catch (InvalidProtocolBufferException e) {
                             throw new RuntimeException(e);
                         }
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 状态数据:
                     case 遥测数据:
@@ -469,18 +462,18 @@ public class TyjwServiceImpl implements ITyjwService {
                         try {
                             if (anEnum.getInstruct() == 0xA8) {
                                 TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
-                                result.put("云盒SN号", uavState.getBoxSn());
-                                result.put("数据", printer.print(uavState));
+                                wsReturnMap.put("云盒SN号", uavState.getBoxSn());
+                                wsReturnMap.put("数据", printer.print(uavState));
                                 batteryPower = uavState.getBatteryState().getBatteryPower(); //不断获取电池电量
                             } else {
                                 TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
-                                result.put("云盒SN号", telemetryData.getBoxSn());
-                                result.put("数据", printer.print(telemetryData));
+                                wsReturnMap.put("云盒SN号", telemetryData.getBoxSn());
+                                wsReturnMap.put("数据", printer.print(telemetryData));
                             }
                         } catch (InvalidProtocolBufferException e) {
                             throw new RuntimeException(e);
                         }
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 航线规划:
                     case 起飞:
@@ -509,100 +502,100 @@ public class TyjwServiceImpl implements ITyjwService {
                     case 格式化存储卡:
                     case 设置视频码流:
                     case 切换SIM卡:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
                         isSuccess = buf.readByte();
-                        result.put("执行结果", isSuccess);
+                        wsReturnMap.put("执行结果", isSuccess);
                         if (isSuccess == 0) {
-                            result.put("action", "ERROR_MESSAGE");
+                            wsReturnMap.put("action", "ERROR_MESSAGE");
                         }
-                        result.put("错误码", buf.readInt());
+                        wsReturnMap.put("错误码", buf.readInt());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 实时激光测距:
                     case 手动激光测距:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
                         isSuccess = buf.readByte();
-                        result.put("执行结果", isSuccess);
+                        wsReturnMap.put("执行结果", isSuccess);
                         if (isSuccess == 0) {
-                            result.put("action", "ERROR_MESSAGE");
+                            wsReturnMap.put("action", "ERROR_MESSAGE");
                         }
-                        result.put("经度", buf.readDouble());
-                        result.put("纬度", buf.readDouble());
-                        result.put("海拔高度", buf.readFloat());
-                        result.put("距离", buf.readFloat());
+                        wsReturnMap.put("经度", buf.readDouble());
+                        wsReturnMap.put("纬度", buf.readDouble());
+                        wsReturnMap.put("海拔高度", buf.readFloat());
+                        wsReturnMap.put("距离", buf.readFloat());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 打开单点测温:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
                         isSuccess = buf.readByte();
-                        result.put("执行结果", isSuccess);
+                        wsReturnMap.put("执行结果", isSuccess);
                         if (isSuccess == 0) {
-                            result.put("action", "ERROR_MESSAGE");
+                            wsReturnMap.put("action", "ERROR_MESSAGE");
                         }
-                        result.put("X点坐标", buf.readFloat());
-                        result.put("Y点坐标", buf.readFloat());
-                        result.put("温度", buf.readFloat());
+                        wsReturnMap.put("X点坐标", buf.readFloat());
+                        wsReturnMap.put("Y点坐标", buf.readFloat());
+                        wsReturnMap.put("温度", buf.readFloat());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 打开区域测温:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
                         isSuccess = buf.readByte();
-                        result.put("执行结果", isSuccess);
+                        wsReturnMap.put("执行结果", isSuccess);
                         if (isSuccess == 0) {
-                            result.put("action", "ERROR_MESSAGE");
+                            wsReturnMap.put("action", "ERROR_MESSAGE");
                         }
-                        result.put("X1点坐标", buf.readFloat());
-                        result.put("Y1点坐标", buf.readFloat());
-                        result.put("X2点坐标", buf.readFloat());
-                        result.put("Y2点坐标", buf.readFloat());
-                        result.put("平均温度", buf.readFloat());
-                        result.put("最低温度", buf.readFloat());
-                        result.put("最高温度", buf.readFloat());
-                        result.put("最低温度x坐标", buf.readFloat());
-                        result.put("最低温度y坐标", buf.readFloat());
-                        result.put("最高温度x坐标", buf.readFloat());
-                        result.put("最高温度y坐标", buf.readFloat());
+                        wsReturnMap.put("X1点坐标", buf.readFloat());
+                        wsReturnMap.put("Y1点坐标", buf.readFloat());
+                        wsReturnMap.put("X2点坐标", buf.readFloat());
+                        wsReturnMap.put("Y2点坐标", buf.readFloat());
+                        wsReturnMap.put("平均温度", buf.readFloat());
+                        wsReturnMap.put("最低温度", buf.readFloat());
+                        wsReturnMap.put("最高温度", buf.readFloat());
+                        wsReturnMap.put("最低温度x坐标", buf.readFloat());
+                        wsReturnMap.put("最低温度y坐标", buf.readFloat());
+                        wsReturnMap.put("最高温度x坐标", buf.readFloat());
+                        wsReturnMap.put("最高温度y坐标", buf.readFloat());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 无人机准备完成通知:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
-                        result.put("电池电量", buf.readByte());
-                        result.put("经度", buf.readDouble());
-                        result.put("纬度", buf.readDouble());
-                        result.put("海拔高度", buf.readInt());
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("电池电量", buf.readByte());
+                        wsReturnMap.put("经度", buf.readDouble());
+                        wsReturnMap.put("纬度", buf.readDouble());
+                        wsReturnMap.put("海拔高度", buf.readInt());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     case 返回码:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
                         int returnCode = buf.readInt();
-                        result.put("action", "ERROR_MESSAGE");
-                        result.put("code", returnCode);
-                        result.put("message", TyjwReturnCodeEnum.getMsg(returnCode));
-                        sendMessage(null, result);
+                        wsReturnMap.put("action", "ERROR_MESSAGE");
+                        wsReturnMap.put("code", returnCode);
+                        wsReturnMap.put("message", TyjwReturnCodeEnum.getMsg(returnCode));
+                        sendMessage(null, wsReturnMap);
                         break;
                     case 机场任务完成通知:
-                        result.put("加密标志", buf.readByte());
-                        result.put("动作编号", String.format("0x%02X", buf.readByte()));
-                        result.put("媒体文件数量", buf.readShort());
+                        wsReturnMap.put("加密标志", buf.readByte());
+                        wsReturnMap.put("动作编号", String.format("0x%02X", buf.readByte()));
+                        wsReturnMap.put("媒体文件数量", buf.readShort());
                         buf.readBytes(boxSnByte);
-                        result.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(result.get("云盒SN号").toString(), result);
+                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
+                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     default:
                         log.info("未知指令!");
@@ -611,7 +604,6 @@ public class TyjwServiceImpl implements ITyjwService {
             }
         }
     }
-
 
     /**
      * 获取 AccessToken

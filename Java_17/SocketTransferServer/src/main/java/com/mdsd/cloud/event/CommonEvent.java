@@ -1,5 +1,6 @@
 package com.mdsd.cloud.event;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.mdsd.cloud.enums.ServerEnum;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
@@ -15,14 +16,14 @@ public class CommonEvent extends ApplicationEvent {
 
     private final ServerEnum source;
 
-    private Map<String, String> map;
+    private JsonNode jsonNode;
 
     private ByteBuf byteBuf;
 
-    public CommonEvent(ServerEnum source, Map<String, String> map) {
+    public CommonEvent(ServerEnum source, JsonNode jsonNode) {
         super(source);
         this.source = source;
-        this.map = map;
+        this.jsonNode = jsonNode;
     }
 
     public CommonEvent(ServerEnum source, ByteBuf byteBuf) {
