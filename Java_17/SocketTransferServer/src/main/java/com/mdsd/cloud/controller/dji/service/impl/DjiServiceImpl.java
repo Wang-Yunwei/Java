@@ -1,6 +1,5 @@
 package com.mdsd.cloud.controller.dji.service.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.util.JsonFormat;
@@ -14,11 +13,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.InetSocketAddress;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author WangYunwei [2024-11-01]
@@ -26,6 +24,10 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DjiServiceImpl implements IDjiService {
+
+    @Value("${env.port.sts.udp}")
+    private int port;
+
     private final ObjectMapper obm = new ObjectMapper();
     JsonFormat.Printer printer = JsonFormat.printer();
 
@@ -49,31 +51,17 @@ public class DjiServiceImpl implements IDjiService {
             content.readBytes(bytes);
             // 打印 Payload
             MdsdProtoBuf.Payload payload = MdsdProtoBuf.Payload.parseFrom(bytes);
+            System.out.println(printer.print(payload));
 
-//            Map<String, Object> ms = obm.readValue(payload.getHardwareCode(), new TypeReference<>() {
-//            });
-            JsonNode jsonNode = obm.readTree(payload.getHardwareCode());
+            JsonNode jsonNode = obm.readTree(payload.getBody());
             System.out.println(jsonNode.toString());
 
-            System.out.println(printer.print(payload));
-            // 打印 SubscriptionTopic
-            MdsdProtoBuf.SubscriptionTopic subscriptionTopic = MdsdProtoBuf.SubscriptionTopic.parseFrom(payload.getBody());
-            System.out.println(printer.print(subscriptionTopic));
-            Map<String, String> topicDataMap = subscriptionTopic.getTopicDataMap();
-            System.out.println(topicDataMap.get("key1"));
-
             // 发送数据
-            Map<String, String> detailMap = new HashMap<>();
-            detailMap.put("key1", "value1");
-            detailMap.put("key2", "value2");
-            MdsdProtoBuf.SubscriptionTopic subscriptionTopic1 = MdsdProtoBuf.SubscriptionTopic.newBuilder()
-                    .setTopic(MdsdProtoBuf.FcSubscriptionTopicEnum.QUATERNION)
-                    .setFrequency(MdsdProtoBuf.SubscriptionFreqEnum.HZ_1)
-                    .putAllTopicData(detailMap).build();
-            MdsdProtoBuf.Payload payload1 = MdsdProtoBuf.Payload.newBuilder().setHardwareCode("683fdd3936614637bb588712e652677f")
+            MdsdProtoBuf.Payload payload1 = MdsdProtoBuf.Payload.newBuilder().setMachineId("683fdd3936614637bb588712e652677f")
                     .setCommand(MdsdProtoBuf.CommandEnum.FC_SUBSCRIPTION)
-                    .setAction(0x123)
-                    .setBody(subscriptionTopic.toByteString()).build();
+                    .setBody(jsonNode.toString()).build();
+
+            System.out.println("payload1_size: "+payload1.getSerializedSize());
 
             DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload1.toByteArray()), new InetSocketAddress(senderIp, senderPort));
             ctx.writeAndFlush(datagramPacket);
@@ -83,9 +71,9 @@ public class DjiServiceImpl implements IDjiService {
     @Override
     public void startUdp() {
 
-        Channel udpSocket = UdpSocket.createUdpSocket(new DjiChannelInboundHandler(), 20242);
+        Channel udpSocket = UdpSocket.createUdpSocket(new DjiChannelInboundHandler(), port);
         if (udpSocket != null && udpSocket.isActive()) {
-
+            log.info(">>> UDP Socket is active");
         }
     }
 }

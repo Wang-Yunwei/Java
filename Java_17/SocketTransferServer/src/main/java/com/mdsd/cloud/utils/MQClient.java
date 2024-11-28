@@ -1,6 +1,7 @@
 package com.mdsd.cloud.utils;
 
 import com.mdsd.cloud.response.BusinessException;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.mqttv5.client.*;
 import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
@@ -18,84 +19,89 @@ import org.springframework.stereotype.Component;
 public class MQClient {
 
     @Value("tcp://${env.ip.sts}:${env.port.sts.mqtt}")
-    String serverURI;
+    private String serverURI;
 
     @Value("${spring.application.name}")
-    String clientId;
+    private String clientId;
+
+    private static MqttClient mqttClient;
 
     /**
-     * 发布消息
+     * 发布
      */
-    public void publishMessage(MqttClient mqttClient, String topic, MqttMessage message) {
-
+    public static void publish(String topic, byte[] payload, int qos, boolean retained) {
         try {
-            mqttClient.publish(topic, message);
+            mqttClient.publish(topic, payload, qos, retained);
         } catch (MqttException e) {
             throw new BusinessException("发布消息到主题 %s 失败!".formatted(topic));
         }
     }
 
-    public static void main(String[] args){
-        MQClient mqClient = new MQClient();
-        mqClient.createClient("STS/subscribe/M350/0x123",0);
-        while (true){
-
+    /**
+     * 订阅
+     */
+    public static void subscribe(String topicFilter, int qos) {
+        try {
+            mqttClient.subscribe(topicFilter, qos);
+        } catch (MqttException e) {
+            throw new BusinessException("订阅主题 %s 失败!".formatted(topicFilter));
         }
     }
 
     /**
-     * MQTT - 创建客户端
-     *
-     * @param subscribeTopic 订阅_主题 例如: "STS/subscribe/M350"
-     * @param subscribeQos   订阅_Qos
+     * 单层通配符: STS/M350/PUBLISH/+
+     * STS/M350/PUBLISH/+ 将匹配 TS/M350/PUBLISH/x26123 和 TS/M350/PUBLISH/x26127，但不会匹配 TS/M350/PUBLISH/x26123/subtopic
+     * 多层通配符: STS/M350/PUBLISH/#
+     * TS/M350/PUBLISH/# 将匹配 TS/M350/PUBLISH/x26123、TS/M350/PUBLISH/x26127 和 TS/M350/PUBLISH/x26123/subtopic
      */
-    public MqttClient createClient(String subscribeTopic, int subscribeQos) {
+    public static void main(String[] args) {
+        MQClient mqClient = new MQClient();
+        mqClient.createMqClient();
+        subscribe("STS/M350/PUBLISH/+", 0);
+    }
 
-        MqttClient mqttClient;
+//    @PostConstruct
+    public void createMqClient() {
         try {
-            mqttClient = new MqttClient("tcp://192.168.0.221:1883", "SocketTransferServer", new MemoryPersistence());
+            mqttClient = new MqttClient(serverURI, clientId, new MemoryPersistence());
             // 设置连接选项
             MqttConnectionOptions connOpts = new MqttConnectionOptions();
-            connOpts.setUserName("admin");
-            connOpts.setPassword("admin@123".getBytes());
+            connOpts.setUserName("mdsd");
+            connOpts.setPassword("mdsd@123".getBytes());
             connOpts.setAutomaticReconnect(true);
             // 设置回调函数
-            mqttClient.setCallback(new MQClient.MyMqttCallback());
+            mqttClient.setCallback(new MqttCallbackImpl());
             // 建立连接
             mqttClient.connect(connOpts);
             // 订阅
-            mqttClient.subscribe(subscribeTopic, subscribeQos);
+            mqttClient.subscribe("STS/M13220230801135/PUBLISH/+", 1);
+            log.info("启动 MQTT 客户端, 连接 -> {}", serverURI);
         } catch (MqttException e) {
             throw new BusinessException("创建MQTTClient失败!");
         }
-        return mqttClient;
     }
 
-    public static class MyMqttCallback implements MqttCallback {
+    static class MqttCallbackImpl implements MqttCallback {
 
         @Override
         public void disconnected(MqttDisconnectResponse disconnectResponse) {
-
-            log.info("disconnected---------{}", disconnectResponse.getReturnCode());
+            log.info("disconnected --------- {}", disconnectResponse.getReturnCode());
         }
 
         @Override
         public void mqttErrorOccurred(MqttException exception) {
-
+            log.info("mqttErrorOccurred --------- {}", exception.getMessage());
         }
 
         @Override
         public void messageArrived(String topic, MqttMessage message) {
-
             log.info("<<< Topic: {}, Qos: {}, Retained: {}, message: {}", topic, message.getQos(), message.isRetained(), new String(message.getPayload()));
-
         }
 
 
         @Override
         public void deliveryComplete(IMqttToken token) {
-
-            log.info("deliveryComplete---------{}", token.isComplete());
+            log.info("deliveryComplete --------- {}", token.isComplete());
         }
 
         /**
@@ -107,7 +113,7 @@ public class MQClient {
          */
         @Override
         public void connectComplete(boolean reconnect, String serverURI) {
-
+            log.info("connectComplete --------- {}", serverURI);
         }
 
         /**
@@ -122,7 +128,7 @@ public class MQClient {
          */
         @Override
         public void authPacketArrived(int reasonCode, MqttProperties properties) {
-
+            log.info("authPacketArrived --------- {}", reasonCode);
         }
     }
 }

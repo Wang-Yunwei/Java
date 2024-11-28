@@ -83,6 +83,8 @@ public class TyjwServiceImpl implements ITyjwService {
 
     private Channel tcpChannel;
 
+    private static final String topic = "STS/%s/PUBLISH/%s";
+
     @FunctionalInterface
     private interface WebSocketFunction<T1, T2, T3> {
         void dataHandle(T1 arg1, T2 arg2, T3 arg3);
@@ -120,6 +122,8 @@ public class TyjwServiceImpl implements ITyjwService {
                 String sendDate;
                 try {
                     sendDate = obm.writeValueAsString(resp);
+                    // 记录操作日志到 MQTT
+                    MQClient.publish(String.format(topic, key,wsChannelDetails.getTaskId()), sendDate.getBytes(), 1, false);
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
@@ -179,48 +183,59 @@ public class TyjwServiceImpl implements ITyjwService {
 
             String text = tws.text();
             if (StringUtils.isNoneBlank(text)) {
-                log.info("<<< {}", text);
                 JsonNode jsonNode = obm.readTree(text);
                 // 心跳数据直接回复
-                if ("PING_MESSAGE".equals(jsonNode.get("action").asText())) {
+                if (null != jsonNode.get("action") && "PING_MESSAGE".equals(jsonNode.get("action").asText())) {
                     wsReturnMap.put("action", "PONG_MESSAGE");
                     ctx.writeAndFlush(new TextWebSocketFrame(obm.writeValueAsString(wsReturnMap)));
-                    return;
-                }
-                String boxNumber = jsonNode.get("云盒编号").asText();
-                String userId = jsonNode.get("用户ID").asText();
-                String taskId = jsonNode.get("任务ID").asText();
-                if (StringUtils.isNoneBlank(boxNumber) && StringUtils.isNoneBlank(userId) && StringUtils.isNoneBlank(taskId)) {
-                    if (wsChannels.containsKey(boxNumber)) {
-                        // 云盒已经注册, 判断用户是否注册
-                        WsChannelDetails wsChannelDetails = wsChannels.get(boxNumber);
-                        Map<String, Channel> channels = wsChannelDetails.getChannels();
-                        if (channels.containsKey(userId)) {
-                            // 用户已注册,判断 channel 是否活跃
-                            Channel wsChannel = channels.get(userId);
-                            if (wsChannel == null || !wsChannel.isActive()) {
-                                // 用户下无活跃的 channel
-                                channels.put(userId, ctx.channel());
+                } else {
+                    String boxNumber = jsonNode.get("云盒编号").asText();
+                    String userId = jsonNode.get("用户ID").asText();
+                    String taskId = jsonNode.get("任务ID").asText();
+                    if (StringUtils.isNoneBlank(boxNumber) && StringUtils.isNoneBlank(userId) && StringUtils.isNoneBlank(taskId)) {
+                        if (wsChannels.containsKey(boxNumber)) {
+                            log.info("<<< {}", text);
+                            // 云盒已经注册, 判断用户是否注册
+                            WsChannelDetails wsChannelDetails = wsChannels.get(boxNumber);
+                            Map<String, Channel> channels = wsChannelDetails.getChannels();
+                            if (channels.containsKey(userId)) {
+                                // 用户已注册,判断 channel 是否活跃
+                                Channel wsChannel = channels.get(userId);
+                                if (wsChannel == null || !wsChannel.isActive()) {
+                                    // 用户下无活跃的 channel
+                                    channels.put(userId, ctx.channel());
+                                    log.info("用户已经注册, 且没有活跃的channel: {}", userId);
+                                }else{
+                                    log.info("用户已经注册, 有活跃的channel: {}", userId);
+                                }
+                            } else {
+                                // 用户未注册
+                                if (wsChannelDetails.getTaskId().equals(taskId)) {
+                                    channels.put(userId, ctx.channel());
+                                }
+                                log.info("用户未注册, 执行注册: {}", userId);
+                            }
+                            // 判断任务是否注册
+                            if(null == wsChannelDetails.getTaskId()){
+                                wsChannelDetails.setTaskId(taskId);
+                            }
+                            // 判断是否有控制权
+                            if(null != jsonNode.get("指令编号") && null != jsonNode.get("动作编号")){
+                                if (wsChannelDetails.getControlPower().equals(userId) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
+                                    publishEvent(jsonNode);
+                                }
                             }
                         } else {
-                            // 用户未注册
-                            if (wsChannelDetails.getTaskId().equals(taskId)) {
-                                channels.put(userId, ctx.channel());
+                            // 云盒未注册
+                            log.info("云盒未注册: {}", boxNumber);
+                            synchronized (wsChannels) {
+                                wsChannels.put(boxNumber, new WsChannelDetails()
+                                        .setTaskId(taskId)
+                                        .setControlPower(userId)
+                                        .setChannels(new HashMap<>() {{
+                                            put(userId, ctx.channel());
+                                        }}));
                             }
-                        }
-                        // 判断是否有控制权
-                        if (wsChannelDetails.getControlPower().equals(userId) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
-                            publishEvent(jsonNode);
-                        }
-                    } else {
-                        // 未注册
-                        synchronized (wsChannels) {
-                            wsChannels.put(boxNumber, new WsChannelDetails()
-                                    .setTaskId(taskId)
-                                    .setControlPower(userId)
-                                    .setChannels(new HashMap<>() {{
-                                        put(userId, ctx.channel());
-                                    }}));
                         }
                     }
                 }
@@ -320,6 +335,8 @@ public class TyjwServiceImpl implements ITyjwService {
                     }
                 });
             }
+            // 记录操作日志到 MQTT
+            MQClient.publish(String.format(topic, boxNumber, jsonNode.get("任务ID").asText()), jsonNode.toString().getBytes(), 1, false);
         } else {
             wsReturnMap.put("action", "ERROR_MESSAGE");
             wsReturnMap.put("message", "TCP 连接不存在!");
@@ -362,7 +379,7 @@ public class TyjwServiceImpl implements ITyjwService {
         tcpClient.addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {
                 // 连接成功后,发送注册请求
-                log.info(">>> 连接 {} 成功, 开始发送注册请求!", String.format("%s:%s", host, tcpPort));
+                log.info(">>> 连接 {}:{} 成功, 开始发送注册请求!", host, tcpPort);
                 tcpChannel = future.channel();
                 ByteBuf buf = Unpooled.buffer();
                 byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
@@ -385,7 +402,7 @@ public class TyjwServiceImpl implements ITyjwService {
     public void handleTcpClient(ByteBuf buf) {
         if (buf.getShort(0) == 0x6A77) {
             int instruct = buf.getByte(4) & 0xFF;
-            TyjwEnum anEnum = null;
+            TyjwEnum anEnum;
             // 指令过滤, 以下项没有 action
             if (instruct == TyjwEnum.注册.getInstruct() ||
                     instruct == TyjwEnum.心跳.getInstruct() ||
@@ -397,14 +414,18 @@ public class TyjwServiceImpl implements ITyjwService {
                     instruct == TyjwEnum.MOP数据透传.getInstruct()
             ) {
                 anEnum = TyjwEnum.getEnum(instruct, 0);
+                if (instruct == TyjwEnum.注册.getInstruct()) {
+                    log.info(">>> {}:{} {}成功!", host, tcpPort, anEnum.name());
+                    return;
+                }
                 if (instruct == TyjwEnum.心跳.getInstruct()) {
-                    log.info(">>> TCP_{}", anEnum.name());
+//                    log.info(">>> TCP: {}", anEnum.name());
                     return;
                 }
             } else {
                 int active = buf.getByte(6) & 0xFF;
+                log.info("<<< TCP: {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
                 anEnum = TyjwEnum.getEnum(instruct, active);
-                log.info("407 <<< {}_{}", String.format("0x%02X", instruct), String.format("0x%02X", active));
             }
             if (null != anEnum) {
                 buf.skipBytes(5);// 跳过 帧头、数据长度、指令编号
@@ -415,11 +436,6 @@ public class TyjwServiceImpl implements ITyjwService {
                 byte[] contentByte;// buffer中的内容
                 byte isSuccess;// 是否成功
                 switch (anEnum) {
-                    case 注册:
-                        wsReturnMap.put("是否成功", buf.readByte());
-                        log.info(">>> 注册: {}", wsReturnMap);
-                    case 心跳:
-                        break;
                     case 图片上传完成通知:
                         wsReturnMap.put("加密标志", buf.readByte());
                         wsReturnMap.put("经度", buf.readDouble());
@@ -437,8 +453,22 @@ public class TyjwServiceImpl implements ITyjwService {
                         byte isShutdown = buf.readByte();
                         wsReturnMap.put("状态", isShutdown);
                         buf.readBytes(boxSnByte);
-                        wsReturnMap.put("云盒SN号", ByteUtil.bytesToStringUTF8(boxSnByte));
-                        sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
+                        String boxNumber = ByteUtil.bytesToStringUTF8(boxSnByte);
+                        wsReturnMap.put("云盒SN号", boxNumber);
+                        sendMessage(boxNumber, wsReturnMap);
+                        // 云盒关机后判断此次任务结束
+                        if (isShutdown != 1) {
+                            WsChannelDetails wsChannelDetails = wsChannels.get(wsReturnMap.get("云盒SN号").toString());
+                            if(null != wsChannelDetails.getTaskId()){
+                                try {
+                                    MQClient.publish(String.format(topic, boxNumber, wsChannelDetails.getTaskId()), obm.writeValueAsBytes(wsReturnMap), 1, false);
+                                    log.info(">>> 云盒 {} 即将关机, 任务 {} 执行完成!", boxNumber, wsChannelDetails.getTaskId());
+                                    wsChannelDetails.setTaskId(null); // 清除任务
+                                } catch (JsonProcessingException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
                         // TODO 当收到关机通知后5分钟,判断是否需要执行充电(暂不启用) if(isShutdown == -1){chargingUav();}
                         break;
                     case 信道质量:
@@ -464,6 +494,7 @@ public class TyjwServiceImpl implements ITyjwService {
                                 TyjwProtoBuf.UavState uavState = TyjwProtoBuf.UavState.parseFrom(contentByte);
                                 wsReturnMap.put("云盒SN号", uavState.getBoxSn());
                                 wsReturnMap.put("数据", printer.print(uavState));
+                                wsReturnMap.put("用户ID", wsChannels.get(uavState.getBoxSn()));
                                 batteryPower = uavState.getBatteryState().getBatteryPower(); //不断获取电池电量
                             } else {
                                 TyjwProtoBuf.TelemetryData telemetryData = TyjwProtoBuf.TelemetryData.parseFrom(contentByte);
@@ -598,7 +629,6 @@ public class TyjwServiceImpl implements ITyjwService {
                         sendMessage(wsReturnMap.get("云盒SN号").toString(), wsReturnMap);
                         break;
                     default:
-                        log.info("未知指令!");
                         break;
                 }
             }
@@ -608,7 +638,7 @@ public class TyjwServiceImpl implements ITyjwService {
     /**
      * 获取 AccessToken
      */
-    @Scheduled(cron = "0 0/3 * * * ?")
+//    @Scheduled(cron = "0 0/3 * * * ?")
     @Override
     public void getToken() {
         log.info(">>> AccessToken: 0 0/3 * * * ?");

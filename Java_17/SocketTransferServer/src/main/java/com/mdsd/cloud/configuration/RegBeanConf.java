@@ -3,6 +3,7 @@ package com.mdsd.cloud.configuration;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
+import com.mdsd.cloud.utils.MQClient;
 import io.minio.MinioClient;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
