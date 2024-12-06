@@ -18,4 +18,4 @@ RUN bash -c "touch app.jar"
 EXPOSE 8080
 ENV JAVA_OPTS="-XX:PermSize=256m -XX:MaxPermSize=512M -Xmx1024m -Xms1024m"
 #容器启动后需要执行的命令
-ENTRYPOINT exec java $JAVA_OPTS -jar /app.jar > /startup.log
+ENTRYPOINT exec java $JAVA_OPTS -jar /app.jar > /running.log
