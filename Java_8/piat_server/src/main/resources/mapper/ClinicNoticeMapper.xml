@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.notice.mapper.ClinicNoticeMapper">
+
+    <!-- 列表 -->
+    <select id="queryList" resultType="com.mdsd.cloud.controller.notice.dto.ClinicNoticeVo">
+        SELECT
+        n.SEND_TIME
+        ,n.CONTENT
+        ,n.NOTICE_TYPE
+        ,n.BUSINESS_ID
+        ,NVL2(cm.PHEP_PID,1,0) checkStatus
+        FROM
+        MED_CLINIC_NOTIC n
+        LEFT JOIN MED_CLINIC_CHECK_MASTER cm ON n.BUSINESS_ID = cm.PHEP_PID
+        <where>
+            <if test="param.noticeType != null">
+                and n.NOTICE_TYPE = #{param.noticeType}
+            </if>
+            <if test="param.startTime != null">
+                and n.SEND_TIME &gt;= #{param.startTime,jdbcType=DATE}
+            </if>
+            <if test="param.endTime !=null">
+                and n.SEND_TIME &lt;= #{param.endTime,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+</mapper>

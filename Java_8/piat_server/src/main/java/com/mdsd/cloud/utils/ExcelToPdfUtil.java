@@ -1,0 +1,67 @@
+package com.mdsd.cloud.utils;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
+/**
+ * excel转PDF工具类
+ */
+@Component
+public class ExcelToPdfUtil {
+    /**
+     * 生成数据流 PDF
+     */
+    public static void buildPdfDocument(final String fileName, final HttpServletResponse response) {
+
+        try {
+            response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+            final InputStream in = new FileInputStream(fileName);
+            final OutputStream out = response.getOutputStream();
+            int b = 0;
+            while ((b = in.read()) != -1) {
+                out.write(b);
+            }
+            out.close();
+            in.close();
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 生成数据流 PNG
+     */
+    public static void buildPngDocument(final String fileName, final HttpServletResponse response) {
+
+        OutputStream out = null;
+        try {
+            if (fileName != null) {
+                byte[] byteArray = null;
+                response.setHeader("Content-Disposition", "attachment;filename=" + fileName + " ");
+                final InputStream input = new FileInputStream(new File(fileName));
+                final int lenth = input.available();
+                byteArray = new byte[lenth];
+                input.read(byteArray);
+                out = response.getOutputStream();
+                out.write(byteArray);
+                out.flush();
+                out.close();
+                input.close();
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+}

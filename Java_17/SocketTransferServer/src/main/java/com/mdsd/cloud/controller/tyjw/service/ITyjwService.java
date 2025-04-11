@@ -15,22 +15,17 @@ import java.util.Map;
 public interface ITyjwService {
 
     /**
-     * 开始 WEBSOCKET_SERVER 监听
-     */
-    void startWebSocket();
-
-    /**
-     * WEBSOCKET_SERVER 消息处理
+     * 处理WEB SOCKET
      */
     void handleWebSocket(JsonNode jsonNode) throws JsonProcessingException;
 
     /**
      * 开始 TCP 连接
      */
-    void startTcpClient();
+    void startTcpConnect();
 
     /**
-     * TCP_CLIENT 消息处理
+     * 处理TCP SOCKET
      */
     void handleTcpClient(ByteBuf buf);
 

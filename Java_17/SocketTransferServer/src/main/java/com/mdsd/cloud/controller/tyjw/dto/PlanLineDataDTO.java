@@ -28,7 +28,7 @@ public class PlanLineDataDTO {
     @Schema(description = "网络失联后动作: 0-返回HOME点,1=继续航线,默认0")
     private Integer loseAction;
 
-    @Schema(description = "返航高度 (单位:米,范围20~1500)")
+    @Schema(description = "返航高度(单位:米,范围20~1500)")
     private Integer homeHeight;
 
     @Schema(description = "是否开启节能模式: 0-不是,1-是(说明: 节能模式下,飞机沿最短直线距离由起飞点到航线第一个航点,非升高到第一个航点高度再飞往第一个航点)")
@@ -40,7 +40,7 @@ public class PlanLineDataDTO {
     @Schema(description = "降落点机库信息")
     private HangarPointDTO landPoint;
 
-    @Schema(description = "兴趣点数组 (对象只包含经纬高)")
+    @Schema(description = "兴趣点数组(对象只包含经纬高)")
     private List<PointDataDTO> interests;
 
     @Schema(description = "普通建模")

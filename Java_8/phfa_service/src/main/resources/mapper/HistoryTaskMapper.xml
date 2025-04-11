@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.history.mapper.HistoryTaskMapper">
+    <!-- 历史任务 - 列表 -->
+    <select id="htcList" resultType="com.mdsd.cloud.controller.history.dto.HtcListRo">
+        SELECT T1.PATIENT_ID,--患者ID
+        T1.NAME,--患者姓名
+        T1.GENDER,--性别
+        T1.AGE,--年龄
+        T1.AGE_EXTEND,--年龄类别
+        T2.ADDRESS,--现场救治地点
+        T2.STATUS AS medicalStatus,--病历状态
+        T3.MISSION_ID,--任务ID
+        to_char(T3.CALL_TIME, 'yyyy-MM-dd HH:MI') AS callTime,--呼叫时间
+        T3.STATUS,--任务状态
+        to_char(T4.SUBMIT_TIME, 'yyyy-MM-dd HH:MI') AS submitTime--提交时间
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T2.PATIENT_ID = T1.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T3.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T4 ON T4.PATIENT_ID = T1.PATIENT_ID
+        <where>
+            T3.LICENSE_PLATE = #{licensePlate,jdbcType=VARCHAR}
+            <if test="startTime != null">
+                AND T3.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T3.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="htcPageList" resultType="com.mdsd.cloud.controller.history.dto.HtcListRo">
+        SELECT T1.PATIENT_ID,--患者ID
+        T1.NAME,--患者姓名
+        T1.GENDER,--性别
+        T1.AGE,--年龄
+        T1.AGE_EXTEND,--年龄类别
+        T2.ADDRESS,--现场救治地点
+        T2.STATUS AS medicalStatus,--病历状态
+        T3.MISSION_ID,--任务ID
+        to_char(T3.CALL_TIME, 'yyyy-MM-dd HH:MI') AS callTime,--呼叫时间
+        T3.STATUS,--任务状态
+        to_char(T4.SUBMIT_TIME, 'yyyy-MM-dd HH:MI') AS submitTime--提交时间
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T2.PATIENT_ID = T1.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T3.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T4 ON T4.PATIENT_ID = T1.PATIENT_ID
+        <where>
+            T3.LICENSE_PLATE = #{dto.licensePlate,jdbcType=VARCHAR}
+            <if test="dto.startTime != null">
+                AND T3.CALL_TIME &gt;= #{dto.startTime,jdbcType=DATE}
+            </if>
+            <if test="dto.endTime != null">
+                AND T3.CALL_TIME &lt;= #{dto.endTime,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+</mapper>

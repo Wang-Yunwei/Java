@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.dictionary.mapper.MedDictionaryMapper">
+    <sql id="MED_DICTIONARY_COLUMN">
+        ID,HOSPITAL_ID,DICT_CODE,DICT_NAME,LABEL,VALUE,REMARK,
+        CREATED_BY,CREATED_NAME,CREATED_DATE,UPDATE_BY,UPDATE_NAME,UPDATE_DATE,
+        COMPANY_CODE,COMPANY_NAME,ORG_CODE,ORG_NAME,SECOND_ORG_CODE,SECOND_ORG_NAME,DELETE_FLAG
+    </sql>
+    <!-- 数据字典 - 分页列表 -->
+    <select id="ddcPageList" resultType="com.mdsd.cloud.controller.dictionary.entity.MedDictionaryEntity">
+        SELECT
+        <include refid="MED_DICTIONARY_COLUMN"/>
+        FROM MED_DICTIONARY
+        <where>
+            DELETE_FLAG = 0
+            <if test="dto.hospitalId != null">
+                AND HOSPITAL_ID = #{dto.hospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.dictCode != null">
+                AND DICT_CODE = #{dto.dictCode,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.dictName != null">
+                AND DICT_NAME LIKE #{dto.dictName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

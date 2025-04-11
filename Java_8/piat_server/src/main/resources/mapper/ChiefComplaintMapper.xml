@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.knowledgebase.mapper.PatientSayMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.knowledgebase.entity.PatientSayEntity">
+        <collection property="knowledgeEntities" column="{PATIENT_SAYID=PATIENT_SAYID}"
+                    select="getMedClinicPatientSay">
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PATIENT_SAYID
+        , CATEGORY_ID, DESCRIPTION, IS_KEY, PYM, SORT_VALUE, IS_VALID
+    </sql>
+    <select id="getChiefComplaint" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.PatientSayEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from MED_CLINIC_PATIENT_SAY
+        where IS_VALID='1' and CATEGORY_ID = #{categoryid,jdbcType=VARCHAR} order by SORT_VALUE
+    </select>
+
+    <!--常用主诉查询-->
+    <select id="getOftenPrincipalComplaint" resultMap="BaseResultMap">
+        select PATIENT_SAYID
+             , CATEGORY_ID
+             , DESCRIPTION
+             , IS_KEY
+             , PYM
+             , SORT_VALUE
+             , IS_VALID
+        from MED_CLINIC_PATIENT_SAY
+        where CATEGORY_ID = #{categoryid}
+          and IS_VALID = '1'
+    </select>
+
+    <select id="getMedClinicPatientSay" resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        select KNOWLEDGE_ID
+                ,
+               CATEGORY_ID,
+               PATIENT_SAYID,
+               SYSTEM_LEVEL,
+               SYSTEM_AREA,
+               KNOWLEDGE_DETAIL,
+               SORT_VALUE,
+               IS_VALID
+        from MED_CLINIC_KNOWLEDGE
+        where PATIENT_SAYID = #{PATIENT_SAYID}
+    </select>
+    <select id="oftenPrincipalComplaint" resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        SELECT KNOWLEDGE_ID,
+               CATEGORY_ID,
+               PATIENT_SAYID,
+               SYSTEM_LEVEL,
+               SYSTEM_AREA,
+               KNOWLEDGE_DETAIL,
+               SORT_VALUE,
+               IS_VALID
+        FROM MED_CLINIC_KNOWLEDGE
+        WHERE PATIENT_SAYID =
+              (SELECT PATIENT_SAYID
+               FROM MED_CLINIC_KNOWLEDGE
+               WHERE KNOWLEDGE_ID = #{categoryid})
+    </select>
+</mapper>

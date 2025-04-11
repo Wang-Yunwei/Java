@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.consultation.mapper.MobileConsultationMapper">
+    <!-- 移动会诊 - 获取患者列表中五大专科患者或移动会诊列表中的患者 -->
+    <select id="mccList" resultType="com.mdsd.cloud.controller.consultation.dto.MccListRo">
+        SELECT T1.PATIENT_ID,--患者ID
+        T1.NAME,--患者姓名
+        T1.GENDER,--性别
+        T1.AGE,--年龄
+        T1.AGE_EXTEND,--年龄类别
+        T1.CREATE_TIME,--患者数据创建时间
+        T2.DISEASE_CATEGORY,--疾病类别
+        T2.ADDRESS,--现场救治地址
+        T2.CHIEF_COMPLAINT,--主诉
+        T2.DIAGNOSIS,--初步诊断
+        T4.IM_USERIDS,--参与者ID
+        T4.REASON,--申请会诊原因
+        T4.GROUP_ID --IM群组ID
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T1.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T1.MISSION_ID = T3.MISSION_ID
+        LEFT JOIN MED_PHEP_MOBILE_CONSULTATION T4 ON T1.PATIENT_ID = T4.PATIENT_ID
+        <where>
+            <if test="startTime != null">
+                T1.CREATE_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime !=null">
+                AND T1.CREATE_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="hospitalId != null">
+                AND T2.TO_HOSPITAL = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="licensePlate != null">
+                AND T3.LICENSE_PLATE = #{licensePlate,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

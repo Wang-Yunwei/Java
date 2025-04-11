@@ -1,12 +1,11 @@
 package com.mdsd.cloud.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.mdsd.cloud.enums.ServerEnum;
+import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
+import com.mdsd.cloud.enums.CommonEnum;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
-
-import java.util.Map;
 
 /**
  * @author WangYunwei [2024-07-10]
@@ -14,22 +13,29 @@ import java.util.Map;
 @Getter
 public class CommonEvent extends ApplicationEvent {
 
-    private final ServerEnum source;
+    private final CommonEnum source;
 
     private JsonNode jsonNode;
 
     private ByteBuf byteBuf;
 
-    public CommonEvent(ServerEnum source, JsonNode jsonNode) {
+    private DjiProtoBuf.Payload payload;
+
+    public CommonEvent(CommonEnum source, JsonNode jsonNode) {
         super(source);
         this.source = source;
         this.jsonNode = jsonNode;
     }
 
-    public CommonEvent(ServerEnum source, ByteBuf byteBuf) {
+    public CommonEvent(CommonEnum source, ByteBuf byteBuf) {
         super(source);
         this.source = source;
         this.byteBuf = byteBuf;
     }
 
+    public CommonEvent(CommonEnum source, DjiProtoBuf.Payload payload) {
+        super(source);
+        this.source = source;
+        this.payload = payload;
+    }
 }

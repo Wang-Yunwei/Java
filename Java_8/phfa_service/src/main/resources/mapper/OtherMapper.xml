@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.other.mapper.OtherMapper">
+    <!-- Other - 患者列表 -->
+    <select id="getPatientsPage" resultType="com.mdsd.cloud.controller.other.dto.GetPatientsPageRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.PATIENT_ID,--患者ID
+        T1.NAME,--姓名
+        T1.GENDER,--性别
+        T1.AGE,--年龄
+        T2.CALL_TIME,--呼叫时间
+        T2.LICENSE_PLATE,--车牌号
+        T3.TO_HOSPITAL AS hospitalArer,--院区
+        T3.DIAGNOSIS--初步诊断
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MISSIONS T2 ON T1.MISSION_ID = T2.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T1.PATIENT_ID = T3.PATIENT_ID
+        <where>
+            1=1
+            <if test="dto.name != null">
+                AND T1.NAME LIKE #{dto.name,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.startTime != null">
+                AND T2.CALL_TIME &gt;= #{dto.startTime,jdbcType=DATE}
+            </if>
+            <if test="dto.endTime != null">
+                AND T2.CALL_TIME &lt;= #{dto.endTime,jdbcType=DATE}
+            </if>
+            <if test="dto.hospitalId != null">
+                AND T3.TO_HOSPITAL = #{dto.hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!-- Other - 通过患者ID获取医院ID、任务ID、病历ID -->
+    <select id="oneForFour" resultType="com.mdsd.cloud.controller.other.dto.OneForFourRo">
+        SELECT T2.MISSION_ID,--任务ID
+               T3.RECORD_ID,--病历ID
+               T4.HOSPITAL_ID,--医院ID
+               T4.HOSPITAL_AREA--院区
+        FROM MED_PHEP_PATIENTS T1
+                 LEFT JOIN MED_PHEP_MISSIONS T2 ON T1.MISSION_ID = T2.MISSION_ID
+                 LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T1.PATIENT_ID = T3.PATIENT_ID
+                 LEFT JOIN MED_PHEP_VEHICLES T4 ON T2.LICENSE_PLATE = T4.LICENSE_PLATE
+        WHERE T1.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+    </select>
+</mapper>

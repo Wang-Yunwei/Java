@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.mapper.MedPhepShiftRecordMapper">
+
+    <select id="queryShiftRecord" resultType="com.mdsd.cloud.controller.diagnosis.vo.PrintShiftRecordDetailVo">
+        SELECT mpr.RECORD_ID
+             , mps.SHIFT_TIME
+             , mpm.DISPATCH_VEHICLE_SITE
+             , mpm.LICENSE_PLATE
+             , mps.TO_HOSPITAL
+             , mps.DEPT
+             , mpm.DESTINATION_ADDRESS
+             , mpp.NAME
+             , mpp.GENDER
+             , mpp.AGE
+             , mpp.AGE_EXTEND
+             , mps.CHIEF_COMPLAINT
+             , mps.DIAGNOSIS
+             , mps.CONDITION_GRADE
+             , mpr.BLOODGLUCOSE
+             , mps.OTHER_INFO
+             , mps.EMERGENCY_DOCTOR
+             , mps.EMERGENCY_NURSE
+             , mpr.OTHER_DRUGE
+             , mps.ACCESSORY_EXAM
+        FROM MED_PHEP_PATIENTS mpp
+                 LEFT JOIN MED_PHEP_MISSIONS mpm ON mpp.MISSION_ID = mpm.MISSION_ID
+                 LEFT JOIN MED_PHEP_MEDICAL_RECORDS mpr ON mpp.PATIENT_ID = mpr.PATIENT_ID
+                 LEFT JOIN MED_PHEP_SHIFT_RECORD mps ON mpp.PATIENT_ID = mps.PATIENT_ID
+        where mpp.PATIENT_ID = #{patiendId}
+    </select>
+    <!-- 急救交接单 - 打印交接记录 -->
+    <select id="printDeliveryRecord" resultType="java.util.Map">
+        SELECT T1.PATIENT_ID,--患者ID
+               T1.MISSION_ID,--任务ID
+               T1.NAME                                    AS "020",--姓名
+               T1.GENDER                                  AS "021",--性别
+               T1.AGE                                     AS "022",--年龄
+               T1.AGE_EXTEND                              AS "023",--年龄类别
+               T2.CHIEF_COMPLAINT                         AS "030",--主诉
+               T2.DIAGNOSIS                               AS "040",--初步诊断
+               T2.BLOODGLUCOSE                            AS "120",--血糖
+               T2.OTHER_CHECK                             AS "180",--其他检查
+               to_char(T3.SHIFT_TIME, 'yyyy-MM-dd HH:MI') AS "240",--交接时间
+               T4.PUPIL_RESPONSE                          AS "130",--瞳孔
+               T4.LIGHT_REFLECTION                        AS "140",--对光反射
+               T4.CONSCIOUSNESS                           AS "150",--意识
+               T4.SKIN                                    AS "160",--皮肤
+               T4.T                                       AS "100",--体温
+               T4.PULSE                                   AS "101",--脉搏(次/分)
+               T4.RR                                      AS "102",--呼吸频率(次/分)
+               T4.SBP                                     AS "110",--收缩压
+               T4.DBP                                     AS "111",--舒张压
+               T4.SPO2                                    AS "112",--血氧
+               T5.DOCTOR_NAME                             AS "200",--急救医生
+               T5.DISPATCH_VEHICLE_SITE                   AS "230"--出车分站
+        FROM MED_PHEP_PATIENTS T1
+                 LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T1.PATIENT_ID = T2.PATIENT_ID
+                 LEFT JOIN MED_PHEP_SHIFT_RECORD T3 ON T1.PATIENT_ID = T3.PATIENT_ID
+                 LEFT JOIN (
+            SELECT N1.PUPIL_RESPONSE,--瞳孔
+                   N1.LIGHT_REFLECTION,--对光反射
+                   N1.CONSCIOUSNESS,--意识
+                   N1.SKIN,--皮肤
+                   N1.T,--体温
+                   N1.PULSE,--脉搏(次/分)
+                   N1.DBP,--舒张压
+                   N1.SBP,--收缩压
+                   N1.SPO2,--血氧
+                   N1.RR,--呼吸频率(次/分)
+                   N1.PATIENT_ID,--患者ID
+                   N1.CREATE_TIME--检查时间
+            FROM MED_PHEP_GENERAL_INSPECTIONS N1,
+                 (SELECT MAX(CREATE_TIME) AS maxtime, PATIENT_ID
+                  FROM MED_PHEP_GENERAL_INSPECTIONS
+                  GROUP BY PATIENT_ID) N2
+            WHERE N1.CREATE_TIME = N2.maxtime
+              AND N1.PATIENT_ID = N2.PATIENT_ID
+        ) T4 ON T1.PATIENT_ID = T4.PATIENT_ID
+                 LEFT JOIN MED_PHEP_MISSIONS T5 ON T1.MISSION_ID = T5.MISSION_ID
+        WHERE T1.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+          AND T3.SHIFT_TIME IS NOT NULL
+    </select>
+</mapper>

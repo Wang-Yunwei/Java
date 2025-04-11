@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.cardnumbermanage.mapper.CheckListMapper">
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+         <foreach item="item" index="index" collection="list">
+         INTO MED_CLINIC_CHECK_LIST
+         (
+             ID,
+             REG_ID,
+             PATIENT_ID,
+             REGISTER_NO,
+             CREATE_TIME
+        ) VALUES
+        (
+             #{item.id},
+             #{item.regId},
+             #{item.patientId},
+             #{item.registerNo},
+             #{item.createTime}
+        )
+         </foreach>
+         SELECT 1 FROM DUAL
+    </insert>
+
+    <!-- 根据EVENTID查询患者信息 -->
+    <select id="selectHisPage" resultType="com.mdsd.cloud.controller.cardnumbermanage.dto.RegitionRelationResultDto">
+        SELECT
+            *
+         from VIEW_CLINIC_PATIENT_MASTER
+    </select>
+
+    <!-- 根据EVENTID查询患者详细信息 -->
+    <select id="selectCardInfoByRegId" resultType="com.mdsd.cloud.controller.cardnumbermanage.dto.CardInfoResultDto">
+      select cm.REG_ID,ci.NAME,cm.TRIAGE_TIME,ci.GENDER,ci.CARD_ID,ci.PATIENT_ID,cm.REG_AGE,cm.REG_AGE_CAPTION,cr.REGISTER_NO from MED_CLINIC_CHECK_MASTER cm
+        LEFT JOIN MED_CLINIC_CARD_INFO ci on cm.INFO_ID = ci.INFO_ID
+        LEFT JOIN (select REG_ID,REGISTER_NO from MED_CLINIC_REGITIONRELATION
+        where REGISTER_TIME = (SELECT MAX(REGISTER_TIME) FROM MED_CLINIC_REGITIONRELATION where REG_ID = #{regId}) and REG_ID = #{regId}) cr on cm.REG_ID = cr.REG_ID
+        where cm.REG_ID = #{regId}
+    </select>
+
+</mapper>

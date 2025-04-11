@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.qualityControl.mapper.MedClinicMedicalNumberMapper">
+
+    <select id="queryList" resultType="com.mdsd.cloud.controller.qualityControl.Vo.DoctorPatientRationDetailVo">
+        SELECT mcm.YEAR,
+        mcm.ID,
+        mcm.HOSPITAL_AREA,
+        mcm.DOCTOR_NUMBER,
+        mcm.NURSE_NUMBER,
+        mcm.PATIENT_NUMBER
+        FROM MED_CLINIC_MEDICAL_NUMBER mcm
+        WHERE
+        STATUS = '1'
+        <if test="dto.startTime != null">
+            AND mcm.YEAR >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND mcm.YEAR &lt;= #{dto.endTime}
+        </if>
+    </select>
+
+    <select id="selectPatientCount" resultType="java.lang.Integer" parameterType="com.mdsd.cloud.controller.qualityControl.Vo.DoctorPatientRationRequestVo">
+        SELECT
+            COUNT(1)
+        FROM
+            MED_CLINIC_CARD_INFO mci
+                INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE mcm.IS_USED = '1'
+        <if test="year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{year}
+        </if>
+        <if test="hospitalArea != null">
+            AND mcm.HOSPITAL_ARER=#{hospitalArea}
+        </if>
+    </select>
+
+</mapper>

@@ -15,4 +15,6 @@ public interface IHangarService {
      * 操作机库
      */
     Map<String,String> operate(OperateInp param);
+
+    void chargingUav();
 }

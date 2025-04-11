@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.pc.pdf.mapper.PdfMapper">
+    <select id="pdfMedicalRecord" resultType="com.mdsd.cloud.controller.pc.pdf.dto.PdfMedicalRecordDto">
+        SELECT T1.PATIENT_ID,--患者ID
+        T1.NAME,--患者姓名
+        CASE
+        WHEN T1.GENDER = '01' THEN
+        '男'
+        WHEN T1.GENDER = '02' THEN
+        '女'
+        ELSE '未知'
+        END AS gender,--性别
+        T1.AGE,--年龄
+        T1.AGE_EXTEND,--年龄类别
+        T2.RECORD_ID,--病历ID
+        T2.DISEASE_CATEGORY,--疾病类别
+        T2.ADDRESS,--现场救治地点
+        T2.CONTACT_NUMBER,--联系电话
+        T2.CHIEF_COMPLAINT,--患者主诉
+        T2.PRESENT_ILLNESS,--现病史
+        T2.PAST_HISTORY,--既往史
+        T2.ALLERGIC_HISTORY,--过敏史
+        T2.DIAGNOSIS,--初步诊断
+        T2.CONDITION_GRADE,--病情判断
+        T2.TREATMENT,--治疗措施
+        T2.TREATMENT_RESULT,--出诊结果
+        T2.RESCUE_CHANGE_RESULT,--病情转归
+        T2.TO_HOSPITAL_NAME,--医院名称
+        T2.BLOODGLUCOSE,--血糖
+        T2.OTHER_CHECK,--其他检查
+        T3.MISSION_ID,--任务ID
+        T3.DISPATCH_VEHICLE_SITE,--出车分站
+        to_char(T3.ACCEPT_MISSION_TIME, 'yyyy-MM-dd HH:MI') AS acceptMissionTime,--接收任务时间
+        to_char(T3.DISPATCH_VEHICLE_TIME, 'yyyy-MM-dd HH:MI') AS dispatchVehicleTime,--出车时间
+        to_char(T3.ARRIVED_SCENE_TIME, 'yyyy-MM-dd HH:MI') AS arrivedSceneTime,--到达现场时间
+        to_char(T3.LEFT_SCENE_TIME, 'yyyy-MM-dd HH:MI') AS leftSceneTime,--离开现场时间
+        to_char(T3.ARRIVED_HOSPITAL_TIME, 'yyyy-MM-dd HH:MI') AS arrivedHospitalTime,--到达医院时间
+        to_char(T3.COMPLETE_TIME, 'yyyy-MM-dd HH:MI') AS completeTime,--完成时间
+        T3.DOCTOR_NAME,--车载医生
+        T3.NURSE_NAME,--车载护士
+        T3.LICENSE_PLATE,--车牌号
+        T4.SHIFT_RECORD_ID,--交接单ID
+        T4.DOCTOR,--急救医生
+        T4.NURSE,--急救护士
+        T4.EMERGENCY_DOCTOR,--出诊医生
+        T4.EMERGENCY_NURSE,--接诊护士
+        to_char(T4.SHIFT_TIME, 'yyyy-MM-dd HH:MI') AS shiftTime,--交接时间
+        T4.DEPT,--交接科室
+        T4.OTHER_INFO--其他
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T2.PATIENT_ID = T1.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T3.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T4 ON T4.PATIENT_ID = T1.PATIENT_ID
+        <where>
+            T1.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        </where>
+    </select>
+</mapper>

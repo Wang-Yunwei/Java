@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.cardnumbermanage.mapper.RegitionRelationMapper">
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach item="item" index="index" collection="list">
+            INTO MED_CLINIC_REGITIONRELATION
+            (
+            ID,
+            REG_ID,
+            REGISTER_NO,
+            REGISTER_TIME,
+            CLINIC_CARD,
+            CARD_TYPE,
+            PATIENT_ID,
+            DEPARTMENT_ID,
+            DEPARTMENT_NAME,
+            DOCTOR_ID,
+            DOCTOR_NAME
+            ) VALUES
+            (
+            #{item.id},
+            #{item.regId},
+            #{item.registerNo},
+            #{item.registerTime},
+            #{item.clinicCard},
+            #{item.cardType},
+            #{item.patientId},
+            #{item.departmentId},
+            #{item.departmentName},
+            #{item.doctorId},
+            #{item.doctorName}
+            )
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+
+    <select id="selectListByRegId" resultType="com.mdsd.cloud.controller.cardnumbermanage.dto.RegitionRelationResultDto">
+        select
+            ID,REG_ID,PATIENT_ID,REGISTER_NO
+        from MED_CLINIC_REGITIONRELATION
+        where
+         REG_ID=#{regId}
+    </select>
+
+</mapper>

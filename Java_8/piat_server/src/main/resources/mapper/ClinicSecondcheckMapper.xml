@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.secondarytriage.mapper.ClinicSecondcheckMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.secondarytriage.entity.ClinicSecondcheckEntity">
+        <collection property="clinicvitalsignsentity" column="{VITALSIGNS_ID=VITALSIGNS_ID}"
+                    select="getMedClinicPatientSay">
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID
+        , REG_ID, VITALSIGNS_ID, VISIT_TIME, RESET_LEVEL, RESET_AREA, TURN_RESULT, DEPARTMENT_ID,
+    DESCRIBE, NURSE_ID, CREATE_TIME
+    </sql>
+
+    <select id="getsecondcheckl" resultType="com.mdsd.cloud.controller.secondarytriage.dto.PatientSecondcheckDto">
+        SELECT '1'              AS type,
+               mcv.id           AS id,
+               mcv.SBP          AS sbp,
+               mcv.PLUS         AS plus,
+               mcv.DBP          AS dbp,
+               mcv.TEMPERATURE  AS temperature,
+               mcv.BREATH       AS breath,
+               mcv.SPO          AS spo,
+               mcv.MIND         AS mind,
+               mccm.RESET_LEVEL AS resetlevel,
+               mccm.TURN_RESULT AS turnresult,
+               mccm.NURSE_ID    AS nurseid,
+               mccm.TRIAGE_TIME AS visittime,
+               mccm.DESCRIBE AS describe
+        FROM MED_CLINIC_CHECK_MASTER mccm
+            LEFT JOIN
+            MED_CLINIC_VITALSIGNS mcv
+        ON
+            mccm.REG_ID = mcv.REG_ID
+        WHERE mccm.REG_ID = #{regid}
+        UNION ALL
+        SELECT *
+        FROM (SELECT '2'             AS type,
+                     mcs.ID          AS id,
+                     mcv.SBP         AS sbp,
+                     mcv.PLUS        AS plus,
+                     mcv.DBP         AS dbp,
+                     mcv.TEMPERATURE AS temperature,
+                     mcv.BREATH      AS breath,
+                     mcv.SPO         AS spo,
+                     mcv.MIND        AS mind,
+                     mcs.RESET_LEVEL AS resetlevel,
+                     mcs.TURN_RESULT AS turnresult,
+                     mcs.NURSE_ID    AS nurseid,
+                     mcs.VISIT_TIME  AS visittime,
+                     mcs.DESCRIBE AS describe
+              FROM MED_CLINIC_SECONDCHECK mcs
+                  LEFT JOIN
+                  MED_CLINIC_VITALSIGNS mcv
+              ON
+                  mcs.VITALSIGNS_ID = mcv.ID
+              WHERE mcs.REG_ID = #{regid}
+              ORDER BY mcs.CREATE_TIME)
+    </select>
+
+    <!--患者二次分诊记录-->
+    <select id="getsecondcheck" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MED_CLINIC_SECONDCHECK where REG_ID=#{regid}
+    </select>
+    <!--患者二次分诊记录 -生命体征-->
+    <select id="getMedClinicPatientSay"
+            resultType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicVitalsignsEntity">
+        select ID,
+               REG_ID,
+               AREA,
+               HASLIFE,
+               NOTPRBP,
+               TEMPERATURE,
+               PLUS,
+               BREATH,
+               DBP,
+               SPO,
+               MIND,
+               ACQ_TIME,
+               SBP
+        from MED_CLINIC_VITALSIGNS
+        where ID = #{VITALSIGNS_ID}
+    </select>
+
+    <!--查询二次分诊患者-->
+    <select id="getPatientSecondcheck" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.secondarytriage.dto.PatientSecondcheckDto">
+        SELECT mcci.NAME,
+        mcci.GENDER,
+        mcci.BIRTHDAY,
+        mccm.REG_ID,
+        mccm.TRIAGE_TIME,
+        mccm.CREATE_TIME,
+        mccm.RESET_LEVEL,
+        mccm.TURN_RESULT,
+        mccm.CHECK_STATUS,
+        mccm.REG_AGE,
+        mccm.waitfortime
+        FROM (SELECT triage,
+        REG_ID,
+        INFO_ID,
+        TRIAGE_TIME,
+        RESET_LEVEL,
+        RESET_AREA,
+        CHECK_STATUS,
+        TURN_RESULT,
+        REG_TIME,
+        REG_AGE,
+        CREATE_TIME,
+        waitfortime
+        FROM (SELECT CASE
+        WHEN RESET_LEVEL = '03' AND test > 30 THEN '03'
+        WHEN RESET_LEVEL = '04' AND test > 60 THEN '04'
+        ELSE '其他' END AS triage,
+        REG_ID,
+        INFO_ID,
+        TRIAGE_TIME,
+        RESET_LEVEL,
+        RESET_AREA,
+        CHECK_STATUS,
+        TURN_RESULT,
+        REG_TIME,
+        REG_AGE,
+        CREATE_TIME,
+        test as waitfortime
+        FROM (SELECT ceil((to_date(TO_CHAR(SYSDATE, 'yyyy-MM-dd HH24:mi:ss'), 'yyyy-MM-dd HH24:mi:ss') -
+        TRIAGE_TIME) * 24 * 60) AS test,
+        REG_ID,
+        INFO_ID,
+        TRIAGE_TIME,
+        RESET_LEVEL,
+        RESET_AREA,
+        TURN_RESULT,
+        CHECK_STATUS,
+        REG_TIME,
+        REG_AGE,
+        CREATE_TIME
+        FROM MED_CLINIC_CHECK_MASTER
+        WHERE CHECK_STATUS IS NULL
+        AND TURN_RESULT = '03'))
+        WHERE triage IN ('03', '04')
+        and CHECK_STATUS is null) mccm
+        left join MED_CLINIC_CARD_INFO mcci on mccm.INFO_ID = mcci.INFO_ID
+        <where>
+            1 = 1
+            <if test="starttime !=null">
+                and TRIAGE_TIME &gt;= #{starttime,jdbcType=DATE}
+            </if>
+            <if test="endtime !=null">
+                and TRIAGE_TIME &lt;= #{endtime,jdbcType=DATE}
+            </if>
+        </where>
+        order by TRIAGE_TIME
+    </select>
+
+
+    <update id="primaryTableUpdateRegid"
+            parameterType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicSecondcheckEntity">
+        <if test='regid !=null and regid!=""'>
+            update MED_CLINIC_CHECK_MASTER
+            <set>
+                <if test="resetLevel != null">
+                    RESET_LEVEL = #{resetLevel},
+                </if>
+                <if test="turnResult != null">
+                    TURN_RESULT = #{turnResult},
+                </if>
+                <if test="departmentId != null">
+                    DEPARTMENT_ID = #{departmentId}
+                </if>
+            </set>
+            where REG_ID = #{regid}
+        </if>
+    </update>
+    <update id="vitalSignsUpdateRegid"
+            parameterType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicVitalsignsEntity">
+        <if test='id !=null and id!=""'>
+            update MED_CLINIC_VITALSIGNS
+            <set>
+                <if test="dbp != null">
+                    DBP = #{dbp},
+                </if>
+                <if test="plus != null">
+                    PLUS = #{plus},
+                </if>
+                <if test="temperature != null">
+                    TEMPERATURE = #{temperature},
+                </if>
+                <if test="breath != null">
+                    BREATH = #{breath},
+                </if>
+                <if test="mind != null">
+                    MIND = #{mind},
+                </if>
+                <if test="spo != null">
+                    SPO = #{spo},
+                </if>
+                <if test="sbp != null">
+                    SBP = #{sbp},
+                </if>
+            </set>
+            where
+            id=#{id}
+
+        </if>
+    </update>
+
+    <update id="secondcheckUpdate"
+            parameterType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicSecondcheckEntity">
+        <if test='id !=null and id!=""'>
+            UPDATE MED_CLINIC_SECONDCHECK
+            <set>
+                <if test="resetLevel != null">
+                    RESET_LEVEL = #{resetLevel},
+                </if>
+                <if test="turnResult != null">
+                    TURN_RESULT = #{turnResult},
+                </if>
+                <if test="describe != null">
+                    DESCRIBE = #{describe},
+                </if>
+                <if test="departmentId != null">
+                    DEPARTMENT_ID = #{departmentId}
+                </if>
+            </set>
+            WHERE ID = #{id}
+        </if>
+    </update>
+
+    <insert id="insertSecondcheck"
+            parameterType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicSecondcheckEntity">
+        insert into MED_CLINIC_SECONDCHECK (ID, REG_ID, VITALSIGNS_ID,
+                                            VISIT_TIME, RESET_LEVEL, RESET_AREA,
+                                            TURN_RESULT, DEPARTMENT_ID, DESCRIBE,
+                                            NURSE_ID, CREATE_TIME)
+        values (#{id,jdbcType=VARCHAR}, #{regid,jdbcType=VARCHAR}, #{vitalsignsId,jdbcType=VARCHAR},
+                #{visitTime,jdbcType=DATE}, #{resetLevel,jdbcType=VARCHAR}, #{resetArea,jdbcType=VARCHAR},
+                #{turnResult,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+                #{nurseId,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE})
+
+    </insert>
+    <select id="hostSecondaryTriageEcho" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.secondarytriage.dto.PatientSecondcheckDto">
+        SELECT '1'              AS TYPE,
+               mcv.id           AS id,
+               mcv.SBP          AS sbp,
+               mcv.PLUS         AS plus,
+               mcv.DBP          AS dbp,
+               mcv.TEMPERATURE  AS temperature,
+               mcv.BREATH       AS breath,
+               mcv.SPO          AS spo,
+               mcv.MIND         AS mind,
+               mccm.RESET_LEVEL AS resetlevel,
+               mccm.TURN_RESULT AS turnresult,
+               mccm.NURSE_ID    AS nurseid,
+               mccm.TRIAGE_TIME AS visittime,
+               mccm.DESCRIBE AS describe,
+              mccm.DEPARTMENT_ID AS departmentid
+        FROM MED_CLINIC_CHECK_MASTER mccm
+            LEFT JOIN
+            MED_CLINIC_VITALSIGNS mcv
+        ON
+            mccm.REG_ID = mcv.REG_ID
+        WHERE mcv.id = #{id}
+    </select>
+
+    <select id="fromsecondarytriageecho" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.secondarytriage.dto.PatientSecondcheckDto">
+        SELECT '2'             AS TYPE,
+               mcs.ID          AS id,
+               mcv.SBP         AS sbp,
+               mcv.PLUS        AS plus,
+               mcv.DBP         AS dbp,
+               mcv.TEMPERATURE AS temperature,
+               mcv.BREATH      AS breath,
+               mcv.SPO         AS spo,
+               mcv.MIND        AS mind,
+               mcs.RESET_LEVEL AS resetlevel,
+               mcs.TURN_RESULT AS turnresult,
+               mcs.NURSE_ID    AS nurseid,
+               mcs.VISIT_TIME  AS visittime,
+               mcs.DESCRIBE AS describe,
+                 mcs.DEPARTMENT_ID AS departmentid
+        FROM MED_CLINIC_SECONDCHECK mcs
+            LEFT JOIN
+            MED_CLINIC_VITALSIGNS mcv
+        ON
+            mcs.VITALSIGNS_ID = mcv.ID
+        WHERE mcs.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.pc.drug.mapper.MedPhepDrugMapper">
+    <!-- 药品 - 分页列表 -->
+    <select id="drugPageList" resultType="com.mdsd.cloud.controller.pc.drug.dto.DrugPageListRo">
+        SELECT ID,--主键ID
+        CODE,--代码
+        NAME,--名称
+        CATEGORY,--类别
+        DRUG_UNIT,--药品单位
+        SPECIFICATIONS,--规格
+        PRODUCTION,--生产企业
+        DEFAULT_USAGE,--默认用法
+        DEFAULT_DOSE,--默认用量
+        SPECIALIST_CATEGORY,--专科对应类别
+        CREATED_DATE,--创建时间
+        UPDATE_DATE,--更新时间
+        DELETE_FLAG--删除标识(0:未删除,1:已删除)
+        FROM MED_PHEP_DRUG
+        <where>
+            <if test="dto.code != null">
+                CODE LIKE #{dto.code,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.name != null">
+                NAME LIKE #{dto.name,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.category != null">
+                CATEGORY = #{dto.category,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.deleteFlag != null">
+                DELETE_FLAG = #{dto.deleteFlag,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY CREATED_DATE DESC
+    </select>
+</mapper>

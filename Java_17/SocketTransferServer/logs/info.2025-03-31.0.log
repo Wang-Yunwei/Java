@@ -1,0 +1,57 @@
+2025-03-31T11:07:25.086+08:00  INFO 10840 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-03-31T11:07:25.144+08:00  INFO 10840 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 10840 (D:\workspace\Gitee\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\Gitee\Java\Java_17\SocketTransferServer)
+2025-03-31T11:07:25.146+08:00  INFO 10840 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-03-31T11:07:27.080+08:00  INFO 10840 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-03-31T11:07:27.116+08:00  INFO 10840 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-03-31T11:07:27.119+08:00  INFO 10840 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-03-31T11:07:27.580+08:00  INFO 10840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 24070 (http)
+2025-03-31T11:07:27.591+08:00  INFO 10840 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-24070"]
+2025-03-31T11:07:27.594+08:00  INFO 10840 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-31T11:07:27.594+08:00  INFO 10840 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-03-31T11:07:27.704+08:00  INFO 10840 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-03-31T11:07:27.705+08:00  INFO 10840 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2490 ms
+2025-03-31T11:07:29.670+08:00  INFO 10840 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-03-31T11:07:29.742+08:00  INFO 10840 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-24070"]
+2025-03-31T11:07:29.761+08:00  INFO 10840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 24070 (http) with context path '/socket-transfer-server'
+2025-03-31T11:07:29.935+08:00  INFO 10840 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 6.205 seconds (process running for 8.032)
+2025-03-31T11:07:29.941+08:00  INFO 10840 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-03-31T11:07:30.045+08:00  INFO 10840 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 24071
+2025-03-31T11:07:30.181+08:00  INFO 10840 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-03-31T11:07:30.208+08:00 ERROR 10840 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:769)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:750)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:745)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at com.mdsd.cloud.SocketTransferServerApplication.main(SocketTransferServerApplication.java:15)
+Caused by: java.lang.RuntimeException: java.io.IOException: Cannot run program "ffmpeg": CreateProcess error=2, 系统找不到指定的文件。
+	at com.mdsd.cloud.util.FfmpegUtil.startProcess(FfmpegUtil.java:34)
+	at com.mdsd.cloud.controller.dji.service.impl.DjiServiceImpl.startUdpListening(DjiServiceImpl.java:105)
+	at com.mdsd.cloud.configuration.RegBeanConf.lambda$startImmediatelyExecute$0(RegBeanConf.java:61)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:766)
+	... 14 common frames omitted
+Caused by: java.io.IOException: Cannot run program "ffmpeg": CreateProcess error=2, 系统找不到指定的文件。
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1143)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+	at com.mdsd.cloud.util.FfmpegUtil.startProcess(FfmpegUtil.java:27)
+	... 17 common frames omitted
+Caused by: java.io.IOException: CreateProcess error=2, 系统找不到指定的文件。
+	at java.base/java.lang.ProcessImpl.create(Native Method)
+	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:499)
+	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:158)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1110)
+	... 19 common frames omitted
+

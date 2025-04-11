@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.knowledgebase.mapper.KnowledgeCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeCategoryEntity">
+        <id column="CATEGORY_ID" javaType="java.lang.String" jdbcType="VARCHAR" property="categoryId"/>
+        <result column="CATEGORY_NAME" javaType="java.lang.String" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="MEDICINE_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" property="medicineType"/>
+        <result column="SORT_VALUE" javaType="java.math.BigDecimal" jdbcType="DECIMAL" property="sortValue"/>
+        <result column="PYM" javaType="java.lang.String" jdbcType="VARCHAR" property="pym"/>
+        <result column="IS_USED" javaType="java.lang.String" jdbcType="VARCHAR" property="isUsed"/>
+        <collection property="patientSayEntity" column="{CATEGORY_ID=CATEGORY_ID}"
+                    select="getUserAddressById">
+        </collection>
+    </resultMap>
+
+    <resultMap id="Getpatientsayentity" type="com.mdsd.cloud.controller.knowledgebase.entity.PatientSayEntity">
+        <id column="PATIENT_SAYID" jdbcType="VARCHAR" property="patientSayid"/>
+        <collection property="knowledgeEntities" column="{PATIENT_SAYID=PATIENT_SAYID}"
+                    select="getMedClinicPatientSay"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        CATEGORY_ID
+        , CATEGORY_NAME, MEDICINE_TYPE, SORT_VALUE, PYM, IS_USED
+    </sql>
+    <!--查询内伤，外伤，儿科种类-->
+    <select id="getmedicinetypecount"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeCategoryEntity">
+        select MEDICINE_TYPE
+        from MED_CLINIC_KNOWLEDGE_CATEGORY
+        group by MEDICINE_TYPE
+    </select>
+
+    <!--根据类型查询全部（内伤，外伤，儿科）-->
+    <select id="getMedicineType" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeCategoryEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from MED_CLINIC_KNOWLEDGE_CATEGORY
+        where IS_USED='1' and MEDICINE_TYPE = #{medicinetype} order by SORT_VALUE
+    </select>
+
+    <!--大类 主诉 依据 根据type逻辑删除-->
+    <update id="updateKnowledgeCategory">
+        BEGIN
+        <if test="'1'.toString() == type ">
+            update MED_CLINIC_KNOWLEDGE_CATEGORY
+            set IS_USED= #{state}
+            <where>
+                CATEGORY_ID in
+                <foreach item="item" collection="list" separator="," open="(" close=");" index="">
+                    #{item, jdbcType=NUMERIC}
+                </foreach>
+            </where>
+        </if>
+        <if test="'1'.toString() == type or '2'.toString() == type">
+            update MED_CLINIC_PATIENT_SAY
+            set IS_VALID=#{state}
+            <where>
+                CATEGORY_ID in
+                <foreach item="item" collection="list" separator="," open="(" close=");" index="">
+                    #{item, jdbcType=NUMERIC}
+                </foreach>
+            </where>
+        </if>
+        <if test="'1'.toString() == type or '2'.toString() == type or '3'.toString() == type  ">
+            update MED_CLINIC_KNOWLEDGE
+            set IS_VALID=#{state}
+            <where>
+                CATEGORY_ID in
+                <foreach item="item" collection="list" separator="," open="(" close=");" index="">
+                    #{item, jdbcType=NUMERIC}
+                </foreach>
+            </where>
+        </if>
+        END;
+    </update>
+
+    <!--根据MEDICINE_TYPE 查询知识库全部数据-->
+    <select id="getListKnowledgeBase" resultMap="BaseResultMap">
+        SELECT CATEGORY_ID
+             , CATEGORY_NAME
+             , MEDICINE_TYPE
+             , SORT_VALUE
+             , PYM
+             , IS_USED
+        FROM MED_CLINIC_KNOWLEDGE_CATEGORY
+        where MEDICINE_TYPE = #{medicinetype}
+    </select>
+
+    <!--根据类型id 查询全部主诉-->
+    <select id="getUserAddressById" resultMap="Getpatientsayentity">
+        select PATIENT_SAYID
+             , CATEGORY_ID
+             , DESCRIPTION
+             , IS_KEY
+             , PYM
+             , SORT_VALUE
+             , IS_VALID
+        from MED_CLINIC_PATIENT_SAY
+        where CATEGORY_ID = #{CATEGORY_ID}
+    </select>
+
+    <!--根据主诉id查询全部依据-->
+    <select id="getMedClinicPatientSay" resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        select KNOWLEDGE_ID,
+               CATEGORY_ID,
+               PATIENT_SAYID,
+               SYSTEM_LEVEL,
+               SYSTEM_AREA,
+               KNOWLEDGE_DETAIL,
+               SORT_VALUE,
+               IS_VALID
+        from MED_CLINIC_KNOWLEDGE
+        where PATIENT_SAYID = #{PATIENT_SAYID}
+    </select>
+
+    <select id="GetpatientSayid" resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        select PATIENT_SAYID, CATEGORY_ID, DESCRIPTION, IS_KEY, PYM, SORT_VALUE, IS_VALID
+        from MED_CLINIC_PATIENT_SAY
+        where PATIENT_SAYID = #{PATIENT_SAYID}
+    </select>
+    <!--知识库搜索-->
+    <select id="searchknowledgebase" resultType="com.mdsd.cloud.controller.knowledgebase.entity.PatientSayEntity">
+        <if test="knowledgeName  != null and knowledgeName != ''">
+            select mcps.* from MED_CLINIC_KNOWLEDGE_CATEGORY mckc left join MED_CLINIC_PATIENT_SAY mcps on
+            mckc.CATEGORY_ID=mcps.CATEGORY_ID
+            <where>
+                mcps.IS_VALID='1'
+                <if test="medicinetype  != null and medicinetype != ''">
+                    and mckc.MEDICINE_TYPE = #{medicinetype}
+                </if>
+                <if test="knowledgeName  != null and knowledgeName != ''">
+                    and mcps.DESCRIPTION LIKE '%${knowledgeName}%'
+                </if>
+            </where>
+        </if>
+    </select>
+    <select id="getPatientSay" resultType="com.mdsd.cloud.controller.knowledgebase.entity.PatientSayEntity">
+        select PATIENT_SAYID,
+               CATEGORY_ID,
+               DESCRIPTION,
+               IS_KEY,
+               PYM,
+               SORT_VALUE,
+               IS_VALID,
+               SPECIALIST
+        from MED_CLINIC_PATIENT_SAY
+        where PATIENT_SAYID = #{medicinetype}
+    </select>
+</mapper>

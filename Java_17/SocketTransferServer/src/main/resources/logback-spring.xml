@@ -2,8 +2,10 @@
 <configuration>
     <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
-    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
-    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
     <property name="LOG_PATH" value="./logs"/>
     <property name="MY_CONSOLE_LOG_PATTERN"
               value="${MY_CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
@@ -17,8 +19,10 @@
         <file>${LOG_PATH}/json.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                {"requestIP": "%X{requestIP:-}", "username": "%X{username}", "timestamp": "%d{yyyy-MM-dd HH:mm:ss}", "requestDispatcherPath":
-                "%X{requestDispatcherPath}", "message": "%message", "stackTrace": "%exception", "userAgents": "%X{userAgent:-}","logType":
+                {"requestIP": "%X{requestIP:-}", "username": "%X{username}", "timestamp": "%d{yyyy-MM-dd HH:mm:ss}",
+                "requestDispatcherPath":
+                "%X{requestDispatcherPath}", "message": "%message", "stackTrace": "%exception", "userAgents":
+                "%X{userAgent:-}","logType":
                 "%level","serviceName": "${APP_NAME:-}"}%n
             </pattern>
         </encoder>
@@ -65,17 +69,17 @@
         </encoder>
     </appender>
 
-    <!-- 开发环境:打印控制台 -->
-    <springProfile name="dev">
+    <!-- 本地环境:打印控制台 -->
+    <springProfile name="local">
         <!-- logger name="com.zaxxer.hikari" level="DEBUG"/ -->
         <root level="INFO">
             <appender-ref ref="MY_CONSOLE_LOG"/>
         </root>
     </springProfile>
-    <springProfile name="linux">
+    <springProfile name="dev">
         <logger name="com.mdsd.cloud.feign" level="DEBUG"/>
         <root level="INFO">
-            <appender-ref ref="MY_CONSOLE_LOG" >
+            <appender-ref ref="MY_CONSOLE_LOG">
                 <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                     <level>DEBUG</level>
                 </filter>

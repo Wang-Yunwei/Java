@@ -1,0 +1,55 @@
+server:
+  port: ${mdsd.port.piat}
+spring:
+  servlet:
+    multipart:
+      file-size-threshold: 10MB
+      max-file-size: 10MB
+      max-request-size: 11MB
+  jackson:
+    default-property-inclusion: non_null
+  cache:
+    type: caffeine
+    cache-names: area
+    caffeine:
+      spec: initialCapacity=50,maximumSize=50,expireAfterWrite=60s
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//${mdsd.ip.db}:1521/helowin
+    hikari: # springboot 2.0 整合了hikari ,据说这是目前性能最好的java数据库连接池
+      username: PIAT
+      password: ENC(fyaBQV/0MwC1cquQdL/zwQVqf4uteYVZ9bfCIQ1+rze92+IY3mX9OSOuTxh2C1qI)
+      pool-name: PiatHikariCP # 连接池名称
+      minimum-idle: 3 # 最小空闲连接数量
+      idle-timeout: 600000 # 空闲连接存活最大时间,默认600000（10分钟）
+      maximum-pool-size: 10 # 连接池最大连接数,默认是10
+      auto-commit: true # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      max-lifetime: 1800000 # 此属性控制池中连接的最长生命周期,值0表示无限生命周期,默认1800000即30分钟
+      connection-timeout: 30000 # 数据库连接超时时间,默认30秒,即30000
+  redis:
+    host: ${mdsd.ip.db}
+    port: 6379
+    database: 1
+    password: ENC(4/AVkuLl+xEkgCL3esU7iLFlAOSYis60viwoBlGgHV92FxM+hnGWt1F6zNksoNzA)
+    jedis:
+      pool:
+        max-active: 10 # 连接池最大连接数,负值表示没有限制
+        max-wait: 30s # 连接池最大阻塞等待时间,负值表示没有限制
+        max-idle: 8 # 最大空闲连接数
+        min-idle: 3 # 最小空闲连接数
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml # 扫描mapper包中的所有 .xml 文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL日志
+    map-underscore-to-camel-case: true # 开启驼峰功能,将下划线映射到驼峰大小写
+    cache-enabled: false
+    jdbc-type-for-null: null #配置JdbcTypeForNull, oracle数据库必须配置
+# MDSD开发环境IP&PORT配置
+mdsd:
+  ip:
+    server: 192.168.0.96
+    db: 192.168.0.129
+  port:
+    piat: 20210
+    auth: 8090
+    das: 8097

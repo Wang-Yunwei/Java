@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.knowledgebase.mapper.KnowledgeMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        <constructor>
+            <idArg column="KNOWLEDGE_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="CATEGORY_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="PATIENT_SAYID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SYSTEM_LEVEL" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SYSTEM_AREA" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="KNOWLEDGE_DETAIL" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SORT_VALUE" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="IS_VALID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        KNOWLEDGE_ID
+        , CATEGORY_ID, PATIENT_SAYID, SYSTEM_LEVEL, SYSTEM_AREA, KNOWLEDGE_DETAIL,
+    SORT_VALUE, IS_VALID
+    </sql>
+
+    <!--查询主诉关联依据-->
+    <select id="getBasis" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        SELECT T1.KNOWLEDGE_ID,
+               T1.CATEGORY_ID,
+               T1.PATIENT_SAYID,
+               T1.SYSTEM_LEVEL,
+               T1.SYSTEM_AREA,
+               T1.KNOWLEDGE_DETAIL,
+               T1.SORT_VALUE,
+               T1.IS_VALID,
+               T2.MEDICINE_TYPE
+        FROM MED_CLINIC_KNOWLEDGE T1
+                 LEFT JOIN MED_CLINIC_KNOWLEDGE_CATEGORY T2 ON T1.CATEGORY_ID = T2.CATEGORY_ID
+        WHERE IS_VALID = '1'
+          AND PATIENT_SAYID = #{patientsayid,jdbcType=VARCHAR}
+        ORDER BY SORT_VALUE
+    </select>
+
+    <!--查询依据等级-->
+    <select id="getsystemlevel" parameterType="java.lang.String"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.KnowledgeEntity">
+        SELECT T1.KNOWLEDGE_ID,
+               T1.CATEGORY_ID,
+               T1.PATIENT_SAYID,
+               T1.SYSTEM_LEVEL,
+               T1.SYSTEM_AREA,
+               T1.KNOWLEDGE_DETAIL,
+               T1.SORT_VALUE,
+               T1.IS_VALID,
+               T2.MEDICINE_TYPE
+        FROM MED_CLINIC_KNOWLEDGE T1
+                 LEFT JOIN MED_CLINIC_KNOWLEDGE_CATEGORY T2 ON T1.CATEGORY_ID = T2.CATEGORY_ID
+        WHERE IS_VALID = '1'
+          AND PATIENT_SAYID = #{patientsayid,jdbcType=VARCHAR}
+        ORDER BY SORT_VALUE
+    </select>
+</mapper>

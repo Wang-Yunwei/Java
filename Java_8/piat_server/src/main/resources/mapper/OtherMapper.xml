@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.other.mapper.OtherMapper">
+    <select id="triagePatientPageList"
+            resultType="com.mdsd.cloud.controller.other.dto.TriagePatientListResultDto">
+        SELECT T1.INFO_ID, --患者信息ID
+        T1.NAME, -- 姓名
+        T1.GENDER,--性别
+        T2.REG_ID,--急诊编号
+        T2.REG_AGE, -- 年龄
+        T2.SUBJECTIVE, -- 患者主诉
+        T2.TRIAGE_TIME -- 分诊时间
+        FROM MED_CLINIC_CARD_INFO T1
+        LEFT JOIN MED_CLINIC_CHECK_MASTER T2 ON T1.INFO_ID = T2.INFO_ID
+        <where>
+            T2.IS_USED = 1
+            <if test="dto.name != null">
+                AND T1.NAME LIKE #{dto.name,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.regId != null">
+                AND T2.REG_ID = #{dto.regId,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.isTagNo == 1">
+                AND T2.TAG_NO IS NOT NULL
+            </if>
+            <if test="dto.hospitalArer != null">
+                AND T2.HOSPITAL_ARER = #{dto.hospitalArer,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.startTime != null">
+                AND T2.TRIAGE_TIME &gt;= #{dto.startTime,jdbcType=DATE}
+            </if>
+            <if test="dto.endTime != null">
+                AND T2.TRIAGE_TIME &lt;= #{dto.endTime,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="triagePatientDetail" resultType="com.mdsd.cloud.controller.other.dto.TriagePatientListResultDto">
+        SELECT T1.INFO_ID,--患者信息ID
+        T1.NAME,-- 姓名
+        T1.GENDER,--性别
+        T2.REG_AGE,-- 年龄
+        T2.SUBJECTIVE,-- 患者主诉
+        T2.TRIAGE_TIME,-- 分诊时间
+        T2.ARRIVE_TYPE,-- 来院方式
+        T2.ARRIVE_TIME,-- 到院时间
+        T1.IDCARD_TYPE,-- 证件类型
+        T1.IDENTIFICATION_CARD,-- 证件号码
+        T1.NATION,-- 民族
+        T1.BIRTHDAY,-- 出生日期
+        T2.REG_TIME,-- 就诊时间
+        T2.REG_ID,-- 急诊编号
+        T2.PHEP_PID,--急救ID
+        T2.HOSPITAL_ARER AS hospitalArea,--院区
+        T3.TEMPERATURE,-- 体温
+        T3.PLUS,-- 脉搏
+        T3.BREATH,-- 呼吸(次/分钟)
+        T3.SBP,-- 收缩压(mmhg)
+        T3.DBP,-- 舒张压(mmhg)
+        T3.SPO,-- SPO₂(%)
+        T3.MIND,-- 意识
+        T3.ACQ_TIME-- 采集时间
+        FROM MED_CLINIC_CARD_INFO T1 LEFT JOIN MED_CLINIC_CHECK_MASTER T2 ON T1.INFO_ID=T2.INFO_ID LEFT JOIN (
+        SELECT N1.REG_ID,N1.TEMPERATURE,N1.PLUS,N1.BREATH,N1.DBP,N1.SBP,N1.SPO,N1.MIND,N1.ACQ_TIME FROM
+        MED_CLINIC_VITALSIGNS N1,(
+        SELECT MAX(ACQ_TIME) AS maxtime,REG_ID FROM MED_CLINIC_VITALSIGNS GROUP BY REG_ID) N2 WHERE
+        N1.ACQ_TIME=N2.maxtime
+        AND N1.REG_ID=N2.REG_ID) T3 ON T2.REG_ID=T3.REG_ID
+        <where>
+            T2.IS_USED = 1
+            AND T2.REG_ID = #{regId}
+        </where>
+    </select>
+</mapper>

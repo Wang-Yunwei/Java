@@ -28,6 +28,11 @@ public final class ResponseDto<T> implements Serializable {
     public ResponseDto() {
     }
 
+    public ResponseDto(RuntimeException e) {
+
+        this.message = e.getMessage();
+    }
+
     public ResponseDto(BusinessException e) {
 
         this.code = e.getCode();
@@ -36,7 +41,7 @@ public final class ResponseDto<T> implements Serializable {
 
     public static <T> ResponseDto<T> wrapSuccess() {
 
-        return new ResponseDto<T>();
+        return new ResponseDto<>();
     }
 
     public static <T> ResponseDto<T> wrapSuccess(final T body) {
@@ -46,12 +51,12 @@ public final class ResponseDto<T> implements Serializable {
 
     public static <T> ResponseDto<T> wrapException(final RuntimeException e) {
 
-        return wrapException(new RuntimeException(e));
+        return new ResponseDto<>(e);
     }
 
     public static <T> ResponseDto<T> wrapException(final BusinessException e) {
 
-        return new ResponseDto<T>(e);
+        return new ResponseDto<>(e);
     }
 
 }

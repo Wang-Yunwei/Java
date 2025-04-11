@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.secondarytriage.mapper.ClinicVitalsignsMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.secondarytriage.entity.ClinicVitalsignsEntity">
+        <constructor>
+            <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="REG_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="AREA" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="HASLIFE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="NOTPRBP" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="TEMPERATURE" javaType="java.lang.Double" jdbcType="FLOAT"/>
+            <arg column="PLUS" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="BREATH" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="DBP" javaType="java.lang.Double" jdbcType="FLOAT"/>
+            <arg column="SPO" javaType="java.lang.Double" jdbcType="FLOAT"/>
+            <arg column="MIND" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="ACQ_TIME" javaType="java.util.Date" jdbcType="DATE"/>
+            <arg column="SBP" javaType="java.lang.Double" jdbcType="FLOAT"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID
+        , REG_ID, AREA, HASLIFE, NOTPRBP, TEMPERATURE, PLUS, BREATH, DBP, SPO, MIND, ACQ_TIME,
+    SBP
+    </sql>
+
+    <insert id="insertVitalsigns" parameterType="com.mdsd.cloud.controller.secondarytriage.entity.ClinicVitalsignsEntity">
+        insert into MED_CLINIC_VITALSIGNS (ID, REG_ID, AREA,
+                                           HASLIFE, NOTPRBP, TEMPERATURE,
+                                           PLUS, BREATH, DBP, SPO,
+                                           MIND, ACQ_TIME, SBP)
+        values (#{id,jdbcType=VARCHAR}, #{regid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
+                #{haslife,jdbcType=VARCHAR}, #{notprbp,jdbcType=VARCHAR}, #{temperature,jdbcType=FLOAT},
+                #{plus,jdbcType=DECIMAL}, #{breath,jdbcType=DECIMAL}, #{dbp,jdbcType=FLOAT}, #{spo,jdbcType=FLOAT},
+                #{mind,jdbcType=VARCHAR}, #{acqTime,jdbcType=DATE}, #{sbp,jdbcType=FLOAT})
+    </insert>
+</mapper>

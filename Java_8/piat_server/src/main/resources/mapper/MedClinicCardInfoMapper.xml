@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.registration.mapper.MedClinicCardInfoMapper">
+    <!-- 个人登记_分诊 - 列表 -->
+    <select id="regList" resultType="com.mdsd.cloud.controller.registration.dto.RegListsResultDto">
+        SELECT row_number() over(ORDER BY T1.TRIAGE_TIME DESC) AS serialNumber,--序号
+        T1.REG_ID,--急诊编号
+        T1.TAG_NO,--腕带
+        T1.TRIAGE_TIME,--就诊时间
+        to_char(T1.TRIAGE_TIME, 'yyyy-MM-dd' ) AS regDate,--日期
+        to_char(T1.TRIAGE_TIME, 'HH24:mi' ) AS regTime,--时间
+        T2.NAME,--姓名
+        CASE WHEN T2.GENDER='1' THEN '男'
+        WHEN T2.GENDER='2' THEN '女'
+        ELSE '未知' END AS gender,--性别
+        T1.REG_AGE,--就诊时年龄
+        T1.REG_AGE_CAPTION,--就诊时年龄(补充)
+        T2.TEL,--联系电话
+        T2.ADDRESS,--住址
+        T1.SUBJECTIVE,--患者主诉
+        T1.DIAGNOSE_DESCRIBE,--诊断
+        T1.ARRIVE_TYPE,--来院方式
+        T1.RESET_LEVEL,--护士分诊的级别
+        T1.NURSE_ID,--分诊护士
+        T1.DEPARTMENT_ID,--就诊科室
+        T1.CHECK_DOCTOR_ID, --就诊医师
+        T1.TURN_RESULT,--去向
+        T5.TEMPERATURE||'℃'||','||T5.PLUS||','||T5.BREATH||','||T5.SBP||'/'||T5.DBP AS mcvInfo,--数据拼接(生命体征)
+        T5.TEMPERATURE,--体温
+        T5.PLUS,--脉搏
+        T5.BREATH,--呼吸
+        T5.SBP||'/'||T5.DBP AS bp,--BP(收缩压/舒张压)
+        T5.MIND--意识
+        FROM MED_CLINIC_CHECK_MASTER T1
+        LEFT JOIN MED_CLINIC_CARD_INFO T2 ON T1.INFO_ID = T2.INFO_ID
+        LEFT JOIN MED_CLINIC_KNOWLEDGE T3 ON T1.KNOWLEDGE_ID = T3.KNOWLEDGE_ID AND IS_VALID = 1
+        LEFT JOIN (SELECT CATEGORY_ID FROM MED_CLINIC_KNOWLEDGE_CATEGORY WHERE IS_USED = 1
+        <if test="dto.categoryName != null">
+            AND CATEGORY_NAME = #{dto.categoryName,jdbcType=VARCHAR}
+        </if>
+        ) T4 ON T3.CATEGORY_ID = T4.CATEGORY_ID
+        LEFT JOIN (SELECT N1.REG_ID,N1.TEMPERATURE,N1.PLUS,N1.BREATH,N1.DBP,N1.SBP,N1.MIND,N1.ACQ_TIME
+        FROM MED_CLINIC_VITALSIGNS N1,
+        (SELECT MAX(ACQ_TIME) AS maxtime, REG_ID FROM MED_CLINIC_VITALSIGNS GROUP BY REG_ID ) N2
+        WHERE N1.ACQ_TIME = N2.maxtime AND N1.REG_ID = N2.REG_ID)
+        T5 ON T1.REG_ID = T5.REG_ID
+        <where>
+            <choose>
+                <when test="dto.isUsed != null">
+                    T1.IS_USED = #{dto.isUsed,jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    T1.IS_USED = 1
+                </otherwise>
+            </choose>
+            <if test="dto.triageTimeStart != null">
+                AND T1.TRIAGE_TIME &gt;= #{dto.triageTimeStart,jdbcType=DATE}
+            </if>
+            <if test="dto.triageTimeEnd != null">
+                AND T1.TRIAGE_TIME &lt;= #{dto.triageTimeEnd,jdbcType=DATE}
+            </if>
+            <if test="dto.isFirstAid != null">
+                <choose>
+                    <when test="dto.isFirstAid == 1">
+                        AND T1.PHEP_PID IS NOT NULL
+                    </when>
+                    <otherwise>
+                        AND T1.PHEP_PID IS NULL
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dto.isNoname != null">
+                AND T1.IS_NONAME = #{dto.isNoname,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.searchValue != null">
+                AND (T2.NAME LIKE #{dto.searchValue,jdbcType=VARCHAR} OR T1.REG_ID LIKE
+                #{dto.searchValue,jdbcType=VARCHAR} OR T2.PATIENT_ID LIKE
+                #{dto.searchValue,jdbcType=VARCHAR})
+            </if>
+            <if test="dto.departmentId != null">
+                AND T1.DEPARTMENT_ID = #{dto.departmentId,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.gender != null">
+                <choose>
+                    <when test="dto.gender == 3">
+                        AND T2.GENDER IS NULL
+                    </when>
+                    <otherwise>
+                        AND T2.GENDER = #{dto.gender,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dto.diagnoseDescribe != null">
+                AND T1.DIAGNOSE_DESCRIBE = #{dto.diagnoseDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.resetLevel != null">
+                AND T1.SYSLEVEL = #{dto.resetLevel,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.turnResult != null">
+                AND T1.TURN_RESULT = #{dto.turnResult,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.greenChannel != null">
+                <choose>
+                    <when test='dto.greenChannel == "A"'>
+                        AND T1.CHANNEL IS NULL
+                    </when>
+                    <when test='dto.greenChannel == "B"'>
+                        AND T1.CHANNEL IS NOT NULL
+                    </when>
+                    <otherwise>
+                        AND T1.CHANNEL = #{dto.greenChannel,jdbcType=VARCHAR}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        <choose>
+            <when test="dto.sortBy != null">
+                <if test="dto.sortBy.name != null">
+                    ORDER BY
+                    <if test="dto.sortBy.name == 'triageTime'.toString()">
+                        T1.TRIAGE_TIME
+                    </if>
+                    <if test="dto.sortBy.name == 'regId'.toString()">
+                        T1.REG_ID
+                    </if>
+                    <if test="dto.sortBy.name == 'gender'.toString()">
+                        T2.GENDER
+                    </if>
+                    <if test="dto.sortBy.name == 'regAge'.toString()">
+                        T1.REG_AGE
+                    </if>
+                    <if test="dto.sortBy.name == 'resetLevel'.toString()">
+                        T1.RESET_LEVEL
+                    </if>
+                    <if test="dto.sortBy.mode != null">
+                        <if test="dto.sortBy.mode == 'desc'.toString()">
+                            DESC
+                        </if>
+                        <if test="dto.sortBy.mode == 'asc'.toString()">
+                            ASC
+                        </if>
+                    </if>
+                </if>
+            </when>
+            <otherwise>
+                ORDER BY T1.TRIAGE_TIME DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 个人登记 - 知识库主诉 -->
+    <select id="getPatientSayList" resultType="com.mdsd.cloud.controller.registration.dto.GetPatientSayList">
+        SELECT PATIENT_SAYID, DESCRIPTION
+        FROM MED_CLINIC_PATIENT_SAY
+    </select>
+    <!-- 获取腕带信息 -->
+    <select id="getTagList" resultType="com.mdsd.cloud.controller.registration.dto.GetSpireLamellaResultDto">
+        SELECT TAG_ID AS value, TAG_NAME AS label
+        FROM MED_TAG
+    </select>
+</mapper>

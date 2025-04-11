@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.qualityControl.mapper.TriageQualityControlMapper">
+
+    <select id="queryPatientProportionReport"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientProportionReportVo">
+        SELECT
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        <where>
+            mcm.IS_USED = '1'
+            <if test="dto.startTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+        </where>
+        GROUP BY
+        mcm.RESET_LEVEL
+        ORDER BY
+        RESET_LEVEL ASC
+    </select>
+
+    <select id="queryPatientProportionDetailReport"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientProportionDetailReportVo">
+        SELECT
+        mci.INFO_ID,
+        mcm.TRIAGE_TIME,
+        mci.NAME,
+        mci.PATIENT_ID,
+        mci.GENDER,
+        mcm.REG_AGE,
+        mcm.REG_AGE_CAPTION,
+        mcm.DIAGNOSE_DESCRIBE,
+        mcm.RESET_LEVEL,
+        mcm.DEPARTMENT_ID
+        FROM
+        MED_CLINIC_CHECK_MASTER mcm
+        LEFT JOIN MED_CLINIC_CARD_INFO mci ON mcm.INFO_ID = mci.INFO_ID
+        <where>
+            mcm.IS_USED = '1'
+            <if test="dto.startTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+            <if test="dto.year != null">
+                AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+            </if>
+            <if test="dto.startYear != null">
+                AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+            </if>
+            <if test="dto.endYear != null">
+                AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+            </if>
+        </where>
+        ORDER BY mcm.TRIAGE_TIME DESC
+    </select>
+    <select id="queryMonthProportionReport"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientMonthProportionReportVo">
+        SELECT
+        (
+        CASE
+        WHEN a.TRIAGE_TIME IS NOT NULL THEN
+        a.TRIAGE_TIME
+        WHEN b.TRIAGE_TIME IS NOT NULL THEN
+        b.TRIAGE_TIME
+        WHEN c.TRIAGE_TIME IS NOT NULL THEN
+        c.TRIAGE_TIME
+        WHEN d.TRIAGE_TIME IS NOT NULL THEN
+        d.TRIAGE_TIME
+        END
+        ) AS triageTime,
+        a.RESET_LEVEL AS aLevel,
+        a.peopleNumber AS aPnumber,
+        b.RESET_LEVEL AS bLevel,
+        b.peopleNumber AS bPnumber,
+        c.RESET_LEVEL AS cLevel,
+        c.peopleNumber AS cPnumber,
+        d.RESET_LEVEL AS dLevel,
+        d.peopleNumber AS dPnumber
+        FROM
+        (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '01'
+        AND mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ),
+        mcm.RESET_LEVEL
+        ) a
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '02'
+        AND mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ),
+        mcm.RESET_LEVEL
+        ) b ON a.TRIAGE_TIME = b.TRIAGE_TIME
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '03'
+        AND mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ),
+        mcm.RESET_LEVEL
+        ) c ON a.TRIAGE_TIME = c.TRIAGE_TIME
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '04'
+        AND mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ),
+        mcm.RESET_LEVEL
+        ) d ON a.TRIAGE_TIME = d.TRIAGE_TIME
+    </select>
+
+    <select id="queryMonthProportionReportCharts"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientMonthProportionReportChartsVo">
+        SELECT
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber,
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' ) TRIAGE_TIME
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        mcm.RESET_LEVEL,
+        to_char( mcm.TRIAGE_TIME, 'yyyy-MM' )
+        ORDER BY
+        TRIAGE_TIME ASC
+    </select>
+
+    <select id="queryYearProportionReportCharts"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientMonthProportionReportChartsVo">
+        SELECT
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber,
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ) TRIAGE_TIME
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        mcm.RESET_LEVEL,
+        to_char( mcm.TRIAGE_TIME, 'yyyy' )
+        ORDER BY
+        TRIAGE_TIME ASC
+    </select>
+
+    <select id="queryYearProportionReport"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.PatientMonthProportionReportVo">
+        SELECT
+        (
+        CASE
+        WHEN a.TRIAGE_TIME IS NOT NULL THEN
+        a.TRIAGE_TIME
+        WHEN b.TRIAGE_TIME IS NOT NULL THEN
+        b.TRIAGE_TIME
+        WHEN c.TRIAGE_TIME IS NOT NULL THEN
+        c.TRIAGE_TIME
+        WHEN d.TRIAGE_TIME IS NOT NULL THEN
+        d.TRIAGE_TIME
+        END
+        ) AS triageTime,
+        a.RESET_LEVEL AS aLevel,
+        a.peopleNumber AS aPnumber,
+        b.RESET_LEVEL AS bLevel,
+        b.peopleNumber AS bPnumber,
+        c.RESET_LEVEL AS cLevel,
+        c.peopleNumber AS cPnumber,
+        d.RESET_LEVEL AS dLevel,
+        d.peopleNumber AS dPnumber
+        FROM
+        (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '01'
+        AND mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ),
+        mcm.RESET_LEVEL
+        ) a
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '02'
+        AND mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ),
+        mcm.RESET_LEVEL
+        ) b ON a.TRIAGE_TIME = b.TRIAGE_TIME
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '03'
+        AND mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ),
+        mcm.RESET_LEVEL
+        ) c ON a.TRIAGE_TIME = c.TRIAGE_TIME
+        FULL JOIN (
+        SELECT
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ) TRIAGE_TIME,
+        mcm.RESET_LEVEL,
+        COUNT( * ) peopleNumber
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.RESET_LEVEL = '04'
+        AND mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        to_char( mcm.TRIAGE_TIME, 'yyyy' ),
+        mcm.RESET_LEVEL
+        ) d ON a.TRIAGE_TIME = d.TRIAGE_TIME
+    </select>
+    <select id="queryTriageWrongRatio" resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongRatioVo">
+        SELECT
+        ERR_TYPE as errType,
+        COUNT( * ) as count
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        <where>
+            <if test="dto.startTime != null">
+                AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+        </where>
+        GROUP BY
+        ERR_TYPE
+    </select>
+    <select id="queryTriageWrongRatioDetail"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongDetailVo">
+        SELECT
+        rownum,
+        mct.REG_ID,
+        mct.ERR_TYPE,
+        mct.TRIAGE_TIME,
+        mci.NAME,
+        mci.PATIENT_ID,
+        mct.OLD_VALUE,
+        mct.NEW_VALUE,
+        mct.CREATE_ID
+        FROM
+        MED_CLINIC_TRIAGE_WRONG mct
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mct.REG_ID = mcm.REG_ID
+        INNER JOIN MED_CLINIC_CARD_INFO mci ON mcm.INFO_ID = mci.INFO_ID
+        <where>
+            <if test="dto.startTime != null">
+                AND to_char( mct.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( mct.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+            <if test="dto.year != null">
+                AND to_char(mct.TRIAGE_TIME,'yyyy')=#{dto.year}
+            </if>
+            <if test="dto.startYear != null">
+                AND to_char(mct.TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+            </if>
+            <if test="dto.endYear != null">
+                AND to_char(mct.TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryTriageWrongRatioCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM (SELECT REG_ID FROM MED_CLINIC_TRIAGE_WRONG
+        <where>
+            <if test="dto.startTime != null">
+                AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+        </where>
+        GROUP BY REG_ID)
+    </select>
+
+    <select id="queryPatientCount"
+            resultType="java.lang.Integer">
+        SELECT
+        COUNT( * )
+        FROM
+        (
+        SELECT
+        COUNT( 1 )
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        <where>
+            mcm.IS_USED = '1'
+            <if test="dto.startTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+        </where>
+        GROUP BY
+        mci.INFO_ID
+        )
+    </select>
+    <select id="queryTriageWrongMonthRatio"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongMonthRatioVo">
+        SELECT (
+        CASE
+        WHEN a.triageTime IS NOT NULL THEN
+        a.triageTime
+        WHEN b.triageTime IS NOT NULL THEN
+        b.triageTime
+        WHEN c.triageTime IS NOT NULL THEN
+        c.triageTime
+        WHEN d.triageTime IS NOT NULL THEN
+        d.triageTime
+        END
+        ) AS triageTime,
+        a.count AS aCount,
+        b.count AS bCount,
+        c.count AS cCount,
+        d.count as patientCount
+        FROM (
+        SELECT COUNT(*) count,
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) AS triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        ERR_TYPE = '1'
+        <if test="dto.year != null">
+            AND to_char(TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ),
+        ERR_TYPE
+        ) a
+        FULL JOIN (
+        SELECT COUNT(*) AS count,
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) AS triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        ERR_TYPE = '2'
+        <if test="dto.year != null">
+            AND to_char(TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ),
+        ERR_TYPE
+        ) b ON a.triageTime = b.triageTime
+        FULL JOIN (
+        SELECT COUNT(*) count,
+        triageTime
+        FROM
+        ( SELECT REG_ID, TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) triageTime FROM MED_CLINIC_TRIAGE_WRONG
+        WHERE 1=1
+        <if test="dto.year != null">
+            AND to_char(TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY REG_ID,
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) )
+        GROUP BY
+        triageTime
+        ) c ON a.triageTime = c.triageTime
+        FULL JOIN (
+        SELECT COUNT(*) count,
+        triageTime
+        FROM
+        (
+        SELECT
+        COUNT ( * ) count,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy-MM' ) triageTime
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.year != null">
+            AND to_char(mcm.TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        mci.INFO_ID,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy-MM' )
+        )
+        GROUP BY
+        triageTime
+        ) d on a.triageTime = d.triageTime
+    </select>
+
+    <select id="queryTriageWrongMonthCharts"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongRatioChartsVo">
+        SELECT COUNT(*) count,
+        ERR_TYPE AS errType,
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        1=1
+        <if test="dto.year != null">
+            AND to_char(TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ),
+        ERR_TYPE
+    </select>
+    <select id="queryTriageWrongMonthChartsCount"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongRatioChartsVo">
+        SELECT
+        a.triageTime AS triageTime,
+        COUNT( * ) count,
+        '错误总数' AS errType
+        FROM
+        ( SELECT COUNT( * ) count, TO_CHAR( TRIAGE_TIME, 'yyyy-MM' ) triageTime
+        FROM MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        1=1
+        <if test="dto.year != null">
+            AND to_char(TRIAGE_TIME,'yyyy')=#{dto.year}
+        </if>
+        GROUP BY REG_ID, TO_CHAR( TRIAGE_TIME, 'yyyy-MM' )
+        ) a
+        GROUP BY
+        a.triageTime
+    </select>
+
+    <select id="queryTriageWrongYearRatio"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongMonthRatioVo">
+        SELECT (
+        CASE
+        WHEN a.triageTime IS NOT NULL THEN
+        a.triageTime
+        WHEN b.triageTime IS NOT NULL THEN
+        b.triageTime
+        WHEN c.triageTime IS NOT NULL THEN
+        c.triageTime
+        WHEN d.triageTime IS NOT NULL THEN
+        d.triageTime
+        END
+        ) AS triageTime,
+        a.count AS aCount,
+        b.count AS bCount,
+        c.count AS cCount,
+        d.count as patientCount
+        FROM (
+        SELECT COUNT(*) count,
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ) AS triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        ERR_TYPE = '1'
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ),
+        ERR_TYPE
+        ) a
+        FULL JOIN (
+        SELECT COUNT(*) AS count,
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ) AS triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        ERR_TYPE = '2'
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ),
+        ERR_TYPE
+        ) b ON a.triageTime = b.triageTime
+        FULL JOIN (
+        SELECT COUNT(*) count,
+        triageTime
+        FROM
+        ( SELECT REG_ID, TO_CHAR( TRIAGE_TIME, 'yyyy' ) triageTime FROM MED_CLINIC_TRIAGE_WRONG
+        WHERE 1=1
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY REG_ID,
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ) )
+        GROUP BY
+        triageTime
+        ) c ON a.triageTime = c.triageTime
+        FULL JOIN (
+        SELECT COUNT(*) count,
+        triageTime
+        FROM
+        (
+        SELECT
+        COUNT ( * ) count,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy' ) triageTime
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        mci.INFO_ID,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy' )
+        )
+        GROUP BY
+        triageTime
+        ) d on a.triageTime = d.triageTime
+    </select>
+
+    <select id="queryTriageWrongYearCharts"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongRatioChartsVo">
+        SELECT COUNT(*) count,
+        ERR_TYPE AS errType,
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ) triageTime
+        FROM
+        MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        1=1
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY
+        TO_CHAR( TRIAGE_TIME, 'yyyy' ),
+        ERR_TYPE
+    </select>
+    <select id="queryTriageWrongYearChartsCount"
+            resultType="com.mdsd.cloud.controller.qualityControl.Vo.TriageWrongRatioChartsVo">
+        SELECT
+        a.triageTime AS triageTime,
+        COUNT( * ) count,
+        '错误总数' AS errType
+        FROM
+        ( SELECT COUNT( * ) count, TO_CHAR( TRIAGE_TIME, 'yyyy' ) triageTime
+        FROM MED_CLINIC_TRIAGE_WRONG
+        WHERE
+        1=1
+        <if test="dto.startYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')>=#{dto.startYear}
+        </if>
+        <if test="dto.endYear != null">
+            AND to_char(TRIAGE_TIME,'yyyy')&lt;=#{dto.endYear}
+        </if>
+        GROUP BY REG_ID, TO_CHAR( TRIAGE_TIME, 'yyyy' )
+        ) a
+        GROUP BY
+        a.triageTime
+    </select>
+
+</mapper>

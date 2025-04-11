@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.pc.emergencystation.mapper.MedPhepStationMapper">
+    <!-- 急救站 - 分页列表 -->
+    <select id="escPageList" resultType="com.mdsd.cloud.controller.pc.emergencystation.dto.EscPageListRo">
+        SELECT ID,--主键ID
+        NAME,--站点名称
+        HOSPITAL_ID,--医院ID
+        HOSPITAL_AREA,--院区
+        REGION_ID,--区域ID
+        LONGITUDE,--经度
+        LATITUDE,--纬度
+        CREATED_DATE,--创建时间
+        UPDATE_DATE,--更新时间
+        DELETE_FLAG--是否删除(0-否,1-是)
+        FROM MED_PHEP_STATION
+        <where>
+            <if test="dto.hospitalId != null">
+                HOSPITAL_ID = #{dto.hospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.hospitalArea != null">
+                AND HOSPITAL_AREA = #{dto.hospitalArea,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.name != null">
+                AND NAME LIKE #{dto.name,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.regionId != null">
+                AND REGION_ID = #{dto.regionId,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.deleteFlag != null">
+                AND DELETE_FLAG = #{dto.deleteFlag,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY CREATED_DATE DESC
+    </select>
+</mapper>

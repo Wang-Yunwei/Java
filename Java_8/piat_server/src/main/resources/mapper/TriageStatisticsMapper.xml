@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.qualityControl.mapper.TriageStatisticsMapper">
+
+    <select id="getReceptionStatistics" resultType="com.mdsd.cloud.controller.qualityControl.Vo.ReceptionStatisticsCountDetailVo">
+        SELECT
+        aa.patientType AS patientType,
+        COUNT( * ) AS count
+        FROM
+        (
+        SELECT
+        CASE
+        WHEN
+        mcm.IS_NONAME = '1' THEN
+        'isNonameCount'
+        WHEN mcm.EVENTID IS NOT NULL THEN
+        'eventCount' ELSE mcm.CHANNEL
+        END AS patientType,
+        mci.INFO_ID
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        AND ( mcm.CHANNEL IS NOT NULL OR mcm.IS_NONAME = '1' OR mcm.EVENTID IS NOT NULL )
+        <if test="dto.startTime != null">
+            AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+        </if>
+        ) aa
+        GROUP BY
+        aa.patientType
+        ORDER BY
+        aa.patientType ASC
+    </select>
+
+    <select id="getDetails" resultType="com.mdsd.cloud.controller.qualityControl.Vo.ReceptionStatisticsDetailVo">
+        SELECT
+        T1.TRIAGE_TIME,
+        T1.REG_ID,
+        T1.INFO_ID,
+        ( CASE
+        WHEN T1.IS_NONAME = '1' THEN '三无患者'
+        WHEN T1.EVENTID IS NOT NULL THEN '群伤患者'
+        WHEN T1.CHANNEL IS NOT NULL THEN T1.CHANNEL
+        END ) AS patientType,
+        T2.NAME,
+        T2.PATIENT_ID,
+        T2.GENDER,
+        T1.REG_AGE,
+        T1.REG_AGE_CAPTION,
+        T1.DIAGNOSE_DESCRIBE,
+        T1.RESET_LEVEL,
+        T1.TURN_RESULT
+        FROM
+        MED_CLINIC_CHECK_MASTER T1
+        INNER JOIN MED_CLINIC_CARD_INFO T2 ON T1.INFO_ID = T2.INFO_ID
+        <where>
+            T1.IS_USED = '1'
+            AND (T1.IS_NONAME = '1' OR T1.EVENTID IS NOT NULL OR T1.CHANNEL IS NOT NULL)
+            <if test="dto.startTime != null">
+                AND to_char( T1.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                AND to_char( T1.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryTimeCount" resultType="com.mdsd.cloud.controller.qualityControl.Vo.TimePeriodDistributionTimeCountVo">
+        SELECT COUNT(*) count ,aa.newTime as triageTime
+        FROM(
+        SELECT
+        CASE WHEN
+        to_char( t.TRIAGE_TIME, 'hh24' ) &lt;4 THEN
+        '00:00-04:00'
+        WHEN to_char( t.TRIAGE_TIME, 'hh24' ) >= 4 AND to_char( t.TRIAGE_TIME, 'hh24' ) &lt;8 THEN
+        '04:00-08:00'
+        WHEN to_char( t.TRIAGE_TIME, 'hh24' ) >= 8 AND to_char( t.TRIAGE_TIME, 'hh24' ) &lt;12 THEN
+        '08:00-12:00'
+        WHEN to_char( t.TRIAGE_TIME, 'hh24' ) >= 12 AND to_char( t.TRIAGE_TIME, 'hh24' ) &lt;16 THEN
+        '12:00-16:00'
+        WHEN to_char( t.TRIAGE_TIME, 'hh24' ) >= 16 AND to_char( t.TRIAGE_TIME, 'hh24' ) &lt;20 THEN
+        '16:00-20:00'
+        WHEN to_char( t.TRIAGE_TIME, 'hh24' ) >= 20 AND to_char( t.TRIAGE_TIME, 'hh24' ) &lt;24 THEN
+        '20:00-24:00'
+        END as newTime
+        FROM
+        MED_CLINIC_CARD_INFO mci INNER JOIN MED_CLINIC_CHECK_MASTER t on mci.INFO_ID = t.INFO_ID
+        WHERE
+        t.IS_USED = '1'
+        <if test="dto.startTime != null">
+            AND to_char( t.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( t.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+        </if>
+        ) aa
+        GROUP BY newTime
+        ORDER BY newTime ASC
+    </select>
+
+    <select id="queryMonthCount" resultType="com.mdsd.cloud.controller.qualityControl.Vo.TimePeriodDistributionTimeCountVo">
+        SELECT
+        COUNT( * ) as count,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy-mm' ) triageTime
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.triageTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy' ) = #{dto.triageTime}
+        </if>
+        GROUP BY
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy-mm' )
+        ORDER BY triageTime
+    </select>
+
+    <select id="queryYearCount" resultType="com.mdsd.cloud.controller.qualityControl.Vo.TimePeriodDistributionTimeCountVo">
+        SELECT
+        COUNT( * ) as count,
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy' ) triageTime
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.startTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy' ) &lt;= #{dto.endTime}
+        </if>
+        GROUP BY
+        TO_CHAR( mcm.TRIAGE_TIME, 'yyyy' )
+        ORDER BY triageTime
+    </select>
+
+    <select id="queryAgeCount" resultType="com.mdsd.cloud.controller.qualityControl.Vo.AgeDistributionCountVo">
+        SELECT COUNT(*) as count, T.newAge as regAge, T.gender as gender FROM (
+        SELECT
+        mci.GENDER as gender,
+        CASE
+        WHEN
+        mcm.REG_AGE &lt;= 10 THEN
+        '01~10'
+        WHEN mcm.REG_AGE > 10
+        AND mcm.REG_AGE &lt;= 20 THEN
+        '11~20'
+        WHEN mcm.REG_AGE > 20
+        AND mcm.REG_AGE &lt;= 30 THEN
+        '21~30'
+        WHEN mcm.REG_AGE > 30
+        AND mcm.REG_AGE &lt;= 40 THEN
+        '31~40'
+        WHEN mcm.REG_AGE > 40
+        AND mcm.REG_AGE &lt;= 50 THEN
+        '41~50'
+        WHEN mcm.REG_AGE > 50
+        AND mcm.REG_AGE &lt;= 60 THEN
+        '51~60'
+        WHEN mcm.REG_AGE > 60
+        AND mcm.REG_AGE &lt;= 70 THEN
+        '61~70'
+        WHEN mcm.REG_AGE > 70
+        AND mcm.REG_AGE &lt;= 80 THEN
+        '71~80'
+        WHEN mcm.REG_AGE > 80 THEN
+        '80以上'
+        END AS newAge
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.REG_AGE IS NOT NULL
+        <if test="dto.startTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+        </if>
+            ) T GROUP BY T.NEWAGE, T.GENDER ORDER BY T.NEWAGE,T.GENDER
+    </select>
+    <select id="queryToHospitalDetail" resultType="com.mdsd.cloud.controller.qualityControl.Vo.ToHospitalDistributionDetailVo">
+        SELECT
+            mci.INFO_ID,
+            mcm.TRIAGE_TIME,
+            mcm.ARRIVE_TYPE,
+            mci.NAME,
+            mci.PATIENT_ID,
+            mcm.REG_ID,
+            mci.GENDER,
+            mcm.REG_AGE,
+            mcm.REG_AGE_CAPTION,
+            mcm.RESET_LEVEL,
+            mcm.TURN_RESULT
+        FROM
+            MED_CLINIC_CARD_INFO mci
+                INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+            mcm.IS_USED = '1'
+        <if test="dto.startTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+        </if>
+    </select>
+
+    <select id="queryToHospitalCount" resultType="com.mdsd.cloud.controller.qualityControl.Vo.ToHospitalDistributionCountVo">
+        SELECT
+        mcm.ARRIVE_TYPE,
+        COUNT(*) as count
+        FROM
+        MED_CLINIC_CARD_INFO mci
+        INNER JOIN MED_CLINIC_CHECK_MASTER mcm ON mci.INFO_ID = mcm.INFO_ID
+        WHERE
+        mcm.IS_USED = '1'
+        <if test="dto.startTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) >= #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null">
+            AND to_char( mcm.TRIAGE_TIME, 'yyyy-mm-dd' ) &lt;= #{dto.endTime}
+        </if>
+        GROUP BY mcm.ARRIVE_TYPE ORDER BY mcm.ARRIVE_TYPE
+    </select>
+
+</mapper>

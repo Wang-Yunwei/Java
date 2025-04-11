@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.mapper.MedPhepMissionsMapper">
+
+    <!-- 根据EVENTID查询患者信息 -->
+    <select id="queryMissionsList" resultType="com.mdsd.cloud.controller.diagnosis.vo.PhepMissionsHistoryListVo">
+        SELECT
+        mpm.MISSION_ID
+        ,mpp.NAME
+        ,mpp.GENDER
+        ,mpp.AGE
+        ,mpp.AGE_EXTEND
+        ,mpp.PATIENT_ID
+        ,mpm.ACCEPT_MISSION_TIME
+        ,mpm.DESTINATION_ADDRESS
+        ,mpm.STATUS
+        ,mpm.MISSION_TYPE
+        ,mpm.LICENSE_PLATE,
+        T1.SHIFT_TIME,--交接时间
+        T2.SUBMIT_TIME--病历提交时间
+        FROM
+        MED_PHEP_MISSIONS mpm
+        LEFT JOIN MED_PHEP_PATIENTS mpp ON mpm.MISSION_ID = mpp.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T1 ON T1.PATIENT_ID = mpp.PATIENT_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T2.PATIENT_ID = mpp.PATIENT_ID
+        <where>
+            mpm.LICENSE_PLATE = #{dto.licensePlate}
+            <if test="dto.startTime != null">
+                and mpm.ACCEPT_MISSION_TIME &gt;= #{dto.startTime,jdbcType=DATE}
+            </if>
+            <if test="dto.endTime !=null">
+                and mpm.ACCEPT_MISSION_TIME &lt;= #{dto.endTime,jdbcType=DATE}
+            </if>
+        </where>
+        ORDER BY mpm.ACCEPT_MISSION_TIME DESC
+    </select>
+
+    <!-- 根据呼叫时间查询患者信息 -->
+    <select id="queryByCallTime" resultType="com.mdsd.cloud.controller.diagnosis.vo.MissionsInfoVo">
+        SELECT
+        mpm.MISSION_ID
+        ,mpp.NAME
+        ,mpp.GENDER
+        ,mpp.AGE
+        ,mpp.AGE_EXTEND
+        ,mpp.BIRTHDAY
+        ,mpp.CARD_TYPE
+        ,mpp.CARD_NO
+        ,mpmr.CHIEF_COMPLAINT
+        ,mpm.CALL_TIME
+        ,mpm.DOCTOR_NAME
+        ,mpm.NURSE_NAME
+        ,mpm.LICENSE_PLATE
+        FROM
+        MED_PHEP_MISSIONS mpm
+        LEFT JOIN MED_PHEP_PATIENTS mpp ON mpm.MISSION_ID = mpp.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS mpmr ON mpp.PATIENT_ID = mpmr.PATIENT_ID
+        <where>
+            <if test="param.startTime != null">
+                and mpm.CALL_TIME &gt;= #{param.startTime,jdbcType=DATE}
+            </if>
+            <if test="param.endTime !=null">
+                and mpm.CALL_TIME &lt;= #{param.endTime,jdbcType=DATE}
+            </if>
+            <if test="param.name != null and param.name != ''">
+                and mpp.NAME = #{param.name}
+            </if>
+        </where>
+        ORDER BY mpm.CALL_TIME DESC
+    </select>
+</mapper>

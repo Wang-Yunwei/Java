@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.knowledgebase.mapper.OftenChiefComplaintMapper">
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.knowledgebase.entity.OftenChiefComplaintEntity">
+        <constructor>
+            <idArg column="FAST_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="TRIAGE_FAST_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="TRIAGE_FAST_PYM" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="MEDICINE_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="CATEGORY_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="PATIENT_SAYID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="KNOWLEDGE_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="TRIAGE_LEVEL" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SORT_NO" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="IS_USED" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        FAST_ID
+        , TRIAGE_FAST_NAME, TRIAGE_FAST_PYM, MEDICINE_TYPE, CATEGORY_ID, PATIENT_SAYID,
+    KNOWLEDGE_ID, TRIAGE_LEVEL, SORT_NO, IS_USED
+    </sql>
+
+
+    <select id="getOftenPrincipalComplaint"
+            resultType="com.mdsd.cloud.controller.knowledgebase.entity.OftenChiefComplaintEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from MED_CLINIC_TRIAGE_FAST
+        where MEDICINE_TYPE=#{medicinetype} and IS_USED='1' order by SORT_NO
+    </select>
+</mapper>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.pc.quality.mapper.QualityMapper">
+    <!-- 质控管理 - 患者趋势 -->
+    <select id="qcPatient" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcPatientRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.STATUS,--任务状态
+        T2.PATIENT_ID,--患者ID
+        to_char(T2.CREATE_TIME, 'yyyy-MM-dd') AS createTime--患者创建时间
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        <where>
+            T1.STATUS = '06'
+        </where>
+        ORDER BY T2.CREATE_TIME
+    </select>
+    <!-- 质控管理 - 出车统计 -->
+    <select id="qcOutCar" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcOutCarRo">
+        SELECT T1.MISSION_ID,--任务ID
+        to_char(T1.CALL_TIME, 'yyyy-MM') AS callTime,--呼叫时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T4.ID--车辆信息ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            <if test="missionStatus != null">
+                T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt; #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T1.CALL_TIME
+    </select>
+    <!-- 质控管理 - 平均反应时间 -->
+    <select id="qcMeanResponseTime" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcMeanResponseTimeRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        to_char(T1.CALL_TIME, 'yyyy-MM') AS callTimeStr,--呼叫时间
+        T1.DISPATCH_VEHICLE_TIME,--出车时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T4.ID--车辆信息ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            <if test="missionStatus != null">
+                T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt; #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T1.CALL_TIME
+    </select>
+    <!-- 质控管理 - 各时段出车统计 -->
+    <select id="qcTimeIntervalOutCar" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcTimeIntervalOutCarRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.DISPATCH_VEHICLE_TIME,--出车时间
+        to_char(T1.DISPATCH_VEHICLE_TIME, 'HH24') AS outCatTimeStr,--出车时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T4.ID--车辆信息ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            <if test="missionStatus != null">
+                T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T1.CALL_TIME
+    </select>
+    <!-- 质控管理 - 平均出车时长 -->
+    <select id="qcMeanOutCarTime" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcMeanOutCarTimeRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.DISPATCH_VEHICLE_TIME,--出车时间
+        to_char(T1.DISPATCH_VEHICLE_TIME, 'yyyy-MM') AS outCatTimeStr,--出车时间
+        T1.ARRIVED_HOSPITAL_TIME,--到达医院时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T4.ID--车辆信息ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            T1.DISPATCH_VEHICLE_TIME IS NOT NULL
+            <if test="missionStatus != null">
+                AND T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T1.CALL_TIME
+    </select>
+    <!-- 质控管理 - 病种分类统计 -->
+    <select id="qcDiseaseEntities" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcDiseaseEntitiesRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        COALESCE(T3.DISEASE_CATEGORY, '16') AS diseaseCategory,--疾病类别
+        T4.ID--车辆ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            <if test="missionStatus != null">
+                T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!-- 质控管理 - 区域分析 -->
+    <select id="qcZoneAnalysis" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcZoneAnalysisRo">
+
+    </select>
+    <!-- 质控管理 - 病历完成率 -->
+    <select id="qcMedicalRecordEfficiency"
+            resultType="com.mdsd.cloud.controller.pc.quality.dto.QcMedicalRecordEfficiencyRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T3.CREATE_TIME,--创建时间
+        T3.UPDATE_TIME,--更新时间
+        T3.STATUS AS medicalRecordStatus,--病历状态
+        T4.ID--车辆ID
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        <where>
+            <if test="missionStatus != null">
+                T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!-- 质控管理 - 急救措施统计 -->
+    <select id="qcEmergencyTreatment" resultType="com.mdsd.cloud.controller.pc.quality.dto.QcEmergencyTreatmentRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.STATUS,--任务状态
+        T1.LICENSE_PLATE,--车牌号
+        T1.DISPATCH_VEHICLE_SITE,--出车分站
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T3.CREATE_TIME,--创建时间
+        T3.STATUS,--状态
+        T4.ID,--车辆ID
+        T5.ID,--急救措施ID
+        T5.MEASURE_KEY,--措施标识
+        T5.MEASURE_NAME--措施名称
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T1.LICENSE_PLATE
+        LEFT JOIN MED_PHEP_MEASURES T5 ON T5.PATIENT_ID = T2.PATIENT_ID
+        <where>
+            T5.ID IS NOT NULL
+            <if test="missionStatus != null">
+                AND T1.STATUS = #{missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND T1.CALL_TIME &gt;= #{startTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND T1.CALL_TIME &lt;= #{endTime,jdbcType=DATE}
+            </if>
+            <if test="stationId != null">
+                AND T1.DISPATCH_VEHICLE_SITE = #{stationId,jdbcType=VARCHAR}
+            </if>
+            <if test="toHospitalId != null">
+                AND T3.TO_HOSPITAL = #{toHospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="hospitalId != null">
+                AND T4.HOSPITAL_ID = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

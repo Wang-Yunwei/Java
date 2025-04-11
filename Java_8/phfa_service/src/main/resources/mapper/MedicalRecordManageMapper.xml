@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.mapper.MedicalRecordManageMapper">
+    <!-- 病历管理 - 分页列表 -->
+    <select id="mrmPageList" resultType="com.mdsd.cloud.controller.pc.medicalrecord.dto.MrmPageListRo">
+        SELECT T1.RECORD_ID,--病历ID
+        T1.CHIEF_COMPLAINT,--主诉
+        T1.DIAGNOSIS,--初步诊断
+        T1.STATUS AS medicalRecordStatus,--病历状态
+        T1.ADDRESS,-- 现场救治地点
+        T2.PATIENT_ID,--患者ID
+        T2.NAME,--姓名
+        CASE
+        WHEN T2.GENDER = '01' THEN '男'
+        WHEN T2.GENDER = '02' THEN'女'
+        ELSE '未知'
+        END AS gender,
+        T2.AGE,--年龄
+        T2.AGE_EXTEND,--年龄类别
+        T3.MISSION_ID,--任务ID
+        T3.DESTINATION_ADDRESS,--现场地址
+        T3.LICENSE_PLATE AS emergencyCar,--车牌号
+        T3.DOCTOR_NAME,--车载医生
+        T3.CALL_TIME,--呼叫时间
+        T3.REASON_TYPE,--呼救原因
+        T3.STATUS AS missionStatus,--任务状态
+        T3.SUSPEND_TYPE,--任务终止类型
+        T3.SUSPEND_REASON--终止原因
+        FROM MED_PHEP_MEDICAL_RECORDS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.PATIENT_ID = T1.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T3.MISSION_ID = T2.MISSION_ID
+        <if test="dto.drawOutHospital != null">
+            LEFT JOIN MED_PHEP_VEHICLES T4 ON T4.LICENSE_PLATE = T3.LICENSE_PLATE
+        </if>
+        <where>
+            <if test="dto.escortToHospital != null">
+                AND T1.TO_HOSPITAL = #{dto.escortToHospital,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.diseaseCategory != null">
+                AND T1.DISEASE_CATEGORY = #{dto.diseaseCategory,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.diagnosis != null">
+                AND T1.DIAGNOSIS = #{dto.diagnosis,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.conditionGrade != null">
+                AND T1.CONDITION_GRADE = #{dto.conditionGrade,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.treatmentResult != null">
+                AND T1.TREATMENT_RESULT = #{dto.treatmentResult,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.medicalRecordStatus != null">
+                AND T1.STATUS = #{dto.medicalRecordStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.patientName != null">
+                AND T2.NAME LIKE #{dto.patientName,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.patientSex != null">
+                AND T2.GENDER = #{dto.patientSex,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.callTimeStart != null">
+                AND T3.CALL_TIME &gt;= #{dto.callTimeStart,jdbcType=DATE}
+            </if>
+            <if test="dto.callTimeEnd != null">
+                AND T3.CALL_TIME &lt;= #{dto.callTimeEnd,jdbcType=DATE}
+            </if>
+            <if test="dto.emergencyCar != null">
+                AND T3.LICENSE_PLATE = #{dto.emergencyCar,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.dispatchVehicleSite != null">
+                AND T3.DISPATCH_VEHICLE_SITE = #{dto.dispatchVehicleSite,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.missionStatus != null">
+                AND T3.STATUS = #{dto.missionStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.drawOutHospital != null">
+                AND T4.HOSPITAL_ID = #{dto.drawOutHospital,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T2.UPDATE_TIME DESC
+    </select>
+    <!-- 病历管理 - 时间轴 -->
+    <select id="timeAxis" resultType="com.mdsd.cloud.controller.pc.medicalrecord.dto.TimeAxisRo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.CALL_TIME,--呼叫时间
+        T1.PLAN_VEHICLE_TIME,--派车时间
+        T1.DISPATCH_VEHICLE_TIME,--出车时间
+        T1.ARRIVED_SCENE_TIME,--到达现场时间
+        T1.TOUCH_PATIENT_TIME,--接触患者时间
+        T1.LEFT_SCENE_TIME,--送往医院时间
+        T1.ARRIVED_HOSPITAL_TIME,--到达医院时间
+        T2.PATIENT_ID,--患者ID
+        T3.RECORD_ID,--病历ID
+        T3.MORBTIMEAREA,--发病时间
+        T4.SHIFT_RECORD_ID,--交接ID
+        T4.SUBMIT_TIME,--提交时间
+        T5.ID AS noticesId,--预警ID
+        T5.NOTICE_TIME AS earlyWarningTime--通知时间
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T2.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T3.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T4 ON T4.MISSION_ID = T1.MISSION_ID
+        LEFT JOIN (SELECT N1.ID, N1.MISSION_ID, N1.NOTICE_TIME FROM MED_PHEP_NOTICES N1,(SELECT MAX(NOTICE_TIME)
+        AS maxtime,MISSION_ID FROM MED_PHEP_NOTICES GROUP BY MISSION_ID) N2
+        WHERE N1.NOTICE_TIME = N2.maxtime AND N1.MISSION_ID = N2.MISSION_ID
+        ) T5 ON T5.MISSION_ID = T1.MISSION_ID
+        <where>
+            T1.MISSION_ID = #{missionId,jdbcType=VARCHAR}
+        </where>
+    </select>
+</mapper>

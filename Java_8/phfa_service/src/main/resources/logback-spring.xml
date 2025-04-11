@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
+    <property name="LOG_PATH" value="./logs"/>
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <property name="MY_CONSOLE_LOG_PATTERN"
+              value="${MY_CONSOLE_LOG_PATTERN:-%clr(%d{${yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="MY_FILE_LOG_PATTERN"
+              value="${MY_FILE_LOG_PATTERN:-%d{${yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <appender name="MY_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${MY_CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <appender name="MY_FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/json.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                {"requestIP": "%X{requestIP:-}", "username": "%X{username}", "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}", "requestDispatcherPath": "%X{requestDispatcherPath}", "message": "%message", "stackTrace": "%exception", "userAgents": "%X{userAgent:-}","logType": "%level","serviceName": "${APP_NAME:-}"}%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/json.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="MY_FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/info.log</file>
+        <encoder charset="UTF-8">
+            <pattern>${MY_FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+    <appender name="MY_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/error.log</file>
+        <encoder charset="UTF-8">
+            <pattern>${MY_FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+    <!-- 开发环境:打印控制台 -->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="MY_CONSOLE"/>
+        </root>
+    </springProfile>
+    <!-- 服务器环境: 输出到文件 -->
+    <springProfile name="linux">
+        <root level="INFO">
+            <appender-ref ref="MY_CONSOLE"/>
+            <appender-ref ref="MY_FILE_INFO"/>
+            <appender-ref ref="MY_FILE_ERROR"/>
+            <appender-ref ref="MY_FILE_JSON"/>
+        </root>
+    </springProfile>
+</configuration>

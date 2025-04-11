@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdsd.cloud.controller.groupevents.mapper.MedClinicGroupEventsMapper">
+
+    <resultMap id="BaseResultMap" type="com.mdsd.cloud.controller.groupevents.dto.GroupEventsExportResultDto">
+        <id column="EVENTID" jdbcType="VARCHAR" property="eventId"/>
+        <collection property="cardInfoExportResultDtoList" column="EVENTID"
+                    select="getCheckMasterList">
+        </collection>
+    </resultMap>
+
+    <resultMap id="CMDBaseResultMap" type="com.mdsd.cloud.controller.groupevents.dto.CardInfoExportResultDto">
+        <id column="REG_ID" jdbcType="VARCHAR" property="regId"/>
+    </resultMap>
+
+    <select id="selectByKey" resultMap="BaseResultMap">
+        select EVENTID,
+               EVENTNAME,
+               EVENTTIME,
+               DESCRIBE,
+               MEASURES,
+               EVENTPROPERTY,
+               EVENT_ADDRESS
+        from MED_CLINIC_GROUPEVENTS
+        where 1 = 1
+          and STATUS = #{status}
+          and EVENTTIME BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+    <select id="getCheckMasterList" resultMap="CMDBaseResultMap">
+        select ci.PATIENT_ID,
+               cm.REG_ID,
+               ci.NAME,
+               cm.REG_AGE,
+               cm.REG_AGE_CAPTION,
+               ci.GENDER,
+               cm.RESET_LEVEL,
+               cm.DIAGNOSE_DESCRIBE,
+               cm.TURN_RESULT
+        from MED_CLINIC_CHECK_MASTER cm
+                 left JOIN MED_CLINIC_CARD_INFO ci on cm.INFO_ID = ci.INFO_ID
+        where EVENTID = #{eventid}
+    </select>
+
+    <sql id="Base_Column_List">
+        EVENTID, EVENTNAME, EVENTTIME, DESCRIBE, MEASURES, ARRAY_TYPE, SELF_REPORT, LEVEL1, LEVEL2, LEVEL3, LEVEL4, DEPARTMENT_ID, CREATE_ID, CREATE_TIME,
+        STATUS, EVENTPROPERTY, CLINIC_DEPARTMENTID, EVENT_ADDRESS
+    </sql>
+
+    <!-- 根据EVENTID查询患者信息 -->
+    <select id="gesSelectByIdList" resultType="com.mdsd.cloud.controller.groupevents.dto.CardInfoDetailsDto">
+        SELECT cm.REG_ID,
+               cci.PATIENT_ID,
+               cci.NAME,
+               cci.GENDER,
+               cm.REG_AGE,
+               cm.REG_AGE_CAPTION,
+               cm.RESET_LEVEL,
+               cm.DIAGNOSE_DESCRIBE,
+               cm.TURN_RESULT
+        from MED_CLINIC_CARD_INFO cci
+                 INNER JOIN MED_CLINIC_CHECK_MASTER cm on cci.INFO_ID = cm.INFO_ID
+        <where> 1=1
+            AND cm.EVENTID = #{gesDetailsParamDto.eventId}
+            and cm.IS_USED = #{gesDetailsParamDto.status}
+        </where>
+        order by cm.REG_ID asc
+    </select>
+
+    <update id="disassociate" parameterType="java.util.List">
+        update MED_CLINIC_CHECK_MASTER
+        set EVENTID =''
+        where REG_ID in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="disassociateByEventId" parameterType="java.util.List">
+        update MED_CLINIC_CHECK_MASTER
+        set EVENTID =''
+        where EVENTID in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="regList" resultType="com.mdsd.cloud.controller.groupevents.dto.RegitionListsResultDto">
+        SELECT
+        T7.REG_ID,--急诊编号
+        T7.INFO_ID,
+        T7.TRIAGE_TIME,--就诊时间
+        T7.TRIAGE_TIME AS regDate,--日期
+        T7.TRIAGE_TIME AS regTime,--时间
+        T7.REG_AGE,--就诊时年龄
+        T7.REG_AGE_CAPTION,--就诊时年龄(补充)
+        T8.DESCRIPTION as SUBJECTIVE,--患者主诉
+        T7.DIAGNOSE_DESCRIBE,--诊断
+        T7.ARRIVE_TYPE,--来院方式
+        T7.RESET_LEVEL,--护士分诊的级别
+        T7.NURSE_ID,--分诊护士
+        T7.DEPARTMENT_ID,--就诊科室
+        T7.CHECK_DOCTOR_ID,--就诊医师
+        T7.TURN_RESULT,--去向
+        CASE WHEN LENGTH(T6.MCVINFO) =5 THEN '--' ELSE T6.MCVINFO END MCVINFO,--数据拼接(生命体征)
+        T6.TEMPERATURE,--体温
+        T6.PLUS,--脉搏
+        T6.BREATH,--呼吸
+        T6.bp,--BP(收缩压/舒张压)
+        T6.MIND,--意识
+        T2.NAME,--姓名
+        T2.GENDER,--性别
+        T2.TEL,--联系电话
+        T2.ADDRESS --住址
+
+        FROM
+        MED_CLINIC_CHECK_MASTER T7
+        LEFT JOIN (
+        SELECT DISTINCT
+        T1.REG_ID,--急诊编号
+        T5.TEMPERATURE || '℃' || ',' || T5.PLUS || ',' || T5.BREATH || ',' || T5.SBP || '/' || T5.DBP AS
+        mcvInfo,--数据拼接(生命体征)
+        T5.TEMPERATURE,--体温
+        T5.PLUS,--脉搏
+        T5.BREATH,--呼吸
+        T5.SBP || '/' || T5.DBP AS bp,--BP(收缩压/舒张压)
+        T5.MIND --意识
+
+        FROM
+        MED_CLINIC_CHECK_MASTER T1
+        LEFT JOIN ( SELECT REG_ID, TEMPERATURE, PLUS, BREATH, DBP, SBP, MIND, ACQ_TIME FROM MED_CLINIC_VITALSIGNS ) T5
+        ON T5.REG_ID = T1.REG_ID
+        WHERE
+        T5.ACQ_TIME = ( SELECT MAX( ACQ_TIME ) FROM MED_CLINIC_VITALSIGNS WHERE REG_ID = T1.REG_ID )
+        AND T1.IS_USED = 1
+        ) T6 ON T7.REG_ID = T6.REG_ID
+        LEFT JOIN MED_CLINIC_CARD_INFO T2 ON T7.INFO_ID = T2.INFO_ID
+        LEFT JOIN MED_CLINIC_KNOWLEDGE T3 ON T7.KNOWLEDGE_ID = T3.KNOWLEDGE_ID
+        AND IS_VALID = 1
+        LEFT JOIN ( SELECT CATEGORY_ID FROM MED_CLINIC_KNOWLEDGE_CATEGORY WHERE IS_USED = 1 ) T4 ON T3.CATEGORY_ID =
+        T4.CATEGORY_ID
+        LEFT JOIN MED_CLINIC_PATIENT_SAY T8 ON T8.PATIENT_SAYID = T7.SUBJECTIVE
+        <where>
+            <if test="dto.triageTimeStart != null">
+                AND T7.TRIAGE_TIME &gt;= #{dto.triageTimeStart,jdbcType=DATE}
+            </if>
+            <if test="dto.triageTimeEnd != null">
+                AND T7.TRIAGE_TIME &lt;= #{dto.triageTimeEnd,jdbcType=DATE}
+            </if>
+            <if test="dto.isNoname != null">
+                AND T7.IS_NONAME = #{dto.isNoname}
+            </if>
+            <if test="dto.searchValue != null">
+                AND (T2.NAME LIKE #{dto.searchValue,jdbcType=VARCHAR} OR T7.REG_ID LIKE
+                #{dto.searchValue,jdbcType=VARCHAR} OR T2.PATIENT_ID LIKE
+                #{dto.searchValue,jdbcType=VARCHAR})
+            </if>
+            <if test="dto.departmentId != null">
+                AND T7.DEPARTMENT_ID = #{dto.departmentId}
+            </if>
+            <if test="dto.gender != null">
+                AND T2.GENDER = #{dto.gender}
+            </if>
+            <if test="dto.diagnoseDescribe != null">
+                AND T7.DIAGNOSE_DESCRIBE = #{dto.diagnoseDescribe}
+            </if>
+            <if test="dto.resetLevel != null">
+                AND T7.SYSLEVEL = #{dto.resetLevel}
+            </if>
+            <if test="dto.turnResult != null">
+                AND T7.TURN_RESULT = #{dto.turnResult}
+            </if>
+            <if test="dto.channel != null">
+                AND T7.TURN_RESULT = #{dto.channel}
+            </if>
+            <if test="dto.checkStatus != null">
+                AND T7.CHECK_STATUS = #{dto.checkStatus}
+            </if>
+            AND T7.EVENTID IS NULL
+        </where>
+        ORDER BY
+        T7.TRIAGE_TIME DESC
+    </select>
+    <!-- 打印模板数据-->
+    <select id="getTemplateList" resultType="com.mdsd.cloud.controller.groupevents.entity.TemplateEntity">
+        select *
+        from MED_CLINIC_TEMPLATE
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

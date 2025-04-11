@@ -3,19 +3,17 @@ package com.mdsd.cloud.configuration;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
 import com.mdsd.cloud.controller.tyjw.dto.AuthSingleton;
 import com.mdsd.cloud.controller.tyjw.service.ITyjwService;
-import com.mdsd.cloud.utils.MQClient;
+import com.mdsd.cloud.controller.web.service.IWebSocketService;
+import com.mdsd.cloud.util.MQClient;
 import io.minio.MinioClient;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.servers.Server;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 /**
  * @author WangYunwei [2024-08-10]
@@ -24,12 +22,16 @@ import java.util.List;
 @Configuration
 public class RegBeanConf {
 
-    final ITyjwService tyjwService;
-    final IDjiService djiService;
+    private final IWebSocketService webSocketService;
+    private final ITyjwService tyjwService;
+    private final IDjiService djiService;
+    private final MQClient mqClient;
 
-    public RegBeanConf(ITyjwService tyjwService, IDjiService djiService) {
+    public RegBeanConf(IWebSocketService webSocketService, ITyjwService tyjwService, IDjiService djiService, MQClient mqClient) {
+        this.webSocketService = webSocketService;
         this.tyjwService = tyjwService;
         this.djiService = djiService;
+        this.mqClient = mqClient;
     }
 
     private final AuthSingleton auth = AuthSingleton.getInstance();
@@ -51,11 +53,12 @@ public class RegBeanConf {
                 tyjwService.getToken();
                 if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {
                     log.info("Access token: {}", auth.getAccessToken());
-                    tyjwService.startTcpClient();
+                    tyjwService.startTcpConnect();
                 }
-                tyjwService.startWebSocket();
+                webSocketService.startWebListening();
+                mqClient.createMqClient();
             } else {
-                djiService.startUdp();
+                djiService.startUdpListening();
             }
         };
     }

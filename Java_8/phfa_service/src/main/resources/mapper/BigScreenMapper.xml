@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.firstaidbigscreen.mapper.BigScreenMapper">
+    <!-- 急救公告大屏 - 24h内急救患者列表 -->
+    <select id="patientList24h" resultType="com.mdsd.cloud.controller.firstaidbigscreen.dto.PatientInfoListDto">
+        SELECT T1.PATIENT_ID,--患者ID
+        T1.MISSION_ID,--任务ID
+        T1.NAME,--姓名
+        T1.GENDER,--性别
+        T1.AGE,--年龄
+        T1.AGE_EXTEND,--年龄补充
+        T2.DISEASE_CATEGORY,--疾病类别
+        T2.DIAGNOSIS,--初步诊断
+        T3.LICENSE_PLATE,--车牌号
+        T4.DEPT,--交接科室
+        T4.SUBMIT_TIME--提交时间
+        FROM MED_PHEP_PATIENTS T1
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T2 ON T1.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_MISSIONS T3 ON T1.MISSION_ID = T3.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T4 ON T1.PATIENT_ID = T4.PATIENT_ID
+        <where>
+            T4.SUBMIT_TIME BETWEEN #{startTime,jdbcType=DATE} AND #{endTime,jdbcType=DATE}
+            <if test="hospitalId != null">
+                AND T2.TO_HOSPITAL = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY T4.SHIFT_TIME DESC
+    </select>
+    <!-- 急救公告大屏 - 时间轴 -->
+    <select id="timeAxis" resultType="com.mdsd.cloud.controller.firstaidbigscreen.dto.TimeAxisReo">
+        SELECT T1.LICENSE_PLATE,--车牌号
+        T2.NAME,--姓名
+        station.name as DISPATCH_VEHICLE_NAME, --出车分站
+        CASE
+            WHEN T2.GENDER = '01' THEN
+            '男'
+            WHEN T2.GENDER = '02' THEN
+            '女'
+            ELSE '未知'
+        END AS gender,--性别
+        T1.CALL_TIME,--呼叫时间
+        T1.PLAN_VEHICLE_TIME,--派车时间
+        T1.DISPATCH_VEHICLE_TIME,--出车时间
+        T1.ARRIVED_SCENE_TIME,--到达现场时间
+        T1.LEFT_SCENE_TIME,--送往医院时间
+        T1.ARRIVED_HOSPITAL_TIME,--到达医院时间
+        T3.SUBMIT_TIME,--提交时间
+        T4.TO_HOSPITAL_NAME AS hospitalName --医院名称
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T1.MISSION_ID = T2.MISSION_ID
+        LEFT JOIN MED_PHEP_SHIFT_RECORD T3 ON T2.PATIENT_ID = T3.PATIENT_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T4 ON T4.PATIENT_ID = T2.PATIENT_ID
+        LEFT JOIN MED_PHEP_STATION station ON station.ID = T1.DISPATCH_VEHICLE_SITE
+        WHERE T3.SUBMIT_TIME IS NULL
+        <if test="hospitalArea != null">
+            AND T4.TO_HOSPITAL = #{hospitalArea,jdbcType=VARCHAR}
+        </if>
+        ORDER BY T1.CALL_TIME DESC
+    </select>
+    <!-- 急救公告大屏 - 移动轨迹 -->
+    <select id="mobilityTrace" resultType="com.mdsd.cloud.controller.firstaidbigscreen.dto.MobilityTraceReo">
+        SELECT T1.MISSION_ID,--任务ID
+        T1.LICENSE_PLATE,--车牌号
+        T1.DESTINATION_ADDRESS,--现场地址
+        T1.ACCEPT_MISSION_TIME,--接收任务时间
+        T1.ARRIVED_SCENE_TIME,--到达现场时间
+        T1.TOUCH_PATIENT_TIME,--接触患者时间
+        T1.LEFT_SCENE_TIME,--送往医院时间
+        T1.ARRIVED_HOSPITAL_TIME,--到达医院时间
+        T1.STATUS AS missionStatus,--任务状态
+        T2.NAME,--姓名
+        T2.GENDER,--性别
+        T2.AGE,--年龄
+        T2.AGE_EXTEND,--年龄扩展
+        T3.PATIENT_ID,--患者ID
+        T3.TO_HOSPITAL AS toHospitalId,--送往医院ID
+        T3.TO_HOSPITAL_NAME,--送往医院名称
+        T3.DISEASE_CATEGORY,--疾病类别
+        T3.DIAGNOSIS,--初步诊断
+        T3.TREATMENT,--治疗措施
+        T3.REASON_TYPE,--呼救原因
+        T3.ADDRESS,--现场救治地点
+        T4.PULSE,--脉搏(次/分)
+        T4.DBP,--舒张压
+        T4.SBP,--收缩压
+        T4.SPO2,--血氧
+        T4.RR,--呼吸频率(次/分)
+        T5.NAME AS dispatchVehicleSite--出车分站
+        FROM MED_PHEP_MISSIONS T1
+        LEFT JOIN MED_PHEP_PATIENTS T2 ON T1.MISSION_ID = T2.MISSION_ID
+        LEFT JOIN MED_PHEP_MEDICAL_RECORDS T3 ON T2.PATIENT_ID = T3.PATIENT_ID
+        LEFT JOIN (
+        SELECT N1.PULSE,--脉搏(次/分)
+        N1.DBP,--舒张压
+        N1.SBP,--收缩压
+        N1.SPO2,--血氧
+        N1.RR,--呼吸频率(次/分)
+        N1.PATIENT_ID,--患者ID
+        N1.CREATE_TIME--检查时间
+        FROM MED_PHEP_GENERAL_INSPECTIONS N1,
+        (SELECT MAX(CREATE_TIME) AS maxtime, PATIENT_ID
+        FROM MED_PHEP_GENERAL_INSPECTIONS
+        GROUP BY PATIENT_ID) N2
+        WHERE N1.CREATE_TIME = N2.maxtime
+        AND N1.PATIENT_ID = N2.PATIENT_ID
+        ) T4 ON T2.PATIENT_ID = T4.PATIENT_ID
+        LEFT JOIN MED_PHEP_STATION T5 ON T1.DISPATCH_VEHICLE_SITE = T5.ID
+        <where>
+            T1.STATUS NOT IN ('05','06','07')
+            <if test="hospitalId != null">
+                AND T3.TO_HOSPITAL = #{hospitalId,jdbcType=VARCHAR}
+            </if>
+            <if test="list != null and list.size > 0">
+                AND T1.MISSION_ID IN
+                <foreach collection="list" item="missionId" open="(" separator="," close=")">
+                    #{missionId,jdbcType=VARCHAR}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

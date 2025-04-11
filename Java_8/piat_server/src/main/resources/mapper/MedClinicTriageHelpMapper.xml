@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdsd.cloud.controller.triage.mapper.MedClinicTriageHelpMapper">
+
+    <!-- 体征辅助 - 列表 -->
+    <select id="triList" resultType="com.mdsd.cloud.controller.triage.dto.TriListResultDto">
+        SELECT ID,--体征辅助分诊表_主键ID
+        VITAL_SIGN_TYPE,--体征类型
+        VITAL_SIGN_CODE,--体征简码
+        PATIENT_TYPE,--患者类型(0:成人,1:儿童)
+        YEAR_GROUP,--年龄分组(注: 只对儿童生效)
+        BEGIN_MONTH,--起始月数
+        END_MONTH,--结束月数
+        LEVEL_BEGIN,--起始值
+        LEVEL_END,--结束值
+        LEVEL_CODE,--体征分诊级别
+        STATUS--状态(0:是,1:否)
+        FROM MED_CLINIC_TRIAGE_HELP
+        <where>
+            STATUS IS NOT NULL
+            <if test="dto.status != null">
+                AND STATUS = #{dto.status}
+            </if>
+            <if test="dto.vitalSignType != null">
+                AND VITAL_SIGN_TYPE = #{dto.vitalSignType}
+            </if>
+            <if test="dto.patientType != null">
+                AND PATIENT_TYPE = #{dto.patientType}
+            </if>
+        </where>
+    </select>
+</mapper>

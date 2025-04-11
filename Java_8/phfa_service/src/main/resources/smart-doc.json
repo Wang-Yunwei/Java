@@ -1,0 +1,23 @@
+{
+  "serverUrl": "http://192.168.0.96:20220/phfa",
+  "outPath": "src/main/resources/static",
+  "isStrict": false,
+  "allInOne": true,
+  "coverOld": true,
+  "createDebugPage": true,
+  "packageFilters": "com.mdsd.cloud.controller.*",
+  "style": "xt256",
+  "projectName": "MedicalSystem - PHFA",
+  "showAuthor": true,
+  "allInOneDocFileName": "index.html",
+  "requestHeaders": [
+    {
+      "name": "jwt-token",
+      "type": "string",
+      "desc": "业务的jwtToken",
+      "required": false,
+      "value": "",
+      "since": "-"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /piat
+spring:
+  application:
+    name: piat
+  profiles:
+    active: @profiles.active@
+# 上传文件实际存放路径
+linux:
+  attachment:
+    path: /app/mdsd/mdsd-piat/attachment/
