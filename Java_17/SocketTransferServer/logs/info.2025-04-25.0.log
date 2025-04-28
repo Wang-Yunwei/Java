@@ -1,0 +1,96 @@
+2025-04-25T16:42:09.895+08:00  INFO 23048 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-04-25T16:42:09.937+08:00  INFO 23048 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 23048 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-04-25T16:42:09.939+08:00  INFO 23048 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-04-25T16:42:12.247+08:00  INFO 23048 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-04-25T16:42:12.283+08:00  INFO 23048 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-25T16:42:12.286+08:00  INFO 23048 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-25T16:42:12.791+08:00  INFO 23048 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 24070 (http)
+2025-04-25T16:42:12.801+08:00  INFO 23048 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-24070"]
+2025-04-25T16:42:12.804+08:00  INFO 23048 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-25T16:42:12.804+08:00  INFO 23048 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-04-25T16:42:12.924+08:00  INFO 23048 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-04-25T16:42:12.925+08:00  INFO 23048 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2903 ms
+2025-04-25T16:42:15.231+08:00  INFO 23048 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-04-25T16:42:15.304+08:00  INFO 23048 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-24070"]
+2025-04-25T16:42:15.339+08:00  INFO 23048 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 24070 (http) with context path '/socket-transfer-server'
+2025-04-25T16:42:15.593+08:00  INFO 23048 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 6.773 seconds (process running for 10.977)
+2025-04-25T16:42:15.599+08:00  INFO 23048 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-04-25T16:42:15.679+08:00  INFO 23048 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 24071
+2025-04-25T16:42:16.277+08:00  INFO 23048 --- [RMI TCP Connection(2)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-25T16:42:16.278+08:00  INFO 23048 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-25T16:42:16.279+08:00  INFO 23048 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-25T16:43:26.063+08:00  INFO 23048 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 打印body: {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"numbers":	[1, 2, 3],
+	"numbers2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"numbers3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-04-25T16:43:26.106+08:00  INFO 23048 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 心跳
+2025-04-25T16:43:26.107+08:00 ERROR 23048 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 未知指令!
+2025-04-25T16:59:49.020+08:00  INFO 5272 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-04-25T16:59:49.111+08:00  INFO 5272 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 5272 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-04-25T16:59:49.113+08:00  INFO 5272 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-04-25T16:59:52.941+08:00  INFO 5272 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-04-25T16:59:52.975+08:00  INFO 5272 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-25T16:59:52.978+08:00  INFO 5272 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-25T16:59:53.415+08:00  INFO 5272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 24070 (http)
+2025-04-25T16:59:53.426+08:00  INFO 5272 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-24070"]
+2025-04-25T16:59:53.427+08:00  INFO 5272 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-25T16:59:53.428+08:00  INFO 5272 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-04-25T16:59:53.559+08:00  INFO 5272 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-04-25T16:59:53.560+08:00  INFO 5272 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4399 ms
+2025-04-25T16:59:55.477+08:00  INFO 5272 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-04-25T16:59:55.539+08:00  INFO 5272 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-24070"]
+2025-04-25T16:59:55.560+08:00  INFO 5272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 24070 (http) with context path '/socket-transfer-server'
+2025-04-25T16:59:55.755+08:00  INFO 5272 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 7.603 seconds (process running for 8.603)
+2025-04-25T16:59:55.761+08:00  INFO 5272 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-04-25T16:59:55.828+08:00  INFO 5272 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 24071
+2025-04-25T16:59:56.166+08:00  INFO 5272 --- [RMI TCP Connection(3)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-25T16:59:56.167+08:00  INFO 5272 --- [RMI TCP Connection(3)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-25T16:59:56.169+08:00  INFO 5272 --- [RMI TCP Connection(3)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-25T17:00:07.817+08:00  INFO 5272 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 打印body: {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"numbers":	[1, 2, 3],
+	"numbers2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"numbers3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-04-25T17:00:07.839+08:00  INFO 5272 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 心跳
+2025-04-25T17:00:07.842+08:00 ERROR 5272 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 未知指令!

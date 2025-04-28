@@ -27,9 +27,9 @@ public enum DjiEnum {
     ;
 
 
-    private int value;
+    private final int value;
 
-    private String desc;
+    private final String desc;
 
     DjiEnum(int value, String desc) {
         this.value = value;
