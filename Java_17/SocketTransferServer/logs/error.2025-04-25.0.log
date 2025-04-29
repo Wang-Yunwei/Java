@@ -1,2 +1,0 @@
-2025-04-25T16:43:26.107+08:00 ERROR 23048 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 未知指令!
-2025-04-25T17:00:07.842+08:00 ERROR 5272 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 未知指令!
