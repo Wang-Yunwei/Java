@@ -133,3 +133,55 @@
 2025-04-28T16:24:50.452+08:00  INFO 20280 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 注册到系统!
 2025-04-28T16:25:03.882+08:00  INFO 20280 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 Mon Apr 28 16:25:03 2025
 
+2025-04-28T16:31:41.366+08:00  INFO 20280 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 Mon Apr 28 16:31:41 2025
+
+2025-04-28T16:52:13.757+08:00  INFO 11692 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-04-28T16:52:13.800+08:00  INFO 11692 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 11692 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-04-28T16:52:13.801+08:00  INFO 11692 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-04-28T16:52:17.245+08:00  INFO 11692 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-04-28T16:52:17.278+08:00  INFO 11692 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-28T16:52:17.281+08:00  INFO 11692 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-28T16:52:17.708+08:00  INFO 11692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 24070 (http)
+2025-04-28T16:52:17.719+08:00  INFO 11692 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-24070"]
+2025-04-28T16:52:17.722+08:00  INFO 11692 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-28T16:52:17.723+08:00  INFO 11692 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-04-28T16:52:17.842+08:00  INFO 11692 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-04-28T16:52:17.843+08:00  INFO 11692 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4001 ms
+2025-04-28T16:52:19.498+08:00  INFO 11692 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-04-28T16:52:19.550+08:00  INFO 11692 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-24070"]
+2025-04-28T16:52:19.575+08:00  INFO 11692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 24070 (http) with context path '/socket-transfer-server'
+2025-04-28T16:52:19.774+08:00  INFO 11692 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 7.014 seconds (process running for 7.94)
+2025-04-28T16:52:19.780+08:00  INFO 11692 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-04-28T16:52:19.840+08:00  INFO 11692 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 24071
+2025-04-28T16:52:20.477+08:00  INFO 11692 --- [RMI TCP Connection(2)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-28T16:52:20.477+08:00  INFO 11692 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-28T16:52:20.479+08:00  INFO 11692 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-28T16:52:37.357+08:00  INFO 11692 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 注册到系统!
+2025-04-28T16:52:45.526+08:00  INFO 11692 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 5 Mon Apr 28 16:52:45 2025
+
+2025-04-28T16:55:01.339+08:00  INFO 20580 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-04-28T16:55:01.381+08:00  INFO 20580 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 20580 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-04-28T16:55:01.382+08:00  INFO 20580 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-04-28T16:55:02.579+08:00  INFO 20580 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-04-28T16:55:02.609+08:00  INFO 20580 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-28T16:55:02.611+08:00  INFO 20580 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-04-28T16:55:02.926+08:00  INFO 20580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 24070 (http)
+2025-04-28T16:55:02.934+08:00  INFO 20580 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-24070"]
+2025-04-28T16:55:02.936+08:00  INFO 20580 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-28T16:55:02.937+08:00  INFO 20580 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-04-28T16:55:03.041+08:00  INFO 20580 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-04-28T16:55:03.041+08:00  INFO 20580 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1618 ms
+2025-04-28T16:55:04.562+08:00  INFO 20580 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-04-28T16:55:04.621+08:00  INFO 20580 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-24070"]
+2025-04-28T16:55:04.643+08:00  INFO 20580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 24070 (http) with context path '/socket-transfer-server'
+2025-04-28T16:55:04.845+08:00  INFO 20580 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 4.305 seconds (process running for 5.023)
+2025-04-28T16:55:04.851+08:00  INFO 20580 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-04-28T16:55:04.914+08:00  INFO 20580 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 24071
+2025-04-28T16:55:05.212+08:00  INFO 20580 --- [RMI TCP Connection(1)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-28T16:55:05.213+08:00  INFO 20580 --- [RMI TCP Connection(1)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-28T16:55:05.215+08:00  INFO 20580 --- [RMI TCP Connection(1)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-28T16:55:14.287+08:00  INFO 20580 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 注册到系统!
+2025-04-28T16:55:24.430+08:00  INFO 20580 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 5 Mon Apr 28 16:55:24 2025
+
+2025-04-28T16:55:24.430+08:00 ERROR 20580 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Mon,Apr,28,16:55:24,2025
+
