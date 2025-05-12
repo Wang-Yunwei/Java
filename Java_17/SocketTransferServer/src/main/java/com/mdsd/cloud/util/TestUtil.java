@@ -1,5 +1,6 @@
 package com.mdsd.cloud.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdsd.cloud.controller.dji.dto.WayPointV2MissionSettingsDTO;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
@@ -13,9 +14,26 @@ import java.util.ArrayList;
  */
 public class TestUtil {
 
+    public static void main(String[] args) {
 
+        int total = 35;
+        for(int i=0;i<total;i++){
+            for(int j=0;j<total;j++){
+                if(i+j==35){
+                    if (2 * j + 4 * i == 94){
+                        System.out.println("鸡=" + j + ",兔子=" + i);
+                    }
+                }
 
-    public static void main(String[] args) throws IOException {
+            }
+        }
+
+        for (int j = 0; j < total; j++) {
+            int r = total - j;
+            if (2 * j + 4 * r == 94) {
+                System.out.println("鸡=" + j + ",兔子=" + r);
+            }
+        }
 
         ObjectMapper obm = new ObjectMapper();
 
@@ -24,7 +42,7 @@ public class TestUtil {
         planLineDataDTO.setAutoSpeed(3.2f);
 
         ArrayList<PointDataDTO> pointDataDTOS = new ArrayList<>();
-        for(int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             PointDataDTO pointDataDTO = new PointDataDTO();
             pointDataDTO.setLng(2d);
             pointDataDTO.setLat(3d);
@@ -34,7 +52,11 @@ public class TestUtil {
         planLineDataDTO.setPoints(pointDataDTOS);
 
         WayPointV2MissionSettingsDTO airLine = DjiParameterMapping.getAirLine(planLineDataDTO);
-        System.out.println(obm.writeValueAsString(airLine));
+        try {
+            System.out.println(obm.writeValueAsString(airLine));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
