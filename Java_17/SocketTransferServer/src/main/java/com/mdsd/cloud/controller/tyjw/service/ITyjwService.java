@@ -15,7 +15,7 @@ import java.util.Map;
 public interface ITyjwService {
 
     /**
-     * 处理WEB SOCKET
+     * 处理 WEB SOCKET
      */
     void handleWebSocket(JsonNode jsonNode) throws JsonProcessingException;
 
@@ -25,7 +25,7 @@ public interface ITyjwService {
     void startTcpConnect();
 
     /**
-     * 处理TCP SOCKET
+     * 处理 TCP SOCKET
      */
     void handleTcpClient(ByteBuf buf);
 

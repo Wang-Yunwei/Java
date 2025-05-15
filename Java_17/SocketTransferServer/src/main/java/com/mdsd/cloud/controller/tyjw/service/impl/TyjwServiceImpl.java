@@ -206,9 +206,6 @@ public class TyjwServiceImpl implements ITyjwService {
         }
     }
 
-    /**
-     * 开始 TCP 连接
-     */
     @Override
     public void startTcpConnect() {
         ChannelFuture tcpClient = SocketUtil.createTcpClient(new TyjwChannelInboundHandler(), host, port);
@@ -231,9 +228,6 @@ public class TyjwServiceImpl implements ITyjwService {
         });
     }
 
-    /**
-     * TCP_CLIENT 消息处理
-     */
     @Override
     public void handleTcpClient(ByteBuf buf) {
         if (buf.getShort(0) == 0x6A77) {

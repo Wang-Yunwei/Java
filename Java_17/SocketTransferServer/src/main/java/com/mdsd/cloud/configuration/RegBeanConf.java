@@ -55,6 +55,7 @@ public class RegBeanConf {
                     log.info("Access token: {}", auth.getAccessToken());
                     tyjwService.startTcpConnect();
                 }
+                djiService.startUdpListening();
                 webSocketService.startWebListening();
                 mqClient.createMqClient();
             } else {

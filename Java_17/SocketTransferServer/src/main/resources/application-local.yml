@@ -20,9 +20,9 @@ env:
     jikupi: 192.168.14.120
   port:
     sts:
-      api: 24070
-      udp: 24071
-      web_socket_server: 24072
+      api: 20240
+      web_socket_server: 20241
+      udp: 20242
       mqtt: 1883
     tyjw:
       api: 12000
