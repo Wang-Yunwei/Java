@@ -101,9 +101,6 @@ public class DjiServiceImpl implements IDjiService {
     @Override
     public void startUdpListening() {
         udpChannel = SocketUtil.createUdpServer(new DjiChannelInboundHandler(), port);
-        if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
-            FfmpegUtil.startProcess();
-        }
     }
 
     /**
@@ -156,8 +153,6 @@ public class DjiServiceImpl implements IDjiService {
                 // 发送数据
                 DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.build().toByteArray()), aircraftMap.get(payload.getSerialNumber()));
                 udpChannel.writeAndFlush(datagramPacket);
-                // 记录操作日志到 MQTT
-//            MQClient.publish(format(MQClient.taskTopic, serialNumber, jsonNode.get("任务ID").asText()), jsonNode.toString().getBytes(), 1, false);
             }
         }
     }
