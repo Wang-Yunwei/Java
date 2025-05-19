@@ -118,7 +118,7 @@ public class TyjwServiceImpl implements ITyjwService {
         String instruct = jsonNode.get("指令编号").asText();
         String action = jsonNode.get("动作编号").asText();
         if (StringUtils.isEmpty(instruct) && StringUtils.isEmpty(action)) {
-            webSocketService.sendMessage(boxNumber, String.format(WebSocketServiceImpl.errorMessage,"指令编号或动作编号不能为空!"));
+            webSocketService.sendMessage(boxNumber, String.format(WebSocketServiceImpl.errorMessage, "指令编号或动作编号不能为空!"));
         }
         TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(instruct, 16), Integer.parseInt(action, 16));
         if (null != tcpChannel && tcpChannel.isActive()) {
@@ -176,7 +176,7 @@ public class TyjwServiceImpl implements ITyjwService {
             // 记录操作日志到 MQTT
             MQClient.publish(format(MQClient.taskTopic, boxNumber, jsonNode.get("任务ID").asText()), jsonNode.toString().getBytes(), 1, false);
         } else {
-            webSocketService.sendMessage(boxNumber, String.format(WebSocketServiceImpl.errorMessage,"TCP 连接不存在!"));
+            webSocketService.sendMessage(boxNumber, String.format(WebSocketServiceImpl.errorMessage, "TCP 连接不存在!"));
         }
     }
 
@@ -456,14 +456,12 @@ public class TyjwServiceImpl implements ITyjwService {
     /**
      * 获取 AccessToken
      */
-    @Scheduled(cron = "0 0/3 * * * ?")
+    @Scheduled(cron = "0 0 2 * * ?")
     @Override
     public void getToken() {
-        if ("Linux1".equals(System.getProperties().getProperty("os.name"))) {
-            if (Strings.isBlank(auth.getAccessToken())) {
-                getToken(new GetTokenInp());
-                log.info("GetAccessToken: 0 0/3 * * * ?");
-            }
+        if (!"windows10".equals(ExecShell.exec("hostname")) && Strings.isBlank(auth.getAccessToken())) {
+            getToken(new GetTokenInp());
+            log.info("GetAccessToken: 0 0 2 * * ?");
         }
     }
 

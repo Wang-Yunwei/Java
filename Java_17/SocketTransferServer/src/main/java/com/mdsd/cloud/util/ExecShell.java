@@ -4,27 +4,25 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * @author WangYunwei [2024-07-14]
+ * @author WangYunwei [2025-05-16]
  */
-public class TestUtil {
+public class ExecShell {
 
-    public static void main(String[] args) {
-
+    public static String exec(String cmd) {
         StringBuffer result = new StringBuffer();
         try {
             // 执行命令
-            Process process = Runtime.getRuntime().exec("cmd /c uname -m");
+            Process process = Runtime.getRuntime().exec("Linux".equals(System.getProperties().getProperty("os.name")) ? cmd : "cmd /c " + cmd);
             // 读取输出
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
             String line;
             while ((line = reader.readLine()) != null) {
                 result.append(line);
             }
-            int i = process.waitFor();
-            System.out.println("执行状态码:" + i);
+            process.waitFor();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("DESKTOP-UHUVLCH".equals(result.toString()));
+        return result.toString();
     }
 }
