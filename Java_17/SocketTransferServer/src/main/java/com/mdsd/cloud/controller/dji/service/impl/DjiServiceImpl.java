@@ -80,7 +80,7 @@ public class DjiServiceImpl implements IDjiService {
                     throw new RuntimeException(e);
                 }
                 // 当接收到心跳后解析地址和端口号
-                if (payload.getCommand() == DjiProtoBuf.CommandEnum.M0_HEARTBEAT) {
+                if (payload.getModule() == DjiProtoBuf.ModuleEnum.M0_HEARTBEAT) {
                     if (aircraftMap.containsKey(el.getSerialNumber())) {
                         log.info("{} 心跳 {}", el.getSerialNumber(), payload.getMessage());
                     } else {
@@ -114,7 +114,7 @@ public class DjiServiceImpl implements IDjiService {
                 TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(instruct, 16), Integer.parseInt(action, 16));
                 log.info(anEnum.name());
                 // 设置序列号、指令编号、动作编号
-                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setCommand(anEnum.getModelEnum());
+                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(anEnum.getModelEnum());
                 switch (anEnum) {
                     case 航线飞行_航线规划 -> {
                         payload.setActive(DjiProtoBuf.ActiveEnum.M15_F2_UPLOAD_MISSION);
@@ -158,7 +158,7 @@ public class DjiServiceImpl implements IDjiService {
      */
     @Override
     public void handleUdpSocket(DjiProtoBuf.Payload payload) {
-        switch (payload.getCommand()) {
+        switch (payload.getModule()) {
             case M2_FC_SUBSCRIPTION -> {
                 log.info(payload.getBody().toStringUtf8());
                 // 将str转为JsonNode
@@ -203,7 +203,7 @@ public class DjiServiceImpl implements IDjiService {
                     }
                 }
             }
-            default -> System.out.println("打印 status: " + payload.getState());
+            default -> log.info("================");
         }
     }
 }
