@@ -51,7 +51,7 @@ public class RegBeanConf {
     CommandLineRunner startImmediatelyExecute() {
         return args -> {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
-            if ("windows10".equals(ExecShell.exec("hostname"))) {
+            if ("Windows10".equals(ExecShell.exec("hostname"))) {
                 djiService.startUdpListening();
             } else {
                 tyjwService.getToken();

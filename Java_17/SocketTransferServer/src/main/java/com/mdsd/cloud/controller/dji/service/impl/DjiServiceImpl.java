@@ -75,8 +75,7 @@ public class DjiServiceImpl implements IDjiService {
             Optional.ofNullable(payload).ifPresent(el -> {
                 // TODO 打印 Payload
                 try {
-                    System.out.println("从 UDP 获取 Payload: " + printer.print(payload));
-                    System.out.println("打印 body: " + payload.getBody().toStringUtf8());
+                    log.info("Payload: {}", printer.print(payload));
                 } catch (InvalidProtocolBufferException e) {
                     throw new RuntimeException(e);
                 }
@@ -88,9 +87,6 @@ public class DjiServiceImpl implements IDjiService {
                         log.info("{} 注册到系统!", el.getSerialNumber());
                         aircraftMap.put(el.getSerialNumber(), pak.sender());
                     }
-                    // 测试发包
-                    DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.toByteArray()), aircraftMap.get(payload.getSerialNumber()));
-                    udpChannel.writeAndFlush(datagramPacket);
                 } else {
                     publisher.publishEvent(new CommonEvent(CommonEnum.UDP_SOCKET_DJI, payload));
                 }
@@ -164,17 +160,18 @@ public class DjiServiceImpl implements IDjiService {
     public void handleUdpSocket(DjiProtoBuf.Payload payload) {
         switch (payload.getCommand()) {
             case M2_FC_SUBSCRIPTION -> {
+                log.info(payload.getBody().toStringUtf8());
                 // 将str转为JsonNode
-                JsonNode jsonNode;
-                try {
-                    jsonNode = obm.readTree(payload.getBody().toStringUtf8());
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
+//                JsonNode jsonNode;
+//                try {
+//                    jsonNode = obm.readTree(payload.getBody().toStringUtf8());
+//                } catch (JsonProcessingException e) {
+//                    throw new RuntimeException(e);
+//                }
                 // 获取JsonNode中的值
-                Optional.ofNullable(jsonNode.path("dji")).filter(node -> !node.isMissingNode()).map(node -> node.path("aircraftSeries")).filter(node -> !node.isMissingNode()).ifPresent(node -> {
-                    System.out.println("aircraftSeries: " + node.asText());
-                });
+//                Optional.ofNullable(jsonNode.path("dji")).filter(node -> !node.isMissingNode()).map(node -> node.path("aircraftSeries")).filter(node -> !node.isMissingNode()).ifPresent(node -> {
+//                    System.out.println("aircraftSeries: " + node.asText());
+//                });
             }
             case M5_POWER_MANAGEMENT -> {
 

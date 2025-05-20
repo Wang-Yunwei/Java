@@ -13,7 +13,7 @@ public class TestUtil {
         StringBuffer result = new StringBuffer();
         try {
             // 执行命令
-            Process process = Runtime.getRuntime().exec("cmd /c uname -m");
+            Process process = Runtime.getRuntime().exec("cmd /c hostname");
             // 读取输出
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
             String line;
@@ -25,6 +25,6 @@ public class TestUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("DESKTOP-UHUVLCH".equals(result.toString()));
+        System.out.println("Windows10".equals(result.toString()));
     }
 }
