@@ -1,10 +1,10 @@
-package com.mdsd.cloud.controller.web.service.impl;
+package com.mdsd.cloud.controller.websocket.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mdsd.cloud.controller.web.dto.WsChannelDetails;
-import com.mdsd.cloud.controller.web.service.IWebSocketService;
+import com.mdsd.cloud.controller.websocket.dto.WsChannelDetails;
+import com.mdsd.cloud.controller.websocket.service.IWebSocketService;
 import com.mdsd.cloud.enums.CommonEnum;
 import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.util.MQClient;

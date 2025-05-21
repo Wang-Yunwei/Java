@@ -9,8 +9,8 @@ import com.mdsd.cloud.controller.dji.dto.AircraftDto;
 import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
 import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
-import com.mdsd.cloud.controller.web.service.IWebSocketService;
-import com.mdsd.cloud.controller.web.service.impl.WebSocketServiceImpl;
+import com.mdsd.cloud.controller.websocket.service.IWebSocketService;
+import com.mdsd.cloud.controller.websocket.service.impl.WebSocketServiceImpl;
 import com.mdsd.cloud.enums.CommonEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.CommonEvent;
@@ -103,6 +103,64 @@ public class DjiServiceImpl implements IDjiService {
     }
 
     /**
+     * 处理 UDP SOCKET
+     */
+    @Override
+    public void handleUdpSocket(DjiProtoBuf.Payload payload) {
+        AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
+        switch (payload.getModule()) {
+            case M2_FC_SUBSCRIPTION -> {
+                log.info(payload.getBody().toStringUtf8());
+                // 将str转为JsonNode
+//                JsonNode jsonNode;
+//                try {
+//                    jsonNode = obm.readTree(payload.getBody().toStringUtf8());
+//                } catch (JsonProcessingException e) {
+//                    throw new RuntimeException(e);
+//                }
+                // 获取JsonNode中的值
+//                Optional.ofNullable(jsonNode.path("dji")).filter(node -> !node.isMissingNode()).map(node -> node.path("aircraftSeries")).filter(node -> !node.isMissingNode()).ifPresent(node -> {
+//                    System.out.println("aircraftSeries: " + node.asText());
+//                });
+            }
+            case M5_POWER_MANAGEMENT -> {
+                // 飞行器下电,关闭视频流管道
+                try {
+                    aircraftDto.getProcess().getOutputStream().close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                aircraftDto.getProcess().destroy();
+                // 删除注册
+                aircraftMap.remove(payload.getSerialNumber());
+            }
+            case M14_LIVE_VIEW -> {
+                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                    if (aircraftDto.getProcess() == null || aircraftDto.getProcess().isAlive()) {
+                        aircraftDto.setProcess(FfmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
+                    }
+                    // 将接收到的数据直接写入FFmpeg标准输入
+                    try {
+                        aircraftDto.getProcess().getOutputStream().write(payload.getBody().toByteArray());
+                        aircraftDto.getProcess().getOutputStream().flush();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    // 如果是 Windows 环境则将视频流写入本地
+                    log.info("已接收 {} 字节", payload.getBody().size());
+                    try (FileOutputStream fileOutputStream = new FileOutputStream(payload.getMessage(), true)) {
+                        fileOutputStream.write(payload.getBody().toByteArray(), 0, payload.getBody().size());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            default -> log.info("================");
+        }
+    }
+
+    /**
      * 处理 WEB SOCKET
      */
     @Override
@@ -153,63 +211,6 @@ public class DjiServiceImpl implements IDjiService {
                 DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.build().toByteArray()), aircraftMap.get(payload.getSerialNumber()).getInetSocketAddress());
                 udpChannel.writeAndFlush(datagramPacket);
             }
-        }
-    }
-
-    /**
-     * 处理 UDP SOCKET
-     */
-    @Override
-    public void handleUdpSocket(DjiProtoBuf.Payload payload) {
-        AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
-        switch (payload.getModule()) {
-            case M2_FC_SUBSCRIPTION -> {
-                log.info(payload.getBody().toStringUtf8());
-                // 将str转为JsonNode
-//                JsonNode jsonNode;
-//                try {
-//                    jsonNode = obm.readTree(payload.getBody().toStringUtf8());
-//                } catch (JsonProcessingException e) {
-//                    throw new RuntimeException(e);
-//                }
-                // 获取JsonNode中的值
-//                Optional.ofNullable(jsonNode.path("dji")).filter(node -> !node.isMissingNode()).map(node -> node.path("aircraftSeries")).filter(node -> !node.isMissingNode()).ifPresent(node -> {
-//                    System.out.println("aircraftSeries: " + node.asText());
-//                });
-            }
-            case M5_POWER_MANAGEMENT -> {
-                // 飞行器下电,关闭视频流管道
-                try {
-                    aircraftDto.getProcess().getOutputStream().close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                aircraftDto.getProcess().destroy();
-
-            }
-            case M14_LIVE_VIEW -> {
-                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
-                    if (aircraftDto.getProcess() == null || aircraftDto.getProcess().isAlive()) {
-                        aircraftDto.setProcess(FfmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
-                    }
-                    // 将接收到的数据直接写入FFmpeg标准输入
-                    try {
-                        aircraftDto.getProcess().getOutputStream().write(payload.getBody().toByteArray());
-                        aircraftDto.getProcess().getOutputStream().flush();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else {
-                    // 如果是 Windows 环境则将视频流写入本地
-                    log.info("已接收 {} 字节", payload.getBody().size());
-                    try (FileOutputStream fileOutputStream = new FileOutputStream(payload.getMessage(), true)) {
-                        fileOutputStream.write(payload.getBody().toByteArray(), 0, payload.getBody().size());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            default -> log.info("================");
         }
     }
 }

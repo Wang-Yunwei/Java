@@ -1,4 +1,4 @@
-package com.mdsd.cloud.controller.web.dto;
+package com.mdsd.cloud.controller.websocket.dto;
 
 import io.netty.channel.Channel;
 import lombok.Getter;

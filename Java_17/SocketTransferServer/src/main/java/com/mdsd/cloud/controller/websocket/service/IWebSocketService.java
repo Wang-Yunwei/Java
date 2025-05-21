@@ -1,8 +1,7 @@
-package com.mdsd.cloud.controller.web.service;
+package com.mdsd.cloud.controller.websocket.service;
 
-import com.mdsd.cloud.controller.web.dto.WsChannelDetails;
+import com.mdsd.cloud.controller.websocket.dto.WsChannelDetails;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
