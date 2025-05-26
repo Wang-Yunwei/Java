@@ -1,0 +1,128 @@
+2025-05-23T02:00:01.914+08:00  INFO 15344 --- [scheduling-1] c.m.c.c.t.service.impl.TyjwServiceImpl   : GetAccessToken: 0 0 2 * * ?
+2025-05-23T14:50:39.934+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-23T14:50:39.967+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 注册到系统!
+2025-05-23T14:50:39.993+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-23T14:50:39.993+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T14:50:39.993+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-23T14:50:39.994+08:00  INFO 15344 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T14:59:07.893+08:00  INFO 24604 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-05-23T14:59:07.944+08:00  INFO 24604 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 24604 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-05-23T14:59:07.945+08:00  INFO 24604 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-05-23T14:59:13.623+08:00  INFO 24604 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-05-23T14:59:13.660+08:00  INFO 24604 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-23T14:59:13.662+08:00  INFO 24604 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-23T14:59:14.140+08:00  INFO 24604 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 20240 (http)
+2025-05-23T14:59:14.151+08:00  INFO 24604 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-20240"]
+2025-05-23T14:59:14.153+08:00  INFO 24604 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-23T14:59:14.154+08:00  INFO 24604 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-05-23T14:59:14.288+08:00  INFO 24604 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-05-23T14:59:14.289+08:00  INFO 24604 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6151 ms
+2025-05-23T14:59:16.482+08:00  INFO 24604 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-05-23T14:59:16.546+08:00  INFO 24604 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-20240"]
+2025-05-23T14:59:16.567+08:00  INFO 24604 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'
+2025-05-23T14:59:16.801+08:00  INFO 24604 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 10.037 seconds (process running for 11.89)
+2025-05-23T14:59:16.811+08:00  INFO 24604 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-05-23T14:59:17.084+08:00  INFO 24604 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 20242
+2025-05-23T14:59:17.201+08:00  INFO 24604 --- [main] com.mdsd.cloud.util.SocketUtil           : Send Buffer Size: 65536
+2025-05-23T14:59:17.201+08:00  INFO 24604 --- [main] com.mdsd.cloud.util.SocketUtil           : Receive Buffer Size: 65536
+2025-05-23T14:59:17.681+08:00  INFO 24604 --- [RMI TCP Connection(2)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-23T14:59:17.681+08:00  INFO 24604 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-23T14:59:17.682+08:00  INFO 24604 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-23T14:59:35.992+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-23T14:59:35.995+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 注册到系统!
+2025-05-23T14:59:35.998+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-23T14:59:35.998+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T14:59:35.998+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-23T14:59:36.016+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-23T14:59:36.016+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T15:00:37.384+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-23T15:00:37.385+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T15:00:37.386+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-23T15:00:37.386+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 
+2025-05-23T15:00:37.386+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-23T15:00:37.387+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "active": "M2_F1_INIT",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-23T15:00:37.387+08:00  INFO 24604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : MDSD20240714_0000 心跳 

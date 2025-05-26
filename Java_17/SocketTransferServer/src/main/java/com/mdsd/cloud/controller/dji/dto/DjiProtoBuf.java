@@ -5381,10 +5381,30 @@ public final class DjiProtoBuf {
 
     /**
      * <pre>
+     * 包数
+     * </pre>
+     *
+     * <code>int32 packageNum = 4;</code>
+     * @return The packageNum.
+     */
+    int getPackageNum();
+
+    /**
+     * <pre>
+     * 包序
+     * </pre>
+     *
+     * <code>int32 packageIndex = 5;</code>
+     * @return The packageIndex.
+     */
+    int getPackageIndex();
+
+    /**
+     * <pre>
      * 消息
      * </pre>
      *
-     * <code>string message = 4;</code>
+     * <code>string message = 6;</code>
      * @return The message.
      */
     String getMessage();
@@ -5393,7 +5413,7 @@ public final class DjiProtoBuf {
      * 消息
      * </pre>
      *
-     * <code>string message = 4;</code>
+     * <code>string message = 6;</code>
      * @return The bytes for message.
      */
     com.google.protobuf.ByteString
@@ -5404,7 +5424,7 @@ public final class DjiProtoBuf {
      * 数据
      * </pre>
      *
-     * <code>bytes body = 5;</code>
+     * <code>bytes body = 7;</code>
      * @return The body.
      */
     com.google.protobuf.ByteString getBody();
@@ -5481,13 +5501,23 @@ public final class DjiProtoBuf {
               active_ = rawValue;
               break;
             }
-            case 34: {
+            case 32: {
+
+              packageNum_ = input.readInt32();
+              break;
+            }
+            case 40: {
+
+              packageIndex_ = input.readInt32();
+              break;
+            }
+            case 50: {
               String s = input.readStringRequireUtf8();
 
               message_ = s;
               break;
             }
-            case 42: {
+            case 58: {
 
               body_ = input.readBytes();
               break;
@@ -5624,14 +5654,44 @@ public final class DjiProtoBuf {
       return result == null ? ActiveEnum.UNRECOGNIZED : result;
     }
 
-    public static final int MESSAGE_FIELD_NUMBER = 4;
+    public static final int PACKAGENUM_FIELD_NUMBER = 4;
+    private int packageNum_;
+    /**
+     * <pre>
+     * 包数
+     * </pre>
+     *
+     * <code>int32 packageNum = 4;</code>
+     * @return The packageNum.
+     */
+    @Override
+    public int getPackageNum() {
+      return packageNum_;
+    }
+
+    public static final int PACKAGEINDEX_FIELD_NUMBER = 5;
+    private int packageIndex_;
+    /**
+     * <pre>
+     * 包序
+     * </pre>
+     *
+     * <code>int32 packageIndex = 5;</code>
+     * @return The packageIndex.
+     */
+    @Override
+    public int getPackageIndex() {
+      return packageIndex_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 6;
     private volatile Object message_;
     /**
      * <pre>
      * 消息
      * </pre>
      *
-     * <code>string message = 4;</code>
+     * <code>string message = 6;</code>
      * @return The message.
      */
     @Override
@@ -5652,7 +5712,7 @@ public final class DjiProtoBuf {
      * 消息
      * </pre>
      *
-     * <code>string message = 4;</code>
+     * <code>string message = 6;</code>
      * @return The bytes for message.
      */
     @Override
@@ -5670,14 +5730,14 @@ public final class DjiProtoBuf {
       }
     }
 
-    public static final int BODY_FIELD_NUMBER = 5;
+    public static final int BODY_FIELD_NUMBER = 7;
     private com.google.protobuf.ByteString body_;
     /**
      * <pre>
      * 数据
      * </pre>
      *
-     * <code>bytes body = 5;</code>
+     * <code>bytes body = 7;</code>
      * @return The body.
      */
     @Override
@@ -5708,11 +5768,17 @@ public final class DjiProtoBuf {
       if (active_ != ActiveEnum.UNKNOW.getNumber()) {
         output.writeEnum(3, active_);
       }
+      if (packageNum_ != 0) {
+        output.writeInt32(4, packageNum_);
+      }
+      if (packageIndex_ != 0) {
+        output.writeInt32(5, packageIndex_);
+      }
       if (!getMessageBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, message_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, message_);
       }
       if (!body_.isEmpty()) {
-        output.writeBytes(5, body_);
+        output.writeBytes(7, body_);
       }
       unknownFields.writeTo(output);
     }
@@ -5734,12 +5800,20 @@ public final class DjiProtoBuf {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, active_);
       }
+      if (packageNum_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, packageNum_);
+      }
+      if (packageIndex_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, packageIndex_);
+      }
       if (!getMessageBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, message_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, message_);
       }
       if (!body_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, body_);
+          .computeBytesSize(7, body_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5760,6 +5834,10 @@ public final class DjiProtoBuf {
           .equals(other.getSerialNumber())) return false;
       if (module_ != other.module_) return false;
       if (active_ != other.active_) return false;
+      if (getPackageNum()
+          != other.getPackageNum()) return false;
+      if (getPackageIndex()
+          != other.getPackageIndex()) return false;
       if (!getMessage()
           .equals(other.getMessage())) return false;
       if (!getBody()
@@ -5781,6 +5859,10 @@ public final class DjiProtoBuf {
       hash = (53 * hash) + module_;
       hash = (37 * hash) + ACTIVE_FIELD_NUMBER;
       hash = (53 * hash) + active_;
+      hash = (37 * hash) + PACKAGENUM_FIELD_NUMBER;
+      hash = (53 * hash) + getPackageNum();
+      hash = (37 * hash) + PACKAGEINDEX_FIELD_NUMBER;
+      hash = (53 * hash) + getPackageIndex();
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
       hash = (37 * hash) + BODY_FIELD_NUMBER;
@@ -5928,6 +6010,10 @@ public final class DjiProtoBuf {
 
         active_ = 0;
 
+        packageNum_ = 0;
+
+        packageIndex_ = 0;
+
         message_ = "";
 
         body_ = com.google.protobuf.ByteString.EMPTY;
@@ -5961,6 +6047,8 @@ public final class DjiProtoBuf {
         result.serialNumber_ = serialNumber_;
         result.module_ = module_;
         result.active_ = active_;
+        result.packageNum_ = packageNum_;
+        result.packageIndex_ = packageIndex_;
         result.message_ = message_;
         result.body_ = body_;
         onBuilt();
@@ -6020,6 +6108,12 @@ public final class DjiProtoBuf {
         }
         if (other.active_ != 0) {
           setActiveValue(other.getActiveValue());
+        }
+        if (other.getPackageNum() != 0) {
+          setPackageNum(other.getPackageNum());
+        }
+        if (other.getPackageIndex() != 0) {
+          setPackageIndex(other.getPackageIndex());
         }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
@@ -6301,13 +6395,99 @@ public final class DjiProtoBuf {
         return this;
       }
 
+      private int packageNum_ ;
+      /**
+       * <pre>
+       * 包数
+       * </pre>
+       *
+       * <code>int32 packageNum = 4;</code>
+       * @return The packageNum.
+       */
+      @Override
+      public int getPackageNum() {
+        return packageNum_;
+      }
+      /**
+       * <pre>
+       * 包数
+       * </pre>
+       *
+       * <code>int32 packageNum = 4;</code>
+       * @param value The packageNum to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackageNum(int value) {
+        
+        packageNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 包数
+       * </pre>
+       *
+       * <code>int32 packageNum = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPackageNum() {
+        
+        packageNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int packageIndex_ ;
+      /**
+       * <pre>
+       * 包序
+       * </pre>
+       *
+       * <code>int32 packageIndex = 5;</code>
+       * @return The packageIndex.
+       */
+      @Override
+      public int getPackageIndex() {
+        return packageIndex_;
+      }
+      /**
+       * <pre>
+       * 包序
+       * </pre>
+       *
+       * <code>int32 packageIndex = 5;</code>
+       * @param value The packageIndex to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackageIndex(int value) {
+        
+        packageIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 包序
+       * </pre>
+       *
+       * <code>int32 packageIndex = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPackageIndex() {
+        
+        packageIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
       private Object message_ = "";
       /**
        * <pre>
        * 消息
        * </pre>
        *
-       * <code>string message = 4;</code>
+       * <code>string message = 6;</code>
        * @return The message.
        */
       public String getMessage() {
@@ -6327,7 +6507,7 @@ public final class DjiProtoBuf {
        * 消息
        * </pre>
        *
-       * <code>string message = 4;</code>
+       * <code>string message = 6;</code>
        * @return The bytes for message.
        */
       public com.google.protobuf.ByteString
@@ -6348,7 +6528,7 @@ public final class DjiProtoBuf {
        * 消息
        * </pre>
        *
-       * <code>string message = 4;</code>
+       * <code>string message = 6;</code>
        * @param value The message to set.
        * @return This builder for chaining.
        */
@@ -6367,7 +6547,7 @@ public final class DjiProtoBuf {
        * 消息
        * </pre>
        *
-       * <code>string message = 4;</code>
+       * <code>string message = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearMessage() {
@@ -6381,7 +6561,7 @@ public final class DjiProtoBuf {
        * 消息
        * </pre>
        *
-       * <code>string message = 4;</code>
+       * <code>string message = 6;</code>
        * @param value The bytes for message to set.
        * @return This builder for chaining.
        */
@@ -6403,7 +6583,7 @@ public final class DjiProtoBuf {
        * 数据
        * </pre>
        *
-       * <code>bytes body = 5;</code>
+       * <code>bytes body = 7;</code>
        * @return The body.
        */
       @Override
@@ -6415,7 +6595,7 @@ public final class DjiProtoBuf {
        * 数据
        * </pre>
        *
-       * <code>bytes body = 5;</code>
+       * <code>bytes body = 7;</code>
        * @param value The body to set.
        * @return This builder for chaining.
        */
@@ -6433,7 +6613,7 @@ public final class DjiProtoBuf {
        * 数据
        * </pre>
        *
-       * <code>bytes body = 5;</code>
+       * <code>bytes body = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearBody() {
@@ -6509,254 +6689,255 @@ public final class DjiProtoBuf {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\tdji.proto\"x\n\007Payload\022\024\n\014serialNumber\030\001" +
-      " \001(\t\022\033\n\006module\030\002 \001(\0162\013.ModuleEnum\022\033\n\006act" +
-      "ive\030\003 \001(\0162\013.ActiveEnum\022\017\n\007message\030\004 \001(\t\022" +
-      "\014\n\004body\030\005 \001(\014*\366\002\n\nModuleEnum\022\020\n\014M0_HEART" +
-      "BEAT\020\000\022\017\n\013M1_AIRCRAFT\020\001\022\026\n\022M2_FC_SUBSCRI" +
-      "PTION\020\002\022\025\n\021M3_CAMERA_MANAGER\020\003\022\025\n\021M4_GIM" +
-      "BAL_MANAGER\020\004\022\027\n\023M5_POWER_MANAGEMENT\020\005\022\030" +
-      "\n\024M6_FLIGHT_CONTROLLER\020\006\022\r\n\tM7_WIDGET\020\007\022" +
-      "\n\n\006M8_HMS\020\010\022\020\n\014M9_TIME_SYNC\020\t\022\031\n\025M10_DAT" +
-      "A_TRANSMISSION\020\n\022\r\n\tM11_XPORT\020\014\022\017\n\013M12_U" +
-      "PGRADE\020\r\022\022\n\016M13_PERCEPTION\020\016\022\021\n\rM14_LIVE" +
-      "_VIEW\020\017\022\023\n\017M15_WAYPOINT_V2\020\020\022\023\n\017M16_POSI" +
-      "TIONING\020\021\022\023\n\017M17_MOP_CHANNEL\020\022*\213I\n\nActiv" +
-      "eEnum\022\n\n\006UNKNOW\020\000\022\021\n\014M2_F0_DEINIT\020\200\004\022\017\n\n" +
-      "M2_F1_INIT\020\201\004\022\025\n\020M2_F2_QUATERNION\020\202\004\022\036\n\031" +
-      "M2_F3_ACCELERATION_GROUND\020\203\004\022\034\n\027M2_F4_AC" +
-      "CELERATION_BODY\020\204\004\022\033\n\026M2_F5_ACCELERATION" +
-      "_RAW\020\205\004\022\023\n\016M2_F6_VELOCITY\020\206\004\022 \n\033M2_F7_AN" +
-      "GULAR_RATE_FUSIONED\020\207\004\022\033\n\026M2_F8_ANGULAR_" +
-      "RATE_RAW\020\210\004\022\031\n\024M2_F9_ALTITUDE_FUSED\020\211\004\022\036" +
-      "\n\031M2_F10_ALTITUDE_BAROMETER\020\212\004\022!\n\034M2_F11" +
-      "_ALTITUDE_OF_HOMEPOINT\020\213\004\022\031\n\024M2_F12_HEIG" +
-      "HT_FUSION\020\214\004\022\033\n\026M2_F13_HEIGHT_RELATIVE\020\215" +
-      "\004\022\032\n\025M2_F14_POSITION_FUSED\020\216\004\022\024\n\017M2_F15_" +
-      "GPS_DATE\020\217\004\022\024\n\017M2_F16_GPS_TIME\020\220\004\022\030\n\023M2_" +
-      "F17_GPS_POSITION\020\221\004\022\030\n\023M2_F18_GPS_VELOCI" +
-      "TY\020\222\004\022\027\n\022M2_F19_GPS_DETAILS\020\223\004\022\034\n\027M2_F20" +
-      "_GPS_SIGNAL_LEVEL\020\224\004\022\030\n\023M2_F21_RTK_POSIT" +
-      "ION\020\225\004\022\030\n\023M2_F22_RTK_VELOCITY\020\226\004\022\023\n\016M2_F" +
-      "23_RTK_YAW\020\227\004\022\035\n\030M2_F24_RTK_POSITION_INF" +
-      "O\020\230\004\022\030\n\023M2_F25_RTK_YAW_INFO\020\231\004\022\023\n\016M2_F26" +
-      "_COMPASS\020\232\004\022\016\n\tM2_F27_RC\020\233\004\022\031\n\024M2_F28_GI" +
-      "MBAL_ANGLES\020\234\004\022\031\n\024M2_F29_GIMBAL_STATUS\020\235" +
-      "\004\022\031\n\024M2_F30_STATUS_FLIGHT\020\236\004\022\036\n\031M2_F31_S" +
-      "TATUS_DISPLAYMODE\020\237\004\022\036\n\031M2_F32_STATUS_LA" +
-      "NDINGGEAR\020\240\004\022$\n\037M2_F33_STATUS_MOTOR_STAR" +
-      "T_ERROR\020\241\004\022\030\n\023M2_F34_BATTERY_INFO\020\242\004\022\032\n\025" +
-      "M2_F35_CONTROL_DEVICE\020\243\004\022\025\n\020M2_F36_HARD_" +
-      "SYNC\020\244\004\022\035\n\030M2_F37_GPS_CONTROL_LEVEL\020\245\004\022\035" +
-      "\n\030M2_F38_RC_WITH_FLAG_DATA\020\246\004\022\024\n\017M2_F39_" +
-      "ESC_DATA\020\247\004\022\036\n\031M2_F40_RTK_CONNECT_STATUS" +
-      "\020\250\004\022\037\n\032M2_F41_GIMBAL_CONTROL_MODE\020\251\004\022\032\n\025" +
-      "M2_F42_FLIGHT_ANOMALY\020\252\004\022\027\n\022M2_F43_POSIT" +
-      "ION_VO\020\253\004\022\026\n\021M2_F44_AVOID_DATA\020\254\004\022!\n\034M2_" +
-      "F45_HOME_POINT_SET_STATUS\020\255\004\022\033\n\026M2_F46_H" +
-      "OME_POINT_INFO\020\256\004\022\035\n\030M2_F47_THREE_GIMBAL" +
-      "_DATA\020\257\004\022&\n!M2_F48_BATTERY_SINGLE_INFO_I" +
-      "NDEX1\020\260\004\022&\n!M2_F49_BATTERY_SINGLE_INFO_I" +
-      "NDEX2\020\261\004\022\021\n\014M3_F0_DEINIT\020\200\006\022\017\n\nM3_F1_INI" +
-      "T\020\201\006\022\032\n\025M3_F2_GET_CAMERA_TYPE\020\202\006\022\037\n\032M3_F" +
-      "3_GET_FIRMWARE_VERSION\020\203\006\022$\n\037M3_F4_GET_C" +
-      "AMERA_CONNECT_STATUS\020\204\006\022\023\n\016M3_F5_SET_MOD" +
-      "E\020\205\006\022\023\n\016M3_F6_GET_MODE\020\206\006\022\037\n\032M3_F7_SET_S" +
-      "HOOT_PHOTO_MODE\020\207\006\022\037\n\032M3_F8_GET_SHOOT_PH" +
-      "OTO_MODE\020\210\006\022\034\n\027M3_F9_START_SHOOT_PHOTO\020\211" +
-      "\006\022\034\n\027M3_F10_STOP_SHOOT_PHOTO\020\212\006\022\037\n\032M3_F1" +
-      "1_GET_CAPTURING_STATE\020\213\006\022!\n\034M3_F12_SET_P" +
-      "HOTO_BURST_COUNT\020\214\006\022,\n\'M3_F13_SET_PHOTO_" +
-      "TIME_INTERVAL_SETTINGS\020\215\006\022,\n\'M3_F14_GET_" +
-      "PHOTO_TIME_INTERVAL_SETTINGS\020\216\006\022-\n(M3_F1" +
-      "5_GET_INTERVAL_SHOOTING_REMAIN_TIME\020\217\006\022\032" +
-      "\n\025M3_F16_SET_FOCUS_MODE\020\220\006\022\032\n\025M3_F17_GET" +
-      "_FOCUS_MODE\020\221\006\022\034\n\027M3_F18_SET_FOCUS_TARGE" +
-      "T\020\222\006\022\034\n\027M3_F19_GET_FOCUS_TARGET\020\223\006\022)\n$M3" +
-      "_F20_START_CONTINUOUS_OPTICAL_ZOOM\020\224\006\022(\n" +
-      "#M3_F21_STOP_CONTINUOUS_OPTICAL_ZOOM\020\225\006\022" +
-      "\"\n\035M3_F22_SET_OPTICAL_ZOOM_PARAM\020\226\006\022\"\n\035M" +
-      "3_F23_GET_OPTICAL_ZOOM_PARAM\020\227\006\022#\n\036M3_F2" +
-      "4_SET_INFRARED_ZOOM_PARAM\020\230\006\022 \n\033M3_F25_S" +
-      "ET_TAP_ZOOM_ENABLED\020\231\006\022 \n\033M3_F26_GET_TAP" +
-      "_ZOOM_ENABLED\020\232\006\022#\n\036M3_F27_SET_TAP_ZOOM_" +
-      "MULTIPLIER\020\233\006\022#\n\036M3_F28_GET_TAP_ZOOM_MUL" +
-      "TIPLIER\020\234\006\022\036\n\031M3_F29_TAP_ZOOM_AT_TARGET\020" +
-      "\235\006\022 \n\033M3_F30_GET_FOCUS_RING_RANGE\020\236\006\022 \n\033" +
-      "M3_F31_SET_FOCUS_RING_VALUE\020\237\006\022 \n\033M3_F32" +
-      "_GET_FOCUS_RING_VALUE\020\240\006\022\035\n\030M3_F33_SET_E" +
-      "XPOSURE_MODE\020\241\006\022\035\n\030M3_F34_GET_EXPOSURE_M" +
-      "ODE\020\242\006\022\023\n\016M3_F35_SET_ISO\020\243\006\022\023\n\016M3_F36_GE" +
-      "T_ISO\020\244\006\022\030\n\023M3_F37_SET_APERTURE\020\245\006\022\030\n\023M3" +
-      "_F38_GET_APERTURE\020\246\006\022\035\n\030M3_F39_SET_SHUTT" +
-      "ER_SPEED\020\247\006\022\035\n\030M3_F40_GET_SHUTTER_SPEED\020" +
-      "\250\006\022%\n M3_F41_SET_EXPOSURE_COMPENSATION\020\251" +
-      "\006\022%\n M3_F42_GET_EXPOSURE_COMPENSATION\020\252\006" +
-      "\022\037\n\032M3_F43_SET_AE_LOCK_ENABLED\020\253\006\022\037\n\032M3_" +
-      "F44_GET_AE_LOCK_ENABLED\020\254\006\022!\n\034M3_F45_RES" +
-      "ET_CAMERA_SETTINGS\020\255\006\022\036\n\031M3_F46_START_RE" +
-      "CORD_VIDEO\020\256\006\022\035\n\030M3_F47_STOP_RECORD_VIDE" +
-      "O\020\257\006\022\037\n\032M3_F48_GET_RECORDING_STATE\020\260\006\022\036\n" +
-      "\031M3_F49_GET_RECORDING_TIME\020\261\006\022#\n\036M3_F50_" +
-      "GET_STREAM_SOURCE_RANGE\020\262\006\022\035\n\030M3_F51_SET" +
-      "_STREAM_SOURCE\020\263\006\022*\n%M3_F52_GET_PHOTO_ST" +
-      "ORAGE_FORMAT_RANGE\020\264\006\022\034\n\027M3_F53_SET_PHOT" +
-      "O_FORMAT\020\265\006\022\034\n\027M3_F54_GET_PHOTO_FORMAT\020\266" +
-      "\006\022\"\n\035M3_F55_GET_VIDEO_FORMAT_RANGE\020\267\006\022$\n" +
-      "\037M3_F56_SET_VIDEO_STORAGE_FORMAT\020\270\006\022$\n\037M" +
-      "3_F57_GET_VIDEO_STORAGE_FORMAT\020\271\006\022!\n\034M3_" +
-      "F58_GET_PHOTO_RATIO_RANGE\020\272\006\022\033\n\026M3_F59_S" +
-      "ET_PHOTO_RATIO\020\273\006\022\033\n\026M3_F60_GET_PHOTO_RA" +
-      "TIO\020\274\006\022+\n&M3_F61_GET_VIDEO_RESOLUTION_FR" +
-      "AME_RATE\020\275\006\022&\n!M3_F62_GET_NIGHT_SCENE_MO" +
-      "DE_RANGE\020\276\006\022 \n\033M3_F63_SET_NIGHT_SCENE_MO" +
-      "DE\020\277\006\022 \n\033M3_F64_GET_NIGHT_SCENE_MODE\020\300\006\022" +
-      "$\n\037M3_F65_GET_STREAM_STORAGE_RANGE\020\301\006\022)\n" +
-      "$M3_F66_SET_CAPTURE_RECORDING_STREAMS\020\302\006" +
-      "\022)\n$M3_F67_GET_CAPTURE_RECORDING_STREAMS" +
-      "\020\303\006\0226\n1M3_F68_SET_SYNCHRONIZED_SPLIT_SCR" +
-      "EEN_ZOOM_ENABLED\020\304\006\022\"\n\035M3_F69_SET_CUSTOM" +
-      "_EXPAND_NAME\020\305\006\022\"\n\035M3_F70_GET_CUSTOM_EXP" +
-      "AND_NAME\020\306\006\022\036\n\031M3_F71_DOWNLOAD_FILE_LIST" +
-      "\020\307\006\022(\n#M3_F72_DOWNLOAD_FILE_LIST_BY_SLIC" +
-      "ES\020\310\006\022+\n&M3_F73_REG_DOWNLOAD_FILE_DATA_C" +
-      "ALLBACK\020\311\006\022\"\n\035M3_F74_DOWNLOAD_FILE_BY_IN" +
-      "DEX\020\312\006\0223\n.M3_F75_DOWNLOAD_SUB_FILE_BY_IN" +
-      "DEX_AND_SUB_TYPE\020\313\006\022$\n\037M3_F76_OBTAIN_DOW" +
-      "NLOADER_RIGHTS\020\314\006\022%\n M3_F77_RELEASE_DOWN" +
-      "LOADER_RIGHTS\020\315\006\022\032\n\025M3_F78_FORMAT_STORAG" +
-      "E\020\316\006\022\034\n\027M3_F79_GET_STORAGE_INFO\020\317\006\022 \n\033M3" +
-      "_F80_DELETE_FILE_BY_INDEX\020\320\006\022\"\n\035M3_F81_G" +
-      "ET_LASER_RANGING_INFO\020\321\006\022,\n\'M3_F82_SET_P" +
-      "OINT_THERMOMETRY_COORDINATE\020\322\006\022&\n!M3_F83" +
-      "_GET_POINT_THERMOMETRY_DATA\020\323\006\022+\n&M3_F84" +
-      "_SET_AREA_THERMOMETRY_COORDINATE\020\324\006\022%\n M" +
-      "3_F85_GET_AREA_THERMOMETRY_DATA\020\325\006\022\030\n\023M3" +
-      "_F86_SET_FFC_MODE\020\326\006\022\027\n\022M3_F87_TRIGGER_F" +
-      "FC\020\327\006\022)\n$M3_F88_SET_INFRARED_CAMERA_GAIN" +
-      "_MODE\020\330\006\022;\n6M3_F89_GET_INFRARED_CAMERA_G" +
-      "AIN_MODE_TEMPERATURE_RANGE\020\331\006\022\035\n\030M3_F90_" +
-      "SET_METERING_MODE\020\332\006\022\035\n\030M3_F91_GET_METER" +
-      "ING_MODE\020\333\006\022+\n&M3_F92_GET_METERING_POINT" +
-      "_REGION_RANGE\020\334\006\022\036\n\031M3_F93_SET_METERING_" +
-      "POINT\020\335\006\022\036\n\031M3_F94_GET_METERING_POINT\020\336\006" +
-      "\022$\n\037M3_F95_START_RECORD_POINT_CLOUD\020\337\006\022#" +
-      "\n\036M3_F96_STOP_RECORD_POINT_CLOUD\020\340\006\022\021\n\014M" +
-      "4_F0_DEINIT\020\200\010\022\017\n\nM4_F1_INIT\020\201\010\022\023\n\016M4_F2" +
-      "_SET_MODE\020\202\010\022\020\n\013M4_F3_RESET\020\203\010\022\021\n\014M4_F4_" +
-      "ROTATE\020\204\010\022,\n\'M4_F5_SET_PITCH_RANGE_EXTEN" +
-      "SION_ENABLED\020\205\010\022.\n)M4_F6_SET_CONTROLLER_" +
-      "MAX_SPEED_PERCENTAGE\020\206\010\022\'\n\"M4_F7_SET_CON" +
-      "TROLLER_SMOOTH_FACTOR\020\207\010\022#\n\036M4_F8_RESTOR" +
-      "E_FACTORY_SETTINGS\020\210\010\022\021\n\014M5_F1_DEINIT\020\200\n" +
-      "\022\017\n\nM5_F1_INIT\020\201\n\022 \n\033M5_F2_APPLY_HIGH_PO" +
-      "WER_SYNC\020\202\n\0222\n-M5_F3_REG_WRITE_HIGH_POWE" +
-      "R_APPLY_PIN_CALLBACK\020\203\n\022.\n)M5_F4_REG_POW" +
-      "ER_OFF_NOTIFICATION_CALLBACK\020\204\n\022\021\n\014M6_F0" +
-      "_DEINIT\020\200\014\022\017\n\nM6_F1_INIT\020\201\014\022\"\n\035M6_F2_SET" +
-      "_TRK_POSITION_ENABLE\020\202\014\022\"\n\035M6_F3_GET_TRK" +
-      "_POSITION_ENABLE\020\203\014\022\035\n\030M6_F4_SET_RC_LOST" +
-      "_ACTION\020\204\014\022\035\n\030M6_F5_GET_RC_LOST_ACTION\020\205" +
-      "\014\022A\n<M6_F6_SET_HORIZONTAL_VISUAL_OBSTACL" +
-      "E_AVOIDANCE_ENABLE_STATUS\020\206\014\022A\n<M6_F7_GE" +
-      "T_HORIZONTAL_VISUAL_OBSTACLE_AVOIDANCE_E" +
-      "NABLE_STATUS\020\207\014\022@\n;M6_F8_SET_HORIZONTAL_" +
-      "RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATUS\020\210" +
-      "\014\022@\n;M6_F9_GET_HORIZONTAL_RADAR_OBSTACLE" +
-      "_AVOIDANCE_ENABLE_STATUS\020\211\014\022?\n:M6_F10_SE" +
-      "T_UPWARDS_VISUAL_OBSTACLE_AVOIDANCE_ENAB" +
-      "LE_STATUS\020\212\014\022?\n:M6_F11_GET_UPWARDS_VISUA" +
-      "L_OBSTACLE_AVOIDANCE_ENABLE_STATUS\020\213\014\022>\n" +
-      "9M6_F12_SET_UPWARDS_RADAR_OBSTACLE_AVOID" +
-      "ANCE_ENABLE_STATUS\020\214\014\022>\n9M6_F13_GET_UPWA" +
-      "RDS_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STAT" +
-      "US\020\215\014\022A\n<M6_F14_SET_DOWNWARDS_VISUAL_OBS" +
-      "TACLE_AVOIDANCE_ENABLE_STATUS\020\216\014\022A\n<M6_F" +
-      "15_GET_DOWNWARDS_VISUAL_OBSTACLE_AVOIDAN" +
-      "CE_ENABLE_STATUS\020\217\014\022\031\n\024M6_F16_ARREST_FLY" +
-      "ING\020\220\014\022 \n\033M6_F17_CANCEL_ARREST_FLYING\020\221\014" +
-      "\022\032\n\025M6_F18_TURN_ON_MOTORS\020\222\014\022\033\n\026M6_F19_T" +
-      "URN_OFF_MOTORS\020\223\014\022\036\n\031M6_F20_EMERGENCY_ST" +
-      "OP_OFF\020\224\014\022\032\n\025M6_F21_START_TASK_OFF\020\225\014\022\031\n" +
-      "\024M6_F22_START_LANDING\020\226\014\022\032\n\025M6_F23_CANCE" +
-      "L_LANDING\020\227\014\022!\n\034M6_F24_START_CONFIRM_LAN" +
-      "DING\020\230\014\022\037\n\032M6_F25_START_FORCE_LANDING\020\231\014" +
-      "\0223\n.M6_F26_SET_HOME_LOCATION_USING_GPS_C" +
-      "OORDINATES\020\232\014\022=\n8M6_F27_SET_HOME_LOCATIO" +
-      "N_USING_CURRENT_AIRCRAFT_LOCATION\020\233\014\022 \n\033" +
-      "M6_F28_SET_GO_HOME_ALTITUDE\020\234\014\022 \n\033M6_F29" +
-      "_GET_GO_HOME_ALTITUDE\020\235\014\022\034\n\027M6_F30_GET_C" +
-      "OUNTRY_CODE\020\236\014\022\031\n\024M6_F31_START_GO_HOME\020\237" +
-      "\014\022\032\n\025M6_F32_CANCEL_GO_HOME\020\240\014\022*\n%M6_F33_" +
-      "OBTAIN_JOYSTICK_CTRL_AUTHORITY\020\241\014\022+\n&M6_" +
-      "F34_RELEASE_JOYSTICK_CTRL_AUTHORITY\020\242\014\0226" +
-      "\n1M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_EVE" +
-      "NT_CALLBACK\020\243\014\022#\n\036M6_F36_EXECUTE_JOYSTIC" +
-      "K_ACTION\020\244\014\022*\n%M6_F37_EXECUTE_EMERGENCY_" +
-      "BRAKE_ACTION\020\245\014\022)\n$M6_F38_CANCEL_EMERGEN" +
-      "CY_BRAKE_ACTION\020\246\014\022\033\n\026M6_F39_GET_GENERA_" +
-      "INFO\020\247\014\022,\n\'M6_F40_SET_RC_LOST_ACTION_ENA" +
-      "BLE_STATUS\020\250\014\022,\n\'M6_F41_GET_ENABEL_RC_LO" +
-      "ST_ACTION_STATUS\020\251\014\022*\n%M6_F42_REG_TRIGGE" +
-      "R_FTS_EVENT_CALLBACK\020\252\014\022\017\n\nM7_F1_INIT\020\201\016" +
-      "\022,\n\'M7_F2_REG_DEFAULT_UI_CONFIG_BY_DIR_P" +
-      "ATH\020\202\016\022$\n\037M7_F3_REG_UI_CONFIG_BY_DIR_PAT" +
-      "H\020\203\016\022)\n$M7_F4_REG_DEFAULT_UI_BY_BINARY_A" +
-      "RRAY\020\204\016\022(\n#M7_F5_REG_UI_CONFIG_BY_BINARY" +
-      "_ARRAY\020\205\016\022\033\n\026M7_F6_REG_HANDLER_LIST\020\206\016\022\'" +
-      "\n\"M7_F7_FLOATION_WINDOW_SHOW_MESSAGE\020\207\016\022" +
-      "\035\n\030M7_F8_GET_CHANNELL_STATE\020\210\016\022\034\n\027M7_F9_" +
-      "GET_SPEAKER_STATE\020\211\016\022\031\n\024M7_F10_SET_WORK_" +
-      "MODE\020\212\016\022\026\n\021M7_F11_START_PLAY\020\213\016\022\025\n\020M7_F1" +
-      "2_STOP_PLAY\020\214\016\022\031\n\024M7_F13_SET_PLAY_MODE\020\215" +
-      "\016\022\026\n\021M7_F14_SET_VOLUME\020\216\016\022\034\n\027M7_F15_RECE" +
-      "IVE_TTS_DATA\020\217\016\022\036\n\031M7_F16_RECEIVE_AUDIO_" +
-      "DATA\020\220\016\022\021\n\014M8_F0_DEINIT\020\200\020\022\017\n\nM8_F1_INIT" +
-      "\020\201\020\022\037\n\032M8_F2_REG_M8_INFO_CALLBACK\020\202\020\022\017\n\n" +
-      "M9_F1_INIT\020\201\022\0223\n.M9_F2_REG_GET_NEWEST_PP" +
-      "S_TRIGGER_TIME_CALLBACK\020\202\022\022$\n\037M9_F3_TRAN" +
-      "SFER_TO_AIRCRAFT_TIME\020\203\022\022\022\n\rM10_F0_DEINI" +
-      "T\020\200\024\022\020\n\013M10_F1_INIT\020\201\024\022\025\n\020M10_F2_SEND_DA" +
-      "TA\020\202\024\022\031\n\024M10_F3_GET_SEND_DATA\020\203\024\022\"\n\035M10_" +
-      "F4_REG_RECV_DATA_CALLBACK\020\204\024\022%\n M10_F5_S" +
-      "ET_BAND_WIDTH_PROPORTION\020\202\026\022*\n%M10_F6_GE" +
-      "T_DATA_STREAM_REMOTE_ADDRESS\020\203\026\022!\n\034M10_F" +
-      "7_SEND_DATA_STREAM_DATA\020\204\026\022!\n\034M10_F8_GET" +
-      "_DATA_STREAM_STATE\020\205\026\022\022\n\rM11_F0_DEINIT\020\200" +
-      "\030\022\020\n\013M11_F1_INIT\020\201\030\022-\n(M11_F2_REG_RECEIV" +
-      "E_SYSTEM_STATE_CALLBACK\020\202\030\0225\n0M11_F3_REG" +
-      "_RECEIVE_ATTITUDE_INFORMATION_CALLBACK\020\203" +
-      "\030\022 \n\033M11_F4_SET_GIMBAL_MODE_SYNC\020\204\030\022\027\n\022M" +
-      "11_F5_ROTATE_SYNC\020\205\030\022+\n&M11_F6_RELEASE_C" +
-      "ONTROL_PERMISSION_SYNC\020\206\030\022\026\n\021M11_F7_RESE" +
-      "T_SYNC\020\207\030\022 \n\033M11_F8_SET_LIMIT_ANGLE_SYNC" +
-      "\020\210\030\022 \n\033M11_F9_GET_LIMIT_ANGLE_SYNC\020\211\030\022(\n" +
-      "#M11_F10_SET_SPEED_CONVERSION_FACTOR\020\212\030\022" +
-      "\020\n\013M12_F1_INIT\020\201\032\022 \n\033M12_F2_ENABLE_LOCAL" +
-      "_UPGRADE\020\202\032\022\027\n\022M12_F3_REG_HANDLER\020\203\032\022\036\n\031" +
-      "M12_F4_PUSH_UPGRADE_STATE\020\204\032\022\022\n\rM13_F0_D" +
-      "EINIT\020\200\034\022\020\n\013M13_F1_INIT\020\201\034\022&\n!M13_F2_SUB" +
-      "SCRIBE_PERCEPTION_IMAGE\020\202\034\022(\n#M13_F3_UNS" +
-      "UBSCRIBE_PERCEPTION_IMAGE\020\203\034\022(\n#M13_F4_G" +
-      "ET_STEREO_CAMERA_PARAMETERS\020\204\034\022\022\n\rM14_F0" +
-      "_DEINIT\020\200\036\022\020\n\013M14_F1_INIT\020\201\036\022\035\n\030M14_F2_S" +
-      "TART_H264_STREAM\020\202\036\022\034\n\027M14_F3_STOP_H264_" +
-      "STREAM\020\203\036\022\022\n\rM15_F0_DEINIT\020\200 \022\020\n\013M15_F1_" +
-      "INIT\020\201 \022\032\n\025M15_F2_UPLOAD_MISSION\020\202 \022\021\n\014M" +
-      "15_F3_START\020\203 \022\020\n\013M15_F4_STOP\020\204 \022\021\n\014M15_" +
-      "F5_PAUSE\020\205 \022\022\n\rM15_F6_RESUME\020\206 \022#\n\036M15_F" +
-      "7_GET_GLOBAL_CRUISE_SPEED\020\207 \022#\n\036M15_F8_S" +
-      "ET_GLOBAL_CRUISE_SPEED\020\210 \022+\n&M15_F9_REGI" +
-      "STER_MISSION_EVENT_CALLBACK\020\211 \022,\n\'M15_F1" +
-      "0_REGISTER_MISSION_STATE_CALLBACK\020\212 \022\020\n\013" +
-      "M16_F1_INIT\020\201\"\022\032\n\025M16_F2_SET_TASK_INDEX\020" +
-      "\202\"\022)\n$M16_F3_GET_POSITION_INFORMATION_SY" +
-      "NC\020\203\"\022\020\n\013M17_F1_INIT\020\201$\022\022\n\rM17_F2_CREATE" +
-      "\020\202$\022\023\n\016M17_F3_DESTROY\020\203$\022\020\n\013M17_F4_BIND\020" +
-      "\204$\022\022\n\rM17_F5_ACCEPT\020\205$\022\023\n\016M17_F6_CONNECT" +
-      "\020\206$\022\021\n\014M17_F7_CLOSE\020\207$\022\025\n\020M17_F8_SEND_DA" +
-      "TA\020\210$\022\025\n\020M17_F9_RECV_DATA\020\211$B\rB\013DjiProto" +
-      "Bufb\006proto3"
+      "\n\tdji.proto\"\242\001\n\007Payload\022\024\n\014serialNumber\030" +
+      "\001 \001(\t\022\033\n\006module\030\002 \001(\0162\013.ModuleEnum\022\033\n\006ac" +
+      "tive\030\003 \001(\0162\013.ActiveEnum\022\022\n\npackageNum\030\004 " +
+      "\001(\005\022\024\n\014packageIndex\030\005 \001(\005\022\017\n\007message\030\006 \001" +
+      "(\t\022\014\n\004body\030\007 \001(\014*\366\002\n\nModuleEnum\022\020\n\014M0_HE" +
+      "ARTBEAT\020\000\022\017\n\013M1_AIRCRAFT\020\001\022\026\n\022M2_FC_SUBS" +
+      "CRIPTION\020\002\022\025\n\021M3_CAMERA_MANAGER\020\003\022\025\n\021M4_" +
+      "GIMBAL_MANAGER\020\004\022\027\n\023M5_POWER_MANAGEMENT\020" +
+      "\005\022\030\n\024M6_FLIGHT_CONTROLLER\020\006\022\r\n\tM7_WIDGET" +
+      "\020\007\022\n\n\006M8_HMS\020\010\022\020\n\014M9_TIME_SYNC\020\t\022\031\n\025M10_" +
+      "DATA_TRANSMISSION\020\n\022\r\n\tM11_XPORT\020\014\022\017\n\013M1" +
+      "2_UPGRADE\020\r\022\022\n\016M13_PERCEPTION\020\016\022\021\n\rM14_L" +
+      "IVE_VIEW\020\017\022\023\n\017M15_WAYPOINT_V2\020\020\022\023\n\017M16_P" +
+      "OSITIONING\020\021\022\023\n\017M17_MOP_CHANNEL\020\022*\213I\n\nAc" +
+      "tiveEnum\022\n\n\006UNKNOW\020\000\022\021\n\014M2_F0_DEINIT\020\200\004\022" +
+      "\017\n\nM2_F1_INIT\020\201\004\022\025\n\020M2_F2_QUATERNION\020\202\004\022" +
+      "\036\n\031M2_F3_ACCELERATION_GROUND\020\203\004\022\034\n\027M2_F4" +
+      "_ACCELERATION_BODY\020\204\004\022\033\n\026M2_F5_ACCELERAT" +
+      "ION_RAW\020\205\004\022\023\n\016M2_F6_VELOCITY\020\206\004\022 \n\033M2_F7" +
+      "_ANGULAR_RATE_FUSIONED\020\207\004\022\033\n\026M2_F8_ANGUL" +
+      "AR_RATE_RAW\020\210\004\022\031\n\024M2_F9_ALTITUDE_FUSED\020\211" +
+      "\004\022\036\n\031M2_F10_ALTITUDE_BAROMETER\020\212\004\022!\n\034M2_" +
+      "F11_ALTITUDE_OF_HOMEPOINT\020\213\004\022\031\n\024M2_F12_H" +
+      "EIGHT_FUSION\020\214\004\022\033\n\026M2_F13_HEIGHT_RELATIV" +
+      "E\020\215\004\022\032\n\025M2_F14_POSITION_FUSED\020\216\004\022\024\n\017M2_F" +
+      "15_GPS_DATE\020\217\004\022\024\n\017M2_F16_GPS_TIME\020\220\004\022\030\n\023" +
+      "M2_F17_GPS_POSITION\020\221\004\022\030\n\023M2_F18_GPS_VEL" +
+      "OCITY\020\222\004\022\027\n\022M2_F19_GPS_DETAILS\020\223\004\022\034\n\027M2_" +
+      "F20_GPS_SIGNAL_LEVEL\020\224\004\022\030\n\023M2_F21_RTK_PO" +
+      "SITION\020\225\004\022\030\n\023M2_F22_RTK_VELOCITY\020\226\004\022\023\n\016M" +
+      "2_F23_RTK_YAW\020\227\004\022\035\n\030M2_F24_RTK_POSITION_" +
+      "INFO\020\230\004\022\030\n\023M2_F25_RTK_YAW_INFO\020\231\004\022\023\n\016M2_" +
+      "F26_COMPASS\020\232\004\022\016\n\tM2_F27_RC\020\233\004\022\031\n\024M2_F28" +
+      "_GIMBAL_ANGLES\020\234\004\022\031\n\024M2_F29_GIMBAL_STATU" +
+      "S\020\235\004\022\031\n\024M2_F30_STATUS_FLIGHT\020\236\004\022\036\n\031M2_F3" +
+      "1_STATUS_DISPLAYMODE\020\237\004\022\036\n\031M2_F32_STATUS" +
+      "_LANDINGGEAR\020\240\004\022$\n\037M2_F33_STATUS_MOTOR_S" +
+      "TART_ERROR\020\241\004\022\030\n\023M2_F34_BATTERY_INFO\020\242\004\022" +
+      "\032\n\025M2_F35_CONTROL_DEVICE\020\243\004\022\025\n\020M2_F36_HA" +
+      "RD_SYNC\020\244\004\022\035\n\030M2_F37_GPS_CONTROL_LEVEL\020\245" +
+      "\004\022\035\n\030M2_F38_RC_WITH_FLAG_DATA\020\246\004\022\024\n\017M2_F" +
+      "39_ESC_DATA\020\247\004\022\036\n\031M2_F40_RTK_CONNECT_STA" +
+      "TUS\020\250\004\022\037\n\032M2_F41_GIMBAL_CONTROL_MODE\020\251\004\022" +
+      "\032\n\025M2_F42_FLIGHT_ANOMALY\020\252\004\022\027\n\022M2_F43_PO" +
+      "SITION_VO\020\253\004\022\026\n\021M2_F44_AVOID_DATA\020\254\004\022!\n\034" +
+      "M2_F45_HOME_POINT_SET_STATUS\020\255\004\022\033\n\026M2_F4" +
+      "6_HOME_POINT_INFO\020\256\004\022\035\n\030M2_F47_THREE_GIM" +
+      "BAL_DATA\020\257\004\022&\n!M2_F48_BATTERY_SINGLE_INF" +
+      "O_INDEX1\020\260\004\022&\n!M2_F49_BATTERY_SINGLE_INF" +
+      "O_INDEX2\020\261\004\022\021\n\014M3_F0_DEINIT\020\200\006\022\017\n\nM3_F1_" +
+      "INIT\020\201\006\022\032\n\025M3_F2_GET_CAMERA_TYPE\020\202\006\022\037\n\032M" +
+      "3_F3_GET_FIRMWARE_VERSION\020\203\006\022$\n\037M3_F4_GE" +
+      "T_CAMERA_CONNECT_STATUS\020\204\006\022\023\n\016M3_F5_SET_" +
+      "MODE\020\205\006\022\023\n\016M3_F6_GET_MODE\020\206\006\022\037\n\032M3_F7_SE" +
+      "T_SHOOT_PHOTO_MODE\020\207\006\022\037\n\032M3_F8_GET_SHOOT" +
+      "_PHOTO_MODE\020\210\006\022\034\n\027M3_F9_START_SHOOT_PHOT" +
+      "O\020\211\006\022\034\n\027M3_F10_STOP_SHOOT_PHOTO\020\212\006\022\037\n\032M3" +
+      "_F11_GET_CAPTURING_STATE\020\213\006\022!\n\034M3_F12_SE" +
+      "T_PHOTO_BURST_COUNT\020\214\006\022,\n\'M3_F13_SET_PHO" +
+      "TO_TIME_INTERVAL_SETTINGS\020\215\006\022,\n\'M3_F14_G" +
+      "ET_PHOTO_TIME_INTERVAL_SETTINGS\020\216\006\022-\n(M3" +
+      "_F15_GET_INTERVAL_SHOOTING_REMAIN_TIME\020\217" +
+      "\006\022\032\n\025M3_F16_SET_FOCUS_MODE\020\220\006\022\032\n\025M3_F17_" +
+      "GET_FOCUS_MODE\020\221\006\022\034\n\027M3_F18_SET_FOCUS_TA" +
+      "RGET\020\222\006\022\034\n\027M3_F19_GET_FOCUS_TARGET\020\223\006\022)\n" +
+      "$M3_F20_START_CONTINUOUS_OPTICAL_ZOOM\020\224\006" +
+      "\022(\n#M3_F21_STOP_CONTINUOUS_OPTICAL_ZOOM\020" +
+      "\225\006\022\"\n\035M3_F22_SET_OPTICAL_ZOOM_PARAM\020\226\006\022\"" +
+      "\n\035M3_F23_GET_OPTICAL_ZOOM_PARAM\020\227\006\022#\n\036M3" +
+      "_F24_SET_INFRARED_ZOOM_PARAM\020\230\006\022 \n\033M3_F2" +
+      "5_SET_TAP_ZOOM_ENABLED\020\231\006\022 \n\033M3_F26_GET_" +
+      "TAP_ZOOM_ENABLED\020\232\006\022#\n\036M3_F27_SET_TAP_ZO" +
+      "OM_MULTIPLIER\020\233\006\022#\n\036M3_F28_GET_TAP_ZOOM_" +
+      "MULTIPLIER\020\234\006\022\036\n\031M3_F29_TAP_ZOOM_AT_TARG" +
+      "ET\020\235\006\022 \n\033M3_F30_GET_FOCUS_RING_RANGE\020\236\006\022" +
+      " \n\033M3_F31_SET_FOCUS_RING_VALUE\020\237\006\022 \n\033M3_" +
+      "F32_GET_FOCUS_RING_VALUE\020\240\006\022\035\n\030M3_F33_SE" +
+      "T_EXPOSURE_MODE\020\241\006\022\035\n\030M3_F34_GET_EXPOSUR" +
+      "E_MODE\020\242\006\022\023\n\016M3_F35_SET_ISO\020\243\006\022\023\n\016M3_F36" +
+      "_GET_ISO\020\244\006\022\030\n\023M3_F37_SET_APERTURE\020\245\006\022\030\n" +
+      "\023M3_F38_GET_APERTURE\020\246\006\022\035\n\030M3_F39_SET_SH" +
+      "UTTER_SPEED\020\247\006\022\035\n\030M3_F40_GET_SHUTTER_SPE" +
+      "ED\020\250\006\022%\n M3_F41_SET_EXPOSURE_COMPENSATIO" +
+      "N\020\251\006\022%\n M3_F42_GET_EXPOSURE_COMPENSATION" +
+      "\020\252\006\022\037\n\032M3_F43_SET_AE_LOCK_ENABLED\020\253\006\022\037\n\032" +
+      "M3_F44_GET_AE_LOCK_ENABLED\020\254\006\022!\n\034M3_F45_" +
+      "RESET_CAMERA_SETTINGS\020\255\006\022\036\n\031M3_F46_START" +
+      "_RECORD_VIDEO\020\256\006\022\035\n\030M3_F47_STOP_RECORD_V" +
+      "IDEO\020\257\006\022\037\n\032M3_F48_GET_RECORDING_STATE\020\260\006" +
+      "\022\036\n\031M3_F49_GET_RECORDING_TIME\020\261\006\022#\n\036M3_F" +
+      "50_GET_STREAM_SOURCE_RANGE\020\262\006\022\035\n\030M3_F51_" +
+      "SET_STREAM_SOURCE\020\263\006\022*\n%M3_F52_GET_PHOTO" +
+      "_STORAGE_FORMAT_RANGE\020\264\006\022\034\n\027M3_F53_SET_P" +
+      "HOTO_FORMAT\020\265\006\022\034\n\027M3_F54_GET_PHOTO_FORMA" +
+      "T\020\266\006\022\"\n\035M3_F55_GET_VIDEO_FORMAT_RANGE\020\267\006" +
+      "\022$\n\037M3_F56_SET_VIDEO_STORAGE_FORMAT\020\270\006\022$" +
+      "\n\037M3_F57_GET_VIDEO_STORAGE_FORMAT\020\271\006\022!\n\034" +
+      "M3_F58_GET_PHOTO_RATIO_RANGE\020\272\006\022\033\n\026M3_F5" +
+      "9_SET_PHOTO_RATIO\020\273\006\022\033\n\026M3_F60_GET_PHOTO" +
+      "_RATIO\020\274\006\022+\n&M3_F61_GET_VIDEO_RESOLUTION" +
+      "_FRAME_RATE\020\275\006\022&\n!M3_F62_GET_NIGHT_SCENE" +
+      "_MODE_RANGE\020\276\006\022 \n\033M3_F63_SET_NIGHT_SCENE" +
+      "_MODE\020\277\006\022 \n\033M3_F64_GET_NIGHT_SCENE_MODE\020" +
+      "\300\006\022$\n\037M3_F65_GET_STREAM_STORAGE_RANGE\020\301\006" +
+      "\022)\n$M3_F66_SET_CAPTURE_RECORDING_STREAMS" +
+      "\020\302\006\022)\n$M3_F67_GET_CAPTURE_RECORDING_STRE" +
+      "AMS\020\303\006\0226\n1M3_F68_SET_SYNCHRONIZED_SPLIT_" +
+      "SCREEN_ZOOM_ENABLED\020\304\006\022\"\n\035M3_F69_SET_CUS" +
+      "TOM_EXPAND_NAME\020\305\006\022\"\n\035M3_F70_GET_CUSTOM_" +
+      "EXPAND_NAME\020\306\006\022\036\n\031M3_F71_DOWNLOAD_FILE_L" +
+      "IST\020\307\006\022(\n#M3_F72_DOWNLOAD_FILE_LIST_BY_S" +
+      "LICES\020\310\006\022+\n&M3_F73_REG_DOWNLOAD_FILE_DAT" +
+      "A_CALLBACK\020\311\006\022\"\n\035M3_F74_DOWNLOAD_FILE_BY" +
+      "_INDEX\020\312\006\0223\n.M3_F75_DOWNLOAD_SUB_FILE_BY" +
+      "_INDEX_AND_SUB_TYPE\020\313\006\022$\n\037M3_F76_OBTAIN_" +
+      "DOWNLOADER_RIGHTS\020\314\006\022%\n M3_F77_RELEASE_D" +
+      "OWNLOADER_RIGHTS\020\315\006\022\032\n\025M3_F78_FORMAT_STO" +
+      "RAGE\020\316\006\022\034\n\027M3_F79_GET_STORAGE_INFO\020\317\006\022 \n" +
+      "\033M3_F80_DELETE_FILE_BY_INDEX\020\320\006\022\"\n\035M3_F8" +
+      "1_GET_LASER_RANGING_INFO\020\321\006\022,\n\'M3_F82_SE" +
+      "T_POINT_THERMOMETRY_COORDINATE\020\322\006\022&\n!M3_" +
+      "F83_GET_POINT_THERMOMETRY_DATA\020\323\006\022+\n&M3_" +
+      "F84_SET_AREA_THERMOMETRY_COORDINATE\020\324\006\022%" +
+      "\n M3_F85_GET_AREA_THERMOMETRY_DATA\020\325\006\022\030\n" +
+      "\023M3_F86_SET_FFC_MODE\020\326\006\022\027\n\022M3_F87_TRIGGE" +
+      "R_FFC\020\327\006\022)\n$M3_F88_SET_INFRARED_CAMERA_G" +
+      "AIN_MODE\020\330\006\022;\n6M3_F89_GET_INFRARED_CAMER" +
+      "A_GAIN_MODE_TEMPERATURE_RANGE\020\331\006\022\035\n\030M3_F" +
+      "90_SET_METERING_MODE\020\332\006\022\035\n\030M3_F91_GET_ME" +
+      "TERING_MODE\020\333\006\022+\n&M3_F92_GET_METERING_PO" +
+      "INT_REGION_RANGE\020\334\006\022\036\n\031M3_F93_SET_METERI" +
+      "NG_POINT\020\335\006\022\036\n\031M3_F94_GET_METERING_POINT" +
+      "\020\336\006\022$\n\037M3_F95_START_RECORD_POINT_CLOUD\020\337" +
+      "\006\022#\n\036M3_F96_STOP_RECORD_POINT_CLOUD\020\340\006\022\021" +
+      "\n\014M4_F0_DEINIT\020\200\010\022\017\n\nM4_F1_INIT\020\201\010\022\023\n\016M4" +
+      "_F2_SET_MODE\020\202\010\022\020\n\013M4_F3_RESET\020\203\010\022\021\n\014M4_" +
+      "F4_ROTATE\020\204\010\022,\n\'M4_F5_SET_PITCH_RANGE_EX" +
+      "TENSION_ENABLED\020\205\010\022.\n)M4_F6_SET_CONTROLL" +
+      "ER_MAX_SPEED_PERCENTAGE\020\206\010\022\'\n\"M4_F7_SET_" +
+      "CONTROLLER_SMOOTH_FACTOR\020\207\010\022#\n\036M4_F8_RES" +
+      "TORE_FACTORY_SETTINGS\020\210\010\022\021\n\014M5_F1_DEINIT" +
+      "\020\200\n\022\017\n\nM5_F1_INIT\020\201\n\022 \n\033M5_F2_APPLY_HIGH" +
+      "_POWER_SYNC\020\202\n\0222\n-M5_F3_REG_WRITE_HIGH_P" +
+      "OWER_APPLY_PIN_CALLBACK\020\203\n\022.\n)M5_F4_REG_" +
+      "POWER_OFF_NOTIFICATION_CALLBACK\020\204\n\022\021\n\014M6" +
+      "_F0_DEINIT\020\200\014\022\017\n\nM6_F1_INIT\020\201\014\022\"\n\035M6_F2_" +
+      "SET_TRK_POSITION_ENABLE\020\202\014\022\"\n\035M6_F3_GET_" +
+      "TRK_POSITION_ENABLE\020\203\014\022\035\n\030M6_F4_SET_RC_L" +
+      "OST_ACTION\020\204\014\022\035\n\030M6_F5_GET_RC_LOST_ACTIO" +
+      "N\020\205\014\022A\n<M6_F6_SET_HORIZONTAL_VISUAL_OBST" +
+      "ACLE_AVOIDANCE_ENABLE_STATUS\020\206\014\022A\n<M6_F7" +
+      "_GET_HORIZONTAL_VISUAL_OBSTACLE_AVOIDANC" +
+      "E_ENABLE_STATUS\020\207\014\022@\n;M6_F8_SET_HORIZONT" +
+      "AL_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATU" +
+      "S\020\210\014\022@\n;M6_F9_GET_HORIZONTAL_RADAR_OBSTA" +
+      "CLE_AVOIDANCE_ENABLE_STATUS\020\211\014\022?\n:M6_F10" +
+      "_SET_UPWARDS_VISUAL_OBSTACLE_AVOIDANCE_E" +
+      "NABLE_STATUS\020\212\014\022?\n:M6_F11_GET_UPWARDS_VI" +
+      "SUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS\020\213\014" +
+      "\022>\n9M6_F12_SET_UPWARDS_RADAR_OBSTACLE_AV" +
+      "OIDANCE_ENABLE_STATUS\020\214\014\022>\n9M6_F13_GET_U" +
+      "PWARDS_RADAR_OBSTACLE_AVOIDANCE_ENABLE_S" +
+      "TATUS\020\215\014\022A\n<M6_F14_SET_DOWNWARDS_VISUAL_" +
+      "OBSTACLE_AVOIDANCE_ENABLE_STATUS\020\216\014\022A\n<M" +
+      "6_F15_GET_DOWNWARDS_VISUAL_OBSTACLE_AVOI" +
+      "DANCE_ENABLE_STATUS\020\217\014\022\031\n\024M6_F16_ARREST_" +
+      "FLYING\020\220\014\022 \n\033M6_F17_CANCEL_ARREST_FLYING" +
+      "\020\221\014\022\032\n\025M6_F18_TURN_ON_MOTORS\020\222\014\022\033\n\026M6_F1" +
+      "9_TURN_OFF_MOTORS\020\223\014\022\036\n\031M6_F20_EMERGENCY" +
+      "_STOP_OFF\020\224\014\022\032\n\025M6_F21_START_TASK_OFF\020\225\014" +
+      "\022\031\n\024M6_F22_START_LANDING\020\226\014\022\032\n\025M6_F23_CA" +
+      "NCEL_LANDING\020\227\014\022!\n\034M6_F24_START_CONFIRM_" +
+      "LANDING\020\230\014\022\037\n\032M6_F25_START_FORCE_LANDING" +
+      "\020\231\014\0223\n.M6_F26_SET_HOME_LOCATION_USING_GP" +
+      "S_COORDINATES\020\232\014\022=\n8M6_F27_SET_HOME_LOCA" +
+      "TION_USING_CURRENT_AIRCRAFT_LOCATION\020\233\014\022" +
+      " \n\033M6_F28_SET_GO_HOME_ALTITUDE\020\234\014\022 \n\033M6_" +
+      "F29_GET_GO_HOME_ALTITUDE\020\235\014\022\034\n\027M6_F30_GE" +
+      "T_COUNTRY_CODE\020\236\014\022\031\n\024M6_F31_START_GO_HOM" +
+      "E\020\237\014\022\032\n\025M6_F32_CANCEL_GO_HOME\020\240\014\022*\n%M6_F" +
+      "33_OBTAIN_JOYSTICK_CTRL_AUTHORITY\020\241\014\022+\n&" +
+      "M6_F34_RELEASE_JOYSTICK_CTRL_AUTHORITY\020\242" +
+      "\014\0226\n1M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_" +
+      "EVENT_CALLBACK\020\243\014\022#\n\036M6_F36_EXECUTE_JOYS" +
+      "TICK_ACTION\020\244\014\022*\n%M6_F37_EXECUTE_EMERGEN" +
+      "CY_BRAKE_ACTION\020\245\014\022)\n$M6_F38_CANCEL_EMER" +
+      "GENCY_BRAKE_ACTION\020\246\014\022\033\n\026M6_F39_GET_GENE" +
+      "RA_INFO\020\247\014\022,\n\'M6_F40_SET_RC_LOST_ACTION_" +
+      "ENABLE_STATUS\020\250\014\022,\n\'M6_F41_GET_ENABEL_RC" +
+      "_LOST_ACTION_STATUS\020\251\014\022*\n%M6_F42_REG_TRI" +
+      "GGER_FTS_EVENT_CALLBACK\020\252\014\022\017\n\nM7_F1_INIT" +
+      "\020\201\016\022,\n\'M7_F2_REG_DEFAULT_UI_CONFIG_BY_DI" +
+      "R_PATH\020\202\016\022$\n\037M7_F3_REG_UI_CONFIG_BY_DIR_" +
+      "PATH\020\203\016\022)\n$M7_F4_REG_DEFAULT_UI_BY_BINAR" +
+      "Y_ARRAY\020\204\016\022(\n#M7_F5_REG_UI_CONFIG_BY_BIN" +
+      "ARY_ARRAY\020\205\016\022\033\n\026M7_F6_REG_HANDLER_LIST\020\206" +
+      "\016\022\'\n\"M7_F7_FLOATION_WINDOW_SHOW_MESSAGE\020" +
+      "\207\016\022\035\n\030M7_F8_GET_CHANNELL_STATE\020\210\016\022\034\n\027M7_" +
+      "F9_GET_SPEAKER_STATE\020\211\016\022\031\n\024M7_F10_SET_WO" +
+      "RK_MODE\020\212\016\022\026\n\021M7_F11_START_PLAY\020\213\016\022\025\n\020M7" +
+      "_F12_STOP_PLAY\020\214\016\022\031\n\024M7_F13_SET_PLAY_MOD" +
+      "E\020\215\016\022\026\n\021M7_F14_SET_VOLUME\020\216\016\022\034\n\027M7_F15_R" +
+      "ECEIVE_TTS_DATA\020\217\016\022\036\n\031M7_F16_RECEIVE_AUD" +
+      "IO_DATA\020\220\016\022\021\n\014M8_F0_DEINIT\020\200\020\022\017\n\nM8_F1_I" +
+      "NIT\020\201\020\022\037\n\032M8_F2_REG_M8_INFO_CALLBACK\020\202\020\022" +
+      "\017\n\nM9_F1_INIT\020\201\022\0223\n.M9_F2_REG_GET_NEWEST" +
+      "_PPS_TRIGGER_TIME_CALLBACK\020\202\022\022$\n\037M9_F3_T" +
+      "RANSFER_TO_AIRCRAFT_TIME\020\203\022\022\022\n\rM10_F0_DE" +
+      "INIT\020\200\024\022\020\n\013M10_F1_INIT\020\201\024\022\025\n\020M10_F2_SEND" +
+      "_DATA\020\202\024\022\031\n\024M10_F3_GET_SEND_DATA\020\203\024\022\"\n\035M" +
+      "10_F4_REG_RECV_DATA_CALLBACK\020\204\024\022%\n M10_F" +
+      "5_SET_BAND_WIDTH_PROPORTION\020\202\026\022*\n%M10_F6" +
+      "_GET_DATA_STREAM_REMOTE_ADDRESS\020\203\026\022!\n\034M1" +
+      "0_F7_SEND_DATA_STREAM_DATA\020\204\026\022!\n\034M10_F8_" +
+      "GET_DATA_STREAM_STATE\020\205\026\022\022\n\rM11_F0_DEINI" +
+      "T\020\200\030\022\020\n\013M11_F1_INIT\020\201\030\022-\n(M11_F2_REG_REC" +
+      "EIVE_SYSTEM_STATE_CALLBACK\020\202\030\0225\n0M11_F3_" +
+      "REG_RECEIVE_ATTITUDE_INFORMATION_CALLBAC" +
+      "K\020\203\030\022 \n\033M11_F4_SET_GIMBAL_MODE_SYNC\020\204\030\022\027" +
+      "\n\022M11_F5_ROTATE_SYNC\020\205\030\022+\n&M11_F6_RELEAS" +
+      "E_CONTROL_PERMISSION_SYNC\020\206\030\022\026\n\021M11_F7_R" +
+      "ESET_SYNC\020\207\030\022 \n\033M11_F8_SET_LIMIT_ANGLE_S" +
+      "YNC\020\210\030\022 \n\033M11_F9_GET_LIMIT_ANGLE_SYNC\020\211\030" +
+      "\022(\n#M11_F10_SET_SPEED_CONVERSION_FACTOR\020" +
+      "\212\030\022\020\n\013M12_F1_INIT\020\201\032\022 \n\033M12_F2_ENABLE_LO" +
+      "CAL_UPGRADE\020\202\032\022\027\n\022M12_F3_REG_HANDLER\020\203\032\022" +
+      "\036\n\031M12_F4_PUSH_UPGRADE_STATE\020\204\032\022\022\n\rM13_F" +
+      "0_DEINIT\020\200\034\022\020\n\013M13_F1_INIT\020\201\034\022&\n!M13_F2_" +
+      "SUBSCRIBE_PERCEPTION_IMAGE\020\202\034\022(\n#M13_F3_" +
+      "UNSUBSCRIBE_PERCEPTION_IMAGE\020\203\034\022(\n#M13_F" +
+      "4_GET_STEREO_CAMERA_PARAMETERS\020\204\034\022\022\n\rM14" +
+      "_F0_DEINIT\020\200\036\022\020\n\013M14_F1_INIT\020\201\036\022\035\n\030M14_F" +
+      "2_START_H264_STREAM\020\202\036\022\034\n\027M14_F3_STOP_H2" +
+      "64_STREAM\020\203\036\022\022\n\rM15_F0_DEINIT\020\200 \022\020\n\013M15_" +
+      "F1_INIT\020\201 \022\032\n\025M15_F2_UPLOAD_MISSION\020\202 \022\021" +
+      "\n\014M15_F3_START\020\203 \022\020\n\013M15_F4_STOP\020\204 \022\021\n\014M" +
+      "15_F5_PAUSE\020\205 \022\022\n\rM15_F6_RESUME\020\206 \022#\n\036M1" +
+      "5_F7_GET_GLOBAL_CRUISE_SPEED\020\207 \022#\n\036M15_F" +
+      "8_SET_GLOBAL_CRUISE_SPEED\020\210 \022+\n&M15_F9_R" +
+      "EGISTER_MISSION_EVENT_CALLBACK\020\211 \022,\n\'M15" +
+      "_F10_REGISTER_MISSION_STATE_CALLBACK\020\212 \022" +
+      "\020\n\013M16_F1_INIT\020\201\"\022\032\n\025M16_F2_SET_TASK_IND" +
+      "EX\020\202\"\022)\n$M16_F3_GET_POSITION_INFORMATION" +
+      "_SYNC\020\203\"\022\020\n\013M17_F1_INIT\020\201$\022\022\n\rM17_F2_CRE" +
+      "ATE\020\202$\022\023\n\016M17_F3_DESTROY\020\203$\022\020\n\013M17_F4_BI" +
+      "ND\020\204$\022\022\n\rM17_F5_ACCEPT\020\205$\022\023\n\016M17_F6_CONN" +
+      "ECT\020\206$\022\021\n\014M17_F7_CLOSE\020\207$\022\025\n\020M17_F8_SEND" +
+      "_DATA\020\210$\022\025\n\020M17_F9_RECV_DATA\020\211$B\rB\013DjiPr" +
+      "otoBufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6767,7 +6948,7 @@ public final class DjiProtoBuf {
     internal_static_Payload_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Payload_descriptor,
-        new String[] { "SerialNumber", "Module", "Active", "Message", "Body", });
+        new String[] { "SerialNumber", "Module", "Active", "PackageNum", "PackageIndex", "Message", "Body", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

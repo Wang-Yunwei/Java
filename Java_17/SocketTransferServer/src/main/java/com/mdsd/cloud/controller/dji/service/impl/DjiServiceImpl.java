@@ -49,6 +49,7 @@ public class DjiServiceImpl implements IDjiService {
     private final ConcurrentHashMap<String, AircraftDto> aircraftMap = new ConcurrentHashMap<>();
     private final ObjectMapper obm = new ObjectMapper();
     private final JsonFormat.Printer printer = JsonFormat.printer();
+    private final StringBuilder stringBuilder = new StringBuilder();
 
     private Channel udpChannel;
     private final ApplicationEventPublisher publisher;
@@ -64,22 +65,23 @@ public class DjiServiceImpl implements IDjiService {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket pak) {
             ByteBuf content = pak.content();
-            System.out.println("接收的数据包大小为: " + content.readableBytes());
-            byte[] bytes = new byte[content.readableBytes()];
-            content.readBytes(bytes);
+            log.info("接收的数据包大小为: {}", content.readableBytes());
+            ByteBuf buffer = Unpooled.buffer(content.readableBytes());
+            content.readBytes(buffer);
+            // 解析数据包
             DjiProtoBuf.Payload payload;
             try {
-                payload = DjiProtoBuf.Payload.parseFrom(bytes);
+                payload = DjiProtoBuf.Payload.parseFrom(buffer.nioBuffer());
             } catch (InvalidProtocolBufferException e) {
                 throw new RuntimeException(e);
             }
             Optional.ofNullable(payload).ifPresent(el -> {
                 // TODO 打印 Payload
-                try {
-                    log.info("Payload: {}", printer.print(payload));
-                } catch (InvalidProtocolBufferException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    log.info("Payload: {}", printer.print(payload));
+//                } catch (InvalidProtocolBufferException e) {
+//                    throw new RuntimeException(e);
+//                }
                 // 当接收到心跳后解析地址和端口号
                 if (payload.getModule() == DjiProtoBuf.ModuleEnum.M0_HEARTBEAT) {
                     if (aircraftMap.containsKey(el.getSerialNumber())) {
@@ -110,7 +112,15 @@ public class DjiServiceImpl implements IDjiService {
         AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
         switch (payload.getModule()) {
             case M2_FC_SUBSCRIPTION -> {
-                log.info(payload.getBody().toStringUtf8());
+                if (payload.getPackageNum() == 1) {
+                    log.info("===> {}", payload.getBody().toStringUtf8());
+                } else {
+                    stringBuilder.append(payload.getBody().toStringUtf8());
+                    if (payload.getPackageNum() == payload.getPackageIndex()) {
+                        log.info("===> {}", stringBuilder.toString());
+                        stringBuilder.setLength(0);
+                    }
+                }
                 // 将str转为JsonNode
 //                JsonNode jsonNode;
 //                try {
