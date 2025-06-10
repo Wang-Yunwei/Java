@@ -1,0 +1,384 @@
+2025-05-26T10:23:22.742+08:00  INFO 3604 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-05-26T10:23:22.784+08:00  INFO 3604 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 3604 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-05-26T10:23:22.785+08:00  INFO 3604 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-05-26T10:23:28.175+08:00  INFO 3604 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-05-26T10:23:28.214+08:00  INFO 3604 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T10:23:28.216+08:00  INFO 3604 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T10:23:28.718+08:00  INFO 3604 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 20240 (http)
+2025-05-26T10:23:28.729+08:00  INFO 3604 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-20240"]
+2025-05-26T10:23:28.731+08:00  INFO 3604 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-26T10:23:28.732+08:00  INFO 3604 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-05-26T10:23:28.841+08:00  INFO 3604 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-05-26T10:23:28.841+08:00  INFO 3604 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6009 ms
+2025-05-26T10:23:30.944+08:00  INFO 3604 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-05-26T10:23:31.001+08:00  INFO 3604 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-20240"]
+2025-05-26T10:23:31.022+08:00  INFO 3604 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'
+2025-05-26T10:23:31.225+08:00  INFO 3604 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 9.679 seconds (process running for 11.472)
+2025-05-26T10:23:31.231+08:00  INFO 3604 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-05-26T10:23:31.393+08:00  INFO 3604 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 20242
+2025-05-26T10:23:31.537+08:00  INFO 3604 --- [main] com.mdsd.cloud.util.SocketUtil           : Send Buffer Size: 65536
+2025-05-26T10:23:31.537+08:00  INFO 3604 --- [main] com.mdsd.cloud.util.SocketUtil           : Receive Buffer Size: 65536
+2025-05-26T10:23:32.283+08:00  INFO 3604 --- [RMI TCP Connection(2)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-26T10:23:32.283+08:00  INFO 3604 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-26T10:23:32.284+08:00  INFO 3604 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-26T10:26:22.744+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-26T10:26:22.753+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "
+2025-05-26T10:26:22.754+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-26T10:26:22.755+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"
+2025-05-26T10:26:22.755+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-26T10:26:22.755+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T10:26:22.756+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : }, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T10:27:30.163+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226450",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-26T10:27:30.163+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "
+2025-05-26T10:27:30.165+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226450",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-26T10:27:30.165+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"
+2025-05-26T10:27:30.166+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226450",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-26T10:27:30.167+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T10:27:30.170+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : }, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T10:28:03.558+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226483",
+  "body": "ewoJImlzX2FjdGl2ZSI6CXRydWUsCgkiaXNfZGVsZXRlZCI6CWZhbHNlLAoJImlzX2FkbWluXzAiOglmYWxzZSwKCSJpc19hZG1pbl8xIjoJdHJ1ZSwKCSJkamkiOgl7ImFpcmNyYWZ0U2VyaWVzIjo3LCJtb3VudFBvc2l0aW9uVHlwZSI6MywiYWlyY3JhZnRUeXBlIjo5MywiZGppQWRhcHRlclR5cGUiOjMsIm1vdW50UG9zaXRpb24iOiA1fSwKCSLlkI3lrZciOgki5oiR5piv5L2g5aSn54i3IiwKCSJyYXdfZGF0YSI6CXsia2V5IjogWzEsMiwzXX0sCgkiYWdlIjoJMzAuNSwKCSJtaWRkbGVfbmFtZSI6CW51bGwsCgkiYXJyYXkxIjoJWzEsIDIsIDNdLAoJImFycmF5MiI6CVt7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIkh6MiJ9LCB7IkYzIjogIkh6MyJ9LCB7IkYxIjogIkh6MSJ9LCB7IkYyIjogIg=="
+}
+2025-05-26T10:28:03.558+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "
+2025-05-26T10:28:03.560+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226483",
+  "body": "SHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIn0sIHsiRjIiOiAiSHoyIn0sIHsiRjMiOiAiSHozIn0sIHsiRjEiOiAiSHoxIg=="
+}
+2025-05-26T10:28:03.561+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"
+2025-05-26T10:28:03.562+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : Payload: {
+  "serialNumber": "MDSD20240714_0000",
+  "module": "M2_FC_SUBSCRIPTION",
+  "active": "M2_F1_INIT",
+  "message": "1748226483",
+  "body": "fSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifSwgeyJGMSI6ICJIejEifSwgeyJGMiI6ICJIejIifSwgeyJGMyI6ICJIejMifV0sCgkiYXJyYXkzIjoJW3sKCQkJImFnZSI6CTMxCgkJfSwgewoJCQkiYWdlIjoJMzIKCQl9LCB7CgkJCSJhZ2UiOgkzMwoJCX1dLAoJImFkZHJlc3MiOgl7CgkJInN0cmVldCI6CSIxMjMgTWFpbiBTdCIsCgkJImNpdHkiOgkiQW55dG93biIsCgkJInN0YXRlIjoJIkFueXN0YXRlIgoJfQp9"
+}
+2025-05-26T10:28:03.562+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T10:28:03.563+08:00  INFO 3604 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : }, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T13:47:58.106+08:00  INFO 12408 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-05-26T13:47:58.148+08:00  INFO 12408 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 12408 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-05-26T13:47:58.149+08:00  INFO 12408 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-05-26T13:47:59.508+08:00  INFO 12408 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-05-26T13:47:59.544+08:00  INFO 12408 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T13:47:59.547+08:00  INFO 12408 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T13:47:59.952+08:00  INFO 12408 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 20240 (http)
+2025-05-26T13:47:59.961+08:00  INFO 12408 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-20240"]
+2025-05-26T13:47:59.963+08:00  INFO 12408 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-26T13:47:59.963+08:00  INFO 12408 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-05-26T13:48:00.079+08:00  INFO 12408 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-05-26T13:48:00.080+08:00  INFO 12408 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1887 ms
+2025-05-26T13:48:01.787+08:00  INFO 12408 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-05-26T13:48:01.841+08:00  INFO 12408 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-20240"]
+2025-05-26T13:48:01.864+08:00  INFO 12408 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'
+2025-05-26T13:48:02.089+08:00  INFO 12408 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 4.882 seconds (process running for 5.923)
+2025-05-26T13:48:02.095+08:00  INFO 12408 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-05-26T13:48:02.283+08:00  INFO 12408 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 20242
+2025-05-26T13:48:02.427+08:00  INFO 12408 --- [main] com.mdsd.cloud.util.SocketUtil           : Send Buffer Size: 65536
+2025-05-26T13:48:02.427+08:00  INFO 12408 --- [main] com.mdsd.cloud.util.SocketUtil           : Receive Buffer Size: 65536
+2025-05-26T13:48:02.598+08:00  INFO 12408 --- [RMI TCP Connection(3)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-26T13:48:02.598+08:00  INFO 12408 --- [RMI TCP Connection(3)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-26T13:48:02.600+08:00  INFO 12408 --- [RMI TCP Connection(3)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-26T13:49:57.683+08:00  INFO 12408 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:49:57.745+08:00  INFO 12408 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:49:57.746+08:00  INFO 12408 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 328
+2025-05-26T13:49:57.746+08:00  INFO 12408 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"
+2025-05-26T13:52:03.638+08:00  INFO 18672 --- [background-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 8.0.1.Final
+2025-05-26T13:52:03.694+08:00  INFO 18672 --- [main] c.m.c.SocketTransferServerApplication    : Starting SocketTransferServerApplication using Java 17.0.9 with PID 18672 (D:\workspace\GitHub\Java\Java_17\SocketTransferServer\target\classes started by WangYunwei in D:\workspace\GitHub\Java\Java_17\SocketTransferServer)
+2025-05-26T13:52:03.696+08:00  INFO 18672 --- [main] c.m.c.SocketTransferServerApplication    : The following 2 profiles are active: "local", "dev"
+2025-05-26T13:52:05.162+08:00  INFO 18672 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=bdd6ed96-933f-3dbc-a273-cd614cb7d4f3
+2025-05-26T13:52:05.198+08:00  INFO 18672 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.EApiFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T13:52:05.201+08:00  INFO 18672 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'com.mdsd.cloud.feign.HangarFeign' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-05-26T13:52:05.592+08:00  INFO 18672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 20240 (http)
+2025-05-26T13:52:05.600+08:00  INFO 18672 --- [main] o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-20240"]
+2025-05-26T13:52:05.602+08:00  INFO 18672 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-26T13:52:05.602+08:00  INFO 18672 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-05-26T13:52:05.727+08:00  INFO 18672 --- [main] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring embedded WebApplicationContext
+2025-05-26T13:52:05.729+08:00  INFO 18672 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1989 ms
+2025-05-26T13:52:07.400+08:00  INFO 18672 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-05-26T13:52:07.453+08:00  INFO 18672 --- [main] o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-20240"]
+2025-05-26T13:52:07.472+08:00  INFO 18672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 20240 (http) with context path '/socket-transfer-server'
+2025-05-26T13:52:07.705+08:00  INFO 18672 --- [main] c.m.c.SocketTransferServerApplication    : Started SocketTransferServerApplication in 4.991 seconds (process running for 6.04)
+2025-05-26T13:52:07.714+08:00  INFO 18672 --- [main] c.mdsd.cloud.configuration.RegBeanConf   : ================== 【START-UP SUCCESSFUL】 ==================
+2025-05-26T13:52:07.904+08:00  INFO 18672 --- [main] com.mdsd.cloud.util.SocketUtil           : 启动 UDP 监听端口: 20242
+2025-05-26T13:52:08.102+08:00  INFO 18672 --- [main] com.mdsd.cloud.util.SocketUtil           : Send Buffer Size: 65536
+2025-05-26T13:52:08.103+08:00  INFO 18672 --- [main] com.mdsd.cloud.util.SocketUtil           : Receive Buffer Size: 65536
+2025-05-26T13:52:08.781+08:00  INFO 18672 --- [RMI TCP Connection(2)-2.0.0.1] o.a.c.c.C.[.[.[/socket-transfer-server]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-26T13:52:08.781+08:00  INFO 18672 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-26T13:52:08.783+08:00  INFO 18672 --- [RMI TCP Connection(2)-2.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-05-26T13:52:13.412+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:52:13.465+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:52:13.465+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 328
+2025-05-26T13:52:13.465+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T13:53:00.119+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:53:00.121+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T13:53:00.121+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 328
+2025-05-26T13:53:00.122+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}
+2025-05-26T17:06:36.881+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T17:06:36.935+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 1067
+2025-05-26T17:06:36.936+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : 接收的数据包大小为: 328
+2025-05-26T17:06:36.937+08:00  INFO 18672 --- [nioEventLoopGroup-2-1] c.m.c.c.dji.service.impl.DjiServiceImpl  : ===> {
+	"is_active":	true,
+	"is_deleted":	false,
+	"is_admin_0":	false,
+	"is_admin_1":	true,
+	"dji":	{"aircraftSeries":7,"mountPositionType":3,"aircraftType":93,"djiAdapterType":3,"mountPosition": 5},
+	"名字":	"我是你大爷",
+	"raw_data":	{"key": [1,2,3]},
+	"age":	30.5,
+	"middle_name":	null,
+	"array1":	[1, 2, 3],
+	"array2":	[{"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}, {"F1": "Hz1"}, {"F2": "Hz2"}, {"F3": "Hz3"}],
+	"array3":	[{
+			"age":	31
+		}, {
+			"age":	32
+		}, {
+			"age":	33
+		}],
+	"address":	{
+		"street":	"123 Main St",
+		"city":	"Anytown",
+		"state":	"Anystate"
+	}
+}

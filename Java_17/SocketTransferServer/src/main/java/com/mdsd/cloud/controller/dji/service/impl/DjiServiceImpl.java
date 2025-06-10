@@ -32,7 +32,9 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author WangYunwei [2024-11-01]
@@ -50,6 +52,8 @@ public class DjiServiceImpl implements IDjiService {
     private final ObjectMapper obm = new ObjectMapper();
     private final JsonFormat.Printer printer = JsonFormat.printer();
     private final StringBuilder stringBuilder = new StringBuilder();
+
+    private final BlockingQueue<byte[]> videoQueue = new LinkedBlockingQueue<>();
 
     private Channel udpChannel;
     private final ApplicationEventPublisher publisher;
@@ -90,7 +94,21 @@ public class DjiServiceImpl implements IDjiService {
                         log.info("{} 注册到系统!", el.getSerialNumber());
                         AircraftDto aircraftDto = new AircraftDto();
                         aircraftDto.setInetSocketAddress(pak.sender());
+                        aircraftDto.setProcess(FfmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
                         aircraftMap.put(el.getSerialNumber(), aircraftDto);
+
+                        // 消费线程
+//                        new Thread(() -> {
+//                            try {
+//                                while (!Thread.interrupted()) {
+//                                    byte[] packet = videoQueue.take(); // 取出一个完整的UDP包（约33656字节）
+//                                    aircraftDto.getProcess().getOutputStream().write(packet);
+//                                    aircraftDto.getProcess().getOutputStream().flush();
+//                                }
+//                            } catch (IOException | InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }).start();
                     }
                 } else {
                     publisher.publishEvent(new CommonEvent(CommonEnum.UDP_SOCKET_DJI, payload));
@@ -145,26 +163,34 @@ public class DjiServiceImpl implements IDjiService {
                 aircraftMap.remove(payload.getSerialNumber());
             }
             case M14_LIVE_VIEW -> {
-                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
-                    if (aircraftDto.getProcess() == null || aircraftDto.getProcess().isAlive()) {
-                        aircraftDto.setProcess(FfmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
-                    }
-                    // 将接收到的数据直接写入FFmpeg标准输入
-                    try {
-                        aircraftDto.getProcess().getOutputStream().write(payload.getBody().toByteArray());
-                        aircraftDto.getProcess().getOutputStream().flush();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else {
-                    // 如果是 Windows 环境则将视频流写入本地
-                    log.info("已接收 {} 字节", payload.getBody().size());
-                    try (FileOutputStream fileOutputStream = new FileOutputStream(payload.getMessage(), true)) {
-                        fileOutputStream.write(payload.getBody().toByteArray(), 0, payload.getBody().size());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                // 如果是 Windows 环境则将视频流写入本地
+                try (FileOutputStream fileOutputStream = new FileOutputStream("output.h264", true)) {
+                    fileOutputStream.write(payload.getBody().toByteArray(), 0, payload.getBody().size());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+//                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+//                    // 将接收到的数据直接写入FFmpeg标准输入
+//                    try {
+//                        aircraftDto.getProcess().getOutputStream().write(payload.getBody().toByteArray());
+//                        aircraftDto.getProcess().getOutputStream().flush();
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    // 将数据流写入队列
+//                    byte[] byteArray = payload.getBody().toByteArray();
+//                    if(!videoQueue.offer(byteArray)){
+//                        log.error("Queue is full, dropping frame.");
+//                    }
+//                } else {
+//                    // 如果是 Windows 环境则将视频流写入本地
+//                    log.info("已接收 {} 字节", payload.getBody().size());
+//                    try (FileOutputStream fileOutputStream = new FileOutputStream("output.h264", true)) {
+//                        fileOutputStream.write(payload.getBody().toByteArray(), 0, payload.getBody().size());
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
             }
             default -> log.info("================");
         }

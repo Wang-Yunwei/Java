@@ -18,8 +18,14 @@ public class FfmpegUtil {
         Process result = null;
         ProcessBuilder pb = new ProcessBuilder(
                 "ffmpeg",
+                "-f","h264",
+                "-probesize","32k",
+                "-analyzeduration","32k",
                 "-i", "pipe:0", // 从标准输入读取数据
                 "-c", "copy", // 不重新编码，直接复制原始流
+                "-flags", "low_delay",
+                "-fflags", "nobuffer",
+                "-flush_packets", "0",
                 "-f", "flv", // 设置输出格式为FLV
                 streamPth // SRS服务器地址和流路径
         );
