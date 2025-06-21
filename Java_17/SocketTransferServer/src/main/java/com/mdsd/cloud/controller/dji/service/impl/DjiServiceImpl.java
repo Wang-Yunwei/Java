@@ -14,7 +14,7 @@ import com.mdsd.cloud.controller.websocket.service.impl.WebSocketServiceImpl;
 import com.mdsd.cloud.enums.CommonEnum;
 import com.mdsd.cloud.enums.TyjwEnum;
 import com.mdsd.cloud.event.CommonEvent;
-import com.mdsd.cloud.util.FfmpegUtil;
+import com.mdsd.cloud.util.FFmpegUtil;
 import com.mdsd.cloud.util.SocketUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -94,7 +94,7 @@ public class DjiServiceImpl implements IDjiService {
                         log.info("{} 注册到系统!", el.getSerialNumber());
                         AircraftDto aircraftDto = new AircraftDto();
                         aircraftDto.setInetSocketAddress(pak.sender());
-                        aircraftDto.setProcess(FfmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
+                        aircraftDto.setProcess(FFmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
                         aircraftMap.put(el.getSerialNumber(), aircraftDto);
 
                         // 消费线程

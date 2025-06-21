@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author WangYunwei [2025-03-13]
  */
 @Slf4j
-public class FfmpegUtil {
+public class FFmpegUtil {
 
     /**
      * @param streamPth 例如: rtmp://192.168.0.221/live/livestream
