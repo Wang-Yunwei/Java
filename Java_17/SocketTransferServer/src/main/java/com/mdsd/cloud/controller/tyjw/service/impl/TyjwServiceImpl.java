@@ -209,23 +209,17 @@ public class TyjwServiceImpl implements ITyjwService {
     @Override
     public void startTcpConnect() {
         ChannelFuture tcpClient = SocketUtil.createTcpClient(new TyjwChannelInboundHandler(), host, port);
-        tcpClient.addListener((ChannelFutureListener) future -> {
-            if (future.isSuccess()) {
-                // 连接成功后,发送注册请求
-                log.info("连接 {}:{} 成功, 开始发送注册请求!", host, port);
-                tcpChannel = future.channel();
-                ByteBuf buf = Unpooled.buffer();
-                byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
-                buf.writeShort(TyjwEnum.请求帧头.getInstruct());
-                buf.writeShort(bytes.length + 5);
-                buf.writeByte(TyjwEnum.注册.getInstruct());
-                buf.writeInt(AuthSingleton.getInstance().getCompanyId());
-                buf.writeBytes(bytes);
-                tcpChannel.writeAndFlush(buf);
-            } else {
-                throw new BusinessException(format("连接 TCP 服务, 失败 -> %s:%s", host, port));
-            }
-        });
+        if(null != tcpClient){
+            tcpChannel = tcpClient.channel();
+            ByteBuf buf = Unpooled.buffer();
+            byte[] bytes = AuthSingleton.getInstance().getAccessToken().getBytes();
+            buf.writeShort(TyjwEnum.请求帧头.getInstruct());
+            buf.writeShort(bytes.length + 5);
+            buf.writeByte(TyjwEnum.注册.getInstruct());
+            buf.writeInt(AuthSingleton.getInstance().getCompanyId());
+            buf.writeBytes(bytes);
+            tcpChannel.writeAndFlush(buf);
+        }
     }
 
     @Override
