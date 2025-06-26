@@ -1,10 +1,5 @@
 package com.mdsd.cloud.util;
 
-import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 /**
  * @author WangYunwei [2024-07-14]
  */

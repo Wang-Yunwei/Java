@@ -157,6 +157,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
             log.error(cause.getMessage());
         }
+
     }
 
     @Override

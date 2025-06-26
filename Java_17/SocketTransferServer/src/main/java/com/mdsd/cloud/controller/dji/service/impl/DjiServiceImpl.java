@@ -1,20 +1,16 @@
 package com.mdsd.cloud.controller.dji.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.dji.dto.AircraftDto;
-import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
-import com.mdsd.cloud.controller.tyjw.dto.PlanLineDataDTO;
 import com.mdsd.cloud.controller.websocket.service.IWebSocketService;
 import com.mdsd.cloud.controller.websocket.service.impl.WebSocketServiceImpl;
 import com.mdsd.cloud.enums.CommonEnum;
-import com.mdsd.cloud.enums.TyjwEnum;
+import com.mdsd.cloud.enums.DjiEnum;
 import com.mdsd.cloud.event.CommonEvent;
-import com.mdsd.cloud.util.FFmpegUtil;
 import com.mdsd.cloud.util.SocketUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -24,7 +20,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -205,36 +200,19 @@ public class DjiServiceImpl implements IDjiService {
     @Override
     public void handleWebSocket(JsonNode jsonNode) {
         String serialNumber = jsonNode.get("云盒编号").asText();
-        String instruct = jsonNode.get("模块").asText();
-        String action = jsonNode.get("指令").asText();
-        if (StringUtils.isEmpty(instruct) && StringUtils.isEmpty(action)) {
-            webSocketService.sendMessage(serialNumber, String.format(WebSocketServiceImpl.errorMessage, "指令编号或动作编号不能为空!"));
+        int module = jsonNode.get("模块").asInt();
+        int directive = jsonNode.get("指令").asInt();
+        if (module == 0 && directive == 0) {
+            webSocketService.sendMessage(serialNumber, String.format(WebSocketServiceImpl.errorMessage, "模块或指令不能为空!"));
         } else {
             if (udpChannel != null && udpChannel.isActive()) {
-                TyjwEnum anEnum = TyjwEnum.getEnum(Integer.parseInt(instruct, 16), Integer.parseInt(action, 16));
+                DjiEnum anEnum = DjiEnum.getEnum(module, directive);
                 log.info(anEnum.name());
                 // 设置序列号、指令编号、动作编号
-                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(anEnum.getModelEnum());
+                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule()));
                 switch (anEnum) {
-                    case 航线飞行_航线规划 -> {
-                        payload.setActive(DjiProtoBuf.ActiveEnum.M15_F2_UPLOAD_MISSION);
-                        try {
-                            PlanLineDataDTO planLineDataDto = obm.readValue(jsonNode.get("航线数据").asText(), PlanLineDataDTO.class);
-                        } catch (JsonProcessingException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    case 航线飞行_开始航线 -> {
-                        payload.setActive(DjiProtoBuf.ActiveEnum.M15_F3_START);
-                    }
-                    case 航线飞行_暂停航线 -> {
-                        payload.setActive(DjiProtoBuf.ActiveEnum.M15_F5_PAUSE);
-                    }
-                    case 航线飞行_恢复航线 -> {
-                        payload.setActive(DjiProtoBuf.ActiveEnum.M15_F6_RESUME);
-                    }
-                    case 航线飞行_结束航线 -> {
-                        payload.setActive(DjiProtoBuf.ActiveEnum.M15_F4_STOP);
+                    case 云台管理_设置工作模式 -> {
+
                     }
                     default -> {
                         log.error("未知指令!");

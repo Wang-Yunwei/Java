@@ -83,6 +83,7 @@ public class SocketUtil {
                                         true, // 是否允许复用 (允许多个WebSocket连接复用同一个Channel)
                                         65536 // 最大帧大小 (64KB)
                                 )) //  4.WebSocket协议处理器 (处理握手、消息升级)
+                                .addLast("heartbeat", new IdleStateHandler(3, 0, 0, TimeUnit.SECONDS)) // 心跳检测
                                 .addLast(handler); // 5.自定义WebSocket业务处理器
                     }
                 });
