@@ -1,6 +1,7 @@
 package com.mdsd.cloud.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
 import com.mdsd.cloud.enums.CommonEnum;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;

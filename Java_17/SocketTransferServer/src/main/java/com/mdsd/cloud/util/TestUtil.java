@@ -1,5 +1,7 @@
 package com.mdsd.cloud.util;
 
+import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
+
 /**
  * @author WangYunwei [2024-07-14]
  */

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.dji.dto.AircraftDto;
+import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
 import com.mdsd.cloud.controller.dji.service.IDjiService;
 import com.mdsd.cloud.controller.websocket.service.IWebSocketService;
 import com.mdsd.cloud.controller.websocket.service.impl.WebSocketServiceImpl;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -212,7 +214,7 @@ public class DjiServiceImpl implements IDjiService {
                 DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule()));
                 switch (anEnum) {
                     case 云台管理_设置工作模式 -> {
-
+                        log.info("收到数据");
                     }
                     default -> {
                         log.error("未知指令!");
@@ -225,8 +227,10 @@ public class DjiServiceImpl implements IDjiService {
                     throw new RuntimeException(e);
                 }
                 // 发送数据
-                DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer(payload.build().toByteArray()), aircraftMap.get(payload.getSerialNumber()).getInetSocketAddress());
-                udpChannel.writeAndFlush(datagramPacket);
+                AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
+                if(aircraftMap.size()>0 || null != aircraftDto){
+                    udpChannel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(payload.build().toByteArray()), aircraftDto.getInetSocketAddress()));
+                }
             }
         }
     }

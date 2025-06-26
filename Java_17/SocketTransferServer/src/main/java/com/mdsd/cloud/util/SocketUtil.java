@@ -65,8 +65,8 @@ public class SocketUtil {
                 .channel(NioServerSocketChannel.class) // 使用NIO服务器通道
                 .option(ChannelOption.SO_BACKLOG, 32) // 设置线程队列连接个数, 受Linux的 /proc/sys/net/core/somaxconn 影响
                 .option(ChannelOption.SO_REUSEADDR, true) // 允许地址复用
-                .option(ChannelOption.SO_KEEPALIVE, true) // 启用TCP保活,在长时间没有数据传输时,操作系统会发送保活探测包以确保连接有效
-                .option(ChannelOption.TCP_NODELAY, true) // 禁用Nagle算法,减少小数据包的延迟
+//                .option(ChannelOption.SO_KEEPALIVE, true) // 启用TCP保活,在长时间没有数据传输时,操作系统会发送保活探测包以确保连接有效
+//                .option(ChannelOption.TCP_NODELAY, true) // 禁用Nagle算法,减少小数据包的延迟
                 .childOption(ChannelOption.SO_RCVBUF, 128 * 1024) // 接收缓冲区大小
                 .childOption(ChannelOption.SO_SNDBUF, 128 * 1024) // 发送缓冲区大小
 //                .handler(new LoggingHandler(LogLevel.INFO)) // 父Channel日志记录

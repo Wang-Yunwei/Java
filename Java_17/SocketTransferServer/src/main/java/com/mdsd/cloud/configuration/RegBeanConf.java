@@ -52,6 +52,7 @@ public class RegBeanConf {
             log.info("================== 【START-UP SUCCESSFUL】 ==================");
             if ("Windows10".equals(ExecShell.exec("hostname"))) {
                 djiService.startUdpListening();
+                webSocketService.startWebListening();
             } else {
                 tyjwService.getToken();
                 if (null != auth.getCompanyId() && StringUtils.isNoneBlank(auth.getAccessToken())) {

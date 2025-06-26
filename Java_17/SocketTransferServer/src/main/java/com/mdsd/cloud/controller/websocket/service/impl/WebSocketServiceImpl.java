@@ -95,10 +95,11 @@ public class WebSocketServiceImpl implements IWebSocketService {
                                 log.info("任务 {} 未注册,执行注册到 {}", taskId, boxNumber);
                             }
                             // 判断是否有控制权
-                            if (null != jsonNode.get("指令编号") && null != jsonNode.get("动作编号")) {
-                                if (userId.equals(wsChannelDetails.getControlPower()) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
-                                    publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
-                                }
+                            if (null != jsonNode.get("模块") && null != jsonNode.get("指令")) {
+//                                if (userId.equals(wsChannelDetails.getControlPower()) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
+//                                    publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
+//                                }
+                                publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
                             }
                         } else {
                             // 云盒未注册

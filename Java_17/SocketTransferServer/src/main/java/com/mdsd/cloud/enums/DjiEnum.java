@@ -1,5 +1,6 @@
 package com.mdsd.cloud.enums;
 
+import com.mdsd.cloud.controller.dji.dto.DjiProtoBuf;
 import com.mdsd.cloud.response.BusinessException;
 import lombok.Getter;
 
