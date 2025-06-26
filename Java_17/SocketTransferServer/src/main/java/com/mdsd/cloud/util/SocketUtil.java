@@ -173,11 +173,11 @@ public class SocketUtil {
     public static Channel createUdpServer(ChannelHandler handler, int port) {
         Bootstrap bootstrap = new Bootstrap().group(new NioEventLoopGroup())
                 .channel(NioDatagramChannel.class)
-                .option(ChannelOption.SO_SNDBUF, 64 * 1024)
-                .option(ChannelOption.SO_RCVBUF, 64 * 1024)
+                .option(ChannelOption.SO_SNDBUF, 128 * 1024)
+                .option(ChannelOption.SO_RCVBUF, 128 * 1024)
                 .option(ChannelOption.SO_REUSEADDR, true) // 启用地址重用
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT) // 使用池化缓冲区分配器
-                .option(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(36 * 1024)) // 设置固定接收缓冲区大小
+                .option(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(64 * 1024)) // 设置固定接收缓冲区大小
                 .handler(handler);
         try {
             log.info("启动 UDP 监听端口: {}", port);
@@ -187,6 +187,7 @@ public class SocketUtil {
                 } else {
                     log.error("UDP 服务启动失败 -> {}", f.cause().getMessage());
 //                    group.shutdownGracefully(); // 启动失败也要释放资源
+                    bootstrap.disableResolver();
                 }
             }).sync().channel();
         } catch (InterruptedException e) {

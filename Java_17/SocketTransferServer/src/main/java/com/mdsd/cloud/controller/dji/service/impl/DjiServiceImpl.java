@@ -81,20 +81,22 @@ public class DjiServiceImpl implements IDjiService {
             }
             Optional.ofNullable(payload).ifPresent(el -> {
                 // TODO 打印 Payload
-//                try {
-//                    log.info("Payload: {}", printer.print(payload));
-//                } catch (InvalidProtocolBufferException e) {
-//                    throw new RuntimeException(e);
-//                }
+                try {
+                    log.info("Payload: {}", printer.print(payload));
+                } catch (InvalidProtocolBufferException e) {
+                    throw new RuntimeException(e);
+                }
                 // 当接收到心跳后解析地址和端口号
                 if (payload.getModule() == DjiProtoBuf.ModuleEnum.M0_HEARTBEAT) {
                     if (aircraftMap.containsKey(el.getSerialNumber())) {
                         log.info("{} 心跳 {}", el.getSerialNumber(), payload.getMessage());
+                        // 发送数据
+                        udpChannel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(buffer.array()), aircraftMap.get(payload.getSerialNumber()).getInetSocketAddress()));
                     } else {
                         log.info("{} 注册到系统!", el.getSerialNumber());
                         AircraftDto aircraftDto = new AircraftDto();
                         aircraftDto.setInetSocketAddress(pak.sender());
-                        aircraftDto.setProcess(FFmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
+//                        aircraftDto.setProcess(FFmpegUtil.startProcess(String.format(STREAM_PATH, payload.getSerialNumber())));
                         aircraftMap.put(el.getSerialNumber(), aircraftDto);
 
                         // 消费线程
@@ -153,6 +155,7 @@ public class DjiServiceImpl implements IDjiService {
             }
             case M5_POWER_MANAGEMENT -> {
                 // 飞行器下电,关闭视频流管道
+                log.info("===> {}", payload.getMessage());
                 try {
                     aircraftDto.getProcess().getOutputStream().close();
                 } catch (IOException e) {
@@ -202,8 +205,8 @@ public class DjiServiceImpl implements IDjiService {
     @Override
     public void handleWebSocket(JsonNode jsonNode) {
         String serialNumber = jsonNode.get("云盒编号").asText();
-        String instruct = jsonNode.get("指令编号").asText();
-        String action = jsonNode.get("动作编号").asText();
+        String instruct = jsonNode.get("模块").asText();
+        String action = jsonNode.get("指令").asText();
         if (StringUtils.isEmpty(instruct) && StringUtils.isEmpty(action)) {
             webSocketService.sendMessage(serialNumber, String.format(WebSocketServiceImpl.errorMessage, "指令编号或动作编号不能为空!"));
         } else {

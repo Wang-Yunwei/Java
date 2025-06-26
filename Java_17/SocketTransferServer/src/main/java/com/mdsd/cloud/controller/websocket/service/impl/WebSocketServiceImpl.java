@@ -44,7 +44,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
 
     private static final String readyMessage = "{\"action\":\"READY_MESSAGE\"}";
 
-    public static final String errorMessage = "{\"action\":\"PONG_MESSAGE\",\"message\",\"%s\"}";
+    public static final String errorMessage = "{\"action\":\"PONG_MESSAGE\",\"message\":\"%s\"}";
 
     private final ApplicationEventPublisher publisher;
 
