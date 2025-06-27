@@ -2,6 +2,7 @@ package com.mdsd.cloud.controller.dji.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.mdsd.cloud.controller.dji.dto.AircraftDto;
@@ -20,6 +21,8 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -28,6 +31,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -214,7 +218,7 @@ public class DjiServiceImpl implements IDjiService {
                 DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule()));
                 switch (anEnum) {
                     case 云台管理_设置工作模式 -> {
-                        log.info("收到数据");
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), 1, 0), Charset.defaultCharset()));
                     }
                     default -> {
                         log.error("未知指令!");
@@ -228,7 +232,7 @@ public class DjiServiceImpl implements IDjiService {
                 }
                 // 发送数据
                 AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
-                if(aircraftMap.size()>0 || null != aircraftDto){
+                if (aircraftMap.size() > 0 || null != aircraftDto) {
                     udpChannel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(payload.build().toByteArray()), aircraftDto.getInetSocketAddress()));
                 }
             }

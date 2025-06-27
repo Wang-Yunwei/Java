@@ -43,12 +43,12 @@ public enum DjiEnum {
 
     private final int directive;
 
-    private final String value;
+    private final String arguments;
 
-    DjiEnum(int module, int directive, String value) {
+    DjiEnum(int module, int directive, String arguments) {
         this.module = module;
         this.directive = directive;
-        this.value = value;
+        this.arguments = arguments;
     }
 
     public static DjiEnum getEnum(int module, int directive) {

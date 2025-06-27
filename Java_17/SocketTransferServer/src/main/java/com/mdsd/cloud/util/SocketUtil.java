@@ -14,11 +14,9 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author WangYunwei [2025-03-05]
@@ -65,11 +63,8 @@ public class SocketUtil {
                 .channel(NioServerSocketChannel.class) // 使用NIO服务器通道
                 .option(ChannelOption.SO_BACKLOG, 32) // 设置线程队列连接个数, 受Linux的 /proc/sys/net/core/somaxconn 影响
                 .option(ChannelOption.SO_REUSEADDR, true) // 允许地址复用
-//                .option(ChannelOption.SO_KEEPALIVE, true) // 启用TCP保活,在长时间没有数据传输时,操作系统会发送保活探测包以确保连接有效
-//                .option(ChannelOption.TCP_NODELAY, true) // 禁用Nagle算法,减少小数据包的延迟
                 .childOption(ChannelOption.SO_RCVBUF, 128 * 1024) // 接收缓冲区大小
                 .childOption(ChannelOption.SO_SNDBUF, 128 * 1024) // 发送缓冲区大小
-//                .handler(new LoggingHandler(LogLevel.INFO)) // 父Channel日志记录
                 .childHandler(new ChannelInitializer<NioSocketChannel>() { // 添加一个 ChannelInitializer 来初始化每一个新的Channel
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
@@ -83,7 +78,6 @@ public class SocketUtil {
                                         true, // 是否允许复用 (允许多个WebSocket连接复用同一个Channel)
                                         65536 // 最大帧大小 (64KB)
                                 )) //  4.WebSocket协议处理器 (处理握手、消息升级)
-                                .addLast("heartbeat", new IdleStateHandler(3, 0, 0, TimeUnit.SECONDS)) // 心跳检测
                                 .addLast(handler); // 5.自定义WebSocket业务处理器
                     }
                 });
@@ -131,7 +125,6 @@ public class SocketUtil {
                     protected void initChannel(SocketChannel ch) {
                         ch.pipeline()
                                 .addLast(new LengthFieldBasedFrameDecoder(10 * 1024, 2, 2, 0, 0)) // 自定义协议解码器
-                                .addLast("ping", new IdleStateHandler(0, 3, 0, TimeUnit.SECONDS)) // 心跳检测
                                 .addLast(handler);
                     }
                 });
@@ -170,6 +163,9 @@ public class SocketUtil {
      * - SO_SNDBUF 和 SO_RCVBUF 控制的是操作系统级别的发送和接收缓冲区大小，并不直接限制单个 UDP 数据包的大小
      * - Netty 中的 DatagramPacket 默认有一个较小的缓冲区大小（如 2048 字节），这是由 ByteBufAllocator 配置决定的
      * - 如果你需要处理更大的 UDP 数据包,应该通过配置 RecvByteBufAllocator 来调整 Netty 的接收缓冲区大小,而不是仅仅依赖于 SO_RCVBUF 的设置
+     * <p>
+     * bootstrap.disableResolver() 的作用是:
+     * - 告诉 Netty 在连接远程主机时不使用内置的 DNS 解析机制（如解析域名到 IP），而是直接使用你传入的地址（必须是 IP 地址或已解析好的地址）
      */
     public static Channel createUdpServer(ChannelHandler handler, int port) {
         Bootstrap bootstrap = new Bootstrap().group(new NioEventLoopGroup())
@@ -181,14 +177,13 @@ public class SocketUtil {
                 .option(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(64 * 1024)) // 设置固定接收缓冲区大小
                 .handler(handler);
         try {
-            log.info("启动 UDP 监听端口: {}", port);
             return bootstrap.bind(port).addListener((ChannelFutureListener) f -> {
                 if (f.isSuccess()) {
                     log.info("UDP 服务启动成功, 监听端口: {}", port);
                 } else {
                     log.error("UDP 服务启动失败 -> {}", f.cause().getMessage());
+                    bootstrap.disableResolver();// 禁用解析器
 //                    group.shutdownGracefully(); // 启动失败也要释放资源
-                    bootstrap.disableResolver();
                 }
             }).sync().channel();
         } catch (InterruptedException e) {
