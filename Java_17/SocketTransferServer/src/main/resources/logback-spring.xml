@@ -70,13 +70,13 @@
     </appender>
 
     <!-- 本地环境:打印控制台 -->
-    <springProfile name="local">
+    <springProfile name="dev">
         <!-- logger name="com.zaxxer.hikari" level="DEBUG"/ -->
         <root level="INFO">
             <appender-ref ref="MY_CONSOLE_LOG"/>
         </root>
     </springProfile>
-    <springProfile name="dev">
+    <springProfile name="linux">
         <logger name="com.mdsd.cloud.feign" level="DEBUG"/>
         <root level="INFO">
             <appender-ref ref="MY_CONSOLE_LOG">
