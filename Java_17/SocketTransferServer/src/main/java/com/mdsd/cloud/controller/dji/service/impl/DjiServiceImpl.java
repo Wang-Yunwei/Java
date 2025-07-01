@@ -49,6 +49,8 @@ public class DjiServiceImpl implements IDjiService {
     @Value("${env.port.sts.udp}")
     private int port;
 
+    private int mountPosition;
+
     private final ConcurrentHashMap<String, AircraftDto> aircraftMap = new ConcurrentHashMap<>();
     private final ObjectMapper obm = new ObjectMapper();
     private final JsonFormat.Printer printer = JsonFormat.printer();
@@ -138,7 +140,7 @@ public class DjiServiceImpl implements IDjiService {
                 } else {
                     stringBuilder.append(payload.getBody().toStringUtf8());
                     if (payload.getPackageNum() == payload.getPackageIndex()) {
-                        log.info("===> {}", stringBuilder.toString());
+                        log.info("===> {}", stringBuilder);
                         stringBuilder.setLength(0);
                     }
                 }
@@ -157,12 +159,12 @@ public class DjiServiceImpl implements IDjiService {
             case M5_POWER_MANAGEMENT -> {
                 // 飞行器下电,关闭视频流管道
                 log.info("===> {}", payload.getMessage());
-                try {
-                    aircraftDto.getProcess().getOutputStream().close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                aircraftDto.getProcess().destroy();
+//                try {
+//                    aircraftDto.getProcess().getOutputStream().close();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                aircraftDto.getProcess().destroy();
                 // 删除注册
                 aircraftMap.remove(payload.getSerialNumber());
             }
@@ -215,10 +217,22 @@ public class DjiServiceImpl implements IDjiService {
                 DjiEnum anEnum = DjiEnum.getEnum(module, directive);
                 log.info(anEnum.name());
                 // 设置序列号、指令编号、动作编号
-                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule()));
+                DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule())).setDirective(DjiProtoBuf.DirectiveEnum.forNumber(anEnum.getDirective()));
                 switch (anEnum) {
                     case 云台管理_设置工作模式 -> {
-                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), 1, 0), Charset.defaultCharset()));
+                        mountPosition = jsonNode.get("mountPosition").asInt();
+                        int mode = jsonNode.get("mode").asInt();
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, mode), Charset.defaultCharset()));
+                    }
+                    case 云台管理_重置俯仰和偏航角 -> {
+                        int resetMode = jsonNode.get("resetMode").asInt();
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, resetMode), Charset.defaultCharset()));
+                    }
+                    case 云台管理_旋转角度 -> {
+                        int pitch = jsonNode.get("pitch").asInt();
+                        int yaw = jsonNode.get("yaw").asInt();
+                        double time = jsonNode.get("time").asDouble();
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, 1, pitch, 0, yaw, time), Charset.defaultCharset()));
                     }
                     default -> {
                         log.error("未知指令!");
