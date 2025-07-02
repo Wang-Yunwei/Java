@@ -63,10 +63,10 @@ public class WebSocketServiceImpl implements IWebSocketService {
                 if (null != jsonNode.get("action") && "PING_MESSAGE".equals(jsonNode.get("action").asText())) {
                     ctx.writeAndFlush(new TextWebSocketFrame(pongMessage));
                 } else {
-                    String boxNumber = jsonNode.get("云盒编号").asText();
-                    String userId = jsonNode.get("用户ID").asText();
-                    String taskId = jsonNode.get("任务ID").asText();
-                    if (StringUtils.isNoneBlank(boxNumber) && StringUtils.isNoneBlank(userId) && StringUtils.isNoneBlank(taskId)) {
+                    if (jsonNode.get("云盒编号") != null && jsonNode.get("用户ID") != null && jsonNode.get("任务ID") != null) {
+                        String boxNumber = jsonNode.get("云盒编号").asText();
+                        String userId = jsonNode.get("用户ID").asText();
+                        String taskId = jsonNode.get("任务ID").asText();
                         // 判断云盒是否已经注册
                         if (wsChannels.containsKey(boxNumber)) {
                             log.info("<<< {}", text);
@@ -99,7 +99,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
 //                                if (userId.equals(wsChannelDetails.getControlPower()) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
 //                                    publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
 //                                }
-                                publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
+                                publisher.publishEvent(new CommonEvent(CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
                             }
                         } else {
                             // 云盒未注册
@@ -109,7 +109,9 @@ public class WebSocketServiceImpl implements IWebSocketService {
                                     put(userId, ctx.channel());
                                 }}));
                                 // 记录操作日志到 MQTT
-                                MQClient.publish(MQClient.userTopic, format(MQClient.userContent, userId, Boolean.TRUE).getBytes(), 1, false);
+                                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                                    MQClient.publish(MQClient.userTopic, format(MQClient.userContent, userId, Boolean.TRUE).getBytes(), 1, false);
+                                }
                             }
                         }
                     }

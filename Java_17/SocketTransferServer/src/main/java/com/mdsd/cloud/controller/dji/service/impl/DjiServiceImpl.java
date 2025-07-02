@@ -220,19 +220,21 @@ public class DjiServiceImpl implements IDjiService {
                 DjiProtoBuf.Payload.Builder payload = DjiProtoBuf.Payload.newBuilder().setSerialNumber(serialNumber).setModule(DjiProtoBuf.ModuleEnum.forNumber(anEnum.getModule())).setDirective(DjiProtoBuf.DirectiveEnum.forNumber(anEnum.getDirective()));
                 switch (anEnum) {
                     case 云台管理_设置工作模式 -> {
-                        mountPosition = jsonNode.get("mountPosition").asInt();
-                        int mode = jsonNode.get("mode").asInt();
+                        mountPosition = jsonNode.get("mountPosition") != null ? jsonNode.get("mountPosition").asInt() : 1;
+                        int mode = jsonNode.get("mode") != null ? jsonNode.get("mode").asInt() : 0;
                         payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, mode), Charset.defaultCharset()));
                     }
-                    case 云台管理_重置俯仰和偏航角 -> {
-                        int resetMode = jsonNode.get("resetMode").asInt();
+                    case 云台管理_重置角度 -> {
+                        int resetMode = jsonNode.get("resetMode") != null ? jsonNode.get("resetMode").asInt() : 0;
                         payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, resetMode), Charset.defaultCharset()));
                     }
                     case 云台管理_旋转角度 -> {
-                        int pitch = jsonNode.get("pitch").asInt();
-                        int yaw = jsonNode.get("yaw").asInt();
-                        double time = jsonNode.get("time").asDouble();
-                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, 1, pitch, 0, yaw, time), Charset.defaultCharset()));
+                        int rotationMode = jsonNode.get("rotationMode") != null ? jsonNode.get("rotationMode").asInt() : 0;
+                        int pitch = jsonNode.get("pitch") != null ? jsonNode.get("pitch").asInt() : 0;
+                        int roll = jsonNode.get("roll") != null ? jsonNode.get("roll").asInt() : 0;
+                        int yaw = jsonNode.get("yaw") != null ? jsonNode.get("yaw").asInt() : 0;
+                        double time = jsonNode.get("time") != null ? jsonNode.get("time").asDouble() : 0;
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, rotationMode, pitch, roll, yaw, time), Charset.defaultCharset()));
                     }
                     default -> {
                         log.error("未知指令!");

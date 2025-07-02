@@ -31,7 +31,7 @@ public enum DjiEnum {
     云台管理_反初始化(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F0_DEINIT_VALUE, null),
     云台管理_初始化(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F1_INIT_VALUE, null),
     云台管理_设置工作模式(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F2_SET_MODE_VALUE, "{\"mountPosition\":%d,\"mode\":%d}"),
-    云台管理_重置俯仰和偏航角(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F3_RESET_VALUE, "{\"mountPosition\":%d,\"resetMode\":%d}"),
+    云台管理_重置角度(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F3_RESET_VALUE, "{\"mountPosition\":%d,\"resetMode\":%d}"),
     云台管理_旋转角度(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F4_ROTATE_VALUE, "{\"mountPosition\":%d,\"rotation\":[%d,%d,%d,%d,%f]}"),
     云台管理_启用或禁用俯仰限位扩展(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F5_SET_PITCH_RANGE_EXTENSION_ENABLED_VALUE, null),
     云台管理_设置最大速度百分比(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F6_SET_CONTROLLER_MAX_SPEED_PERCENTAGE_VALUE, null),
