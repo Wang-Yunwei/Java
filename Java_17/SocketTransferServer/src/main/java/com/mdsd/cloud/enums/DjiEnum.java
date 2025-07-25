@@ -11,23 +11,6 @@ import java.util.Arrays;
  */
 @Getter
 public enum DjiEnum {
-
-    /* E_DJIWaypointV2MissionFinishedAction */
-//    DJI_WAYPOINT_V2_FINISHED_NO_ACTION(0, "无进一步操作,飞行器可以通过遥控器进行控制"),
-//    DJI_WAYPOINT_V2_FINISHED_GO_HOME(1, "当任务结束时返航。如果飞行器距离返航点20米以内，则直接降落"),
-//    DJI_WAYPOINT_V2_FINISHED_AUTO_LANDING(2, "飞行器将在最后一个航点自动降落"),
-//    DJI_WAYPOINT_V2_FINISHED_GO_TO_FIRST_WAYPOINT(3, "飞行器将返回第一个航点并悬停"),
-//    DJI_WAYPOINT_V2_FINISHED_CONTINUE_UNTIL_STOP(4, "当飞行器到达最终航点时,它将继续悬停而不结束任务,操纵杆仍可用于将飞行器沿之前的航点拉回,停止此任务的唯一方法是调用stopMission"),
-//
-//    /* E_DJIWaypointV2MissionActionWhenRcLost */
-//    DJI_WAYPOINT_V2_MISSION_STOP_WAYPOINT_V2_AND_EXECUTE_RC_LOST_ACTION(0,"当遥控器信号丢失时停止当前任务,并执行用户在应用程序上选择的遥控器丢失动作"),
-//    DJI_WAYPOINT_V2_MISSION_KEEP_EXECUTE_WAYPOINT_V2(1,"当遥控器信号丢失时继续执行任务,这意味着即使遥控器信号丢失,无人机也将继续按照预设的航点任务进行操作"),
-//
-//    /* E_DJIWaypointV2MissionGotoFirstWaypointMode */
-//    DJI_WAYPOINT_V2_MISSION_GO_TO_FIRST_WAYPOINT_MODE_SAFELY(0,"安全前往航点,如果当前高度低于航点的高度,飞行器将上升到与航点相同的高度,然后,它从当前高度前往航点坐标,并继续调整到航点的高度"),
-//    DJI_WAYPOINT_V2_MISSION_GO_TO_FIRST_WAYPOINT_MODE_POINT_TO_POINT(1,"从当前飞行器位置直接前往航点,这种方式下,飞行器将直线飞向第一个航点,不特别考虑高度的变化"),
-
-
     云台管理_反初始化(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F0_DEINIT_VALUE, null),
     云台管理_初始化(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F1_INIT_VALUE, null),
     云台管理_设置工作模式(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F2_SET_MODE_VALUE, "{\"mountPosition\":%d,\"mode\":%d}"),
@@ -37,6 +20,66 @@ public enum DjiEnum {
     云台管理_设置最大速度百分比(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F6_SET_CONTROLLER_MAX_SPEED_PERCENTAGE_VALUE, null),
     云台管理_设置云台控制器的平滑因子(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F7_SET_CONTROLLER_SMOOTH_FACTOR_VALUE, null),
     云台管理_恢复出厂设置(DjiProtoBuf.ModuleEnum.M4_GIMBAL_MANAGER_VALUE, DjiProtoBuf.DirectiveEnum.M4_F8_RESTORE_FACTORY_SETTINGS_VALUE, null),
+
+    飞行控制_反初始化(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F0_DEINIT_VALUE, null),
+    飞行控制_初始化(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F1_INIT_VALUE, null),
+    飞行控制_启用或禁用RTK位置功能(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F2_SET_TRK_POSITION_ENABLE_VALUE, null),
+    飞行控制_获取RTK启用状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F3_GET_TRK_POSITION_ENABLE_VALUE, null),
+    飞行控制_设置失联动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F4_SET_RC_LOST_ACTION_VALUE, null),
+    飞行控制_获取遥控器失联动作悬停_降落_返回(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F5_GET_RC_LOST_ACTION_VALUE, null),
+    飞行控制_启用或禁用水平视觉障碍物避让前_后_左_右(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F6_SET_HORIZONTAL_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取水平视觉障碍物避让前_后_左_右的开关状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F7_GET_HORIZONTAL_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_开启或关闭水平雷达避障功能(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F8_SET_HORIZONTAL_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取水平雷达避障功能的状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F9_GET_HORIZONTAL_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_开启或关闭上视避障功能(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F10_SET_UPWARDS_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取上视避障功能的状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F11_GET_UPWARDS_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_开启或关闭向上雷达避障功能(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F12_SET_UPWARDS_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取向上雷达避障功能的状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F13_GET_UPWARDS_RADAR_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_开启或关闭向下视觉避障功能(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F14_SET_DOWNWARDS_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取向下视觉避障功能的状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F15_GET_DOWNWARDS_VISUAL_OBSTACLE_AVOIDANCE_ENABLE_STATUS_VALUE, null),
+    飞行控制_紧急制动飞行(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F16_ARREST_FLYING_VALUE, null),
+    飞行控制_退出紧急制动状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F17_CANCEL_ARREST_FLYING_VALUE, null),
+    飞行控制_无人机在地面时启动电机(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F18_TURN_ON_MOTORS_VALUE, null),
+    飞行控制_无人机在地面时关闭电机(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F19_TURN_OFF_MOTORS_VALUE, null),
+    飞行控制_在任何情况下紧急停止电机(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F20_EMERGENCY_STOP_OFF_VALUE, null),
+    飞行控制_当无人机在地面时请求起飞(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F21_START_TASK_OFF_VALUE, null),
+    飞行控制_当无人机在空中时请求降落(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F22_START_LANDING_VALUE, null),
+    飞行控制_当无人机正在降落时请求取消降落(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F23_CANCEL_LANDING_VALUE, null),
+    飞行控制_当无人机距离地面07米时确认着陆(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F24_START_CONFIRM_LANDING_VALUE, null),
+    飞行控制_在任何情况下都强制着陆(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F25_START_FORCE_LANDING_VALUE, null),
+    飞行控制_设置自定义GPS非RTK的home点位置(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F26_SET_HOME_LOCATION_USING_GPS_COORDINATES_VALUE, null),
+    飞行控制_使用当前飞机的GPS非RTK位置设置home点位置(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F27_SET_HOME_LOCATION_USING_CURRENT_AIRCRAFT_LOCATION_VALUE, null),
+    飞行控制_设置返航高度(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F28_SET_GO_HOME_ALTITUDE_VALUE, null),
+    飞行控制_获取返航高度(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F29_GET_GO_HOME_ALTITUDE_VALUE, null),
+    飞行控制_获取国家码(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F30_GET_COUNTRY_CODE_VALUE, null),
+    飞行控制_当无人机在空中时请求返航动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F31_START_GO_HOME_VALUE, null),
+    飞行控制_在无人机返航时请求取消返航动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F32_CANCEL_GO_HOME_VALUE, null),
+    飞行控制_获取无人机的摇杆控制权限(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F33_OBTAIN_JOYSTICK_CTRL_AUTHORITY_VALUE, null),
+    飞行控制_释放无人机摇杆控制权限(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F34_RELEASE_JOYSTICK_CTRL_AUTHORITY_VALUE, null),
+    飞行控制_使用回调函数订阅摇杆控制权限切换事件(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_EVENT_CALLBACK_VALUE, null),
+    飞行控制_设置摇杆模式(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F36_SET_JOYSTICK_ACTION_VALUE, "{\"horizontalCoordinate\":%d,\"horizontalControlMode\":%d,\"stableControlMode\":%d,\"verticalControlMode\":%d,\"yawControlMode\":%d}"),
+    飞行控制_执行摇杆动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F37_EXECUTE_JOYSTICK_ACTION_VALUE, "{\"north\":%d,\"east\":%d,\"down\":%d,\"yaw\":%d,\"down_speed\":%d}"),
+    飞行控制_执行紧急制动动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION_VALUE, null),
+    飞行控制_取消紧急制动动作(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION_VALUE, null),
+    飞行控制_获取飞机的通用信息(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F40_GET_GENERA_INFO_VALUE, null),
+    飞行控制_设置启动或禁用失联动作状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS_VALUE, null),
+    飞行控制_获取失联动作状态(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS_VALUE, null),
+    飞行控制_注册回调函数触发FTS事件(DjiProtoBuf.ModuleEnum.M6_FLIGHT_CONTROLLER_VALUE, DjiProtoBuf.DirectiveEnum.M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK_VALUE, null),
+
+    感知模块_反初始化(DjiProtoBuf.ModuleEnum.M13_PERCEPTION_VALUE, DjiProtoBuf.DirectiveEnum.M13_F0_DEINIT_VALUE, null),
+    感知模块_初始化(DjiProtoBuf.ModuleEnum.M13_PERCEPTION_VALUE, DjiProtoBuf.DirectiveEnum.M13_F1_INIT_VALUE, null),
+    感知模块_订阅(DjiProtoBuf.ModuleEnum.M13_PERCEPTION_VALUE, DjiProtoBuf.DirectiveEnum.M13_F2_SUBSCRIBE_PERCEPTION_IMAGE_VALUE, null),
+    感知模块_取消订阅(DjiProtoBuf.ModuleEnum.M13_PERCEPTION_VALUE, DjiProtoBuf.DirectiveEnum.M13_F3_UNSUBSCRIBE_PERCEPTION_IMAGE_VALUE, null),
+    感知模块_获取参数(DjiProtoBuf.ModuleEnum.M13_PERCEPTION_VALUE, DjiProtoBuf.DirectiveEnum.M13_F4_GET_STEREO_CAMERA_PARAMETERS_VALUE, null),
+
+    航点_反初始化(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F0_DEINIT_VALUE, null),
+    航点_上传任务(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F2_UPLOAD_MISSION_VALUE, "{\"missTotalLen\":%d,\"missionList\":%s}"),
+    航点_开始任务(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F3_START_VALUE, null),
+    航点_停止任务(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F4_STOP_VALUE, null),
+    航点_暂停任务(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F5_PAUSE_VALUE, null),
+    航点_恢复任务(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F6_RESUME_VALUE, null),
+    航点_获取全局巡航速度(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F7_GET_GLOBAL_CRUISE_SPEED_VALUE, null),
+    航点_设置全局巡航速度(DjiProtoBuf.ModuleEnum.M15_WAYPOINT_V2_VALUE, DjiProtoBuf.DirectiveEnum.M15_F8_SET_GLOBAL_CRUISE_SPEED_VALUE, null),
     ;
 
     private final int module;

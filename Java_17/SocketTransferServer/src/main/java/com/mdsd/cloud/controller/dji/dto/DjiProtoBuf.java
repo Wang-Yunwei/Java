@@ -1631,7 +1631,7 @@ public final class DjiProtoBuf {
     M4_F2_SET_MODE(1026),
     /**
      * <pre>
-     * 重置云台的俯仰和偏航角
+     * 重置云台角度
      * </pre>
      *
      * <code>M4_F3_RESET = 1027;</code>
@@ -1927,7 +1927,7 @@ public final class DjiProtoBuf {
     M6_F25_START_FORCE_LANDING(1561),
     /**
      * <pre>
-     * 设置自定义 GPS（非 RTK）的 home 点位置
+     * 设置自定义 GPS (非RTK)的 home 点位置
      * </pre>
      *
      * <code>M6_F26_SET_HOME_LOCATION_USING_GPS_COORDINATES = 1562;</code>
@@ -1935,7 +1935,7 @@ public final class DjiProtoBuf {
     M6_F26_SET_HOME_LOCATION_USING_GPS_COORDINATES(1562),
     /**
      * <pre>
-     * 使用当前飞机的 GPS（非 RTK）位置设置 home 点位置
+     * 使用当前飞机的 GPS (非RTK)位置设置 home 点位置
      * </pre>
      *
      * <code>M6_F27_SET_HOME_LOCATION_USING_CURRENT_AIRCRAFT_LOCATION = 1563;</code>
@@ -1967,7 +1967,7 @@ public final class DjiProtoBuf {
     M6_F30_GET_COUNTRY_CODE(1566),
     /**
      * <pre>
-     * 当无人机在空中时，请求返航动作
+     * 当无人机在空中时,请求返航动作
      * </pre>
      *
      * <code>M6_F31_START_GO_HOME = 1567;</code>
@@ -1975,7 +1975,7 @@ public final class DjiProtoBuf {
     M6_F31_START_GO_HOME(1567),
     /**
      * <pre>
-     * 在无人机返航时，请求取消返航动作
+     * 在无人机返航时,请求取消返航动作
      * </pre>
      *
      * <code>M6_F32_CANCEL_GO_HOME = 1568;</code>
@@ -2007,60 +2007,68 @@ public final class DjiProtoBuf {
     M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_EVENT_CALLBACK(1571),
     /**
      * <pre>
-     * 请求执行摇杆动作
+     * 设置摇杆模式
      * </pre>
      *
-     * <code>M6_F36_EXECUTE_JOYSTICK_ACTION = 1572;</code>
+     * <code>M6_F36_SET_JOYSTICK_ACTION = 1572;</code>
      */
-    M6_F36_EXECUTE_JOYSTICK_ACTION(1572),
+    M6_F36_SET_JOYSTICK_ACTION(1572),
     /**
      * <pre>
-     * 请求紧急制动动作
+     * 执行摇杆动作
      * </pre>
      *
-     * <code>M6_F37_EXECUTE_EMERGENCY_BRAKE_ACTION = 1573;</code>
+     * <code>M6_F37_EXECUTE_JOYSTICK_ACTION = 1573;</code>
      */
-    M6_F37_EXECUTE_EMERGENCY_BRAKE_ACTION(1573),
+    M6_F37_EXECUTE_JOYSTICK_ACTION(1573),
     /**
      * <pre>
-     * 请求取消紧急制动动作
+     * 执行紧急制动动作
      * </pre>
      *
-     * <code>M6_F38_CANCEL_EMERGENCY_BRAKE_ACTION = 1574;</code>
+     * <code>M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION = 1574;</code>
      */
-    M6_F38_CANCEL_EMERGENCY_BRAKE_ACTION(1574),
+    M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION(1574),
+    /**
+     * <pre>
+     * 取消紧急制动动作
+     * </pre>
+     *
+     * <code>M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION = 1575;</code>
+     */
+    M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION(1575),
     /**
      * <pre>
      * 获取飞机的通用信息
      * </pre>
      *
-     * <code>M6_F39_GET_GENERA_INFO = 1575;</code>
+     * <code>M6_F40_GET_GENERA_INFO = 1576;</code>
      */
-    M6_F39_GET_GENERA_INFO(1575),
+    M6_F40_GET_GENERA_INFO(1576),
     /**
      * <pre>
-     * 启动/禁用失联动作状态
+     * 设置启动/禁用失联动作状态
      * </pre>
      *
-     * <code>M6_F40_SET_RC_LOST_ACTION_ENABLE_STATUS = 1576;</code>
+     * <code>M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS = 1577;</code>
      */
-    M6_F40_SET_RC_LOST_ACTION_ENABLE_STATUS(1576),
+    M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS(1577),
     /**
      * <pre>
      * 获取失联动作状态
      * </pre>
      *
-     * <code>M6_F41_GET_ENABEL_RC_LOST_ACTION_STATUS = 1577;</code>
+     * <code>M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS = 1578;</code>
      */
-    M6_F41_GET_ENABEL_RC_LOST_ACTION_STATUS(1577),
+    M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS(1578),
     /**
      * <pre>
      * 注册回调函数触发 FTS 事件
      * </pre>
      *
-     * <code>M6_F42_REG_TRIGGER_FTS_EVENT_CALLBACK = 1578;</code>
+     * <code>M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK = 1579;</code>
      */
-    M6_F42_REG_TRIGGER_FTS_EVENT_CALLBACK(1578),
+    M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK(1579),
     /**
      * <pre>
      * 初始化自定义控件模块
@@ -3898,7 +3906,7 @@ public final class DjiProtoBuf {
     public static final int M4_F2_SET_MODE_VALUE = 1026;
     /**
      * <pre>
-     * 重置云台的俯仰和偏航角
+     * 重置云台角度
      * </pre>
      *
      * <code>M4_F3_RESET = 1027;</code>
@@ -4194,7 +4202,7 @@ public final class DjiProtoBuf {
     public static final int M6_F25_START_FORCE_LANDING_VALUE = 1561;
     /**
      * <pre>
-     * 设置自定义 GPS（非 RTK）的 home 点位置
+     * 设置自定义 GPS (非RTK)的 home 点位置
      * </pre>
      *
      * <code>M6_F26_SET_HOME_LOCATION_USING_GPS_COORDINATES = 1562;</code>
@@ -4202,7 +4210,7 @@ public final class DjiProtoBuf {
     public static final int M6_F26_SET_HOME_LOCATION_USING_GPS_COORDINATES_VALUE = 1562;
     /**
      * <pre>
-     * 使用当前飞机的 GPS（非 RTK）位置设置 home 点位置
+     * 使用当前飞机的 GPS (非RTK)位置设置 home 点位置
      * </pre>
      *
      * <code>M6_F27_SET_HOME_LOCATION_USING_CURRENT_AIRCRAFT_LOCATION = 1563;</code>
@@ -4234,7 +4242,7 @@ public final class DjiProtoBuf {
     public static final int M6_F30_GET_COUNTRY_CODE_VALUE = 1566;
     /**
      * <pre>
-     * 当无人机在空中时，请求返航动作
+     * 当无人机在空中时,请求返航动作
      * </pre>
      *
      * <code>M6_F31_START_GO_HOME = 1567;</code>
@@ -4242,7 +4250,7 @@ public final class DjiProtoBuf {
     public static final int M6_F31_START_GO_HOME_VALUE = 1567;
     /**
      * <pre>
-     * 在无人机返航时，请求取消返航动作
+     * 在无人机返航时,请求取消返航动作
      * </pre>
      *
      * <code>M6_F32_CANCEL_GO_HOME = 1568;</code>
@@ -4274,60 +4282,68 @@ public final class DjiProtoBuf {
     public static final int M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_EVENT_CALLBACK_VALUE = 1571;
     /**
      * <pre>
-     * 请求执行摇杆动作
+     * 设置摇杆模式
      * </pre>
      *
-     * <code>M6_F36_EXECUTE_JOYSTICK_ACTION = 1572;</code>
+     * <code>M6_F36_SET_JOYSTICK_ACTION = 1572;</code>
      */
-    public static final int M6_F36_EXECUTE_JOYSTICK_ACTION_VALUE = 1572;
+    public static final int M6_F36_SET_JOYSTICK_ACTION_VALUE = 1572;
     /**
      * <pre>
-     * 请求紧急制动动作
+     * 执行摇杆动作
      * </pre>
      *
-     * <code>M6_F37_EXECUTE_EMERGENCY_BRAKE_ACTION = 1573;</code>
+     * <code>M6_F37_EXECUTE_JOYSTICK_ACTION = 1573;</code>
      */
-    public static final int M6_F37_EXECUTE_EMERGENCY_BRAKE_ACTION_VALUE = 1573;
+    public static final int M6_F37_EXECUTE_JOYSTICK_ACTION_VALUE = 1573;
     /**
      * <pre>
-     * 请求取消紧急制动动作
+     * 执行紧急制动动作
      * </pre>
      *
-     * <code>M6_F38_CANCEL_EMERGENCY_BRAKE_ACTION = 1574;</code>
+     * <code>M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION = 1574;</code>
      */
-    public static final int M6_F38_CANCEL_EMERGENCY_BRAKE_ACTION_VALUE = 1574;
+    public static final int M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION_VALUE = 1574;
+    /**
+     * <pre>
+     * 取消紧急制动动作
+     * </pre>
+     *
+     * <code>M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION = 1575;</code>
+     */
+    public static final int M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION_VALUE = 1575;
     /**
      * <pre>
      * 获取飞机的通用信息
      * </pre>
      *
-     * <code>M6_F39_GET_GENERA_INFO = 1575;</code>
+     * <code>M6_F40_GET_GENERA_INFO = 1576;</code>
      */
-    public static final int M6_F39_GET_GENERA_INFO_VALUE = 1575;
+    public static final int M6_F40_GET_GENERA_INFO_VALUE = 1576;
     /**
      * <pre>
-     * 启动/禁用失联动作状态
+     * 设置启动/禁用失联动作状态
      * </pre>
      *
-     * <code>M6_F40_SET_RC_LOST_ACTION_ENABLE_STATUS = 1576;</code>
+     * <code>M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS = 1577;</code>
      */
-    public static final int M6_F40_SET_RC_LOST_ACTION_ENABLE_STATUS_VALUE = 1576;
+    public static final int M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS_VALUE = 1577;
     /**
      * <pre>
      * 获取失联动作状态
      * </pre>
      *
-     * <code>M6_F41_GET_ENABEL_RC_LOST_ACTION_STATUS = 1577;</code>
+     * <code>M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS = 1578;</code>
      */
-    public static final int M6_F41_GET_ENABEL_RC_LOST_ACTION_STATUS_VALUE = 1577;
+    public static final int M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS_VALUE = 1578;
     /**
      * <pre>
      * 注册回调函数触发 FTS 事件
      * </pre>
      *
-     * <code>M6_F42_REG_TRIGGER_FTS_EVENT_CALLBACK = 1578;</code>
+     * <code>M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK = 1579;</code>
      */
-    public static final int M6_F42_REG_TRIGGER_FTS_EVENT_CALLBACK_VALUE = 1578;
+    public static final int M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK_VALUE = 1579;
     /**
      * <pre>
      * 初始化自定义控件模块
@@ -5176,13 +5192,14 @@ public final class DjiProtoBuf {
         case 1569: return M6_F33_OBTAIN_JOYSTICK_CTRL_AUTHORITY;
         case 1570: return M6_F34_RELEASE_JOYSTICK_CTRL_AUTHORITY;
         case 1571: return M6_F35_REG_JOYSTICK_CTRL_AUTHORITY_EVENT_CALLBACK;
-        case 1572: return M6_F36_EXECUTE_JOYSTICK_ACTION;
-        case 1573: return M6_F37_EXECUTE_EMERGENCY_BRAKE_ACTION;
-        case 1574: return M6_F38_CANCEL_EMERGENCY_BRAKE_ACTION;
-        case 1575: return M6_F39_GET_GENERA_INFO;
-        case 1576: return M6_F40_SET_RC_LOST_ACTION_ENABLE_STATUS;
-        case 1577: return M6_F41_GET_ENABEL_RC_LOST_ACTION_STATUS;
-        case 1578: return M6_F42_REG_TRIGGER_FTS_EVENT_CALLBACK;
+        case 1572: return M6_F36_SET_JOYSTICK_ACTION;
+        case 1573: return M6_F37_EXECUTE_JOYSTICK_ACTION;
+        case 1574: return M6_F38_EXECUTE_EMERGENCY_BRAKE_ACTION;
+        case 1575: return M6_F39_CANCEL_EMERGENCY_BRAKE_ACTION;
+        case 1576: return M6_F40_GET_GENERA_INFO;
+        case 1577: return M6_F41_SET_RC_LOST_ACTION_ENABLE_STATUS;
+        case 1578: return M6_F42_GET_ENABEL_RC_LOST_ACTION_STATUS;
+        case 1579: return M6_F43_REG_TRIGGER_FTS_EVENT_CALLBACK;
         case 1793: return M7_F1_INIT;
         case 1794: return M7_F2_REG_DEFAULT_UI_CONFIG_BY_DIR_PATH;
         case 1795: return M7_F3_REG_UI_CONFIG_BY_DIR_PATH;
@@ -6703,7 +6720,7 @@ public final class DjiProtoBuf {
       "\022\017\n\013M12_UPGRADE\020\r\022\022\n\016M13_PERCEPTION\020\016\022\021\n" +
       "\rM14_LIVE_VIEW\020\017\022\023\n\017M15_WAYPOINT_V2\020\020\022\023\n" +
       "\017M16_POSITIONING\020\021\022\023\n\017M17_MOP_CHANNEL\020\022*" +
-      "\217I\n\rDirectiveEnum\022\n\n\006UNKNOW\020\000\022\021\n\014M2_F0_D" +
+      "\260I\n\rDirectiveEnum\022\n\n\006UNKNOW\020\000\022\021\n\014M2_F0_D" +
       "EINIT\020\200\004\022\017\n\nM2_F1_INIT\020\201\004\022\025\n\020M2_F2_QUATE" +
       "RNION\020\202\004\022\036\n\031M2_F3_ACCELERATION_GROUND\020\203\004" +
       "\022\034\n\027M2_F4_ACCELERATION_BODY\020\204\004\022\033\n\026M2_F5_" +
@@ -6872,72 +6889,73 @@ public final class DjiProtoBuf {
       "\014\022*\n%M6_F33_OBTAIN_JOYSTICK_CTRL_AUTHORI" +
       "TY\020\241\014\022+\n&M6_F34_RELEASE_JOYSTICK_CTRL_AU" +
       "THORITY\020\242\014\0226\n1M6_F35_REG_JOYSTICK_CTRL_A" +
-      "UTHORITY_EVENT_CALLBACK\020\243\014\022#\n\036M6_F36_EXE" +
-      "CUTE_JOYSTICK_ACTION\020\244\014\022*\n%M6_F37_EXECUT" +
-      "E_EMERGENCY_BRAKE_ACTION\020\245\014\022)\n$M6_F38_CA" +
-      "NCEL_EMERGENCY_BRAKE_ACTION\020\246\014\022\033\n\026M6_F39" +
-      "_GET_GENERA_INFO\020\247\014\022,\n\'M6_F40_SET_RC_LOS" +
-      "T_ACTION_ENABLE_STATUS\020\250\014\022,\n\'M6_F41_GET_" +
-      "ENABEL_RC_LOST_ACTION_STATUS\020\251\014\022*\n%M6_F4" +
-      "2_REG_TRIGGER_FTS_EVENT_CALLBACK\020\252\014\022\017\n\nM" +
-      "7_F1_INIT\020\201\016\022,\n\'M7_F2_REG_DEFAULT_UI_CON" +
-      "FIG_BY_DIR_PATH\020\202\016\022$\n\037M7_F3_REG_UI_CONFI" +
-      "G_BY_DIR_PATH\020\203\016\022)\n$M7_F4_REG_DEFAULT_UI" +
-      "_BY_BINARY_ARRAY\020\204\016\022(\n#M7_F5_REG_UI_CONF" +
-      "IG_BY_BINARY_ARRAY\020\205\016\022\033\n\026M7_F6_REG_HANDL" +
-      "ER_LIST\020\206\016\022\'\n\"M7_F7_FLOATION_WINDOW_SHOW" +
-      "_MESSAGE\020\207\016\022\035\n\030M7_F8_GET_CHANNELL_STATE\020" +
-      "\210\016\022\034\n\027M7_F9_GET_SPEAKER_STATE\020\211\016\022\031\n\024M7_F" +
-      "10_SET_WORK_MODE\020\212\016\022\026\n\021M7_F11_START_PLAY" +
-      "\020\213\016\022\025\n\020M7_F12_STOP_PLAY\020\214\016\022\031\n\024M7_F13_SET" +
-      "_PLAY_MODE\020\215\016\022\026\n\021M7_F14_SET_VOLUME\020\216\016\022\034\n" +
-      "\027M7_F15_RECEIVE_TTS_DATA\020\217\016\022\036\n\031M7_F16_RE" +
-      "CEIVE_AUDIO_DATA\020\220\016\022\021\n\014M8_F0_DEINIT\020\200\020\022\017" +
-      "\n\nM8_F1_INIT\020\201\020\022 \n\033M8_F2_REG_HMS_INFO_CA" +
-      "LLBACK\020\202\020\022\017\n\nM9_F1_INIT\020\201\022\0223\n.M9_F2_REG_" +
-      "GET_NEWEST_PPS_TRIGGER_TIME_CALLBACK\020\202\022\022" +
-      "$\n\037M9_F3_TRANSFER_TO_AIRCRAFT_TIME\020\203\022\022\022\n" +
-      "\rM10_F0_DEINIT\020\200\024\022\020\n\013M10_F1_INIT\020\201\024\022\025\n\020M" +
-      "10_F2_SEND_DATA\020\202\024\022\031\n\024M10_F3_GET_SEND_DA" +
-      "TA\020\203\024\022\"\n\035M10_F4_REG_RECV_DATA_CALLBACK\020\204" +
-      "\024\022%\n M10_F5_SET_BAND_WIDTH_PROPORTION\020\202\026" +
-      "\022*\n%M10_F6_GET_DATA_STREAM_REMOTE_ADDRES" +
-      "S\020\203\026\022!\n\034M10_F7_SEND_DATA_STREAM_DATA\020\204\026\022" +
-      "!\n\034M10_F8_GET_DATA_STREAM_STATE\020\205\026\022\022\n\rM1" +
-      "1_F0_DEINIT\020\200\030\022\020\n\013M11_F1_INIT\020\201\030\022-\n(M11_" +
-      "F2_REG_RECEIVE_SYSTEM_STATE_CALLBACK\020\202\030\022" +
-      "5\n0M11_F3_REG_RECEIVE_ATTITUDE_INFORMATI" +
-      "ON_CALLBACK\020\203\030\022 \n\033M11_F4_SET_GIMBAL_MODE" +
-      "_SYNC\020\204\030\022\027\n\022M11_F5_ROTATE_SYNC\020\205\030\022+\n&M11" +
-      "_F6_RELEASE_CONTROL_PERMISSION_SYNC\020\206\030\022\026" +
-      "\n\021M11_F7_RESET_SYNC\020\207\030\022 \n\033M11_F8_SET_LIM" +
-      "IT_ANGLE_SYNC\020\210\030\022 \n\033M11_F9_GET_LIMIT_ANG" +
-      "LE_SYNC\020\211\030\022(\n#M11_F10_SET_SPEED_CONVERSI" +
-      "ON_FACTOR\020\212\030\022\020\n\013M12_F1_INIT\020\201\032\022 \n\033M12_F2" +
-      "_ENABLE_LOCAL_UPGRADE\020\202\032\022\027\n\022M12_F3_REG_H" +
-      "ANDLER\020\203\032\022\036\n\031M12_F4_PUSH_UPGRADE_STATE\020\204" +
-      "\032\022\022\n\rM13_F0_DEINIT\020\200\034\022\020\n\013M13_F1_INIT\020\201\034\022" +
-      "&\n!M13_F2_SUBSCRIBE_PERCEPTION_IMAGE\020\202\034\022" +
-      "(\n#M13_F3_UNSUBSCRIBE_PERCEPTION_IMAGE\020\203" +
-      "\034\022(\n#M13_F4_GET_STEREO_CAMERA_PARAMETERS" +
-      "\020\204\034\022\022\n\rM14_F0_DEINIT\020\200\036\022\020\n\013M14_F1_INIT\020\201" +
-      "\036\022\035\n\030M14_F2_START_H264_STREAM\020\202\036\022\034\n\027M14_" +
-      "F3_STOP_H264_STREAM\020\203\036\022\022\n\rM15_F0_DEINIT\020" +
-      "\200 \022\020\n\013M15_F1_INIT\020\201 \022\032\n\025M15_F2_UPLOAD_MI" +
-      "SSION\020\202 \022\021\n\014M15_F3_START\020\203 \022\020\n\013M15_F4_ST" +
-      "OP\020\204 \022\021\n\014M15_F5_PAUSE\020\205 \022\022\n\rM15_F6_RESUM" +
-      "E\020\206 \022#\n\036M15_F7_GET_GLOBAL_CRUISE_SPEED\020\207" +
-      " \022#\n\036M15_F8_SET_GLOBAL_CRUISE_SPEED\020\210 \022+" +
-      "\n&M15_F9_REGISTER_MISSION_EVENT_CALLBACK" +
-      "\020\211 \022,\n\'M15_F10_REGISTER_MISSION_STATE_CA" +
-      "LLBACK\020\212 \022\020\n\013M16_F1_INIT\020\201\"\022\032\n\025M16_F2_SE" +
-      "T_TASK_INDEX\020\202\"\022)\n$M16_F3_GET_POSITION_I" +
-      "NFORMATION_SYNC\020\203\"\022\020\n\013M17_F1_INIT\020\201$\022\022\n\r" +
-      "M17_F2_CREATE\020\202$\022\023\n\016M17_F3_DESTROY\020\203$\022\020\n" +
-      "\013M17_F4_BIND\020\204$\022\022\n\rM17_F5_ACCEPT\020\205$\022\023\n\016M" +
-      "17_F6_CONNECT\020\206$\022\021\n\014M17_F7_CLOSE\020\207$\022\025\n\020M" +
-      "17_F8_SEND_DATA\020\210$\022\025\n\020M17_F9_RECV_DATA\020\211" +
-      "$B\rB\013DjiProtoBufb\006proto3"
+      "UTHORITY_EVENT_CALLBACK\020\243\014\022\037\n\032M6_F36_SET" +
+      "_JOYSTICK_ACTION\020\244\014\022#\n\036M6_F37_EXECUTE_JO" +
+      "YSTICK_ACTION\020\245\014\022*\n%M6_F38_EXECUTE_EMERG" +
+      "ENCY_BRAKE_ACTION\020\246\014\022)\n$M6_F39_CANCEL_EM" +
+      "ERGENCY_BRAKE_ACTION\020\247\014\022\033\n\026M6_F40_GET_GE" +
+      "NERA_INFO\020\250\014\022,\n\'M6_F41_SET_RC_LOST_ACTIO" +
+      "N_ENABLE_STATUS\020\251\014\022,\n\'M6_F42_GET_ENABEL_" +
+      "RC_LOST_ACTION_STATUS\020\252\014\022*\n%M6_F43_REG_T" +
+      "RIGGER_FTS_EVENT_CALLBACK\020\253\014\022\017\n\nM7_F1_IN" +
+      "IT\020\201\016\022,\n\'M7_F2_REG_DEFAULT_UI_CONFIG_BY_" +
+      "DIR_PATH\020\202\016\022$\n\037M7_F3_REG_UI_CONFIG_BY_DI" +
+      "R_PATH\020\203\016\022)\n$M7_F4_REG_DEFAULT_UI_BY_BIN" +
+      "ARY_ARRAY\020\204\016\022(\n#M7_F5_REG_UI_CONFIG_BY_B" +
+      "INARY_ARRAY\020\205\016\022\033\n\026M7_F6_REG_HANDLER_LIST" +
+      "\020\206\016\022\'\n\"M7_F7_FLOATION_WINDOW_SHOW_MESSAG" +
+      "E\020\207\016\022\035\n\030M7_F8_GET_CHANNELL_STATE\020\210\016\022\034\n\027M" +
+      "7_F9_GET_SPEAKER_STATE\020\211\016\022\031\n\024M7_F10_SET_" +
+      "WORK_MODE\020\212\016\022\026\n\021M7_F11_START_PLAY\020\213\016\022\025\n\020" +
+      "M7_F12_STOP_PLAY\020\214\016\022\031\n\024M7_F13_SET_PLAY_M" +
+      "ODE\020\215\016\022\026\n\021M7_F14_SET_VOLUME\020\216\016\022\034\n\027M7_F15" +
+      "_RECEIVE_TTS_DATA\020\217\016\022\036\n\031M7_F16_RECEIVE_A" +
+      "UDIO_DATA\020\220\016\022\021\n\014M8_F0_DEINIT\020\200\020\022\017\n\nM8_F1" +
+      "_INIT\020\201\020\022 \n\033M8_F2_REG_HMS_INFO_CALLBACK\020" +
+      "\202\020\022\017\n\nM9_F1_INIT\020\201\022\0223\n.M9_F2_REG_GET_NEW" +
+      "EST_PPS_TRIGGER_TIME_CALLBACK\020\202\022\022$\n\037M9_F" +
+      "3_TRANSFER_TO_AIRCRAFT_TIME\020\203\022\022\022\n\rM10_F0" +
+      "_DEINIT\020\200\024\022\020\n\013M10_F1_INIT\020\201\024\022\025\n\020M10_F2_S" +
+      "END_DATA\020\202\024\022\031\n\024M10_F3_GET_SEND_DATA\020\203\024\022\"" +
+      "\n\035M10_F4_REG_RECV_DATA_CALLBACK\020\204\024\022%\n M1" +
+      "0_F5_SET_BAND_WIDTH_PROPORTION\020\202\026\022*\n%M10" +
+      "_F6_GET_DATA_STREAM_REMOTE_ADDRESS\020\203\026\022!\n" +
+      "\034M10_F7_SEND_DATA_STREAM_DATA\020\204\026\022!\n\034M10_" +
+      "F8_GET_DATA_STREAM_STATE\020\205\026\022\022\n\rM11_F0_DE" +
+      "INIT\020\200\030\022\020\n\013M11_F1_INIT\020\201\030\022-\n(M11_F2_REG_" +
+      "RECEIVE_SYSTEM_STATE_CALLBACK\020\202\030\0225\n0M11_" +
+      "F3_REG_RECEIVE_ATTITUDE_INFORMATION_CALL" +
+      "BACK\020\203\030\022 \n\033M11_F4_SET_GIMBAL_MODE_SYNC\020\204" +
+      "\030\022\027\n\022M11_F5_ROTATE_SYNC\020\205\030\022+\n&M11_F6_REL" +
+      "EASE_CONTROL_PERMISSION_SYNC\020\206\030\022\026\n\021M11_F" +
+      "7_RESET_SYNC\020\207\030\022 \n\033M11_F8_SET_LIMIT_ANGL" +
+      "E_SYNC\020\210\030\022 \n\033M11_F9_GET_LIMIT_ANGLE_SYNC" +
+      "\020\211\030\022(\n#M11_F10_SET_SPEED_CONVERSION_FACT" +
+      "OR\020\212\030\022\020\n\013M12_F1_INIT\020\201\032\022 \n\033M12_F2_ENABLE" +
+      "_LOCAL_UPGRADE\020\202\032\022\027\n\022M12_F3_REG_HANDLER\020" +
+      "\203\032\022\036\n\031M12_F4_PUSH_UPGRADE_STATE\020\204\032\022\022\n\rM1" +
+      "3_F0_DEINIT\020\200\034\022\020\n\013M13_F1_INIT\020\201\034\022&\n!M13_" +
+      "F2_SUBSCRIBE_PERCEPTION_IMAGE\020\202\034\022(\n#M13_" +
+      "F3_UNSUBSCRIBE_PERCEPTION_IMAGE\020\203\034\022(\n#M1" +
+      "3_F4_GET_STEREO_CAMERA_PARAMETERS\020\204\034\022\022\n\r" +
+      "M14_F0_DEINIT\020\200\036\022\020\n\013M14_F1_INIT\020\201\036\022\035\n\030M1" +
+      "4_F2_START_H264_STREAM\020\202\036\022\034\n\027M14_F3_STOP" +
+      "_H264_STREAM\020\203\036\022\022\n\rM15_F0_DEINIT\020\200 \022\020\n\013M" +
+      "15_F1_INIT\020\201 \022\032\n\025M15_F2_UPLOAD_MISSION\020\202" +
+      " \022\021\n\014M15_F3_START\020\203 \022\020\n\013M15_F4_STOP\020\204 \022\021" +
+      "\n\014M15_F5_PAUSE\020\205 \022\022\n\rM15_F6_RESUME\020\206 \022#\n" +
+      "\036M15_F7_GET_GLOBAL_CRUISE_SPEED\020\207 \022#\n\036M1" +
+      "5_F8_SET_GLOBAL_CRUISE_SPEED\020\210 \022+\n&M15_F" +
+      "9_REGISTER_MISSION_EVENT_CALLBACK\020\211 \022,\n\'" +
+      "M15_F10_REGISTER_MISSION_STATE_CALLBACK\020" +
+      "\212 \022\020\n\013M16_F1_INIT\020\201\"\022\032\n\025M16_F2_SET_TASK_" +
+      "INDEX\020\202\"\022)\n$M16_F3_GET_POSITION_INFORMAT" +
+      "ION_SYNC\020\203\"\022\020\n\013M17_F1_INIT\020\201$\022\022\n\rM17_F2_" +
+      "CREATE\020\202$\022\023\n\016M17_F3_DESTROY\020\203$\022\020\n\013M17_F4" +
+      "_BIND\020\204$\022\022\n\rM17_F5_ACCEPT\020\205$\022\023\n\016M17_F6_C" +
+      "ONNECT\020\206$\022\021\n\014M17_F7_CLOSE\020\207$\022\025\n\020M17_F8_S" +
+      "END_DATA\020\210$\022\025\n\020M17_F9_RECV_DATA\020\211$B\rB\013Dj" +
+      "iProtoBufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

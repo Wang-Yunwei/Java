@@ -21,8 +21,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
-import io.netty.handler.timeout.IdleState;
-import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -30,8 +28,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -136,11 +134,11 @@ public class DjiServiceImpl implements IDjiService {
         switch (payload.getModule()) {
             case M2_FC_SUBSCRIPTION -> {
                 if (payload.getPackageNum() == 1) {
-                    log.info("===> {}", payload.getBody().toStringUtf8());
+                    log.info("M2_FC_SUBSCRIPTION ===> {}", payload.getBody().toStringUtf8());
                 } else {
                     stringBuilder.append(payload.getBody().toStringUtf8());
                     if (payload.getPackageNum() == payload.getPackageIndex()) {
-                        log.info("===> {}", stringBuilder);
+                        log.info("M2_FC_SUBSCRIPTION ===> {}", stringBuilder);
                         stringBuilder.setLength(0);
                     }
                 }
@@ -167,6 +165,18 @@ public class DjiServiceImpl implements IDjiService {
 //                aircraftDto.getProcess().destroy();
                 // 删除注册
                 aircraftMap.remove(payload.getSerialNumber());
+            }
+            case M6_FLIGHT_CONTROLLER -> {
+                log.info("M6_FLIGHT_CONTROLLER ===> {}", payload.getBody().toStringUtf8());
+//                switch (payload.getDirective()){
+//                    case M6_F3_GET_TRK_POSITION_ENABLE -> {
+//                        log.info("M6_FLIGHT_CONTROLLER ===> {}", payload.getBody().toStringUtf8());
+//                    }
+//                    default -> log.info("M6");
+//                }
+            }
+            case M8_HMS -> {
+                log.info("M8_HMS ===> {}", payload.getBody().toStringUtf8());
             }
             case M14_LIVE_VIEW -> {
                 // 如果是 Windows 环境则将视频流写入本地
@@ -208,8 +218,8 @@ public class DjiServiceImpl implements IDjiService {
     @Override
     public void handleWebSocket(JsonNode jsonNode) {
         String serialNumber = jsonNode.get("云盒编号").asText();
-        int module = jsonNode.get("模块").asInt();
-        int directive = jsonNode.get("指令").asInt();
+        int module = Integer.decode(jsonNode.get("模块").asText());
+        int directive = Integer.decode(jsonNode.get("指令").asText());
         if (module == 0 && directive == 0) {
             webSocketService.sendMessage(serialNumber, String.format(WebSocketServiceImpl.errorMessage, "模块或指令不能为空!"));
         } else {
@@ -236,16 +246,31 @@ public class DjiServiceImpl implements IDjiService {
                         double time = jsonNode.get("time") != null ? jsonNode.get("time").asDouble() : 0;
                         payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), mountPosition, rotationMode, pitch, roll, yaw, time), Charset.defaultCharset()));
                     }
+                    case 飞行控制_执行摇杆动作 -> {
+                        int north = jsonNode.get("north") != null ? jsonNode.get("north").asInt() : 0;
+                        int east = jsonNode.get("east") != null ? jsonNode.get("east").asInt() : 0;
+                        int down = jsonNode.get("down") != null ? jsonNode.get("down").asInt() : 0;
+                        int yaw = jsonNode.get("yaw") != null ? jsonNode.get("yaw").asInt() : 0;
+                        int down_speed = jsonNode.get("down_speed") != null ? jsonNode.get("down_speed").asInt() : 0;
+                        payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), north, east, down, yaw, down_speed), Charset.defaultCharset()));
+                    }
+                    case 航点_上传任务 -> {
+                        if (jsonNode.get("waypoint") != null) {
+                            JsonNode waypoint = jsonNode.withArray("waypoint");
+                            payload.setBody(ByteString.copyFrom(String.format(anEnum.getArguments(), waypoint.size(), waypoint.toString()), Charset.defaultCharset()));
+                        }
+                    }
                     default -> {
+
                         log.error("未知指令!");
                     }
                 }
                 // TODO 打印 Payload
-                try {
-                    System.out.println("发送数据前打印Payload: " + printer.print(payload));
-                } catch (InvalidProtocolBufferException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    System.out.println("发送数据前打印Payload: " + printer.print(payload));
+//                } catch (InvalidProtocolBufferException e) {
+//                    throw new RuntimeException(e);
+//                }
                 // 发送数据
                 AircraftDto aircraftDto = aircraftMap.get(payload.getSerialNumber());
                 if (aircraftMap.size() > 0 || null != aircraftDto) {
