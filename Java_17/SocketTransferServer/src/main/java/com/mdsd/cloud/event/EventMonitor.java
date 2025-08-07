@@ -29,7 +29,7 @@ public class EventMonitor {
             case WEB_SOCKET_TYJW -> tyjwService.handleWebSocket(param.getJsonNode());
             case WEB_SOCKET_DJI -> djiService.handleWebSocket(param.getJsonNode());
             case TCP_SOCKET_TYJW -> tyjwService.handleTcpClient(param.getByteBuf());
-            case UDP_SOCKET_DJI -> djiService.handleUdpSocket(param.getPayload());
+            case UDP_SOCKET_DJI -> djiService.handleUdpSocket(param.getJsonNode());
             default -> log.error("未知平台指令!");
         }
     }

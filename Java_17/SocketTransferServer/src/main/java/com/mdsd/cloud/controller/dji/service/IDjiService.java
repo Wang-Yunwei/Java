@@ -21,5 +21,5 @@ public interface IDjiService {
     /**
      * 处理UDP SOCKET
      */
-    void handleUdpSocket(DjiProtoBuf.Payload payload);
+    void handleUdpSocket(JsonNode jsonNode);
 }

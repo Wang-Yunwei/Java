@@ -19,8 +19,6 @@ public class CommonEvent extends ApplicationEvent {
 
     private ByteBuf byteBuf;
 
-    private DjiProtoBuf.Payload payload;
-
     public CommonEvent(CommonEnum source, JsonNode jsonNode) {
         super(source);
         this.source = source;
@@ -31,11 +29,5 @@ public class CommonEvent extends ApplicationEvent {
         super(source);
         this.source = source;
         this.byteBuf = byteBuf;
-    }
-
-    public CommonEvent(CommonEnum source, DjiProtoBuf.Payload payload) {
-        super(source);
-        this.source = source;
-        this.payload = payload;
     }
 }
