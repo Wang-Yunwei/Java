@@ -14,8 +14,6 @@ public class ByteUtil {
     private final static ObjectMapper om = new ObjectMapper();
 
     public static byte[] shortToByte() {
-
-
         byte[] result = new byte[2];
         result[0] = (byte) (0x6A77 >> 8); // 右移8位,得到高8位
         result[1] = (byte) (0x6A77 & 0xFF); // 与0xFF进行位与操作,得到低8位

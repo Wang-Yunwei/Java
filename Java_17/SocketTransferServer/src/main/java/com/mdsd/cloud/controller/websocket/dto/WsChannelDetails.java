@@ -1,8 +1,10 @@
 package com.mdsd.cloud.controller.websocket.dto;
 
 import io.netty.channel.Channel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@ToString
 @Accessors(chain = true)
 public class WsChannelDetails {
 

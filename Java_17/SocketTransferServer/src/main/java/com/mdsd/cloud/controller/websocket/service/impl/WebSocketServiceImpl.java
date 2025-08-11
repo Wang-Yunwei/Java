@@ -9,7 +9,10 @@ import com.mdsd.cloud.enums.CommonEnum;
 import com.mdsd.cloud.event.CommonEvent;
 import com.mdsd.cloud.util.MQClient;
 import com.mdsd.cloud.util.SocketUtil;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -36,15 +39,15 @@ public class WebSocketServiceImpl implements IWebSocketService {
     @Value("${env.port.sts.web_socket_server}")
     private int port;
 
-    private final ConcurrentHashMap<String, WsChannelDetails> wsChannels = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, WsChannelDetails> wsMap = new ConcurrentHashMap<>();
 
     private final ObjectMapper obm = new ObjectMapper();
 
-    private static final String pongMessage = "{\"action\":\"PONG_MESSAGE\"}";
+    private static final String pongMessage = "{\"message\":\"PONG_MESSAGE\"}";
 
-    private static final String readyMessage = "{\"action\":\"READY_MESSAGE\"}";
+    private static final String readyMessage = "{\"message\":\"READY_MESSAGE\"}";
 
-    public static final String errorMessage = "{\"action\":\"PONG_MESSAGE\",\"message\":\"%s\"}";
+    public static final String errorMessage = "{\"message\":\"PONG_MESSAGE\",\"error\":\"%s\"}";
 
     private final ApplicationEventPublisher publisher;
 
@@ -55,22 +58,27 @@ public class WebSocketServiceImpl implements IWebSocketService {
     @ChannelHandler.Sharable
     class WebChannelInboundHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
         @Override
-        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) throws JsonProcessingException {
+        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame tws) {
             String text = tws.text();
-            if (StringUtils.isNoneBlank(text)) {
-                JsonNode jsonNode = obm.readTree(text);
-                // 心跳数据直接回复
-                if (null != jsonNode.get("action") && "PING_MESSAGE".equals(jsonNode.get("action").asText())) {
+            Optional.ofNullable(text).ifPresent(s -> {
+                JsonNode jsonNode;
+                try {
+                    jsonNode = obm.readTree(s);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+                if (null != jsonNode.get("heartbeat")) {
+                    // 心跳数据直接回复
                     ctx.writeAndFlush(new TextWebSocketFrame(pongMessage));
                 } else {
-                    if (jsonNode.get("云盒编号") != null && jsonNode.get("用户ID") != null && jsonNode.get("任务ID") != null) {
-                        String boxNumber = jsonNode.get("云盒编号").asText();
-                        String userId = jsonNode.get("用户ID").asText();
-                        String taskId = jsonNode.get("任务ID").asText();
+                    if (null != jsonNode.get("serialNumber") && null != jsonNode.get("userId") && null != jsonNode.get("taskId")) {
+                        String serialNumber = jsonNode.get("serialNumber").asText();
+                        String taskId = jsonNode.get("taskId").asText();
+                        String userId = jsonNode.get("userId").asText();
+
                         // 判断云盒是否已经注册
-                        if (wsChannels.containsKey(boxNumber)) {
-                            log.info("<<< {}", text);
-                            WsChannelDetails wsChannelDetails = wsChannels.get(boxNumber);
+                        if (wsMap.containsKey(serialNumber)) {
+                            WsChannelDetails wsChannelDetails = wsMap.get(serialNumber);
                             // 云盒已经注册,判断任务是否注册
                             if (null != wsChannelDetails.getTaskId()) {
                                 // 任务已经注册,判断用户是否注册
@@ -79,35 +87,36 @@ public class WebSocketServiceImpl implements IWebSocketService {
                                     // 用户已注册,判断 channel 是否活跃
                                     Channel wsChannel = channels.get(userId);
                                     if (wsChannel == null || !wsChannel.isActive()) {
-                                        // 用户下无活跃的 channel
-                                        channels.put(userId, ctx.channel());
                                         log.info("用户 {} 已经注册,无活跃的channel,替换为当前的channel", userId);
+                                        channels.put(userId, ctx.channel());
                                     }
                                 } else {
-                                    log.info("用户 {} 未注册,执行注册到 {}", userId, boxNumber);
+                                    log.info("用户 {} 未注册,执行注册到 {}", userId, serialNumber);
                                     channels.put(userId, ctx.channel());
                                     // 记录操作日志到 MQTT
-                                    MQClient.publish(MQClient.userTopic, format(MQClient.userContent, userId, Boolean.TRUE).getBytes(), 1, false);
+                                    if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                                        MQClient.publish(MQClient.userTopic, format(MQClient.userContent, userId, Boolean.TRUE).getBytes(), 1, false);
+                                    }
                                 }
                             } else {
                                 // 任务未注册,开始注册任务
                                 wsChannelDetails.setTaskId(taskId);
-                                log.info("任务 {} 未注册,执行注册到 {}", taskId, boxNumber);
+                                log.info("任务 {} 未注册,执行注册到 {}", taskId, serialNumber);
                             }
                             // 判断是否有控制权
-                            if (null != jsonNode.get("模块") && null != jsonNode.get("指令")) {
+                            if (null != jsonNode.get("module") && null != jsonNode.get("directive") && null != jsonNode.get("platform")) {
 //                                if (userId.equals(wsChannelDetails.getControlPower()) || ("D1".equals(jsonNode.get("指令编号").asText()) && "30".equals(jsonNode.get("动作编号").asText()))) {
 //                                    publisher.publishEvent(new CommonEvent( CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
 //                                }
-                                publisher.publishEvent(new CommonEvent(CommonEnum.getEnumByDesc(jsonNode.get("平台标识").asText()), jsonNode));
+                                publisher.publishEvent(new CommonEvent(CommonEnum.getEnumByDesc(jsonNode.get("platform").asText()), jsonNode));
                             }
                         } else {
-                            // 云盒未注册
-                            log.info("云盒 {} 未注册,开始注册云盒、任务、用户", boxNumber);
-                            synchronized (wsChannels) {
-                                wsChannels.put(boxNumber, new WsChannelDetails().setTaskId(taskId).setControlPower(userId).setChannels(new HashMap<>() {{
+                            log.info("云盒 {} 未注册,开始注册云盒并绑定任务及用户!", serialNumber);
+                            synchronized (wsMap) {
+                                wsMap.put(serialNumber, new WsChannelDetails().setTaskId(taskId).setControlPower(userId).setChannels(new HashMap<>() {{
                                     put(userId, ctx.channel());
                                 }}));
+                                log.info("已注册信息: {}", wsMap);
                                 // 记录操作日志到 MQTT
                                 if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
                                     MQClient.publish(MQClient.userTopic, format(MQClient.userContent, userId, Boolean.TRUE).getBytes(), 1, false);
@@ -116,7 +125,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
                         }
                     }
                 }
-            }
+            });
         }
 
         @Override
@@ -129,7 +138,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
         @Override
         public void channelInactive(ChannelHandlerContext ctx) {
             ArrayList<String> keysToRemove = new ArrayList<>();
-            wsChannels.forEach((key, value) -> {
+            wsMap.forEach((key, value) -> {
                 Map<String, Channel> channels = value.getChannels();
                 Optional.ofNullable(channels).ifPresent(m -> m.forEach((k, v) -> {
                     if (!v.isActive()) {
@@ -145,14 +154,16 @@ public class WebSocketServiceImpl implements IWebSocketService {
                             if (k.equals(value.getControlPower())) {
                                 keysToRemove.add(key);
                                 // 记录操作日志到 MQTT
-                                MQClient.publish(format(MQClient.taskTopic, key, value.getTaskId()), "{\"missionStatus\":1}".getBytes(), 1, false);
+                                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                                    MQClient.publish(format(MQClient.taskTopic, key, value.getTaskId()), "{\"missionStatus\":1}".getBytes(), 1, false);
+                                }
                             }
                         }
                     }
                 }));
             });
             if (!keysToRemove.isEmpty()) {
-                keysToRemove.forEach(wsChannels::remove);
+                keysToRemove.forEach(wsMap::remove);
             }
         }
 
@@ -171,11 +182,13 @@ public class WebSocketServiceImpl implements IWebSocketService {
     @Override
     public void sendMessage(String key, String data) {
         if (!StringUtils.isEmpty(key)) {
-            WsChannelDetails wsChannelDetails = wsChannels.get(key);
+            WsChannelDetails wsChannelDetails = wsMap.get(key);
             if (wsChannelDetails != null && StringUtils.isNoneBlank(wsChannelDetails.getTaskId())) {
                 Map<String, Channel> channels = wsChannelDetails.getChannels();
                 // 记录操作日志到 MQTT
-                MQClient.publish(format(MQClient.taskTopic, key, wsChannelDetails.getTaskId()), data.getBytes(), 1, false);
+                if ("Linux".equals(System.getProperties().getProperty("os.name"))) {
+                    MQClient.publish(format(MQClient.taskTopic, key, wsChannelDetails.getTaskId()), data.getBytes(), 1, false);
+                }
                 channels.forEach((k, v) -> {
                     if (v.isActive()) {
                         v.writeAndFlush(new TextWebSocketFrame(data));
@@ -187,6 +200,6 @@ public class WebSocketServiceImpl implements IWebSocketService {
 
     @Override
     public ConcurrentHashMap<String, WsChannelDetails> getWsChannels() {
-        return wsChannels;
+        return wsMap;
     }
 }
